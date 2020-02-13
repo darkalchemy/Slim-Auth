@@ -1,0 +1,38 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-centered">
+                    Recover your password
+                </h3>
+
+                {% include 'components/status.twig' %}
+
+                <form action="{{ url_for('auth.password.recover') }}" method="post">
+                    {{ csrf() | raw }}
+                    <div class="field">
+                        <label for="email" class="label">Email</label>
+                        <div class="control">
+                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ old.email }}">
+                        </div>
+
+                        {% if errors.email %}
+                            <p class="help is-danger">
+                                {{ errors.email | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="control has-text-centered">
+                        <button type="submit" class="button is-info">
+                            Recover
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

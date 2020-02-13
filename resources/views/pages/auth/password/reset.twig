@@ -1,0 +1,56 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-centered">
+                    Choose a password
+                </h3>
+
+                {% include 'components/status.twig' %}
+
+                <form action="{{ url_for('auth.password.reset') }}" method="post">
+                    {{ csrf() | raw }}
+
+                    <div class="field">
+                        <label for="password" class="label">Password</label>
+                        <div class="control">
+                            <input class="input{{ errors.password ? ' is-danger' : '' }}" type="password"
+                                   name="password" id="password" autocomplete="new-password">
+                        </div>
+
+                        {% if errors.password %}
+                            <p class="help is-danger">
+                                {{ errors.password | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="password" class="label">Confirm Password</label>
+                        <div class="control">
+                            <input class="input{{ errors.confirm_password ? ' is-danger' : '' }}" type="password"
+                                   name="confirm_password" id="confirm_password">
+                        </div>
+
+                        {% if errors.password %}
+                            <p class="help is-danger">
+                                {{ errors.confirm_password | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="control has-text-centered">
+                        <button type="submit" class="button is-info">
+                            Reset
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="email" value="{{ email }}" autocomplete="username">
+                    <input type="hidden" name="code" value="{{ code }}">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

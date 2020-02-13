@@ -1,0 +1,30 @@
+{% if has_message('status') %}
+    <div class='notification-wrapper'>
+        <div class='notification is-info has-text-centered'>
+            {% for msg in flash('status') %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if has_message('success') %}
+    <div class='notification-wrapper'>
+        <div class='notification is-success has-text-centered'>
+            {% for msg in flash('success') %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if has_message('error') %}
+    <div class='notification-wrapper'>
+        <div class='notification is-error has-text-centered'>
+            {% for msg in flash('error') %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+

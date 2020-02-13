@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ settings.site_name }}</title>
+
+    {% block css %}
+        {% webpack_entry_css 'default' %}
+    {% endblock %}
+</head>
+<body>
+{% include 'components/menu.twig' %}
+{% block content %}{% endblock %}
+{% block js %}
+    {% webpack_entry_js 'default' %}
+{% endblock %}
+</body>
+</html>

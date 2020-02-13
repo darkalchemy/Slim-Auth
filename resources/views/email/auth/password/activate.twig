@@ -1,0 +1,16 @@
+{% set link = full_url_for('auth.password.activate', {}, {'email': user.email, 'code': code}) %}
+
+<p>
+    Hi {{ user.username }},
+</p>
+
+<p>
+    Click the link below to confirm your email and activate your account.
+</p>
+<p>
+    <a href="{{ link }}">{{ link }}</a>
+</p>
+
+<p>
+    {{ settings.site_name }} Staff
+</p>

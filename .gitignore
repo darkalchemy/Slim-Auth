@@ -1,0 +1,5 @@
+.idea
+.php_cs.cache
+config/settings.php
+node_modules/
+vendor/

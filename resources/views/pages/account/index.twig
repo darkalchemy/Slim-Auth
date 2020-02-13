@@ -1,0 +1,53 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-centered">
+                    Account
+                </h3>
+
+                {% include 'components/status.twig' %}
+
+                <form action="{{ url_for('account') }}" method="post">
+                    {{ csrf() | raw }}
+                    <div class="field">
+                        <label for="email" class="label">Amail</label>
+                        <div class="control">
+                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ old.email ?: user.email }}">
+                        </div>
+
+                        {% if errors.email %}
+                            <p class="help is-danger">
+                                {{ errors.email | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="username" class="label">Username</label>
+                        <div class="control">
+                            <input class="input{{ errors.username ? ' is-danger' : '' }}" type="text"
+                                   name="username" id="username"
+                                   value="{{ old.username ?: user.username }}">
+                        </div>
+
+                        {% if errors.username %}
+                            <p class="help is-danger">
+                                {{ errors.username | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="control">
+                        <button type="submit" class="button is-info">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

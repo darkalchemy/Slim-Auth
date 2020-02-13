@@ -1,0 +1,56 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item has-text-weight-bold" href="{{ url_for('home') }}">
+            {{ settings.site_name }}
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+            {% if user %}
+                <div class="navbar-item has-dropdown is-hoverable min-150">
+                    <a class="navbar-link min-150 has-text-right">
+                        {{ user.username }}
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="{{ url_for('account') }}">
+                            Account
+                        </a>
+                        <a class="navbar-item" href="{{ url_for('account.password') }}">
+                            Change password
+                        </a>
+                        <a class="navbar-item" href="{{ url_for('dashboard') }}">
+                            Dashboard
+                        </a>
+                        <a href="#" class="navbar-item"
+                           onclick="document.getElementById('signout').submit(); return false;">
+                            Sign out
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-info" href="{{ url_for('auth.signup') }}">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light" href="{{ url_for('auth.signin') }}">
+                            Sign in
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% if user %}
+    <form action="{{ url_for('auth.signout') }}" method="post" id="signout">
+        {{ csrf() | raw }}
+    </form>
+{% endif %}

@@ -1,0 +1,64 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-centered">
+                    Sign in
+                </h3>
+
+                {% include 'components/status.twig' %}
+
+                <form action="{{ url_for('auth.signin') }}" method="post">
+                    {{ csrf() | raw }}
+                    <div class="field">
+                        <label for="email" class="label">Email</label>
+                        <div class="control">
+                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ old.email }}">
+                        </div>
+
+                        {% if errors.email %}
+                            <p class="help is-danger">
+                                {{ errors.email | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="password" class="label">Password</label>
+                        <div class="control">
+                            <input class="input{{ errors.password ? ' is-danger' : '' }}" type="password"
+                                   name="password" id="password">
+                        </div>
+
+                        {% if errors.password %}
+                            <p class="help is-danger">
+                                {{ errors.password | first }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" name="persist" checked>
+                                Keep me signed in
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="control level">
+                        <a href="{{ url_for('auth.password.recover') }}" class="button is-info">Recover</a>
+                        <button type="submit" class="button is-info">
+                            Sign In
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="redirect" value="{{ redirect }}">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types = 1);
+
+use Illuminate\Database\Schema\Blueprint;
+use $useClassName;
+
+/**
+ * Class $className
+ */
+class $className extends $baseClassName
+{
+    /**
+     *
+     */
+    public function up()
+    {
+        $this->schema->create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('permissions')->nullable();
+            $table->timestamp('last_login')->nullable();
+            $table->timestamps();
+        });
+
+        $this->schema->table('users', function (Blueprint $table) {
+
+        });
+    }
+
+    /**
+     *
+     */
+    public function down()
+    {
+        $this->schema->table('', function (Blueprint $table) {
+
+        });
+
+        $this->schema->drop('');
+    }
+}

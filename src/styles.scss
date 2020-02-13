@@ -1,0 +1,17 @@
+body {
+  font: 100%/1.5 system-ui;
+  line-height: 150%;
+  margin: auto;
+  padding: 0;
+  height: 100%;
+  width: auto;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+}
+
+.min-150 {
+  min-width: 150px !important;
+}
+

@@ -1,0 +1,9 @@
+{% if has_message('status') %}
+    <article class="message is-info">
+        <div class="message-body">
+            {% for msg in flash('status') %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </div>
+    </article>
+{% endif %}
