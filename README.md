@@ -62,11 +62,11 @@ Set up cron job, add this to root crontab:
 
 Emails are not sent directly, they are inserted into the database and jobby will take care of sending them.
   
-###TODO  
+### TODO  
 i18n translation for twig.  
 phpunit for testing.
 
-###Credits  
+### Credits  
 Much of what I have done here I learned from watching videos on youtube, [Laracasts](https://laracasts.com/) and [Codecourse](https://codecourse.com) and from what I have read in many of the online tutorials and Slim Skeletons on github.  
 [Slim4-Skeleton](https://github.com/odan/slim4-skeleton), [Slim-Skeleton](https://github.com/slimphp/Slim-Skeleton) and [Slim4-Starter](https://github.com/akrabat/slim4-starter) to list just a few.  
 I still have a long way to go, but I'm enjoying the trip.   
