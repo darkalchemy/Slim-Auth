@@ -46,7 +46,7 @@ class UserActivateController extends Controller
             // TODO fix why this does not display on page load
             $this->flash->addMessage('error', 'Invalid activation code.');
 
-            return $response->withHeader('Location', $this->routeParser->urlFor('home'));
+            return $response->withHeader('Location', $this->routeParser->urlFor('auth.signup'));
         }
 
         Sentinel::getActivationRepository()->complete($user, $code);
