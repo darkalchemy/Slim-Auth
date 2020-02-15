@@ -35,8 +35,7 @@ edit settings as needed.
 
 Set ownership
 ```
-sudo chown -R www-data:www-data var/{cache,logs}
-sudo chown -R www-data:www-data resources/views/cache/
+sudo chown -R www-data:www-data var/{cache,logs} resources/views/cache/
 ```
 
 Development:
