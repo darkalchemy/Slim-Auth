@@ -55,10 +55,10 @@
                     </div>
 
                     <div class="field">
-                        <label for="password" class="label">Confirm Password</label>
+                        <label for="confirm_password" class="label">Confirm Password</label>
                         <div class="control">
                             <input class="input{{ errors.confirm_password ? ' is-danger' : '' }}" type="password"
-                                   name="confirm_password" id="confirm_password">
+                                   name="confirm_password" id="confirm_password" autocomplete="new-password">
                         </div>
 
                         {% if errors.password %}
