@@ -27,12 +27,11 @@ npm is required
 [Slim Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
   
 
-To install:
+To install with composer:
 ```
-git clone git@github.com:darkalchemy/Slim-Auth.git
-cp config/settings.example.php config/settings.php
+composer create-project darkalchemy/slim-auth
 ```
-edit settings as needed.
+edit config/settings.php as needed.
 
 Set ownership
 ```

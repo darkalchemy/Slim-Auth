@@ -71,6 +71,9 @@
         "post-update-cmd": [
             "composer dump-autoload -o"
         ],
+        "post-create-project-cmd": [
+            "php -r \"copy('config/settings.example.php', 'config/settins.php');\""
+        ],
         "migrate": [
             "vendor/bin/phinx migrate -c config/phinx.php -e default --ansi"
         ],
