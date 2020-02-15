@@ -2,7 +2,11 @@
 
 declare(strict_types = 1);
 
-use App\Middleware\FlashOldFormData;
+use App\Middleware\CheckMailMiddleware;
+use App\Middleware\FlashOldFormDataMiddleware;
+use App\Middleware\SessionMiddleware;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Csrf\Guard;
 use Slim\Views\TwigMiddleware;
@@ -11,9 +15,12 @@ use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 return function (App $app) {
     $container = $app->getContainer();
 
+    (require __DIR__ . '/database.php')($container->get(Capsule::class), $container->get(Configuration::class)->getArray('cookies'));
     $app->addMiddleware($container->get(Guard::class));
-    $app->add($container->get(FlashOldFormData::class));
+    $app->addMiddleware($container->get(FlashOldFormDataMiddleware::class));
     $app->addMiddleware(TwigMiddleware::createFromContainer($container->get(App::class)));
-    $app->addRoutingMiddleware();
     $app->addMiddleware($container->get(WhoopsMiddleware::class));
+    $app->addMiddleware($container->get(CheckMailMiddleware::class));
+    $app->addMiddleware($container->get(SessionMiddleware::class));
+    $app->addRoutingMiddleware();
 };

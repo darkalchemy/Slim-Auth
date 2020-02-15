@@ -14,6 +14,7 @@
         "monolog/monolog": "^2.0",
         "nyholm/psr7": "^1.2",
         "nyholm/psr7-server": "^0.4.1",
+        "odan/session": "^4.0",
         "php-di/slim-bridge": "^3.0",
         "phpmailer/phpmailer": "^6.1",
         "robmorgan/phinx": "^0.11.4",

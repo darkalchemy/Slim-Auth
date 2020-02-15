@@ -9,6 +9,8 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Fullpipe\TwigWebpackExtension\WebpackExtension;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use DI\Bridge\Slim\Bridge;
+use Odan\Session\PhpSession;
+use Odan\Session\SessionInterface;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -38,6 +40,14 @@ return [
         return $app;
     },
 
+    SessionInterface::class => function (ContainerInterface $container) {
+        $settings = $container->get(Configuration::class)->getArray('session');
+        $session = new PhpSession();
+        $session->setOptions($settings);
+
+        return $session;
+    },
+
     RouteParserInterface::class => function (ContainerInterface $container) {
         return $container->get(App::class)
             ->getRouteCollector()
@@ -50,8 +60,7 @@ return [
     },
 
     Capsule::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)
-            ->getArray('db');
+        $settings = $container->get(Configuration::class)->getArray('db');
         $capsule = new Capsule();
         $capsule->addConnection($settings);
 
@@ -85,9 +94,6 @@ return [
 
     PHPMailer::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->getArray('mail');
-        if (!$settings['smtp_enable']) {
-            return null;
-        }
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0;
         $mail->isSMTP();

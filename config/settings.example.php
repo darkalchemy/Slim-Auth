@@ -72,17 +72,17 @@ $settings = [
         'smtp_enable' => false,
         'smtp_host' => 'smtp.gmail.com',
         'smtp_auth' => true,
-        'smtp_username' => 'gmail username',
+        'smtp_username' => 'username@gmail.com',
         'smtp_password' => 'gmail password',
         'smtp_secure' => 'tls',
         'smtp_port' => 587,
-        'smtp_from_email' => 'gmail username',
+        'smtp_from_email' => 'username@gmail.com',
         'smtp_from_user' => $site_name . ' Staff',
     ],
 
     'logger' => [
         'name' => 'simple',
-        'path' => __DIR__ . '/../var/logs/',
+        'path' => realpath(__DIR__ . '/../var/logs/'),
         'level' => Logger::DEBUG,
     ],
 
@@ -107,7 +107,6 @@ $settings = [
         'cookie_domain' => '',
         'cookie_httponly' => '1',
         'cookie_lifetime' => '0',
-        'gc_probability' => 1,
         'gc_divisor' => 1,
         'gc_maxlifetime' => '1350',
         'cookie_path' => '/',

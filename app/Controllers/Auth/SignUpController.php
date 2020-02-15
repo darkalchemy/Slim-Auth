@@ -85,9 +85,7 @@ class SignUpController extends Controller
                 'username',
                 'password',
             ]));
-            $activation = Sentinel::getActivationRepository()
-                ->create($user);
-
+            $activation = Sentinel::getActivationRepository()->create($user);
             $this->sendMail->setUserID($user->id);
             $this->sendMail->setSubject('Confirm your email');
             $this->sendMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
