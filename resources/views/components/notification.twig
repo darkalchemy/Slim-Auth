@@ -20,7 +20,7 @@
 
 {% if has_message('error') %}
     <div class='notification-wrapper'>
-        <div class='notification is-error has-text-centered'>
+        <div class='notification is-danger has-text-centered'>
             {% for msg in flash('error') %}
                 <li>{{ msg }}</li>
             {% endfor %}
