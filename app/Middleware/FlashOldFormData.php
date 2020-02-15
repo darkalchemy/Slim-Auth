@@ -34,7 +34,9 @@ class FlashOldFormData
      */
     public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
-        $this->flash->addMessage('old', $request->getParsedBody());
+        if (!empty($params = $request->getParsedBody())) {
+            $this->flash->addMessage('old', $params);
+        }
 
         return $handler->handle($request);
     }
