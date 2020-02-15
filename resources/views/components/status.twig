@@ -7,3 +7,23 @@
         </div>
     </article>
 {% endif %}
+
+{% if has_message('success') %}
+    <article class="message is-success">
+        <div class="message-body">
+            {% for msg in flash('success') %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </div>
+    </article>
+{% endif %}
+
+{% if has_message('error') %}
+    <article class="message is-danger">
+        <div class="message-body">
+            {% for msg in flash('error') %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </div>
+    </article>
+{% endif %}
