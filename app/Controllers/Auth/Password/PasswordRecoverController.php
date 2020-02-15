@@ -49,8 +49,7 @@ class PasswordRecoverController extends Controller
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('password_recovery_controller.log')
-            ->createInstance('password_recovery_controller');
+        $this->logger = $loggerFactory->addFileHandler('password_recovery_controller.log')->createInstance('password_recovery_controller');
         $this->sendMail = $sendMail;
         $this->rules = $rules;
     }
@@ -86,10 +85,8 @@ class PasswordRecoverController extends Controller
         $data = $this->validate($request, $rules);
 
         $params = array_clean($data, ['email']);
-        if ($user = User::whereEmail($params['email'])
-            ->first()) {
-            $reminder = Sentinel::getReminderRepository()
-                ->create($user);
+        if ($user = User::whereEmail($params['email'])->first()) {
+            $reminder = Sentinel::getReminderRepository()->create($user);
 
             $this->sendMail->addRecipient($user->email, $user->username);
             $this->sendMail->setSubject('Reset your password');

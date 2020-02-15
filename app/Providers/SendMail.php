@@ -21,7 +21,6 @@ class SendMail
     protected Email             $email;
     protected int               $user_id;
     protected string            $template;
-    protected string            $fillables;
     protected string            $subject;
 
     /**
@@ -56,6 +55,9 @@ class SendMail
         }
     }
 
+    /**
+     *
+     */
     public function store()
     {
         try {
@@ -120,6 +122,9 @@ class SendMail
         $this->email->subject = $subject;
     }
 
+    /**
+     * @param string $body
+     */
     public function setBody(string $body)
     {
         $this->email->body = $body;

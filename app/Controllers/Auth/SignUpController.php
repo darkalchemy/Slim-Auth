@@ -48,8 +48,7 @@ class SignUpController extends Controller
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('signup_controller.log')
-            ->createInstance('signup_controller');
+        $this->logger = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
         $this->rules = $rules;
         $this->sendMail = $sendMail;
     }

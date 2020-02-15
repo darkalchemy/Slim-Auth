@@ -26,13 +26,7 @@ class AccountController extends Controller
     protected Messages             $flash;
     protected RouteParserInterface $routeParser;
     protected ValidationRules      $rules;
-    /**
-     * AccountController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     */
+
     /**
      * AccountController constructor.
      *

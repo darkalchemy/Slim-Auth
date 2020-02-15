@@ -25,16 +25,6 @@ class User extends EloquentUser
     ];
 
     /**
-     * User constructor.
-     *
-     * @param array $attributes The attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
-
-    /**
      * @return HasMany
      */
     public function email()

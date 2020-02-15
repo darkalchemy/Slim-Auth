@@ -46,10 +46,10 @@ class AccountPasswordController extends Controller
     /**
      * @param ResponseInterface $response
      *
-     * @return ResponseInterface
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
+     * @return ResponseInterface
      */
     public function index(ResponseInterface $response)
     {
@@ -60,16 +60,15 @@ class AccountPasswordController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @return ResponseInterface
      * @throws ValidationException
+     * @return ResponseInterface
      */
     public function action(ServerRequestInterface $request, ResponseInterface $response)
     {
         $rules = array_merge_recursive($this->rules->password(), $this->rules->current_password(), $this->rules->confirm_password());
         $data = $this->validate($request, $rules);
 
-        Sentinel::getUserRepository()
-            ->update(Sentinel::check(), array_clean($data, ['password']));
+        Sentinel::getUserRepository()->update(Sentinel::check(), array_clean($data, ['password']));
 
         $this->flash->addMessage('status', 'Password updated!');
 

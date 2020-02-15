@@ -45,8 +45,7 @@ class PasswordResetController extends Controller
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('password_reset_controller.log')
-            ->createInstance('password_reset_controller');
+        $this->logger = $loggerFactory->addFileHandler('password_reset_controller.log')->createInstance('password_reset_controller');
         $this->rules = $rules;
     }
 
@@ -65,8 +64,7 @@ class PasswordResetController extends Controller
             'email',
             'code',
         ]);
-        if (!$this->reminderCodeExists(User::whereEmail($email = $params['email'] ?? null)
-            ->first(), $code = $params['code'] ?? null)) {
+        if (!$this->reminderCodeExists(User::whereEmail($email = $params['email'] ?? null)->first(), $code = $params['code'] ?? null)) {
             $this->flash->addMessage('status', 'Invalid reset code.');
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
@@ -92,16 +90,14 @@ class PasswordResetController extends Controller
             'code',
             'password',
         ]);
-        if (!$this->reminderCodeExists($user = User::whereEmail($params['email'])
-            ->first(), $code = $params['code'])) {
+        if (!$this->reminderCodeExists($user = User::whereEmail($params['email'])->first(), $code = $params['code'])) {
             $this->logger->error('Invalid reset code', $data);
             $this->flash->addMessage('status', 'Invalid reset code.');
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
         }
 
-        Sentinel::getReminderRepository()
-            ->complete($user, $code, $params['password']);
+        Sentinel::getReminderRepository()->complete($user, $code, $params['password']);
         $this->flash->addMessage('status', 'Your password has been reset and you can now sign in.');
 
         return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));
@@ -119,8 +115,7 @@ class PasswordResetController extends Controller
             return false;
         }
 
-        if (!Sentinel::getReminderRepository()
-            ->exists($user, $code)) {
+        if (!Sentinel::getReminderRepository()->exists($user, $code)) {
             return false;
         }
 

@@ -45,8 +45,7 @@ class SignInController extends Controller
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('signin_controller.log')
-            ->createInstance('signin_controller');
+        $this->logger = $loggerFactory->addFileHandler('signin_controller.log')->createInstance('signin_controller');
         $this->rules = $rules;
     }
 
@@ -79,10 +78,8 @@ class SignInController extends Controller
         $rules = array_merge_recursive($this->rules->email(), $this->rules->required('password'));
         $data = $this->validate($request, $rules);
 
-        $data = $request->getParsedBody();
-
         try {
-            if (!$user = Sentinel::authenticate(array_clean($data, [
+            if (!Sentinel::authenticate(array_clean($data, [
                 'email',
                 'password',
             ]), isset($data['persist']))) {
