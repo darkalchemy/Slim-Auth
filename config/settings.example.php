@@ -15,7 +15,7 @@ $settings = [
     'app_env' => 'DEVELOPMENT',
     'site_name' => $site_name,
     'di_compilation_path' => null,
-    'db_sockets' => true,
+    'db_sockets' => false,
     'error_handler_middleware' => [
         'display_error_details' => true,
         'log_errors' => true,
@@ -76,7 +76,7 @@ $settings = [
         'smtp_password' => 'gmail password',
         'smtp_secure' => 'tls',
         'smtp_port' => 587,
-        'smtp_from_email' => 'gmail email',
+        'smtp_from_email' => 'gmail username',
         'smtp_from_user' => $site_name . ' Staff',
     ],
 

@@ -61,7 +61,7 @@ module.exports = {
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0.75,
-            deleteOriginalAssets: true
+            deleteOriginalAssets: false
         })
     ],
     watchOptions: {
