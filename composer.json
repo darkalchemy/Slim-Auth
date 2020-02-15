@@ -1,4 +1,14 @@
 {
+    "name": "darkalchemy/slim-auth",
+    "type": "project",
+    "description": "A Slim 4 skeleton with authentication",
+    "keywords": [
+        "slim-framework",
+        "skeleton",
+        "slim",
+        "slim4"
+    ],
+    "license": "MIT",
     "require": {
         "php": ">=7.4.0",
         "ext-intl": "*",
