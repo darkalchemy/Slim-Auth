@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use App\Extensions\TwigTranslationExtension;
 use App\Factory\LoggerFactory;
 use App\Middleware\CheckMailMiddleware;
-use App\Middleware\SetLocalMiddleware;
+use App\Middleware\SetLocaleMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
@@ -79,6 +79,7 @@ return [
 
         return $capsule;
     },
+
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
         $twig = Twig::create(realpath($settings['twig']['path']), [
@@ -133,8 +134,10 @@ return [
     CheckMailMiddleware::class => function (ContainerInterface $container) {
         return new CheckMailMiddleware($container->get(Configuration::class)->getArray('mail'), $container->get(Messages::class));
     },
-    SetLocalMiddleware::class => function (ContainerInterface $container) {
-        return new SetLocalMiddleware($container->get(I18n::class), $container->get(Messages::class));
+
+    SetLocaleMiddleware::class => function (ContainerInterface $container) {
+        return new SetLocaleMiddleware($container->get(I18n::class), $container->get(Messages::class));
     },
+
     'view' => DI\get(Twig::class),
 ];

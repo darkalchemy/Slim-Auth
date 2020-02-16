@@ -1,4 +1,4 @@
-{% set link = full_url_for('auth.password.activate', {}, {'email': user.email, 'code': code}) %}
+{% set link = full_url_for('auth.activate', {}, {'email': user.email, 'code': code}) %}
 
 <p>
     {{ _f('Hi') }} {{ user.username }},

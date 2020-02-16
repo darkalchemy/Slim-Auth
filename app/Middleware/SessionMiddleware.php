@@ -31,6 +31,7 @@ class SessionMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $response = $handler->handle($request);
         if (!$this->session->isStarted()) {
             $this->session->start();
         }
@@ -39,7 +40,6 @@ class SessionMiddleware implements MiddlewareInterface
             $this->session->regenerateId();
             $this->session->set('regen', time() + 300);
         }
-        $response = $handler->handle($request);
         $this->session->save();
 
         return $response;

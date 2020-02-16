@@ -14,8 +14,6 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class RedirectIfAuthenticated
 {
-    protected ResponseInterface $response;
-
     /**
      * @param ServerRequestInterface  $request
      * @param RequestHandlerInterface $handler
@@ -24,10 +22,11 @@ class RedirectIfAuthenticated
      */
     public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
+        $response = $handler->handle($request);
         if (!Sentinel::guest()) {
-            return $this->response->withHeader('Location', '/');
+            return $response->withHeader('Location', '/');
         }
 
-        return $handler->handle($request);
+        return $response;
     }
 }

@@ -12,7 +12,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Flash\Messages;
 
-class SetLocalMiddleware implements MiddlewareInterface
+class SetLocaleMiddleware implements MiddlewareInterface
 {
     protected I18n $i18n;
     protected Messages $flash;

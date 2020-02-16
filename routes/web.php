@@ -25,6 +25,7 @@ return function (App $app) {
             $route->post('/signin', [SignInController::class, 'signin']);
             $route->get('/signup', [SignUpController::class, 'index'])->setName('auth.signup');
             $route->post('/signup', [SignUpController::class, 'signup']);
+            $route->get('/activate', UserActivateController::class)->setName('auth.activate');
         })->add(RedirectIfAuthenticated::class);
 
         $route->group('/password', function ($route) {
@@ -32,7 +33,6 @@ return function (App $app) {
             $route->post('/recover', [PasswordRecoverController::class, 'recover']);
             $route->get('/reset', [PasswordResetController::class, 'index'])->setName('auth.password.reset');
             $route->post('/reset', [PasswordResetController::class, 'reset']);
-            $route->get('/activate', UserActivateController::class)->setName('auth.password.activate');
         })->add(RedirectIfAuthenticated::class);
 
         $route->post('/signout', SignOutController::class)->setName('auth.signout');

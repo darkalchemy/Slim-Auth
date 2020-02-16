@@ -40,12 +40,10 @@ class RedirectIfGuest
     public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         $response = $handler->handle($request);
-
         if (Sentinel::guest()) {
             $this->flash->addMessage('status', _f('Please sign in before continuing'));
 
-            $response = $response
-                ->withHeader(
+            $response = $response->withHeader(
                     'Location',
                     $this->routeParser->urlFor('auth.signin') .
                     '?' .

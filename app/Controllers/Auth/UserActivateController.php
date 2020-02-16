@@ -29,7 +29,7 @@ class UserActivateController extends Controller
     {
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
+        $this->logger = $loggerFactory->addFileHandler('activate_controller.log')->createInstance('activate_controller');
     }
 
     /**
@@ -46,6 +46,7 @@ class UserActivateController extends Controller
 
         if (!$this->activationCodeExists($user = User::whereEmail($email = $params['email'] ?? null)->first(), $code = $params['code'] ?? null)) {
             $this->logger->error('Invalid activation code.');
+            // TODO: fix this not showing on page load
             $this->flash->addMessage('error', _f('Invalid activation code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('auth.signup'));
@@ -54,6 +55,7 @@ class UserActivateController extends Controller
         Sentinel::getActivationRepository()->complete($user, $code);
         $role = Sentinel::findRoleByName('User');
         $role->users()->attach($user);
+        // TODO: fix this not showing on page load
         $this->flash->addMessage('success', _f('Your email has been confirmed and your account has been activated. You can now sign in.'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));
