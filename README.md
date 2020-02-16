@@ -1,6 +1,11 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.1.3)
+[![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
+[![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
+[![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
+
 This is a simple skeleton to quickly ramp up a slim 4 project.  
 
 PHP 7.4 is required  
