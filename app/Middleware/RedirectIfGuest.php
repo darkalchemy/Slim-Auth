@@ -42,7 +42,7 @@ class RedirectIfGuest
         $response = $handler->handle($request);
 
         if (Sentinel::guest()) {
-            $this->flash->addMessage('status', 'Please sign in before continuing');
+            $this->flash->addMessage('status', _f('Please sign in before continuing'));
 
             $response = $response
                 ->withHeader(

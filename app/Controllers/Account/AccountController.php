@@ -5,7 +5,7 @@ namespace App\Controllers\Account;
 use App\Controllers\Controller;
 use App\Exceptions\ValidationException;
 use App\Validation\ValidationRules;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
@@ -46,10 +46,10 @@ class AccountController extends Controller
     /**
      * @param ResponseInterface $response
      *
-     * @return ResponseInterface
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
+     * @return ResponseInterface
      */
     public function index(ResponseInterface $response)
     {
@@ -60,23 +60,18 @@ class AccountController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @return ResponseInterface
      * @throws ValidationException
+     * @return ResponseInterface
      */
     public function action(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $rules = array_merge_recursive($this->rules->email(), $this->rules->required('username'));
-        $data = $this->validate($request, $rules);
+        $data = $this->validate($request, array_merge_recursive($this->rules->email(), $this->rules->required('username')));
+        Sentinel::check()->update(array_clean($data, [
+                'email', 'username',
+            ])
+        );
+        $this->flash->addMessage('status', _f('Account details updated!'));
 
-        Sentinel::check()
-            ->update(array_clean($data, [
-                'email',
-                'first_name',
-                'last_name',
-            ]));
-
-        $this->flash->addMessage('status', 'Account details updated!');
-
-        return $response->withHeader('Location', $this->routeParser->urlFor('account'));
+        return $response->withHeader('Location', $this->routeParser->urlFor('account.account'));
     }
 }

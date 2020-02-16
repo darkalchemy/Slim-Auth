@@ -4,7 +4,6 @@ namespace App\Controllers\Auth\Password;
 
 use App\Controllers\Controller;
 use App\Exceptions\ValidationException;
-use App\Factory\LoggerFactory;
 use App\Models\User;
 use App\Providers\SendMail;
 use App\Validation\ValidationRules;
@@ -12,7 +11,6 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use PHPMailer\PHPMailer\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
@@ -30,7 +28,6 @@ class PasswordRecoverController extends Controller
     protected Twig                  $view;
     protected Messages              $flash;
     protected RouteParserInterface  $routeParser;
-    protected LoggerInterface       $logger;
     protected SendMail              $sendMail;
     protected ValidationRules       $rules;
 
@@ -40,16 +37,14 @@ class PasswordRecoverController extends Controller
      * @param Twig                 $view
      * @param Messages             $flash
      * @param RouteParserInterface $routeParser
-     * @param LoggerFactory        $loggerFactory
      * @param SendMail             $sendMail
      * @param ValidationRules      $rules
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, SendMail $sendMail, ValidationRules $rules)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, SendMail $sendMail, ValidationRules $rules)
     {
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('password_recovery_controller.log')->createInstance('password_recovery_controller');
         $this->sendMail = $sendMail;
         $this->rules = $rules;
     }
@@ -81,22 +76,21 @@ class PasswordRecoverController extends Controller
      */
     public function recover(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $rules = $this->rules->email();
-        $data = $this->validate($request, $rules);
+        $data = $this->validate($request, $this->rules->email());
 
         $params = array_clean($data, ['email']);
         if ($user = User::whereEmail($params['email'])->first()) {
             $reminder = Sentinel::getReminderRepository()->create($user);
 
             $this->sendMail->addRecipient($user->email, $user->username);
-            $this->sendMail->setSubject('Reset your password');
+            $this->sendMail->setSubject(_f('Reset your password'));
             $this->sendMail->setMessage($this->view->fetch('email/auth/password/recover.twig', [
                 'user' => $user,
                 'code' => $reminder->code,
             ]));
             $this->sendMail->store();
         }
-        $this->flash->addMessage('status', 'An email has to been sent with instructions to reset your password.');
+        $this->flash->addMessage('status', _f('An email has to been sent with instructions to reset your password.'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('auth.password.recover'));
     }

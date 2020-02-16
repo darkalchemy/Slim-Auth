@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ff6ba81d73376f31082a97b96e16a53",
+    "content-hash": "69574ed7df5cf53b3d263261d3890677",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -530,6 +530,50 @@
                 "support"
             ],
             "time": "2019-09-10T13:59:08+00:00"
+        },
+        {
+            "name": "delight-im/i18n",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delight-im/PHP-I18N.git",
+                "reference": "cc50010bc6df3dbcd39a72d41683b4bc67cd35a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/delight-im/PHP-I18N/zipball/cc50010bc6df3dbcd39a72d41683b4bc67cd35a4",
+                "reference": "cc50010bc6df3dbcd39a72d41683b4bc67cd35a4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gettext": "*",
+                "ext-intl": "*",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Delight\\I18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Internationalization and localization for PHP",
+            "homepage": "https://github.com/delight-im/PHP-I18N",
+            "keywords": [
+                "gettext",
+                "i18n",
+                "internationalization",
+                "intl",
+                "l10n",
+                "language",
+                "locale",
+                "localization",
+                "translation"
+            ],
+            "time": "2019-06-14T18:54:26+00:00"
         },
         {
             "name": "doctrine/inflector",

@@ -38,6 +38,11 @@ $config = PhpCsFixer\Config::create()
         PhpCsFixer\Finder::create()
             ->in(__DIR__)
             ->exclude('vendor')
+            ->exclude('node_modules')
+            ->exclude('resources/views/cache')
+            ->exclude('public/resources')
+            ->exclude('var')
+            ->exclude('locale')
     )
 ;
 

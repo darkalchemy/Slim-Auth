@@ -18,18 +18,18 @@
                         {{ user.username }}
                     </a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item" href="{{ url_for('account') }}">
-                            Account
+                        <a class="navbar-item" href="{{ url_for('account.account') }}">
+                            {{ _f('Account') }}
                         </a>
                         <a class="navbar-item" href="{{ url_for('account.password') }}">
-                            Change password
+                            {{ _f('Change password') }}
                         </a>
                         <a class="navbar-item" href="{{ url_for('dashboard') }}">
-                            Dashboard
+                            {{ _f('Dashboard') }}
                         </a>
                         <a href="#" class="navbar-item"
                            onclick="document.getElementById('signout').submit(); return false;">
-                            Sign out
+                            {{ _f('Sign out') }}
                         </a>
                     </div>
                 </div>
@@ -37,10 +37,10 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         <a class="button is-info" href="{{ url_for('auth.signup') }}">
-                            <strong>Sign up</strong>
+                            <strong>{{ _f('Sign up') }}</strong>
                         </a>
                         <a class="button is-light" href="{{ url_for('auth.signin') }}">
-                            Sign in
+                            {{ _f('Sign in') }}
                         </a>
                     </div>
                 </div>

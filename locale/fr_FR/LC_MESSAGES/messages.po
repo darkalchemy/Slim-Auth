@@ -1,0 +1,160 @@
+#
+msgid ""
+msgstr ""
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, php-format
+msgid "Account"
+msgstr ""
+
+#, php-format
+msgid "Account details updated!"
+msgstr ""
+
+#, php-format
+msgid "An email has to been sent with instructions to reset your password."
+msgstr ""
+
+#, php-format
+msgid "Change"
+msgstr ""
+
+#, php-format
+msgid "Change password"
+msgstr ""
+
+#, php-format
+msgid "Choose a password"
+msgstr ""
+
+#, php-format
+msgid "Click the link below to confirm your email and activate your account."
+msgstr ""
+
+#, php-format
+msgid "Click the link below to reset your password and recover your account."
+msgstr ""
+
+#, php-format
+msgid "Confirm Password"
+msgstr ""
+
+#, php-format
+msgid "Confirm your email"
+msgstr ""
+
+#, php-format
+msgid "Current password"
+msgstr ""
+
+#, php-format
+msgid "Dashboard"
+msgstr ""
+
+#, php-format
+msgid "Email"
+msgstr ""
+
+#, php-format
+msgid "Hi"
+msgstr ""
+
+#, php-format
+msgid "Incorrect email or password"
+msgstr ""
+
+#, php-format
+msgid "Invalid activation code."
+msgstr ""
+
+#, php-format
+msgid "Invalid reset code."
+msgstr ""
+
+#, php-format
+msgid "Keep me signed in"
+msgstr ""
+
+#, php-format
+msgid "New password"
+msgstr ""
+
+#, php-format
+msgid "Page Not Found"
+msgstr ""
+
+#, php-format
+msgid "Password"
+msgstr ""
+
+#, php-format
+msgid "Password updated!"
+msgstr ""
+
+#, php-format
+msgid "Please sign in before continuing"
+msgstr ""
+
+#, php-format
+msgid "Recover"
+msgstr ""
+
+#, php-format
+msgid "Recover your password"
+msgstr ""
+
+#, php-format
+msgid "Reset"
+msgstr ""
+
+#, php-format
+msgid "Reset your password"
+msgstr ""
+
+#, php-format
+msgid "Sign in"
+msgstr ""
+
+#, php-format
+msgid "Sign out"
+msgstr ""
+
+#, php-format
+msgid "Sign up"
+msgstr ""
+
+#, php-format
+msgid "Signup successful. Please check and confirm your email before continuing."
+msgstr ""
+
+#, php-format
+msgid "Something went wrong"
+msgstr ""
+
+#, php-format
+msgid "Staff"
+msgstr ""
+
+#, php-format
+msgid "Update"
+msgstr ""
+
+#, php-format
+msgid "Username"
+msgstr ""
+
+#, php-format
+msgid "You must set up mail settings to use this."
+msgstr ""
+
+#, php-format
+msgid "Your email has been confirmed and your account has been activated. You can now sign in."
+msgstr ""
+
+#, php-format
+msgid "Your password has been reset and you can now sign in."
+msgstr ""

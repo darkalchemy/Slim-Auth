@@ -33,8 +33,7 @@ class SendMail
     public function __construct(PHPMailer $mailer, LoggerFactory $loggerFactory, Email $email)
     {
         $this->mailer = $mailer;
-        $this->logger = $loggerFactory->addFileHandler('sendmail_class.log')
-            ->createInstance('sendmail');
+        $this->logger = $loggerFactory->addFileHandler('sendmail_class.log')->createInstance('sendmail');
         $this->email = $email;
     }
 

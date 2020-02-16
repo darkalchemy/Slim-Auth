@@ -65,7 +65,7 @@ class PasswordResetController extends Controller
             'code',
         ]);
         if (!$this->reminderCodeExists(User::whereEmail($email = $params['email'] ?? null)->first(), $code = $params['code'] ?? null)) {
-            $this->flash->addMessage('status', 'Invalid reset code.');
+            $this->flash->addMessage('status', _f('Invalid reset code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
         }
@@ -82,8 +82,7 @@ class PasswordResetController extends Controller
      */
     public function reset(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $rules = array_merge_recursive($this->rules->required('email'), $this->rules->required('code'), $this->rules->password(), $this->rules->confirm_password());
-        $data = $this->validate($request, $rules);
+        $data = $this->validate($request, array_merge_recursive($this->rules->required('email'), $this->rules->required('code'), $this->rules->password(), $this->rules->confirm_password()));
 
         $params = array_clean($data, [
             'email',
@@ -92,13 +91,13 @@ class PasswordResetController extends Controller
         ]);
         if (!$this->reminderCodeExists($user = User::whereEmail($params['email'])->first(), $code = $params['code'])) {
             $this->logger->error('Invalid reset code', $data);
-            $this->flash->addMessage('status', 'Invalid reset code.');
+            $this->flash->addMessage('status', _f('Invalid reset code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
         }
 
         Sentinel::getReminderRepository()->complete($user, $code, $params['password']);
-        $this->flash->addMessage('status', 'Your password has been reset and you can now sign in.');
+        $this->flash->addMessage('status', _f('Your password has been reset and you can now sign in.'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));
     }

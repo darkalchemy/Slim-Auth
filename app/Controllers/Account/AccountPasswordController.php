@@ -65,12 +65,9 @@ class AccountPasswordController extends Controller
      */
     public function action(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $rules = array_merge_recursive($this->rules->password(), $this->rules->current_password(), $this->rules->confirm_password());
-        $data = $this->validate($request, $rules);
-
+        $data = $this->validate($request, array_merge_recursive($this->rules->password(), $this->rules->current_password(), $this->rules->confirm_password()));
         Sentinel::getUserRepository()->update(Sentinel::check(), array_clean($data, ['password']));
-
-        $this->flash->addMessage('status', 'Password updated!');
+        $this->flash->addMessage('status', _f('Password updated!'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('account.password'));
     }

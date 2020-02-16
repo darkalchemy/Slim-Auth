@@ -83,7 +83,7 @@ class SignInController extends Controller
                 'email',
                 'password',
             ]), isset($data['persist']))) {
-                throw new Exception('Incorrect email or password');
+                throw new Exception(_f('Incorrect email or password'));
             }
         } catch (Exception $e) {
             $this->flash->addMessage('status', $e->getMessage());

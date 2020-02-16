@@ -5,15 +5,15 @@
         <div class="container">
             <div class="column is-4 is-offset-4">
                 <h3 class="title has-text-centered">
-                    Account
+                    {{ _f('Account') }}
                 </h3>
 
                 {% include 'components/status.twig' %}
 
-                <form action="{{ url_for('account') }}" method="post">
+                <form action="{{ url_for('account.account') }}" method="post">
                     {{ csrf() | raw }}
                     <div class="field">
-                        <label for="email" class="label">Amail</label>
+                        <label for="email" class="label">{{ _f('Email') }}</label>
                         <div class="control">
                             <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
                                    id="email" value="{{ old.email ?: user.email }}">
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="field">
-                        <label for="username" class="label">Username</label>
+                        <label for="username" class="label">{{ _f('Username') }}</label>
                         <div class="control">
                             <input class="input{{ errors.username ? ' is-danger' : '' }}" type="text"
                                    name="username" id="username"
@@ -43,7 +43,7 @@
 
                     <div class="control">
                         <button type="submit" class="button is-info">
-                            Update
+                            {{ _f('Update') }}
                         </button>
                     </div>
                 </form>

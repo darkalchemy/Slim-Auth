@@ -16,6 +16,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "cartalyst/sentinel": "^3.0",
+        "delight-im/i18n": "^1.0",
         "egulias/email-validator": "^2.1",
         "filips123/monolog-phpmailer": "^1.0",
         "fullpipe/twig-webpack-extension": "^3.1",
@@ -80,6 +81,14 @@
         ],
         "rollback": [
             "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0"
+        ],
+        "compile-twig": [
+            "php bin/compile_twig.php"
+        ],
+        "translate": [
+            "cp bin/i18n.sh .",
+            "./i18n.sh en_US",
+            "rm i18n.sh"
         ]
     }
 }

@@ -49,7 +49,7 @@ $settings = [
     ],
 
     'twig' => [
-        'path' => __DIR__ . '/../resources/views',
+        'path' => __DIR__ . '/../resources/views/',
         'cache' => null,
     ],
 
@@ -120,10 +120,10 @@ if ($settings['db_sockets']) {
     unset($settings['db']['host'], $settings['db']['port']);
 }
 if ($settings['app_env'] === 'PRODUCTION') {
-    $settings['di_compilation_path'] = realpath(__DIR__ . '/../var/cache');
+    $settings['di_compilation_path'] = realpath(__DIR__ . '/../var/cache/');
     $settings['error_handler_middleware']['display_error_details'] = false;
     $settings['router']['cache_file'] = realpath(__DIR__ . '/../var/cache/router.cache');
-    $settings['twig']['cache'] = realpath(__DIR__ . '/../resources/views/cache');
+    $settings['twig']['cache'] = realpath(__DIR__ . '/../resources/views/cache/');
 }
 
 return $settings;

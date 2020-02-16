@@ -76,8 +76,7 @@ class SignUpController extends Controller
      */
     public function signup(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $rules = array_merge_recursive($this->rules->email(), $this->rules->email_unique(), $this->rules->username(), $this->rules->password(), $this->rules->password_different(), $this->rules->confirm_password(), $this->rules->confirm_password_different(), );
-        $data = $this->validate($request, $rules);
+        $data = $this->validate($request, array_merge_recursive($this->rules->email(), $this->rules->email_unique(), $this->rules->username(), $this->rules->password(), $this->rules->password_different(), $this->rules->confirm_password(), $this->rules->confirm_password_different()));
 
         try {
             $user = Sentinel::register(array_clean($data, [
@@ -87,14 +86,14 @@ class SignUpController extends Controller
             ]));
             $activation = Sentinel::getActivationRepository()->create($user);
             $this->sendMail->setUserID($user->id);
-            $this->sendMail->setSubject('Confirm your email');
+            $this->sendMail->setSubject(_f('Confirm your email'));
             $this->sendMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
                 'user' => $user,
                 'code' => $activation->code,
             ]));
             $this->sendMail->store();
         } catch (Exception $e) {
-            $this->flash->addMessage('status', 'Something went wrong');
+            $this->flash->addMessage('status', _f('Something went wrong'));
             $this->logger->error($e->getMessage(), array_clean($data, [
                 'email',
                 'username',
@@ -110,7 +109,7 @@ class SignUpController extends Controller
             'email',
             'username',
         ]));
-        $this->flash->addMessage('success', 'Signup successful. Please check and confirm your email before continuing.');
+        $this->flash->addMessage('success', _f('Signup successful. Please check and confirm your email before continuing.'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('home'));
     }

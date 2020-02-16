@@ -2,11 +2,15 @@
 
 declare(strict_types = 1);
 
+use App\Extensions\TwigTranslationExtension;
 use App\Factory\LoggerFactory;
 use App\Middleware\CheckMailMiddleware;
+use App\Middleware\SetLocalMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Delight\I18n\Codes;
+use Delight\I18n\I18n;
 use Fullpipe\TwigWebpackExtension\WebpackExtension;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use DI\Bridge\Slim\Bridge;
@@ -49,6 +53,13 @@ return [
         return $session;
     },
 
+    I18n::class => DI\factory(function () {
+        return new I18n([
+            Codes::EN_US,
+            Codes::FR_FR,
+        ]);
+    }),
+
     RouteParserInterface::class => function (ContainerInterface $container) {
         return $container->get(App::class)
             ->getRouteCollector()
@@ -56,31 +67,28 @@ return [
     },
 
     ResponseInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)
-            ->getResponseFactory();
+        return $container->get(App::class)->getResponseFactory();
     },
 
     Capsule::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->getArray('db');
         $capsule = new Capsule();
         $capsule->addConnection($settings);
-
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
         return $capsule;
     },
-
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
         $twig = Twig::create(realpath($settings['twig']['path']), [
             'cache' => $settings['twig']['cache'] ?? false,
-            'auto_reload' => true,
         ]);
 
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], $settings['webpack']['js_path'], $settings['webpack']['css_path']));
         $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
+        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class)));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
         $twig->getEnvironment()->addGlobal('settings', $settings);
         $twig->getEnvironment()->addGlobal('errors', $container->get(Messages::class)->getFirstMessage('errors'));
@@ -125,6 +133,8 @@ return [
     CheckMailMiddleware::class => function (ContainerInterface $container) {
         return new CheckMailMiddleware($container->get(Configuration::class)->getArray('mail'), $container->get(Messages::class));
     },
-
+    SetLocalMiddleware::class => function (ContainerInterface $container) {
+        return new SetLocalMiddleware($container->get(I18n::class), $container->get(Messages::class));
+    },
     'view' => DI\get(Twig::class),
 ];
