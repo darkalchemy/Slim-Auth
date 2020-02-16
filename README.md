@@ -40,7 +40,6 @@ sudo chown -R www-data:www-data var/{cache,logs} resources/views/cache/
 
 Development:
 ```
-composer install
 npm install
 composer migrate
 npm run build-dev
