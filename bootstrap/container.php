@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 use App\Factory\LoggerFactory;
+use App\Middleware\CheckMailMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
@@ -119,6 +120,10 @@ return [
 
     LoggerFactory::class => function (ContainerInterface $container) {
         return new LoggerFactory($container->get(Configuration::class)->getArray('logger'));
+    },
+
+    CheckMailMiddleware::class => function (ContainerInterface $container) {
+        return new CheckMailMiddleware($container->get(Configuration::class)->getArray('mail'), $container->get(Messages::class));
     },
 
     'view' => DI\get(Twig::class),

@@ -4,22 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Middleware;
 
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Selective\Config\Configuration;
 use Slim\Flash\Messages;
 
 class CheckMailMiddleware implements MiddlewareInterface
 {
-    protected ContainerInterface $container;
+    protected array $settings;
     protected Messages $flash;
 
-    public function __construct(ContainerInterface $container, Messages $flash)
+    public function __construct(array $settings, Messages $flash)
     {
-        $this->container = $container;
+        $this->settings = $settings;
         $this->flash = $flash;
     }
 
@@ -31,7 +29,7 @@ class CheckMailMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
-        if (!$this->container->get(Configuration::class)->getArray('mail')['smtp_enable']) {
+        if (!$this->settings['smtp_enable']) {
             $this->flash->addMessage('error', 'You must set up mail settings to use this.');
         }
 
