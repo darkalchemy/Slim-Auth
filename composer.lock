@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69574ed7df5cf53b3d263261d3890677",
+    "content-hash": "db84d5050bdfbea7a955eef53b8a712d",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -1222,6 +1222,112 @@
                 "tokenizer"
             ],
             "time": "2018-03-21T22:21:57+00:00"
+        },
+        {
+            "name": "middlewares/trailing-slash",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/middlewares/trailing-slash.git",
+                "reference": "7965ed1032095b7260ec0436d5ff84347fdd5b1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/middlewares/trailing-slash/zipball/7965ed1032095b7260ec0436d5ff84347fdd5b1c",
+                "reference": "7965ed1032095b7260ec0436d5ff84347fdd5b1c",
+                "shasum": ""
+            },
+            "require": {
+                "middlewares/utils": "^3.0",
+                "php": "^7.2",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "oscarotero/php-cs-fixer-config": "^1.0",
+                "phpunit/phpunit": "^8.1",
+                "squizlabs/php_codesniffer": "^3.0",
+                "zendframework/zend-diactoros": "^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Middlewares\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Middleware to normalize the trailing slash of the uri path",
+            "homepage": "https://github.com/middlewares/trailing-slash",
+            "keywords": [
+                "http",
+                "middleware",
+                "normalize",
+                "path",
+                "psr-15",
+                "psr-7",
+                "slash"
+            ],
+            "time": "2019-11-30T16:32:48+00:00"
+        },
+        {
+            "name": "middlewares/utils",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/middlewares/utils.git",
+                "reference": "13689487e8f3bba10b6cc66ed206efc8b874163e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/middlewares/utils/zipball/13689487e8f3bba10b6cc66ed206efc8b874163e",
+                "reference": "13689487e8f3bba10b6cc66ed206efc8b874163e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2",
+                "psr/container": "^1.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "guzzlehttp/psr7": "dev-master",
+                "laminas/laminas-diactoros": "^2.2",
+                "nyholm/psr7": "^1.0",
+                "oscarotero/php-cs-fixer-config": "^1.0",
+                "phpunit/phpunit": "^8.1",
+                "slim/psr7": "~0.3",
+                "squizlabs/php_codesniffer": "^3.0",
+                "sunrise/http-message": "^1.0",
+                "sunrise/http-server-request": "^1.0",
+                "sunrise/stream": "^1.0",
+                "sunrise/uri": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Middlewares\\Utils\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Common utils for PSR-15 middleware packages",
+            "homepage": "https://github.com/middlewares/utils",
+            "keywords": [
+                "PSR-11",
+                "http",
+                "middleware",
+                "psr-15",
+                "psr-17",
+                "psr-7"
+            ],
+            "time": "2020-01-19T00:30:41+00:00"
         },
         {
             "name": "monolog/monolog",
