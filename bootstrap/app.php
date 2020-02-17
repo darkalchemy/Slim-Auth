@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Delight\I18n\I18n;
 use DI\ContainerBuilder;

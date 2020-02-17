@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Email;
 use App\Providers\SendMail;
 use Carbon\Carbon;

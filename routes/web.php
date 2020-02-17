@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use App\Controllers\Account\AccountController;
 use App\Controllers\Account\AccountPasswordController;

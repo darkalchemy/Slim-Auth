@@ -1,10 +1,12 @@
-<?php declare
+<?php 
 
-(strict_types = 1);
+declare(strict_types=1);
 
 $config = PhpCsFixer\Config::create()
     ->setUsingCache(false)
+    ->setRiskyAllowed(true)
     ->setRules([
+        '@PSR1' => true,
         '@PSR2' => true,
         'array_syntax' => [ 'syntax' => 'short' ],
         'binary_operator_spaces' => [ 'align_equals' => false, 'align_double_arrow' => false ],
@@ -33,6 +35,10 @@ $config = PhpCsFixer\Config::create()
         'method_argument_space' => ['ensure_fully_multiline' => false],
         'no_break_comment' => false,
         'blank_line_before_statement' => true,
+        'declare_equal_normalize' => [ 'space' => 'none' ],
+        'declare_strict_types' => true,
+        'fully_qualified_strict_types' => true,
+        'blank_line_after_opening_tag' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

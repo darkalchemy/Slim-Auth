@@ -82,7 +82,7 @@
         "rollback": [
             "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0"
         ],
-        "compile-twig": [
+        "compile": [
             "php bin/compile_twig.php"
         ],
         "translate": [
