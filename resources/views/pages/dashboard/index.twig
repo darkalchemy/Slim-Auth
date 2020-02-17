@@ -1,7 +1,14 @@
 {% extends 'layouts/app.twig' %}
 
 {% block content %}
-    <div class="container">
-        {{ _f('Dashboard') }}
-    </div>
+    <section class="hero is-info is-fullheight-with-navbar">
+        {% include 'components/notification.twig' %}
+        <div class="hero-body">
+            <div class="container">
+                <p class="title">
+                    {{ _f('Dashboard') }}
+                </p>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -39,9 +39,9 @@ class AccountPasswordController extends Controller
     }
 
     /**
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError
      *
      * @return ResponseInterface
      */

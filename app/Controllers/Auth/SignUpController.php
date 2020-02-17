@@ -7,7 +7,7 @@ namespace App\Controllers\Auth;
 use App\Controllers\Controller;
 use App\Exceptions\ValidationException;
 use App\Factory\LoggerFactory;
-use App\Providers\SendMail;
+use App\Providers\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
@@ -31,7 +31,7 @@ class SignUpController extends Controller
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
-    protected SendMail              $sendMail;
+    protected StoreMail             $storeMail;
 
     /**
      * SignUpController constructor.
@@ -41,16 +41,15 @@ class SignUpController extends Controller
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
      * @param ValidationRules      $rules         The rules
-     * @param SendMail             $sendMail      The sendMail
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, SendMail $sendMail)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail)
     {
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
         $this->logger = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
         $this->rules = $rules;
-        $this->sendMail = $sendMail;
+        $this->storeMail = $storeMail;
     }
 
     /**
@@ -86,13 +85,13 @@ class SignUpController extends Controller
                 'password',
             ]));
             $activation = Sentinel::getActivationRepository()->create($user);
-            $this->sendMail->setUserID($user->id);
-            $this->sendMail->setSubject(_f('Confirm your email'));
-            $this->sendMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
+            $this->storeMail->setUserID($user->id);
+            $this->storeMail->setSubject(_f('Confirm your email'));
+            $this->storeMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
                 'user' => $user,
                 'code' => $activation->code,
             ]));
-            $this->sendMail->store();
+            $this->storeMail->store();
         } catch (Exception $e) {
             $this->flash->addMessage('status', _f('Something went wrong'));
             $this->logger->error($e->getMessage(), array_clean($data, [

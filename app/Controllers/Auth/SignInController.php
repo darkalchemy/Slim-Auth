@@ -74,8 +74,7 @@ class SignInController extends Controller
      */
     public function signin(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $rules = array_merge_recursive($this->rules->email(), $this->rules->required('password'));
-        $data = $this->validate($request, $rules);
+        $data = $this->validate($request, array_merge_recursive($this->rules->email(), $this->rules->required('password')));
 
         try {
             if (!Sentinel::authenticate(array_clean($data, [

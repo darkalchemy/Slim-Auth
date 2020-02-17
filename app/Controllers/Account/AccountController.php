@@ -39,9 +39,9 @@ class AccountController extends Controller
     }
 
     /**
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError
      *
      * @return ResponseInterface
      */
@@ -60,8 +60,7 @@ class AccountController extends Controller
         $data = $this->validate($request, array_merge_recursive($this->rules->email(), $this->rules->required('username')));
         Sentinel::check()->update(array_clean($data, [
             'email', 'username',
-        ])
-        );
+        ]));
         $this->flash->addMessage('status', _f('Account details updated!'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('account.account'));

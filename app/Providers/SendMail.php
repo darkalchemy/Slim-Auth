@@ -6,7 +6,6 @@ namespace App\Providers;
 
 use App\Factory\LoggerFactory;
 use App\Models\Email;
-use Exception;
 use PHPMailer\PHPMailer\Exception as ExceptionAlias;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
@@ -30,7 +29,6 @@ class SendMail
     {
         $this->mailer = $mailer;
         $this->logger = $loggerFactory->addFileHandler('sendmail_class.log')->createInstance('sendmail');
-        $this->email = $email;
     }
 
     public function send()
@@ -45,28 +43,6 @@ class SendMail
             $this->mailer->clearAttachments();
             $this->mailer->clearCustomHeaders();
         }
-    }
-
-    public function store()
-    {
-        try {
-            $this->email->save();
-        } catch (Exception $e) {
-            $this->logger->error($e->getMessage());
-        }
-    }
-
-    public function setUserID(int $user_id)
-    {
-        $this->email->user_id = $user_id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUserID()
-    {
-        return $this->email->user_id;
     }
 
     /**
@@ -92,18 +68,8 @@ class SendMail
         $this->mailer->msgHTML($body);
     }
 
-    public function setEmailSubject(string $subject)
-    {
-        $this->mailer->Subject = $subject;
-    }
-
     public function setSubject(string $subject)
     {
-        $this->email->subject = $subject;
-    }
-
-    public function setBody(string $body)
-    {
-        $this->email->body = $body;
+        $this->mailer->Subject = $subject;
     }
 }

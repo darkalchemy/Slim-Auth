@@ -7,10 +7,9 @@ namespace App\Controllers\Auth\Password;
 use App\Controllers\Controller;
 use App\Exceptions\ValidationException;
 use App\Models\User;
-use App\Providers\SendMail;
+use App\Providers\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use PHPMailer\PHPMailer\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
@@ -28,18 +27,18 @@ class PasswordRecoverController extends Controller
     protected Twig                  $view;
     protected Messages              $flash;
     protected RouteParserInterface  $routeParser;
-    protected SendMail              $sendMail;
     protected ValidationRules       $rules;
+    protected StoreMail             $storeMail;
 
     /**
      * PasswordRecoverController constructor.
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, SendMail $sendMail, ValidationRules $rules)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, StoreMail $storeMail, ValidationRules $rules)
     {
         $this->view = $view;
         $this->flash = $flash;
         $this->routeParser = $routeParser;
-        $this->sendMail = $sendMail;
+        $this->storeMail = $storeMail;
         $this->rules = $rules;
     }
 
@@ -60,7 +59,6 @@ class PasswordRecoverController extends Controller
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws ValidationException
-     * @throws Exception
      *
      * @return ResponseInterface
      */
@@ -71,14 +69,13 @@ class PasswordRecoverController extends Controller
         $params = array_clean($data, ['email']);
         if ($user = User::whereEmail($params['email'])->first()) {
             $reminder = Sentinel::getReminderRepository()->create($user);
-
-            $this->sendMail->addRecipient($user->email, $user->username);
-            $this->sendMail->setSubject(_f('Reset your password'));
-            $this->sendMail->setMessage($this->view->fetch('email/auth/password/recover.twig', [
+            $this->storeMail->setUserID($user->id);
+            $this->storeMail->setSubject(_f('Reset your password'));
+            $this->storeMail->setBody($this->view->fetch('email/auth/password/recover.twig', [
                 'user' => $user,
                 'code' => $reminder->code,
             ]));
-            $this->sendMail->store();
+            $this->storeMail->store();
         }
         $this->flash->addMessage('status', _f('An email has to been sent with instructions to reset your password.'));
 

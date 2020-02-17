@@ -25,7 +25,7 @@ class CheckMailMiddleware implements MiddlewareInterface
     {
         $response = $handler->handle($request);
         if (!$this->settings['smtp_enable']) {
-            $this->flash->addMessage('error', _f('You must set up mail settings to use this.'));
+            $this->flash->addMessage('error', _f('You must set up mail settings to send mail.'));
         }
 
         return $response;
