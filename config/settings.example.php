@@ -100,7 +100,6 @@ $settings['session'] = [
     'cookie_domain' => '',
     'cookie_httponly' => '1',
     'cookie_lifetime' => '0',
-    'gc_divisor' => 1,
     'gc_maxlifetime' => '1350',
     'cookie_path' => '/',
     'cookie_samesite' => 'Strict',

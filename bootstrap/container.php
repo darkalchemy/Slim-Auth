@@ -120,7 +120,7 @@ return [
     },
 
     WhoopsMiddleware::class => function (ContainerInterface $container) {
-        $appEnv = $container->get(Configuration::class)->getArray('site')['app_env'];
+        $appEnv = $container->get(Configuration::class)->findString('site.app_env');
 
         return new WhoopsMiddleware([
             'enable' => $appEnv === 'DEVELOPMENT',
