@@ -41,8 +41,8 @@ edit config/settings.php as needed.
 
 Make these folders writable by the web server
 ```
-sudo chown -R www-data:www-data var/{cache,logs} resources/views/cache/
-sudo chmod -R 0775 var/{cache,logs} resources/views/cache/
+sudo chown -R www-data:www-data var/{cache,logs,tmp} resources/views/cache/
+sudo chmod -R 0775 var/{cache,logs,tmp} resources/views/cache/
 ```
 
 For Development:

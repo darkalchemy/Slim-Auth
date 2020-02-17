@@ -45,7 +45,7 @@ function compile_twig_templates(ContainerInterface $container)
 {
     $settings = $container->get(Configuration::class)->all();
     $twig_config = $settings['twig'];
-    $cache = $twig_config['cache'] ?? $settings['site']['root'] . '/resources/views/cache/';
+    $cache = $twig_config['cache'] ?? $settings['root'] . '/resources/views/cache/';
     $twig = $container->get(Twig::class)->getEnvironment();
     $twig->addExtension(new TwigExtension());
     $compiler = new TwigCompiler($twig, $cache, true);

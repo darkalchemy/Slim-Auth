@@ -11,6 +11,8 @@ ini_set('default_charset', 'utf-8');
 ini_set('max_execution_time', '300');
 
 $settings['site_name'] = 'Slim-Auth';
+$settings['root'] = dirname(__DIR__);
+$settings['tmp'] = $settings['root'] . '/var/tmp';
 $settings['site'] = [
     'app_env' => 'DEVELOPMENT', // DEVELOPMENT PRODUCTION
     'root' => dirname(__DIR__),
@@ -22,6 +24,7 @@ $settings['site'] = [
         'log_error_details' => true,
     ],
 ];
+
 $settings['db'] = [
     'driver' => 'mysql',
     'host' => '127.0.0.1',
@@ -44,18 +47,22 @@ $settings['db'] = [
         PDO::ATTR_PERSISTENT => false,
     ],
 ];
+
 $settings['router'] = [
     'cache_file' => '',
 ];
+
 $settings['twig'] = [
-    'path' => $settings['site']['root'] . '/resources/views',
+    'path' => $settings['root'] . '/resources/views',
     'cache' => null,
 ];
+
 $settings['webpack'] = [
-    'manifest' => $settings['site']['root'] . '/public/resources/manifest.json',
+    'manifest' => $settings['root'] . '/public/resources/manifest.json',
     'js_path' => '/resources/',
     'css_path' => '/resources/',
 ];
+
 $settings['bad_words'] = [
     'owner',
     'staff',
@@ -64,6 +71,7 @@ $settings['bad_words'] = [
     'sysop',
     'user',
 ];
+
 $settings['mail'] = [
     'smtp_enable' => false,
     'smtp_host' => 'smtp.gmail.com',
@@ -75,17 +83,20 @@ $settings['mail'] = [
     'smtp_from_email' => 'username@gmail.com',
     'smtp_from_user' => $settings['site_name'] . ' Staff',
 ];
+
 $settings['logger'] = [
     'name' => 'simple',
-    'path' => $settings['site']['root'] . '/var/logs/',
+    'path' => $settings['root'] . '/var/logs/',
     'level' => Logger::DEBUG,
 ];
+
 $settings['cookies'] = [
     'name' => ($scheme ? '__Secure-' : '') . $settings['site_name'],
     'http_only' => '1',
     'secure' => $scheme ? '1' : '0',
     'samesite' => 'Strict',
 ];
+
 $settings['session'] = [
     'name' => $settings['site_name'],
     'sid_length' => (ini_get('session.save_handler') != 'files' ? '256' : '128'),
@@ -100,6 +111,7 @@ $settings['session'] = [
     'cookie_domain' => '',
     'cookie_httponly' => '1',
     'cookie_lifetime' => '0',
+    'gc_divisor' => 1,
     'gc_maxlifetime' => '1350',
     'cookie_path' => '/',
     'cookie_samesite' => 'Strict',
@@ -111,10 +123,12 @@ if ($settings['site']['db_sockets']) {
     unset($settings['db']['host'], $settings['db']['port']);
 }
 if ($settings['site']['app_env'] === 'PRODUCTION') {
-    $settings['site']['di_compilation_path'] = $settings['site']['root'] . '/var/cache';
+    $settings['site']['di_compilation_path'] = $settings['root'] . '/var/cache';
     $settings['site']['error_handler_middleware']['display_error_details'] = false;
-    $settings['router']['cache_file'] = $settings['site']['root'] . '/var/cache/router.cache';
-    $settings['twig']['cache'] = $settings['site']['root'] . '/resources/views/cache';
+    $settings['router']['cache_file'] = $settings['root'] . '/var/cache/router.cache';
+    $settings['twig']['cache'] = $settings['root'] . '/resources/views/cache';
 }
+
+putenv(sprintf('TMPDIR=%s', $settings['tmp']));
 
 return $settings;
