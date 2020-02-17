@@ -26,6 +26,11 @@ class LoggerFactory
     private int $level;
 
     /**
+     * @var array Handler
+     */
+    private array $handler = [];
+
+    /**
      * The constructor.
      *
      * @param array $settings The settings
@@ -35,11 +40,6 @@ class LoggerFactory
         $this->path = (string) $settings['path'];
         $this->level = (int) $settings['level'];
     }
-
-    /**
-     * @var array Handler
-     */
-    private array $handler = [];
 
     /**
      * Build the logger.

@@ -18,9 +18,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class AccountPasswordController
- *
- * @package App\Controllers\Account
+ * Class AccountPasswordController.
  */
 class AccountPasswordController extends Controller
 {
@@ -31,11 +29,6 @@ class AccountPasswordController extends Controller
 
     /**
      * AccountPasswordController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param ValidationRules      $rules
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules)
     {
@@ -46,11 +39,10 @@ class AccountPasswordController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response
-     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
+     *
      * @return ResponseInterface
      */
     public function index(ResponseInterface $response)
@@ -59,10 +51,8 @@ class AccountPasswordController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     *
      * @throws ValidationException
+     *
      * @return ResponseInterface
      */
     public function action(ServerRequestInterface $request, ResponseInterface $response)

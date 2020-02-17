@@ -9,9 +9,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
- * Class CsrfExtension
- *
- * @package App\Views
+ * Class CsrfExtension.
  */
 class CsrfExtension extends AbstractExtension
 {
@@ -19,17 +17,12 @@ class CsrfExtension extends AbstractExtension
 
     /**
      * CsrfExtension constructor.
-     *
-     * @param Guard $csrf
      */
     public function __construct(Guard $csrf)
     {
         $this->csrf = $csrf;
     }
 
-    /**
-     * @return array
-     */
     public function getFunctions(): array
     {
         return [

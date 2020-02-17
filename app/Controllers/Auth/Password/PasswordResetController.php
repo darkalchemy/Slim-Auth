@@ -21,9 +21,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class PasswordResetController
- *
- * @package App\Controllers\Auth\Password
+ * Class PasswordResetController.
  */
 class PasswordResetController extends Controller
 {
@@ -35,12 +33,6 @@ class PasswordResetController extends Controller
 
     /**
      * PasswordResetController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param LoggerFactory        $loggerFactory
-     * @param ValidationRules      $rules
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules)
     {
@@ -52,13 +44,11 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     *
-     * @return ResponseInterface
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
+     * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -76,11 +66,9 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @throws ValidationException
      *
      * @return ResponseInterface
-     * @throws ValidationException
      */
     public function reset(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -105,9 +93,6 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param User|null   $user
-     * @param string|null $code
-     *
      * @return bool
      */
     protected function reminderCodeExists(?User $user, ?string $code)

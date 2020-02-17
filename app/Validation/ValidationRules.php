@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Validation;
 
 /**
- * Class ValidationRules
- *
- * @package App\Validation
+ * Class ValidationRules.
  */
 class ValidationRules
 {
@@ -143,8 +141,6 @@ class ValidationRules
     }
 
     /**
-     * @param string $key
-     *
      * @return array
      */
     public function required(string $key)

@@ -11,9 +11,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class HomeController
- *
- * @package App\Controllers
+ * Class HomeController.
  */
 class HomeController
 {
@@ -21,8 +19,6 @@ class HomeController
 
     /**
      * HomeController constructor.
-     *
-     * @param Twig $view
      */
     public function __construct(Twig $view)
     {
@@ -30,10 +26,10 @@ class HomeController
     }
 
     /**
-     * @param ResponseInterface $response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
      * @return ResponseInterface
      */
     public function __invoke(ResponseInterface $response)

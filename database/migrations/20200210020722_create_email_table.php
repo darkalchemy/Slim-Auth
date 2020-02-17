@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
 use App\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateEmailTable
+ * Class CreateEmailTable.
  */
 class CreateEmailTable extends Migration
 {
-    /**
-     *
-     */
     public function up()
     {
         $this->schema->create('email', function (Blueprint $table) {
@@ -31,9 +28,6 @@ class CreateEmailTable extends Migration
         });
     }
 
-    /**
-     *
-     */
     public function down()
     {
         $this->schema->drop('email');

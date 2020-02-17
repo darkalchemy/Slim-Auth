@@ -9,9 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Interfaces\RouteParserInterface;
 
 /**
- * Class SignOutController
- *
- * @package App\Controllers\Auth
+ * Class SignOutController.
  */
 class SignOutController
 {
@@ -19,8 +17,6 @@ class SignOutController
 
     /**
      * SignOutController constructor.
-     *
-     * @param RouteParserInterface $routeParser
      */
     public function __construct(RouteParserInterface $routeParser)
     {
@@ -28,7 +24,6 @@ class SignOutController
     }
 
     /**
-     * @param ResponseInterface $response
      * @return ResponseInterface
      */
     public function __invoke(ResponseInterface $response)

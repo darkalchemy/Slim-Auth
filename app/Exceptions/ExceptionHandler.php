@@ -40,10 +40,9 @@ class ExceptionHandler
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param Throwable              $exception
      * @throws ReflectionException
      * @throws Throwable
+     *
      * @return mixed
      */
     public function __invoke(ServerRequestInterface $request, Throwable $exception)

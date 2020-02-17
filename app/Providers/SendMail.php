@@ -12,9 +12,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class SendMail
- *
- * @package App\Providers
+ * Class SendMail.
  */
 class SendMail
 {
@@ -27,10 +25,6 @@ class SendMail
 
     /**
      * SendMail constructor.
-     *
-     * @param PHPMailer     $mailer
-     * @param LoggerFactory $loggerFactory
-     * @param Email         $email
      */
     public function __construct(PHPMailer $mailer, LoggerFactory $loggerFactory, Email $email)
     {
@@ -39,9 +33,6 @@ class SendMail
         $this->email = $email;
     }
 
-    /**
-     *
-     */
     public function send()
     {
         try {
@@ -56,9 +47,6 @@ class SendMail
         }
     }
 
-    /**
-     *
-     */
     public function store()
     {
         try {
@@ -68,9 +56,6 @@ class SendMail
         }
     }
 
-    /**
-     * @param int $user_id
-     */
     public function setUserID(int $user_id)
     {
         $this->email->user_id = $user_id;
@@ -107,25 +92,16 @@ class SendMail
         $this->mailer->msgHTML($body);
     }
 
-    /**
-     * @param string $subject
-     */
     public function setEmailSubject(string $subject)
     {
         $this->mailer->Subject = $subject;
     }
 
-    /**
-     * @param string $subject
-     */
     public function setSubject(string $subject)
     {
         $this->email->subject = $subject;
     }
 
-    /**
-     * @param string $body
-     */
     public function setBody(string $body)
     {
         $this->email->body = $body;

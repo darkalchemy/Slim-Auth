@@ -34,5 +34,4 @@ return [
     'default_migration_prefix' => 'db_schema_',
     'generate_migration_name' => true,
     'mark_generated_migration' => true,
-
 ];

@@ -37,8 +37,6 @@ class SignInController extends Controller
      * @param Twig                 $view        The view
      * @param Messages             $flash       The flash
      * @param RouteParserInterface $routeParser The routeParser
-     * @param LoggerFactory        $loggerFactory
-     * @param ValidationRules      $rules
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules)
     {
@@ -53,11 +51,11 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @return ResponseInterface
      * @throws SyntaxError
      * @throws LoaderError
-     *
      * @throws RuntimeError
+     *
+     * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -70,8 +68,9 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @return ResponseInterface
      * @throws ValidationException
+     *
+     * @return ResponseInterface
      */
     public function signin(ServerRequestInterface $request, ResponseInterface $response)
     {

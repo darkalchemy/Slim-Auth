@@ -14,8 +14,6 @@ class TwigTranslationExtension extends AbstractExtension
 
     /**
      * TwigTranslationExtension constructor.
-     *
-     * @param I18n $i18n
      */
     public function __construct(I18n $i18n)
     {
@@ -38,7 +36,6 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param string $text
      * @return string
      */
     public function translateFormatted(string $text)
@@ -47,8 +44,8 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param string $text
-     * @param mixed  ...$replacements
+     * @param mixed ...$replacements
+     *
      * @return string
      */
     public function translateFormattedExtended(string $text, ...$replacements)
@@ -57,9 +54,6 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param string $text
-     * @param string $alternative
-     * @param int    $count
      * @return string
      */
     public function translatePlural(string $text, string $alternative, int $count)
@@ -68,10 +62,8 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param string $text
-     * @param string $alternative
-     * @param int    $count
-     * @param mixed  ...$replacements
+     * @param mixed ...$replacements
+     *
      * @return string
      */
     public function translatePluralFormatted(string $text, string $alternative, int $count, ...$replacements)
@@ -80,10 +72,8 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param string $text
-     * @param string $alternative
-     * @param int    $count
-     * @param mixed  ...$replacements
+     * @param mixed ...$replacements
+     *
      * @return string
      */
     public function translatePluralFormattedExtended(string $text, string $alternative, int $count, ...$replacements)
@@ -92,8 +82,6 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param string $text
-     * @param string $context
      * @return string
      */
     public function translateWithContext(string $text, string $context)

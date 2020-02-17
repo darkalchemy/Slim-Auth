@@ -18,9 +18,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class AccountController
- *
- * @package App\Controllers\Account
+ * Class AccountController.
  */
 class AccountController extends Controller
 {
@@ -31,11 +29,6 @@ class AccountController extends Controller
 
     /**
      * AccountController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param ValidationRules      $rules
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules)
     {
@@ -46,11 +39,10 @@ class AccountController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response
-     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
+     *
      * @return ResponseInterface
      */
     public function index(ResponseInterface $response)
@@ -59,18 +51,16 @@ class AccountController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     *
      * @throws ValidationException
+     *
      * @return ResponseInterface
      */
     public function action(ServerRequestInterface $request, ResponseInterface $response)
     {
         $data = $this->validate($request, array_merge_recursive($this->rules->email(), $this->rules->required('username')));
         Sentinel::check()->update(array_clean($data, [
-                'email', 'username',
-            ])
+            'email', 'username',
+        ])
         );
         $this->flash->addMessage('status', _f('Account details updated!'));
 

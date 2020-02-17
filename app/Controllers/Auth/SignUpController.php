@@ -56,11 +56,11 @@ class SignUpController extends Controller
     /**
      * @param ResponseInterface $response The response
      *
-     * @return ResponseInterface
      * @throws RuntimeError
      * @throws SyntaxError
-     *
      * @throws LoaderError
+     *
+     * @return ResponseInterface
      */
     public function index(ResponseInterface $response)
     {
@@ -71,8 +71,9 @@ class SignUpController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @return ResponseInterface
      * @throws ValidationException
+     *
+     * @return ResponseInterface
      */
     public function signup(ServerRequestInterface $request, ResponseInterface $response)
     {

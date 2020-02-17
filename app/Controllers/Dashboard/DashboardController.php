@@ -11,9 +11,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class DashboardController
- *
- * @package App\Controllers\Dashboard
+ * Class DashboardController.
  */
 class DashboardController
 {
@@ -21,8 +19,6 @@ class DashboardController
 
     /**
      * DashboardController constructor.
-     *
-     * @param Twig $view
      */
     public function __construct(Twig $view)
     {
@@ -30,10 +26,10 @@ class DashboardController
     }
 
     /**
-     * @param ResponseInterface $response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
      * @return ResponseInterface
      */
     public function __invoke(ResponseInterface $response)

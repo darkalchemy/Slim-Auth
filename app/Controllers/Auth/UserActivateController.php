@@ -35,8 +35,6 @@ class UserActivateController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
      * @return ResponseInterface
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
@@ -64,9 +62,6 @@ class UserActivateController extends Controller
     }
 
     /**
-     * @param User|null   $user
-     * @param string|null $code
-     *
      * @return bool
      */
     protected function activationCodeExists(?User $user, ?string $code)

@@ -20,7 +20,7 @@ class FlashOldFormDataMiddleware implements MiddlewareInterface
     /**
      * FlashOldFormData constructor.
      *
-     * @param Messages   $flash The flash
+     * @param Messages $flash The flash
      */
     public function __construct(Messages $flash)
     {
@@ -30,8 +30,6 @@ class FlashOldFormDataMiddleware implements MiddlewareInterface
     /**
      * @param ServerRequestInterface  $request The request
      * @param RequestHandlerInterface $handler The handler
-     *
-     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

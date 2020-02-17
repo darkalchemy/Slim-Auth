@@ -80,7 +80,6 @@ class TwigCompiler
     }
 
     /**
-     * @param string $viewPath
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -105,10 +104,6 @@ class TwigCompiler
         }
     }
 
-    /**
-     * @param string $path
-     * @return bool
-     */
     private function removeDirectory(string $path): bool
     {
         $iterator = new DirectoryIterator($path);

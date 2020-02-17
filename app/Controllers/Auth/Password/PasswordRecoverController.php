@@ -21,9 +21,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class PasswordRecoverController
- *
- * @package App\Controllers\Auth\Password
+ * Class PasswordRecoverController.
  */
 class PasswordRecoverController extends Controller
 {
@@ -35,12 +33,6 @@ class PasswordRecoverController extends Controller
 
     /**
      * PasswordRecoverController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param SendMail             $sendMail
-     * @param ValidationRules      $rules
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, SendMail $sendMail, ValidationRules $rules)
     {
@@ -52,13 +44,11 @@ class PasswordRecoverController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     *
-     * @return ResponseInterface
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
+     * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -66,15 +56,13 @@ class PasswordRecoverController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     *
-     * @return ResponseInterface
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws ValidationException
      * @throws Exception
+     *
+     * @return ResponseInterface
      */
     public function recover(ServerRequestInterface $request, ResponseInterface $response)
     {

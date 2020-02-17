@@ -15,9 +15,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 class RedirectIfAuthenticated
 {
     /**
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
-     *
      * @return ResponseInterface
      */
     public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)

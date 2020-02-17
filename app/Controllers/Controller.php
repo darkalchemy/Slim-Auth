@@ -17,8 +17,9 @@ class Controller
      * @param ServerRequestInterface $request The request
      * @param array                  $rules   The rules to process
      *
-     * @return array|object|null
      * @throws ValidationException
+     *
+     * @return null|array|object
      */
     public function validate(ServerRequestInterface $request, array $rules = [])
     {
