@@ -82,7 +82,7 @@ return [
 
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
-        $twig = Twig::create(realpath($settings['twig']['path']), [
+        $twig = Twig::create($settings['twig']['path'], [
             'cache' => $settings['twig']['cache'] ?? false,
         ]);
 
@@ -120,7 +120,7 @@ return [
     },
 
     WhoopsMiddleware::class => function (ContainerInterface $container) {
-        $appEnv = $container->get(Configuration::class)->getString('app_env');
+        $appEnv = $container->get(Configuration::class)->getArray('site')['app_env'];
 
         return new WhoopsMiddleware([
             'enable' => $appEnv === 'DEVELOPMENT',

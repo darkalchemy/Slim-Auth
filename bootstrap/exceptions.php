@@ -10,7 +10,7 @@ use Slim\Views\Twig;
 
 return static function (App $app) {
     $container = $app->getContainer();
-    $error = $container->get(Configuration::class)->getArray('error_handler_middleware');
+    $error = $container->get(Configuration::class)->getArray('site')['error_handler_middleware'];
 
     $errorMiddleware = $app->addErrorMiddleware(
         $error['display_error_details'],

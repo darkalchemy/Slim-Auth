@@ -11,8 +11,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $settings = require __DIR__ . '/../config/settings.php';
 $containerBuilder = new ContainerBuilder();
-$containerBuilder->addDefinitions(__DIR__ . '/container.php');
-$settings['di_compilation_path'] ? $containerBuilder->enableCompilation($settings['di_compilation_path']) : null;
+$containerBuilder->addDefinitions($settings['site']['root'] . '/bootstrap/container.php');
+$settings['site']['di_compilation_path'] ? $containerBuilder->enableCompilation($settings['site']['di_compilation_path']) : null;
 $container = $containerBuilder->build();
 $app = $container->get(App::class);
 $session = $container->get(SessionInterface::class);

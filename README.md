@@ -74,7 +74,7 @@ For simplicity, the locale is set automatically by the HTTP request header Accep
 
 Compile twig templates for translating:
 ```
-composer compile-twig
+composer compile
 sudo chown -R www-data:www-data resources/views/cache/
 sudo chmod -R 0775 resources/views/cache/
 ```
