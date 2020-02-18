@@ -153,9 +153,10 @@ msgstr "Update"
 msgid "Username"
 msgstr "Username"
 
-#, php-format
-msgid "You must set up mail settings to use this."
-msgstr "You must set up mail settings to use this."
+#, fuzzy, php-format
+#| msgid "You must set up mail settings to use this."
+msgid "You must set up mail settings to send mail."
+msgstr "You must set up mail settings to send mail."
 
 #, php-format
 msgid "Your email has been confirmed and your account has been activated. You can now sign in."

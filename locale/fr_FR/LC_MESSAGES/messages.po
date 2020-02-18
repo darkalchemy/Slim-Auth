@@ -148,7 +148,7 @@ msgid "Username"
 msgstr ""
 
 #, php-format
-msgid "You must set up mail settings to use this."
+msgid "You must set up mail settings to send mail."
 msgstr ""
 
 #, php-format
