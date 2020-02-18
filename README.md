@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.2)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.3)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
@@ -19,11 +19,12 @@ npm is required
 [delight-im/PHP-I18N](https://github.com/delight-im/PHP-I18N) for generating the files needed for poedit  
 [jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
 [Eloquent/ORM](https://github.com/illuminate/database) for database storage  
-[EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails  
+[EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails
+[Middlewares/Trailing-slash](https://github.com/middlewares/trailing-slash) to remove any trailing slashes in the url  
 [Monolog](https://github.com/Seldaek/monolog) for logging  
 [PHPMailer](https://github.com/PHPMailer/PHPMailer) for sending email  
 [Phinx](https://phinx.org/) for database migrations  
-[Odan/Session](https://github.com/odan/session) for managing the session(start session in middleware is not working)  
+[Odan/Session](https://github.com/odan/session) for managing the session  
 [Odan/Twig-Translation](https://github.com/odan/twig-translation) (partial usage) for compiling twig templates  
 [Selective/Config](https://github.com/selective-php/config) to manage config settings  
 [Slim/CSRF](https://github.com/slimphp/Slim-Csrf) to protect against csrf  

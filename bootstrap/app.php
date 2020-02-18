@@ -37,7 +37,6 @@ try {
 } catch (NotFoundException $e) {
     dd($e->getMessage());
 }
-$session->start();
 
 try {
     $i18n = $container->get(I18n::class);

@@ -15,7 +15,9 @@ class SessionMiddleware implements MiddlewareInterface
     protected SessionInterface $session;
 
     /**
-     * RedirectIfAuthenticated constructor.
+     * SessionMiddleware constructor.
+     *
+     * @param SessionInterface $session
      */
     public function __construct(SessionInterface $session)
     {
@@ -25,10 +27,6 @@ class SessionMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
-        if (!$this->session->isStarted()) {
-            $this->session->start();
-        }
-
         if (!$this->session->has('regen') || $this->session->get('regen') < time()) {
             $this->session->regenerateId();
             $this->session->set('regen', time() + 300);
