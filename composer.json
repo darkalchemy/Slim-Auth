@@ -84,12 +84,10 @@
             "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0"
         ],
         "compile": [
-            "php bin/compile_twig.php"
+            "php bin/translate.php compile"
         ],
         "translate": [
-            "cp bin/i18n.sh .",
-            "./i18n.sh en_US",
-            "rm i18n.sh"
+            "php bin/translate.php translate"
         ]
     }
 }

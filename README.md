@@ -80,10 +80,6 @@ sudo chown -R www-data:www-data resources/views/cache/
 sudo chmod -R 0775 resources/views/cache/
 ```
 
-Translate all php files to locale - en_US(compile templates before translating):
-```
-composer translate
-```
 Add additional locales:
 ```
 ## check if locale is installed
@@ -104,11 +100,10 @@ sudo service nginx restart
 nano bootstrap/container.php
 ```
 
-Translate all php files to locale - fr_FR:
+Translate all php files to locale - en_US and fr_FR:
 ```
-cp bin/i18n.sh .
-./i18n.sh fr_FR
-rm i18n.sh
+composer translate en_US
+composer translate fr_FR
 ```
 
 Then open locale/[en_US|fr_FR]/LC_MESSAGES/messages.po in poedit and edit translation.  

@@ -58,6 +58,10 @@ msgid "Current password"
 msgstr "Current password"
 
 #, php-format
+msgid "Current time"
+msgstr "Current time"
+
+#, php-format
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -153,8 +157,7 @@ msgstr "Update"
 msgid "Username"
 msgstr "Username"
 
-#, fuzzy, php-format
-#| msgid "You must set up mail settings to use this."
+#, php-format
 msgid "You must set up mail settings to send mail."
 msgstr "You must set up mail settings to send mail."
 

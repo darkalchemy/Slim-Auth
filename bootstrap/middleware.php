@@ -15,6 +15,7 @@ use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return function (App $app) {
     $container = $app->getContainer();
+    $app->addMiddleware($container->get(SessionMiddleware::class));
 
     (require __DIR__ . '/database.php')($container->get(Capsule::class));
     $app->addMiddleware($container->get(Guard::class));
@@ -25,5 +26,4 @@ return function (App $app) {
     $app->addMiddleware($container->get(SetLocaleMiddleware::class));
     $app->addRoutingMiddleware();
     $app->addMiddleware($container->get(TrailingSlash::class));
-    $app->addMiddleware($container->get(SessionMiddleware::class));
 };

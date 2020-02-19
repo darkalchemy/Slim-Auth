@@ -47,10 +47,10 @@ return [
 
     SessionInterface::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->getArray('session');
-        $session = new PhpSession();
-        $session->setOptions($settings);
+        $phpSession = new PhpSession();
+        $phpSession->setOptions($settings);
 
-        return $session;
+        return $phpSession;
     },
 
     I18n::class => DI\factory(function () {

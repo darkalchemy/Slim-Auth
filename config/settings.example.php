@@ -118,6 +118,11 @@ $settings['session'] = [
     'cookie_secure' => $scheme ? '1' : '0',
 ];
 
+$settings['lang'] = [
+    'en' => 'en_US',
+    'fr' => 'fr_FR',
+];
+
 if ($settings['site']['db_sockets']) {
     $settings['db']['unix_socket'] = '/var/run/mysqld/mysqld.sock';
     unset($settings['db']['host'], $settings['db']['port']);

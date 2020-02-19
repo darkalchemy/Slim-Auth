@@ -52,6 +52,10 @@ msgid "Current password"
 msgstr ""
 
 #, php-format
+msgid "Current time"
+msgstr ""
+
+#, php-format
 msgid "Dashboard"
 msgstr ""
 
