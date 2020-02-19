@@ -19,7 +19,7 @@ npm is required
 [delight-im/PHP-I18N](https://github.com/delight-im/PHP-I18N) for generating the files needed for poedit  
 [jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
 [Eloquent/ORM](https://github.com/illuminate/database) for database storage  
-[EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails
+[EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails  
 [Middlewares/Trailing-slash](https://github.com/middlewares/trailing-slash) to remove any trailing slashes in the url  
 [Monolog](https://github.com/Seldaek/monolog) for logging  
 [PHPMailer](https://github.com/PHPMailer/PHPMailer) for sending email  
@@ -80,6 +80,11 @@ sudo chown -R www-data:www-data resources/views/cache/
 sudo chmod -R 0775 resources/views/cache/
 ```
 
+Translate all php files to locale - en_US:
+```
+composer translate en_US
+```
+
 Add additional locales:
 ```
 ## check if locale is installed
@@ -100,9 +105,8 @@ sudo service nginx restart
 nano bootstrap/container.php
 ```
 
-Translate all php files to locale - en_US and fr_FR:
+Translate all php files to locale - fr_FR:
 ```
-composer translate en_US
 composer translate fr_FR
 ```
 
