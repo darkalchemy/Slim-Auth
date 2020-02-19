@@ -18,7 +18,7 @@ class CheckMailMiddleware implements MiddlewareInterface
     public function __construct(array $settings, Messages $flash)
     {
         $this->settings = $settings;
-        $this->flash = $flash;
+        $this->flash    = $flash;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

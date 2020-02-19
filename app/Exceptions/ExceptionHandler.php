@@ -34,9 +34,9 @@ class ExceptionHandler
      */
     public function __construct(Messages $flash, ResponseFactoryInterface $responseFactory, Twig $view)
     {
-        $this->flash = $flash;
+        $this->flash           = $flash;
         $this->responseFactory = $responseFactory;
-        $this->view = $view;
+        $this->view            = $view;
     }
 
     /**

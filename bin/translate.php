@@ -12,8 +12,8 @@ $processes = [
     'translate',
 ];
 $languages = $container->get(Configuration::class)->getArray('lang');
-$process = 'compile';
-$lang = 'en_US';
+$process   = 'compile';
+$lang      = 'en_US';
 foreach ($argv as $arg) {
     if (in_array($arg, $processes)) {
         $process = $arg;

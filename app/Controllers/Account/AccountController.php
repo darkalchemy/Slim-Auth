@@ -32,10 +32,10 @@ class AccountController extends Controller
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules)
     {
-        $this->view = $view;
-        $this->flash = $flash;
+        $this->view        = $view;
+        $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->rules = $rules;
+        $this->rules       = $rules;
     }
 
     /**

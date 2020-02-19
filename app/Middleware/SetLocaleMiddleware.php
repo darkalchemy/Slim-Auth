@@ -19,7 +19,7 @@ class SetLocaleMiddleware implements MiddlewareInterface
 
     public function __construct(I18n $i18n, Messages $flash)
     {
-        $this->i18n = $i18n;
+        $this->i18n  = $i18n;
         $this->flash = $flash;
     }
 

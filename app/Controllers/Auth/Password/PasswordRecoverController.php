@@ -35,11 +35,11 @@ class PasswordRecoverController extends Controller
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, StoreMail $storeMail, ValidationRules $rules)
     {
-        $this->view = $view;
-        $this->flash = $flash;
+        $this->view        = $view;
+        $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->storeMail = $storeMail;
-        $this->rules = $rules;
+        $this->storeMail   = $storeMail;
+        $this->rules       = $rules;
     }
 
     /**

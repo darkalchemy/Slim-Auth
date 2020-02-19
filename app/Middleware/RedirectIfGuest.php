@@ -27,7 +27,7 @@ class RedirectIfGuest
      */
     public function __construct(Messages $flash, RouteParserInterface $routeParser)
     {
-        $this->flash = $flash;
+        $this->flash       = $flash;
         $this->routeParser = $routeParser;
     }
 

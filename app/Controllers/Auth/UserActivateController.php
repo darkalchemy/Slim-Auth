@@ -29,9 +29,9 @@ class UserActivateController extends Controller
      */
     public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory)
     {
-        $this->flash = $flash;
+        $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('activate_controller.log')->createInstance('activate_controller');
+        $this->logger      = $loggerFactory->addFileHandler('activate_controller.log')->createInstance('activate_controller');
     }
 
     /**

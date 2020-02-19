@@ -24,7 +24,7 @@ class ValidationException extends Exception
     {
         parent::__construct();
         $this->errors = $errors;
-        $this->path = $path;
+        $this->path   = $path;
     }
 
     /**

@@ -43,10 +43,10 @@ function get_scheme()
  */
 function compile_twig_templates(ContainerInterface $container)
 {
-    $settings = $container->get(Configuration::class)->all();
+    $settings    = $container->get(Configuration::class)->all();
     $twig_config = $settings['twig'];
-    $cache = $twig_config['cache'] ?? $settings['root'] . '/resources/views/cache/';
-    $twig = $container->get(Twig::class)->getEnvironment();
+    $cache       = $twig_config['cache'] ?? $settings['root'] . '/resources/views/cache/';
+    $twig        = $container->get(Twig::class)->getEnvironment();
     $twig->addExtension(new TwigExtension());
     $compiler = new TwigCompiler($twig, $cache, true);
 

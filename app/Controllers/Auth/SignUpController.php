@@ -44,12 +44,12 @@ class SignUpController extends Controller
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail)
     {
-        $this->view = $view;
-        $this->flash = $flash;
+        $this->view        = $view;
+        $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
-        $this->rules = $rules;
-        $this->storeMail = $storeMail;
+        $this->logger      = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
+        $this->rules       = $rules;
+        $this->storeMail   = $storeMail;
     }
 
     /**

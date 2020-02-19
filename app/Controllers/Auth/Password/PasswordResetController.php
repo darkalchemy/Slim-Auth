@@ -36,11 +36,11 @@ class PasswordResetController extends Controller
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules)
     {
-        $this->view = $view;
-        $this->flash = $flash;
+        $this->view        = $view;
+        $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger = $loggerFactory->addFileHandler('password_reset_controller.log')->createInstance('password_reset_controller');
-        $this->rules = $rules;
+        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log')->createInstance('password_reset_controller');
+        $this->rules       = $rules;
     }
 
     /**

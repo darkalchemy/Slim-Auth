@@ -35,9 +35,9 @@ class TwigCompiler
             throw new InvalidArgumentException('The cache path is required');
         }
 
-        $this->twig = $twig;
+        $this->twig      = $twig;
         $this->cachePath = str_replace('\\', '/', rtrim($cachePath, '\/'));
-        $this->verbose = $verbose;
+        $this->verbose   = $verbose;
     }
 
     /**

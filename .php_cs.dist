@@ -11,7 +11,7 @@ $config = PhpCsFixer\Config::create()
         '@Symfony' => true,
         '@PhpCsFixer' => true,
         'array_syntax' => [ 'syntax' => 'short' ],
-        'binary_operator_spaces' => [ 'align_equals' => false, 'align_double_arrow' => false ],
+        'binary_operator_spaces' => [ 'align_equals' => true, 'align_double_arrow' => true ],
         'cast_spaces' => true,
         'combine_consecutive_unsets' => true,
         'concat_space' => [ 'spacing' => 'one' ],

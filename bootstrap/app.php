@@ -10,7 +10,7 @@ use Slim\App;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$settings = require __DIR__ . '/../config/settings.php';
+$settings         = require __DIR__ . '/../config/settings.php';
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->addDefinitions($settings['root'] . '/bootstrap/container.php');
 $settings['site']['di_compilation_path'] ? $containerBuilder->enableCompilation($settings['site']['di_compilation_path']) : null;

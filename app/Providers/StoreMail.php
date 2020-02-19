@@ -23,7 +23,7 @@ class StoreMail
     public function __construct(LoggerFactory $loggerFactory, Email $email)
     {
         $this->logger = $loggerFactory->addFileHandler('storemail_class.log')->createInstance('storemail');
-        $this->email = $email;
+        $this->email  = $email;
     }
 
     public function store()

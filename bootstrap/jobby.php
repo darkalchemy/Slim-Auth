@@ -11,11 +11,11 @@ use DI\NotFoundException;
 use Jobby\Jobby;
 use Selective\Config\Configuration;
 
-$app = require_once 'app.php';
-$container = $app->getContainer();
-$jobby = $container->get(Jobby::class);
-$loggerFactory = $container->get(LoggerFactory::class);
-$logger = $loggerFactory->addFileHandler('jobby.log')->createInstance('jobby');
+$app              = require_once 'app.php';
+$container        = $app->getContainer();
+$jobby            = $container->get(Jobby::class);
+$loggerFactory    = $container->get(LoggerFactory::class);
+$logger           = $loggerFactory->addFileHandler('jobby.log')->createInstance('jobby');
 $sendmail_enabled = false;
 
 try {
@@ -28,7 +28,7 @@ try {
 
 if ($sendmail_enabled) {
     $jobby->add('Send Email', [
-        'runAs' => 'www-data',
+        'runAs'   => 'www-data',
         'command' => function () {
             $container = (require_once __DIR__ . '/app.php')->getContainer();
             $email = $container->get(Email::class);
@@ -56,8 +56,8 @@ if ($sendmail_enabled) {
             return true;
         },
         'schedule' => '* * * * *',
-        'output' => __DIR__ . '/../var/logs/sendmail.log',
-        'enabled' => true,
+        'output'   => __DIR__ . '/../var/logs/sendmail.log',
+        'enabled'  => true,
     ]);
 } else {
     $logger->error('SendMail disabled.');
