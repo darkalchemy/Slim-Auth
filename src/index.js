@@ -22,11 +22,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const $notification = Array.prototype.slice.call(document.querySelectorAll('.notification-wrapper'), 0);
-    if ($notification.length) {
-        setTimeout(function () {
-            $notification.remove();
-        }, 7500);
+    const notifications = document.querySelectorAll('.notification-wrapper');
+    setTimeout(function () {
+        notifications.forEach(function (el) {
+            removeFadeOut(el, 1000);
+        });
+    }, 6500);
+
+    if (document.getElementById('ct')) {
+        display_ct();
     }
 });
 
+function removeFadeOut(el, speed) {
+    el.style.transition = 'opacity ' + speed + 'ms ease';
+    el.style.opacity = '0';
+    setTimeout(function () {
+        el.parentNode.removeChild(el);
+    }, speed);
+}
+
+function display_ct() {
+    const x = new Date();
+    let hour = x.getHours();
+    let minute = x.getMinutes();
+    let second = x.getSeconds();
+    if (minute < 10) {
+        minute = '0' + minute;
+    }
+    if (second < 10) {
+        second = '0' + second;
+    }
+    document.getElementById('ct').innerHTML = hour + ':' + minute + ':' + second;
+    setTimeout(display_ct, 1000);
+}
