@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Delight\I18n\I18n;
 use Selective\Config\Configuration;
 
 $container = (require_once __DIR__ . '/../bootstrap/app.php')->getContainer();
@@ -11,9 +12,14 @@ $processes = [
     'compile',
     'translate',
 ];
-$languages = $container->get(Configuration::class)->getArray('lang');
-$process   = 'compile';
-$lang      = 'en_US';
+
+$languages = [];
+$locales   = $container->get(I18n::class)->getSupportedLocales();
+foreach ($locales as $locale) {
+    $languages[] = str_replace('-', '_', $locale);
+}
+$process = 'compile';
+$lang    = 'en_US';
 foreach ($argv as $arg) {
     if (in_array($arg, $processes)) {
         $process = $arg;
@@ -23,15 +29,15 @@ foreach ($argv as $arg) {
 }
 
 switch ($process) {
-    case 'compile':
-        compile_twig_templates($container);
-
-        break;
     case 'translate':
         copy($root_path . '/bin/i18n.sh', $root_path . '/i18n.sh');
         chmod($root_path . '/i18n.sh', 0755);
         passthru(sprintf('./i18n.sh %s', $lang));
         unlink($root_path . '/i18n.sh');
+
+        break;
+    default:
+        compile_twig_templates($container);
 
         break;
 }

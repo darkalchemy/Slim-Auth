@@ -8,6 +8,7 @@ use App\Controllers\Controller;
 use App\Factory\LoggerFactory;
 use App\Models\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Odan\Session\PhpSession;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -19,6 +20,7 @@ class UserActivateController extends Controller
     protected Messages              $flash;
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
+    protected PhpSession $phpSession;
 
     /**
      * SignUpController constructor.
@@ -27,8 +29,9 @@ class UserActivateController extends Controller
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
      */
-    public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory)
+    public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, PhpSession $phpSession)
     {
+        parent::__construct($phpSession);
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('activate_controller.log')->createInstance('activate_controller');

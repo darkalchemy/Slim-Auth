@@ -8,6 +8,7 @@ use App\Controllers\Controller;
 use App\Exceptions\ValidationException;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Odan\Session\PhpSession;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
@@ -26,12 +27,14 @@ class AccountPasswordController extends Controller
     protected Messages             $flash;
     protected RouteParserInterface $routeParser;
     protected ValidationRules      $rules;
+    protected PhpSession $phpSession;
 
     /**
      * AccountPasswordController constructor.
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules, PhpSession $phpSession)
     {
+        parent::__construct($phpSession);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;

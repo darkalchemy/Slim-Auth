@@ -117,8 +117,7 @@ return [
     },
 
     WhoopsMiddleware::class => function (ContainerInterface $container) {
-        $appEnv = $container->get(Configuration::class)
-            ->findString('site.app_env');
+        $appEnv = $container->get(Configuration::class)->findString('site.app_env');
 
         return new WhoopsMiddleware([
             'enable' => $appEnv === 'DEVELOPMENT',
@@ -126,8 +125,7 @@ return [
     },
 
     LoggerFactory::class => function (ContainerInterface $container) {
-        return new LoggerFactory($container->get(Configuration::class)
-            ->getArray('logger'));
+        return new LoggerFactory($container->get(Configuration::class)->getArray('logger'));
     },
 
     CheckMailMiddleware::class => function (ContainerInterface $container) {

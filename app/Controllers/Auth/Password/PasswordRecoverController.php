@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Providers\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Odan\Session\PhpSession;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
@@ -29,12 +30,14 @@ class PasswordRecoverController extends Controller
     protected RouteParserInterface  $routeParser;
     protected ValidationRules       $rules;
     protected StoreMail             $storeMail;
+    protected PhpSession $phpSession;
 
     /**
      * PasswordRecoverController constructor.
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, StoreMail $storeMail, ValidationRules $rules)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, StoreMail $storeMail, ValidationRules $rules, PhpSession $phpSession)
     {
+        parent::__construct($phpSession);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;

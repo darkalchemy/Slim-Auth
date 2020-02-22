@@ -11,6 +11,7 @@ use App\Providers\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
+use Odan\Session\PhpSession;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -32,6 +33,7 @@ class SignUpController extends Controller
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
     protected StoreMail             $storeMail;
+    protected PhpSession $phpSession;
 
     /**
      * SignUpController constructor.
@@ -42,14 +44,16 @@ class SignUpController extends Controller
      * @param LoggerFactory        $loggerFactory The logger
      * @param ValidationRules      $rules         The rules
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail, PhpSession $phpSession)
     {
+        parent::__construct($phpSession);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
         $this->rules       = $rules;
         $this->storeMail   = $storeMail;
+        $this->phpSession->set('current_url', 'auth.signup');
     }
 
     /**

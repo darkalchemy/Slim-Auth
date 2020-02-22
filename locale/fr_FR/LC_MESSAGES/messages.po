@@ -1,164 +1,182 @@
 #
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, php-format
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #, php-format
 msgid "Account details updated!"
-msgstr ""
+msgstr "Les détails du compte ont été mis à jour!"
 
 #, php-format
 msgid "An email has to been sent with instructions to reset your password."
-msgstr ""
+msgstr "Un e-mail doit être envoyé avec des instructions pour réinitialiser votre mot de passe."
 
 #, php-format
 msgid "Change"
-msgstr ""
+msgstr "Changement"
 
 #, php-format
 msgid "Change password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #, php-format
 msgid "Choose a password"
-msgstr ""
+msgstr "Choisissez un mot de passe"
 
 #, php-format
 msgid "Click the link below to confirm your email and activate your account."
-msgstr ""
+msgstr "Cliquez sur le lien ci-dessous pour confirmer votre adresse e-mail et activer votre compte."
 
 #, php-format
 msgid "Click the link below to reset your password and recover your account."
-msgstr ""
+msgstr "Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe et récupérer votre compte."
 
 #, php-format
 msgid "Confirm Password"
-msgstr ""
+msgstr "Confirmez le mot de passe"
 
 #, php-format
 msgid "Confirm your email"
-msgstr ""
+msgstr "confirmez votre email"
+
+#, no-php-format
+msgid "Current locale changed to: {0}"
+msgstr "Paramètres régionaux actuels remplacés par: {0}"
 
 #, php-format
 msgid "Current password"
-msgstr ""
+msgstr "Mot de passe actuel"
 
 #, php-format
 msgid "Current time"
-msgstr ""
+msgstr "Heure actuelle"
 
 #, php-format
 msgid "Dashboard"
-msgstr ""
+msgstr "Tableau de bord"
 
 #, php-format
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #, php-format
 msgid "Hi"
-msgstr ""
+msgstr "salut"
 
 #, php-format
 msgid "Incorrect email or password"
-msgstr ""
+msgstr "email ou mot de passe incorrect"
 
 #, php-format
 msgid "Invalid activation code."
-msgstr ""
+msgstr "Code d'activation invalide."
 
 #, php-format
 msgid "Invalid reset code."
-msgstr ""
+msgstr "Code de réinitialisation non valide."
 
 #, php-format
 msgid "Keep me signed in"
-msgstr ""
+msgstr "Gardez-moi connecté"
+
+#, php-format
+msgid "Locale"
+msgstr "Lieu"
 
 #, php-format
 msgid "New password"
-msgstr ""
+msgstr "Nouveau mot de passe"
 
 #, php-format
 msgid "Page Not Found"
-msgstr ""
+msgstr "Page non trouvée"
 
 #, php-format
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #, php-format
 msgid "Password updated!"
-msgstr ""
+msgstr "Mot de passe mis à jour!"
 
 #, php-format
 msgid "Please sign in before continuing"
-msgstr ""
+msgstr "Veuillez vous connecter avant de continuer"
 
 #, php-format
 msgid "Recover"
-msgstr ""
+msgstr "Récupérer"
 
 #, php-format
 msgid "Recover your password"
-msgstr ""
+msgstr "Récupérez votre mot de passe"
 
 #, php-format
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
 #, php-format
 msgid "Reset your password"
-msgstr ""
+msgstr "réinitialisez votre mot de passe"
+
+#, php-format
+msgid "Select Locale"
+msgstr "Sélectionnez les paramètres régionaux"
 
 #, php-format
 msgid "Sign in"
-msgstr ""
+msgstr "se connecter"
 
 #, php-format
 msgid "Sign out"
-msgstr ""
+msgstr "Déconnexion"
 
 #, php-format
 msgid "Sign up"
-msgstr ""
+msgstr "S'inscrire"
 
 #, php-format
 msgid "Signup successful. Please check and confirm your email before continuing."
-msgstr ""
+msgstr "Inscription réussie. Veuillez vérifier et confirmer votre e-mail avant de continuer."
 
 #, php-format
 msgid "Something went wrong"
-msgstr ""
+msgstr "Quelque chose a mal tourné"
 
 #, php-format
 msgid "Staff"
-msgstr ""
+msgstr "Personnel"
 
 #, php-format
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #, php-format
 msgid "Username"
-msgstr ""
+msgstr "Nom d'utilisateur"
 
 #, php-format
 msgid "You must set up mail settings to send mail."
-msgstr ""
+msgstr "Vous devez configurer les paramètres de messagerie pour envoyer du courrier."
 
 #, php-format
 msgid "Your email has been confirmed and your account has been activated. You can now sign in."
-msgstr ""
+msgstr "Votre email a été confirmé et votre compte a été activé. Vous pouvez maintenant vous connecter."
 
 #, php-format
 msgid "Your password has been reset and you can now sign in."
-msgstr ""
+msgstr "Votre mot de passe a été réinitialisé et vous pouvez maintenant vous connecter."

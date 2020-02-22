@@ -12,12 +12,14 @@ use App\Controllers\Auth\SignOutController;
 use App\Controllers\Auth\SignUpController;
 use App\Controllers\Dashboard\DashboardController;
 use App\Controllers\HomeController;
+use App\Controllers\LocaleController;
 use App\Middleware\RedirectIfAuthenticated;
 use App\Middleware\RedirectIfGuest;
 use Slim\App;
 
 return function (App $app) {
     $app->get('/', HomeController::class)->setName('home');
+    $app->get('/locale/{lang}', LocaleController::class)->setName('translate');
 
     $app->group('/auth', function ($route) {
         $route->group('', function ($route) {

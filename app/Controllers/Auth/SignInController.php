@@ -10,6 +10,7 @@ use App\Factory\LoggerFactory;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
+use Odan\Session\PhpSession;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -30,6 +31,7 @@ class SignInController extends Controller
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
+    protected PhpSession $phpSession;
 
     /**
      * SignInController constructor.
@@ -38,13 +40,15 @@ class SignInController extends Controller
      * @param Messages             $flash       The flash
      * @param RouteParserInterface $routeParser The routeParser
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
     {
+        parent::__construct($phpSession);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signin_controller.log')->createInstance('signin_controller');
         $this->rules       = $rules;
+        $this->phpSession->set('current_url', 'auth.signin');
     }
 
     /**

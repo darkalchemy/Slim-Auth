@@ -53,6 +53,11 @@ msgstr "Confirm Password"
 msgid "Confirm your email"
 msgstr "Confirm your email"
 
+#, fuzzy, no-php-format
+#| msgid "Current locale changed to: "
+msgid "Current locale changed to: {0}"
+msgstr "Current locale changed to: {0}"
+
 #, php-format
 msgid "Current password"
 msgstr "Current password"
@@ -90,6 +95,10 @@ msgid "Keep me signed in"
 msgstr "Keep me signed in"
 
 #, php-format
+msgid "Locale"
+msgstr "Locale"
+
+#, php-format
 msgid "New password"
 msgstr "New password"
 
@@ -124,6 +133,10 @@ msgstr "Reset"
 #, php-format
 msgid "Reset your password"
 msgstr "Reset your password"
+
+#, php-format
+msgid "Select Locale"
+msgstr "Select Locale"
 
 #, php-format
 msgid "Sign in"
