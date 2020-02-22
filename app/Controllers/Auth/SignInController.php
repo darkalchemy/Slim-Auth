@@ -31,14 +31,17 @@ class SignInController extends Controller
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
-    protected PhpSession $phpSession;
+    protected PhpSession            $phpSession;
 
     /**
      * SignInController constructor.
      *
-     * @param Twig                 $view        The view
-     * @param Messages             $flash       The flash
-     * @param RouteParserInterface $routeParser The routeParser
+     * @param Twig                 $view          The view
+     * @param Messages             $flash         The flash
+     * @param RouteParserInterface $routeParser   The routeParser
+     * @param LoggerFactory        $loggerFactory
+     * @param ValidationRules      $rules
+     * @param PhpSession           $phpSession
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
     {

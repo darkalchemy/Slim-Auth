@@ -17,15 +17,17 @@ class SendMail
 {
     protected PHPMailer         $mailer;
     protected LoggerInterface   $logger;
-    protected Email             $email;
     protected int               $user_id;
     protected string            $template;
     protected string            $subject;
 
     /**
      * SendMail constructor.
+     *
+     * @param PHPMailer     $mailer
+     * @param LoggerFactory $loggerFactory
      */
-    public function __construct(PHPMailer $mailer, LoggerFactory $loggerFactory, Email $email)
+    public function __construct(PHPMailer $mailer, LoggerFactory $loggerFactory)
     {
         $this->mailer = $mailer;
         $this->logger = $loggerFactory->addFileHandler('sendmail_class.log')->createInstance('sendmail');
@@ -68,6 +70,9 @@ class SendMail
         $this->mailer->msgHTML($body);
     }
 
+    /**
+     * @param string $subject
+     */
     public function setSubject(string $subject)
     {
         $this->mailer->Subject = $subject;

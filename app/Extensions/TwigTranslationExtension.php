@@ -21,6 +21,9 @@ class TwigTranslationExtension extends AbstractExtension
 
     /**
      * TwigTranslationExtension constructor.
+     *
+     * @param I18n       $i18n
+     * @param PhpSession $phpSession
      */
     public function __construct(I18n $i18n, PhpSession $phpSession)
     {
@@ -51,6 +54,8 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
+     * @param string $text
+     *
      * @return string
      */
     public function translateFormatted(string $text)
@@ -59,7 +64,8 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param mixed ...$replacements
+     * @param string $text
+     * @param mixed  ...$replacements
      *
      * @return string
      */
@@ -69,6 +75,10 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
+     * @param string $text
+     * @param string $alternative
+     * @param int    $count
+     *
      * @return string
      */
     public function translatePlural(string $text, string $alternative, int $count)
@@ -77,7 +87,10 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param mixed ...$replacements
+     * @param string $text
+     * @param string $alternative
+     * @param int    $count
+     * @param mixed  ...$replacements
      *
      * @return string
      */
@@ -87,7 +100,10 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
-     * @param mixed ...$replacements
+     * @param string $text
+     * @param string $alternative
+     * @param int    $count
+     * @param mixed  ...$replacements
      *
      * @return string
      */
@@ -97,6 +113,9 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
+     * @param string $text
+     * @param string $context
+     *
      * @return string
      */
     public function translateWithContext(string $text, string $context)
@@ -104,6 +123,9 @@ class TwigTranslationExtension extends AbstractExtension
         return $this->i18n->translateWithContext($text, $context);
     }
 
+    /**
+     * @return array|string[]
+     */
     public function supported_locales()
     {
         return $this->locales;
@@ -127,6 +149,8 @@ class TwigTranslationExtension extends AbstractExtension
     }
 
     /**
+     * @param string $locale
+     *
      * @return null|string
      */
     public function native_language_name(string $locale)

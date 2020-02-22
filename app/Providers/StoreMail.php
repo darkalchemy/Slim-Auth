@@ -9,6 +9,9 @@ use App\Models\Email;
 use Exception;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class StoreMail.
+ */
 class StoreMail
 {
     protected LoggerInterface   $logger;
@@ -19,6 +22,9 @@ class StoreMail
 
     /**
      * SendMail constructor.
+     *
+     * @param LoggerFactory $loggerFactory
+     * @param Email         $email
      */
     public function __construct(LoggerFactory $loggerFactory, Email $email)
     {
@@ -35,16 +41,25 @@ class StoreMail
         }
     }
 
+    /**
+     * @param int $user_id
+     */
     public function setUserID(int $user_id)
     {
         $this->email->user_id = $user_id;
     }
 
+    /**
+     * @param string $subject
+     */
     public function setSubject(string $subject)
     {
         $this->email->subject = $subject;
     }
 
+    /**
+     * @param string $body
+     */
     public function setBody(string $body)
     {
         $this->email->body = $body;

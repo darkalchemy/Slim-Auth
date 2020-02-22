@@ -39,6 +39,8 @@ function get_scheme()
 }
 
 /**
+ * @param ContainerInterface $container
+ *
  * @return int
  */
 function compile_twig_templates(ContainerInterface $container)
@@ -63,7 +65,8 @@ function compile_twig_templates(ContainerInterface $container)
 }
 
 /**
- * @param mixed ...$replacements
+ * @param string $text
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -75,7 +78,8 @@ function _f(string $text, ...$replacements)
 }
 
 /**
- * @param mixed ...$replacements
+ * @param string $text
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -87,6 +91,10 @@ function _fe(string $text, ...$replacements)
 }
 
 /**
+ * @param string $text
+ * @param string $alternative
+ * @param int    $count
+ *
  * @return string
  */
 function _p(string $text, string $alternative, int $count)
@@ -97,7 +105,10 @@ function _p(string $text, string $alternative, int $count)
 }
 
 /**
- * @param mixed ...$replacements
+ * @param string $text
+ * @param string $alternative
+ * @param int    $count
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -109,7 +120,10 @@ function _pf(string $text, string $alternative, int $count, ...$replacements)
 }
 
 /**
- * @param mixed ...$replacements
+ * @param string $text
+ * @param string $alternative
+ * @param int    $count
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -121,6 +135,9 @@ function _pfe(string $text, string $alternative, int $count, ...$replacements)
 }
 
 /**
+ * @param string $text
+ * @param string $context
+ *
  * @return string
  */
 function _c(string $text, string $context)
@@ -131,6 +148,8 @@ function _c(string $text, string $context)
 }
 
 /**
+ * @param string $text
+ *
  * @return string
  */
 function _m(string $text)

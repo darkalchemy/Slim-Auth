@@ -33,7 +33,7 @@ class SignUpController extends Controller
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
     protected StoreMail             $storeMail;
-    protected PhpSession $phpSession;
+    protected PhpSession            $phpSession;
 
     /**
      * SignUpController constructor.
@@ -43,6 +43,8 @@ class SignUpController extends Controller
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
      * @param ValidationRules      $rules         The rules
+     * @param StoreMail            $storeMail
+     * @param PhpSession           $phpSession
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail, PhpSession $phpSession)
     {

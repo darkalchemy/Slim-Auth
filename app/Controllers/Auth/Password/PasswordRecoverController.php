@@ -30,10 +30,17 @@ class PasswordRecoverController extends Controller
     protected RouteParserInterface  $routeParser;
     protected ValidationRules       $rules;
     protected StoreMail             $storeMail;
-    protected PhpSession $phpSession;
+    protected PhpSession            $phpSession;
 
     /**
      * PasswordRecoverController constructor.
+     *
+     * @param Twig                 $view
+     * @param Messages             $flash
+     * @param RouteParserInterface $routeParser
+     * @param StoreMail            $storeMail
+     * @param ValidationRules      $rules
+     * @param PhpSession           $phpSession
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, StoreMail $storeMail, ValidationRules $rules, PhpSession $phpSession)
     {
@@ -46,6 +53,9 @@ class PasswordRecoverController extends Controller
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -58,6 +68,9 @@ class PasswordRecoverController extends Controller
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError

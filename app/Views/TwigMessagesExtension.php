@@ -17,6 +17,8 @@ class TwigMessagesExtension extends AbstractExtension
 
     /**
      * TwigMessagesExtension constructor.
+     *
+     * @param Messages $flash
      */
     public function __construct(Messages $flash)
     {
@@ -31,6 +33,9 @@ class TwigMessagesExtension extends AbstractExtension
         return 'slim-twig-flash';
     }
 
+    /**
+     * @return array
+     */
     public function getFunctions(): array
     {
         return [
@@ -56,6 +61,8 @@ class TwigMessagesExtension extends AbstractExtension
     }
 
     /**
+     * @param null|string $key
+     *
      * @return array|mixed
      */
     public function getMessages(?string $key = null)

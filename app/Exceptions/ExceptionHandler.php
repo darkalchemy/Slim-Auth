@@ -40,6 +40,9 @@ class ExceptionHandler
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param Throwable              $exception
+     *
      * @throws ReflectionException
      * @throws Throwable
      *

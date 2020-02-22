@@ -10,18 +10,29 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Class SessionMiddleware.
+ */
 class SessionMiddleware implements MiddlewareInterface
 {
     protected SessionInterface $session;
 
     /**
      * SessionMiddleware constructor.
+     *
+     * @param SessionInterface $session
      */
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
     }
 
+    /**
+     * @param ServerRequestInterface  $request
+     * @param RequestHandlerInterface $handler
+     *
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);

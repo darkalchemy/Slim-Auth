@@ -15,6 +15,9 @@ use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 
+/**
+ * Class UserActivateController.
+ */
 class UserActivateController extends Controller
 {
     protected Messages              $flash;
@@ -28,6 +31,7 @@ class UserActivateController extends Controller
      * @param Messages             $flash         The response
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
+     * @param PhpSession           $phpSession
      */
     public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, PhpSession $phpSession)
     {
@@ -38,6 +42,9 @@ class UserActivateController extends Controller
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     *
      * @return ResponseInterface
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
@@ -65,6 +72,9 @@ class UserActivateController extends Controller
     }
 
     /**
+     * @param null|User   $user
+     * @param null|string $code
+     *
      * @return bool
      */
     protected function activationCodeExists(?User $user, ?string $code)

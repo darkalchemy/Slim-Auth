@@ -19,6 +19,8 @@ class HomeController
 
     /**
      * HomeController constructor.
+     *
+     * @param Twig $view
      */
     public function __construct(Twig $view)
     {
@@ -26,6 +28,8 @@ class HomeController
     }
 
     /**
+     * @param ResponseInterface $response
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError

@@ -27,10 +27,16 @@ class AccountController extends Controller
     protected Messages             $flash;
     protected RouteParserInterface $routeParser;
     protected ValidationRules      $rules;
-    protected PhpSession $phpSession;
+    protected PhpSession           $phpSession;
 
     /**
      * AccountController constructor.
+     *
+     * @param Twig                 $view
+     * @param Messages             $flash
+     * @param RouteParserInterface $routeParser
+     * @param ValidationRules      $rules
+     * @param PhpSession           $phpSession
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules, PhpSession $phpSession)
     {
@@ -42,6 +48,8 @@ class AccountController extends Controller
     }
 
     /**
+     * @param ResponseInterface $response
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -54,6 +62,9 @@ class AccountController extends Controller
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     *
      * @throws ValidationException
      *
      * @return ResponseInterface

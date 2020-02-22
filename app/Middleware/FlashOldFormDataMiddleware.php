@@ -30,6 +30,8 @@ class FlashOldFormDataMiddleware implements MiddlewareInterface
     /**
      * @param ServerRequestInterface  $request The request
      * @param RequestHandlerInterface $handler The handler
+     *
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

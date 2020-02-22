@@ -141,6 +141,8 @@ class ValidationRules
     }
 
     /**
+     * @param string $key
+     *
      * @return array
      */
     public function required(string $key)

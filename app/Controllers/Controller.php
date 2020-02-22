@@ -17,6 +17,11 @@ class Controller
     protected PhpSession $phpSession;
     protected string $locale;
 
+    /**
+     * Controller constructor.
+     *
+     * @param PhpSession $phpSession
+     */
     public function __construct(PhpSession $phpSession)
     {
         $this->phpSession = $phpSession;
@@ -36,8 +41,6 @@ class Controller
         Validator::langDir(__DIR__ . '/../../vendor/vlucas/valitron/lang/');
         Validator::lang($this->locale);
         $validator = new Validator($params = $request->getParsedBody());
-        Validator::langDir(__DIR__ . '/../../vendor/vlucas/valitron/lang/');
-        Validator::lang('fr');
         $validator->mapFieldsRules($rules);
         if (!$validator->validate()) {
             throw new ValidationException($validator->errors(), $request->getServerParams()['HTTP_REFERER']);

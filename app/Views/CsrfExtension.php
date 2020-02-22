@@ -17,12 +17,17 @@ class CsrfExtension extends AbstractExtension
 
     /**
      * CsrfExtension constructor.
+     *
+     * @param Guard $csrf
      */
     public function __construct(Guard $csrf)
     {
         $this->csrf = $csrf;
     }
 
+    /**
+     * @return array
+     */
     public function getFunctions(): array
     {
         return [

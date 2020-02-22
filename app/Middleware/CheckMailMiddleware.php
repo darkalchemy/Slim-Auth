@@ -10,17 +10,32 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Flash\Messages;
 
+/**
+ * Class CheckMailMiddleware.
+ */
 class CheckMailMiddleware implements MiddlewareInterface
 {
     protected array $settings;
     protected Messages $flash;
 
+    /**
+     * CheckMailMiddleware constructor.
+     *
+     * @param array    $settings
+     * @param Messages $flash
+     */
     public function __construct(array $settings, Messages $flash)
     {
         $this->settings = $settings;
         $this->flash    = $flash;
     }
 
+    /**
+     * @param ServerRequestInterface  $request
+     * @param RequestHandlerInterface $handler
+     *
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);

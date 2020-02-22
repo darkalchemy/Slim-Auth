@@ -19,6 +19,8 @@ class DashboardController
 
     /**
      * DashboardController constructor.
+     *
+     * @param Twig $view
      */
     public function __construct(Twig $view)
     {
@@ -26,6 +28,8 @@ class DashboardController
     }
 
     /**
+     * @param ResponseInterface $response
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError

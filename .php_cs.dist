@@ -30,6 +30,7 @@ $config = PhpCsFixer\Config::create()
         'phpdoc_indent' => true,
         'phpdoc_to_comment' => true,
         'phpdoc_trim' => true,
+        'no_superfluous_phpdoc_tags' => false,
         'single_quote' => true,
         'ternary_to_null_coalescing' => true,
         'trailing_comma_in_multiline_array' => true,

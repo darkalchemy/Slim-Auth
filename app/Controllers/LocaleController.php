@@ -11,6 +11,9 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 
+/**
+ * Class LocaleController.
+ */
 class LocaleController
 {
     protected I18n                 $i18n;
@@ -20,6 +23,14 @@ class LocaleController
     protected array                $locales;
     protected string $current_url;
 
+    /**
+     * LocaleController constructor.
+     *
+     * @param I18n                 $i18n
+     * @param Messages             $flash
+     * @param RouteParserInterface $routeParser
+     * @param PhpSession           $phpSession
+     */
     public function __construct(I18n $i18n, Messages $flash, RouteParserInterface $routeParser, PhpSession $phpSession)
     {
         $this->i18n        = $i18n;
@@ -31,6 +42,9 @@ class LocaleController
     }
 
     /**
+     * @param ResponseInterface $response
+     * @param string            $lang
+     *
      * @throws LocaleNotSupportedException
      *
      * @return ResponseInterface

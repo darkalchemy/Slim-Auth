@@ -17,6 +17,8 @@ class SignOutController
 
     /**
      * SignOutController constructor.
+     *
+     * @param RouteParserInterface $routeParser
      */
     public function __construct(RouteParserInterface $routeParser)
     {
@@ -24,6 +26,8 @@ class SignOutController
     }
 
     /**
+     * @param ResponseInterface $response
+     *
      * @return ResponseInterface
      */
     public function __invoke(ResponseInterface $response)

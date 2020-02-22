@@ -31,10 +31,17 @@ class PasswordResetController extends Controller
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
-    protected PhpSession $phpSession;
+    protected PhpSession            $phpSession;
 
     /**
      * PasswordResetController constructor.
+     *
+     * @param Twig                 $view
+     * @param Messages             $flash
+     * @param RouteParserInterface $routeParser
+     * @param LoggerFactory        $loggerFactory
+     * @param ValidationRules      $rules
+     * @param PhpSession           $phpSession
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
     {
@@ -47,6 +54,9 @@ class PasswordResetController extends Controller
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -69,6 +79,9 @@ class PasswordResetController extends Controller
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     *
      * @throws ValidationException
      *
      * @return ResponseInterface
@@ -96,6 +109,9 @@ class PasswordResetController extends Controller
     }
 
     /**
+     * @param null|User   $user
+     * @param null|string $code
+     *
      * @return bool
      */
     protected function reminderCodeExists(?User $user, ?string $code)
