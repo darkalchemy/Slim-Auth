@@ -6,6 +6,12 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Cartalyst\Sentinel\Native\SentinelBootstrapper;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-return static function (Capsule $db) {
+return static function ($settings) {
     Sentinel::instance(new SentinelBootstrapper((require __DIR__ . '/../config/sentinel.php')));
+    $capsule = new Capsule();
+    $capsule->addConnection($settings);
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+
+    $capsule->bootEloquent();
 };

@@ -13,7 +13,6 @@ use Delight\I18n\Codes;
 use Delight\I18n\I18n;
 use DI\Bridge\Slim\Bridge;
 use Fullpipe\TwigWebpackExtension\WebpackExtension;
-use Illuminate\Database\Capsule\Manager as Capsule;
 use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -65,16 +64,6 @@ return [
 
     ResponseInterface::class => function (ContainerInterface $container) {
         return $container->get(App::class)->getResponseFactory();
-    },
-
-    Capsule::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->getArray('db');
-        $capsule = new Capsule();
-        $capsule->addConnection($settings);
-        $capsule->setAsGlobal();
-        $capsule->bootEloquent();
-
-        return $capsule;
     },
 
     Twig::class => function (ContainerInterface $container) {
