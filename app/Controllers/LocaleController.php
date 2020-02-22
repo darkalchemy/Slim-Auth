@@ -55,7 +55,7 @@ class LocaleController
             $this->phpSession->set('lang', $lang);
             $this->phpSession->set('locale', substr($lang, 0, 2));
             $this->i18n->setLocaleManually($lang);
-            $this->flash->addMessage('success', _fe('Current locale changed to: {0}', ucfirst($this->i18n->getNativeLanguageName($lang))));
+            $this->flash->addMessage('success', _fe('Current locale changed to: {0}.', ucfirst($this->i18n->getNativeLanguageName($lang))));
         }
 
         return $response->withHeader('Location', $this->routeParser->urlFor($this->current_url));

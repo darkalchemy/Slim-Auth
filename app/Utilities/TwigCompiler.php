@@ -35,7 +35,7 @@ class TwigCompiler
     public function __construct(Environment $twig, string $cachePath, bool $verbose = false)
     {
         if (empty($cachePath)) {
-            throw new InvalidArgumentException('The cache path is required');
+            throw new InvalidArgumentException(_f('The cache path is required'));
         }
 
         $this->twig      = $twig;

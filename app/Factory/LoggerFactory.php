@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use Exception;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
@@ -62,15 +63,18 @@ class LoggerFactory
     }
 
     /**
-     * Add rotating file logger handler.
+     * @param string   $filename
+     * @param null|int $level
      *
-     * @param string $filename The filename
-     * @param int    $level    The level (optional)
+     * @throws Exception
      *
-     * @return LoggerFactory The logger factory
+     * @return $this
      */
     public function addFileHandler(string $filename, int $level = null): self
     {
+        if (!is_writeable($this->path)) {
+            die(_fe('{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}', $this->path));
+        }
         $filename            = sprintf('%s/%s', $this->path, $filename);
         $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level ?? $this->level, true, 0755);
 

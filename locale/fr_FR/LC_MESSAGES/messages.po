@@ -54,8 +54,8 @@ msgid "Confirm your email"
 msgstr "confirmez votre email"
 
 #, no-php-format
-msgid "Current locale changed to: {0}"
-msgstr "Paramètres régionaux actuels remplacés par: {0}"
+msgid "Current locale changed to: {0}."
+msgstr "Paramètres régionaux actuels remplacés par: {0}."
 
 #, php-format
 msgid "Current password"
@@ -162,6 +162,10 @@ msgid "Staff"
 msgstr "Personnel"
 
 #, php-format
+msgid "The cache path is required"
+msgstr "Le chemin du cache est obligatoire"
+
+#, php-format
 msgid "Update"
 msgstr "Mise à jour"
 
@@ -180,3 +184,7 @@ msgstr "Votre email a été confirmé et votre compte a été activé. Vous pouv
 #, php-format
 msgid "Your password has been reset and you can now sign in."
 msgstr "Votre mot de passe a été réinitialisé et vous pouvez maintenant vous connecter."
+
+#, no-php-format
+msgid "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
+msgstr "{0} n'est pas accessible en écriture par le serveur Web. <br> Veuillez exécuter: <br> sudo chown -R www-data: www-data {0} <br> sudo chmod -R 0775 {0}"
