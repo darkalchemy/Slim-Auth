@@ -39,7 +39,7 @@ class TwigCompiler
         }
 
         $this->twig      = $twig;
-        $this->cachePath = str_replace('\\', '/', rtrim($cachePath, '\/'));
+        $this->cachePath =  str_replace('\\', '/', $cachePath);
         $this->verbose   = $verbose;
     }
 

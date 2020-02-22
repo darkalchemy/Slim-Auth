@@ -93,6 +93,7 @@ locale -a
 ## find correct local
 nano /usr/share/i18n/SUPPORTED
 
+## in order to test the locale switcher, I needed to have another locale translated. I translated this using Google Translate, so the translation quality may not be very good. Please consider a pull request to improve the quality of the translation.
 ## add locale if not already installed (fr_FR)
 sudo locale-gen fr_FR
 sudo locale-gen fr_FR.UTF-8
