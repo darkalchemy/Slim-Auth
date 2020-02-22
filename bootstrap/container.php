@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Controllers\LocaleController;
 use App\Extensions\TwigTranslationExtension;
 use App\Factory\LoggerFactory;
 use App\Middleware\CheckMailMiddleware;
-use App\Middleware\SetLocaleMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
@@ -38,8 +38,7 @@ return [
         $config = $container->get(Configuration::class);
         $routeCacheFile = $config->findString('router.cache_file');
         if ($routeCacheFile) {
-            $app->getRouteCollector()
-                ->setCacheFile($routeCacheFile);
+            $app->getRouteCollector()->setCacheFile($routeCacheFile);
         }
 
         return $app;
@@ -61,9 +60,7 @@ return [
     }),
 
     RouteParserInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)
-            ->getRouteCollector()
-            ->getRouteParser();
+        return $container->get(App::class)->getRouteCollector()->getRouteParser();
     },
 
     ResponseInterface::class => function (ContainerInterface $container) {
@@ -89,7 +86,7 @@ return [
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], $settings['webpack']['js_path'], $settings['webpack']['css_path']));
         $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
-        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class)));
+        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class), $container->get(PhpSession::class)));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
         $twig->getEnvironment()->addGlobal('settings', $settings);
         $twig->getEnvironment()->addGlobal('errors', $container->get(Messages::class)->getFirstMessage('errors'));
@@ -120,7 +117,8 @@ return [
     },
 
     WhoopsMiddleware::class => function (ContainerInterface $container) {
-        $appEnv = $container->get(Configuration::class)->findString('site.app_env');
+        $appEnv = $container->get(Configuration::class)
+            ->findString('site.app_env');
 
         return new WhoopsMiddleware([
             'enable' => $appEnv === 'DEVELOPMENT',
@@ -128,15 +126,16 @@ return [
     },
 
     LoggerFactory::class => function (ContainerInterface $container) {
-        return new LoggerFactory($container->get(Configuration::class)->getArray('logger'));
+        return new LoggerFactory($container->get(Configuration::class)
+            ->getArray('logger'));
     },
 
     CheckMailMiddleware::class => function (ContainerInterface $container) {
         return new CheckMailMiddleware($container->get(Configuration::class)->getArray('mail'), $container->get(Messages::class));
     },
 
-    SetLocaleMiddleware::class => function (ContainerInterface $container) {
-        return new SetLocaleMiddleware($container->get(I18n::class), $container->get(Messages::class));
+    LocaleController::class => function (ContainerInterface $container) {
+        return new LocaleController($container->get(I18n::class), $container->get(Messages::class), $container->get(RouteParserInterface::class), $container->get(PhpSession::class));
     },
 
     'view' => DI\get(Twig::class),
