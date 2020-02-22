@@ -26,6 +26,8 @@ class SendMail
      *
      * @param PHPMailer     $mailer
      * @param LoggerFactory $loggerFactory
+     *
+     * @throws \Exception
      */
     public function __construct(PHPMailer $mailer, LoggerFactory $loggerFactory)
     {

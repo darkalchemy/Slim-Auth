@@ -25,6 +25,8 @@ class StoreMail
      *
      * @param LoggerFactory $loggerFactory
      * @param Email         $email
+     *
+     * @throws Exception
      */
     public function __construct(LoggerFactory $loggerFactory, Email $email)
     {

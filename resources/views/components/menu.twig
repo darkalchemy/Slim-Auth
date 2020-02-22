@@ -1,16 +1,15 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item has-text-weight-bold" href="{{ url_for('home') }}">
             {{ settings.site_name }}
         </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-           data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
     </div>
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbar" class="navbar-menu">
         <div class="navbar-end">
             {% if user %}
                 <div class="navbar-item has-dropdown is-hoverable min-150">

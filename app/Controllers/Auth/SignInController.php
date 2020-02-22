@@ -42,6 +42,8 @@ class SignInController extends Controller
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
      * @param PhpSession           $phpSession
+     *
+     * @throws Exception
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
     {

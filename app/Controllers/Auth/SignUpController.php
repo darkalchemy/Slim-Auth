@@ -38,13 +38,15 @@ class SignUpController extends Controller
     /**
      * SignUpController constructor.
      *
-     * @param Twig                 $view          The view
-     * @param Messages             $flash         The response
-     * @param RouteParserInterface $routeParser   The routeParser
-     * @param LoggerFactory        $loggerFactory The logger
-     * @param ValidationRules      $rules         The rules
+     * @param Twig                 $view
+     * @param Messages             $flash
+     * @param RouteParserInterface $routeParser
+     * @param LoggerFactory        $loggerFactory
+     * @param ValidationRules      $rules
      * @param StoreMail            $storeMail
      * @param PhpSession           $phpSession
+     *
+     * @throws Exception
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail, PhpSession $phpSession)
     {

@@ -10,6 +10,7 @@ use App\Factory\LoggerFactory;
 use App\Models\User;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Exception;
 use Odan\Session\PhpSession;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -42,6 +43,8 @@ class PasswordResetController extends Controller
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
      * @param PhpSession           $phpSession
+     *
+     * @throws Exception
      */
     public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
     {
