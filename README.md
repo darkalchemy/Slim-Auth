@@ -71,8 +71,6 @@ sudo crontab -e
 
 Emails are not sent directly, they are inserted into the database and jobby will take care of sending them.
 
-For simplicity, the locale is set automatically by the HTTP request header Accept-Language. This may change to using a query string to set the locale with a fallback to the HTTP request header.  
-
 Compile twig templates for translating:
 ```
 composer compile
