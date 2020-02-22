@@ -2,7 +2,7 @@
     <div class='notification-wrapper'>
         <div class='notification is-info has-text-centered'>
             {% for msg in flash('status') %}
-                <li>{{ msg }}</li>
+                <p>{{ msg }}</p>
             {% endfor %}
         </div>
     </div>
@@ -12,7 +12,7 @@
     <div class='notification-wrapper'>
         <div class='notification is-success has-text-centered'>
             {% for msg in flash('success') %}
-                <li>{{ msg }}</li>
+                <p>{{ msg }}</p>
             {% endfor %}
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class='notification-wrapper'>
         <div class='notification is-danger has-text-centered'>
             {% for msg in flash('error') %}
-                <li>{{ msg }}</li>
+                <p>{{ msg }}</p>
             {% endfor %}
         </div>
     </div>
