@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Controllers\LocaleController;
 use App\Extensions\TwigTranslationExtension;
 use App\Factory\LoggerFactory;
-use App\Middleware\CheckMailMiddleware;
+use App\Middleware\CheckSettingsMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
@@ -117,8 +117,8 @@ return [
         return new LoggerFactory($container->get(Configuration::class)->getArray('logger'));
     },
 
-    CheckMailMiddleware::class => function (ContainerInterface $container) {
-        return new CheckMailMiddleware($container->get(Configuration::class)->getArray('mail'), $container->get(Messages::class));
+    CheckSettingsMiddleware::class => function (ContainerInterface $container) {
+        return new CheckSettingsMiddleware($container->get(Configuration::class)->all(), $container->get(Messages::class));
     },
 
     LocaleController::class => function (ContainerInterface $container) {

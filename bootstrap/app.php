@@ -10,7 +10,11 @@ use Slim\App;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$settings         = require __DIR__ . '/../config/settings.php';
+$settings_path = realpath(__DIR__ . '/../') . '/config/settings.php';
+if (!file_exists($settings_path)) {
+    die(sprintf('%s does not exist.<br>please run:<br>cp %s %s<br>and edit as needed.', realpath(__DIR__ . '/../') . '/config/settings.php', realpath(__DIR__ . '/../') . '/config/settings.example.php', $settings_path));
+}
+$settings         = require $settings_path;
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->addDefinitions($settings['root'] . '/bootstrap/container.php');
 $settings['site']['di_compilation_path'] ? $containerBuilder->enableCompilation($settings['site']['di_compilation_path']) : null;

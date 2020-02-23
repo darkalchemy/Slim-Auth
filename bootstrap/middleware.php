@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Middleware\CheckMailMiddleware;
+use App\Middleware\CheckSettingsMiddleware;
 use App\Middleware\FlashOldFormDataMiddleware;
 use App\Middleware\SessionMiddleware;
 use Middlewares\TrailingSlash;
@@ -20,6 +20,6 @@ return function (App $app) {
     $app->addMiddleware($container->get(FlashOldFormDataMiddleware::class));
     $app->addMiddleware(TwigMiddleware::createFromContainer($container->get(App::class)));
     $app->addMiddleware($container->get(WhoopsMiddleware::class));
-    $app->addMiddleware($container->get(CheckMailMiddleware::class));
+    $app->addMiddleware($container->get(CheckSettingsMiddleware::class));
     $app->addMiddleware($container->get(TrailingSlash::class));
 };
