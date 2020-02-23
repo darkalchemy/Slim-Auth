@@ -54,7 +54,6 @@ msgid "Confirm your email"
 msgstr "Confirm your email"
 
 #, no-php-format
-#| msgid "Current locale changed to: {0}"
 msgid "Current locale changed to: {0}."
 msgstr "Current locale changed to: {0}."
 

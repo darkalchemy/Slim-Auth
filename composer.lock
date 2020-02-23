@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db84d5050bdfbea7a955eef53b8a712d",
+    "content-hash": "75d90896badd064355eb6026f8bc351a",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -530,6 +530,55 @@
                 "support"
             ],
             "time": "2019-09-10T13:59:08+00:00"
+        },
+        {
+            "name": "darkalchemy/twig-translate",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darkalchemy/Twig-Translate.git",
+                "reference": "3a9c06e3f03153c520b7439f8c8c9096587d3f56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/3a9c06e3f03153c520b7439f8c8c9096587d3f56",
+                "reference": "3a9c06e3f03153c520b7439f8c8c9096587d3f56",
+                "shasum": ""
+            },
+            "require": {
+                "delight-im/i18n": "^1.0",
+                "ext-gettext": "*",
+                "ext-intl": "*",
+                "odan/session": "^4.0",
+                "php": "^7.4",
+                "twig/twig": "^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "symfony/var-dumper": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "darkalchemy\\Twig\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Twig Translation Extension",
+            "homepage": "https://github.com/darkalchemy/twig-translate",
+            "keywords": [
+                "gettext",
+                "i18n",
+                "poEdit",
+                "text",
+                "translation",
+                "translations",
+                "twig"
+            ],
+            "time": "2020-02-23T01:57:49+00:00"
         },
         {
             "name": "delight-im/i18n",

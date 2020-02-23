@@ -8,6 +8,7 @@
         "slim",
         "slim4"
     ],
+    "homepage": "https://github.com/darkalchemy/slim-auth",
     "license": "MIT",
     "require": {
         "php": ">=7.4.0",
@@ -16,6 +17,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "cartalyst/sentinel": "^3.0",
+        "darkalchemy/twig-translate": "^0.1.0",
         "delight-im/i18n": "^1.0",
         "egulias/email-validator": "^2.1",
         "filips123/monolog-phpmailer": "^1.0",
