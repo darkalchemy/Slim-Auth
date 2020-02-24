@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.6)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.7)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
@@ -24,13 +24,13 @@ npm is required
 [Monolog](https://github.com/Seldaek/monolog) for logging  
 [PHPMailer](https://github.com/PHPMailer/PHPMailer) for sending email  
 [Phinx](https://phinx.org/) for database migrations  
-[Odan/Session](https://github.com/odan/session) for managing the session  
-[Odan/Twig-Translation](https://github.com/odan/twig-translation) (partial usage) for compiling twig templates  
+[Odan/Session](https://github.com/odan/session) for managing the session    
 [Selective/Config](https://github.com/selective-php/config) to manage config settings  
 [Slim/CSRF](https://github.com/slimphp/Slim-Csrf) to protect against csrf  
 [Slim/Flash](https://github.com/slimphp/Slim-Flash) for flash messaging  
 [Slim/Twig/Flash](https://github.com/kanellov/slim-twig-flash)(updated) for displaying flash messages in twig  
 [Slim/Twig-View](https://github.com/slimphp/Twig-View) for templates  
+[Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for compiling twig templates  
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
 [Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
 
