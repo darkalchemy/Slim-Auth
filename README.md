@@ -15,8 +15,7 @@ npm is required
 [Slim 4](https://github.com/slimphp/Slim) as the core framework  
 [nyholm/psr7](https://github.com/Nyholm/psr7) for the PSR-7 implementation  
 [php-di/php-di](http://php-di.org/) to manage dependency injection    
-[Cartalyst/Sentinel](https://cartalyst.com/manual/sentinel/3.) for user authentication and authorization  
-[delight-im/PHP-I18N](https://github.com/delight-im/PHP-I18N) for generating the files needed for poedit  
+[Cartalyst/Sentinel](https://cartalyst.com/manual/sentinel/3.) for user authentication and authorization    
 [jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
 [Eloquent/ORM](https://github.com/illuminate/database) for database storage  
 [EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails  
@@ -30,7 +29,7 @@ npm is required
 [Slim/Flash](https://github.com/slimphp/Slim-Flash) for flash messaging  
 [Slim/Twig/Flash](https://github.com/kanellov/slim-twig-flash)(updated) for displaying flash messages in twig  
 [Slim/Twig-View](https://github.com/slimphp/Twig-View) for templates  
-[Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for compiling twig templates  
+[Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for translations  
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
 [Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
 
