@@ -6,8 +6,6 @@ use App\Factory\LoggerFactory;
 use App\Models\Email;
 use App\Providers\SendMail;
 use Carbon\Carbon;
-use DI\DependencyException;
-use DI\NotFoundException;
 use Jobby\Jobby;
 use Selective\Config\Configuration;
 
@@ -20,9 +18,7 @@ $sendmail_enabled = false;
 
 try {
     $sendmail_enabled = $container->get(Configuration::class)->findString('mail.smtp_enable');
-} catch (DependencyException $e) {
-    $logger->error($e->getMessage());
-} catch (NotFoundException $e) {
+} catch (Exception $e) {
     $logger->error($e->getMessage());
 }
 
