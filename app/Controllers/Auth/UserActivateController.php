@@ -15,17 +15,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
-use Slim\Views\Twig;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 /**
  * Class UserActivateController.
  */
 class UserActivateController extends Controller
 {
-    protected Twig                  $view;
     protected Messages              $flash;
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
@@ -34,7 +29,6 @@ class UserActivateController extends Controller
     /**
      * SignUpController constructor.
      *
-     * @param Twig                 $view
      * @param Messages             $flash         The response
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
@@ -42,10 +36,9 @@ class UserActivateController extends Controller
      *
      * @throws Exception
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, PhpSession $phpSession)
+    public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, PhpSession $phpSession)
     {
         parent::__construct($phpSession);
-        $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('activate_controller.log')->createInstance('activate_controller');
@@ -54,10 +47,6 @@ class UserActivateController extends Controller
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
-     *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      *
      * @return ResponseInterface
      */
@@ -70,17 +59,17 @@ class UserActivateController extends Controller
 
         if (!$this->activationCodeExists($user = User::whereEmail($email = $params['email'] ?? null)->first(), $code = $params['code'] ?? null)) {
             $this->logger->error('Invalid activation code.');
-            $this->flash->addMessageNow('error', _f('Invalid activation code.'));
+            $this->flash->addMessage('error', _f('Invalid activation code.'));
 
-            return $this->view->render($response, 'pages/auth/signup.twig');
+            return $response->withHeader('Location', $this->routeParser->urlFor('auth.signup'));
         }
 
         Sentinel::getActivationRepository()->complete($user, $code);
         $role = Sentinel::findRoleByName('User');
         $role->users()->attach($user);
-        $this->flash->addMessageNow('success', _f('Your email has been confirmed and your account has been activated. You can now sign in.'));
+        $this->flash->addMessage('success', _f('Your email has been confirmed and your account has been activated. You can now sign in.'));
 
-        return $this->view->render($response, 'pages/auth/signin.twig');
+        return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));
     }
 
     /**

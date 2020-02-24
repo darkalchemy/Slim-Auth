@@ -94,7 +94,7 @@ $settings['cookies'] = [
     'name'      => ($scheme ? '__Secure-' : '') . $settings['site_name'],
     'http_only' => '1',
     'secure'    => $scheme ? '1' : '0',
-    'samesite'  => 'Strict',
+    'samesite'  => 'Lax',
 ];
 
 $settings['session'] = [
@@ -114,7 +114,7 @@ $settings['session'] = [
     'gc_divisor'             => 1,
     'gc_maxlifetime'         => '1350',
     'cookie_path'            => '/',
-    'cookie_samesite'        => 'Strict',
+    'cookie_samesite'        => 'Lax',
     'cookie_secure'          => $scheme ? '1' : '0',
 ];
 

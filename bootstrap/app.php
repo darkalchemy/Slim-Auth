@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $settings_path = realpath(__DIR__ . '/../') . '/config/settings.php';
 if (!file_exists($settings_path)) {
-    die(sprintf('%s does not exist.<br>please run:<br>cp %s %s<br>and edit as needed.', realpath(__DIR__ . '/../') . '/config/settings.php', realpath(__DIR__ . '/../') . '/config/settings.example.php', $settings_path));
+    die(sprintf('%s does not exist.<br>please run:<br>cp %s %s<br>and edit as needed.', $settings_path, realpath(__DIR__ . '/../') . '/config/settings.example.php', $settings_path));
 }
 $settings         = require $settings_path;
 $containerBuilder = new ContainerBuilder();

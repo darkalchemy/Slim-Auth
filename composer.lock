@@ -533,16 +533,16 @@
         },
         {
             "name": "darkalchemy/twig-translate",
-            "version": "0.1.1",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darkalchemy/Twig-Translate.git",
-                "reference": "3a9c06e3f03153c520b7439f8c8c9096587d3f56"
+                "reference": "8b10891bfc87830aa8b9ecf1e6083862cae206b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/3a9c06e3f03153c520b7439f8c8c9096587d3f56",
-                "reference": "3a9c06e3f03153c520b7439f8c8c9096587d3f56",
+                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/8b10891bfc87830aa8b9ecf1e6083862cae206b2",
+                "reference": "8b10891bfc87830aa8b9ecf1e6083862cae206b2",
                 "shasum": ""
             },
             "require": {
@@ -578,7 +578,7 @@
                 "translations",
                 "twig"
             ],
-            "time": "2020-02-23T01:57:49+00:00"
+            "time": "2020-02-23T02:39:21+00:00"
         },
         {
             "name": "delight-im/i18n",

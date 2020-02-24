@@ -40,7 +40,6 @@ class SessionMiddleware implements MiddlewareInterface
             $this->session->regenerateId();
             $this->session->set('regen', time() + 300);
         }
-        $this->session->save();
 
         return $response;
     }

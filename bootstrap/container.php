@@ -118,7 +118,7 @@ return [
     },
 
     CheckSettingsMiddleware::class => function (ContainerInterface $container) {
-        return new CheckSettingsMiddleware($container->get(Configuration::class)->all(), $container->get(Messages::class));
+        return new CheckSettingsMiddleware($container->get(Configuration::class)->all(), $container->get(LoggerFactory::class), $container->get(Messages::class));
     },
 
     LocaleController::class => function (ContainerInterface $container) {

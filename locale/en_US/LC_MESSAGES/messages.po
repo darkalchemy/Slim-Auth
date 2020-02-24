@@ -1,17 +1,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #, php-format
 msgid "Account"
@@ -147,7 +141,7 @@ msgstr "Sign out"
 
 #, php-format
 msgid "Sign up"
-msgstr "Sign Up"
+msgstr "Sign up"
 
 #, php-format
 msgid "Signup successful. Please check and confirm your email before continuing."
@@ -160,10 +154,6 @@ msgstr "Something went wrong"
 #, php-format
 msgid "Staff"
 msgstr "Staff"
-
-#, php-format
-msgid "The cache path is required"
-msgstr "The cache path is required"
 
 #, php-format
 msgid "Update"
@@ -184,6 +174,10 @@ msgstr "Your email has been confirmed and your account has been activated. You c
 #, php-format
 msgid "Your password has been reset and you can now sign in."
 msgstr "Your password has been reset and you can now sign in."
+
+#, no-php-format
+msgid "{0} is not writable by the webserver."
+msgstr "{0} is not writable by the webserver."
 
 #, no-php-format
 msgid "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
