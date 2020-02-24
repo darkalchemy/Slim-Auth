@@ -8,7 +8,7 @@ use App\Middleware\CheckSettingsMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use darkalchemy\Twig\TwigTranslationExtension;
+use Darkalchemy\Twig\TwigTranslationExtension;
 use Delight\I18n\Codes;
 use Delight\I18n\I18n;
 use DI\Bridge\Slim\Bridge;

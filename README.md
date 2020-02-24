@@ -15,7 +15,8 @@ npm is required
 [Slim 4](https://github.com/slimphp/Slim) as the core framework  
 [nyholm/psr7](https://github.com/Nyholm/psr7) for the PSR-7 implementation  
 [php-di/php-di](http://php-di.org/) to manage dependency injection    
-[Cartalyst/Sentinel](https://cartalyst.com/manual/sentinel/3.) for user authentication and authorization    
+[Cartalyst/Sentinel](https://cartalyst.com/manual/sentinel/3.) for user authentication and authorization  
+[delight-im/PHP-I18N](https://github.com/delight-im/PHP-I18N) for handling the users locale      
 [jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
 [Eloquent/ORM](https://github.com/illuminate/database) for database storage  
 [EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails  

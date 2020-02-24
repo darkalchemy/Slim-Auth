@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use darkalchemy\Twig\TwigCompiler;
+use Darkalchemy\Twig\TwigCompiler;
 use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
 use Slim\Views\Twig;
