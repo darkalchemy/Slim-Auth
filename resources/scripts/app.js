@@ -1,4 +1,5 @@
-require('./default.scss');
+import '../../resources/styles/app.scss';
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements
