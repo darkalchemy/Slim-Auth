@@ -109,6 +109,12 @@ Translate all php files to locale - fr_FR:
 composer translate fr_FR
 ```
 
+Then to create the binary forms of the translations, you need to run again for each locale:
+```
+composer translate en_EN
+composer translate fr_FR
+```
+
 Then open locale/[en_US|fr_FR]/LC_MESSAGES/messages.po in poedit and edit translation.  
 
 ### TODO    
