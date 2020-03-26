@@ -98,6 +98,10 @@ msgid "Locale"
 msgstr "Lieu"
 
 #, php-format
+msgid "Method Not Allowed"
+msgstr "Méthode Non Autorisée"
+
+#, php-format
 msgid "New password"
 msgstr "Nouveau mot de passe"
 

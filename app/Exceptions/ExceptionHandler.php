@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use App\Factory\LoggerFactory;
+use Exception;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use ReflectionClass;
 use ReflectionException;
 use Slim\Flash\Messages;
@@ -24,6 +27,7 @@ class ExceptionHandler
     protected Messages $flash;
     protected ResponseFactoryInterface $responseFactory;
     protected Twig $view;
+    protected LoggerInterface       $logger;
 
     /**
      * ExceptionHandler constructor.
@@ -31,12 +35,16 @@ class ExceptionHandler
      * @param Messages                 $flash           The flash
      * @param ResponseFactoryInterface $responseFactory The responseFactory
      * @param Twig                     $view            The view
+     * @param LoggerFactory            $loggerFactory   The loggerFactory
+     *
+     * @throws Exception
      */
-    public function __construct(Messages $flash, ResponseFactoryInterface $responseFactory, Twig $view)
+    public function __construct(Messages $flash, ResponseFactoryInterface $responseFactory, Twig $view, LoggerFactory $loggerFactory)
     {
         $this->flash           = $flash;
         $this->responseFactory = $responseFactory;
         $this->view            = $view;
+        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log')->createInstance('exception_handler');
     }
 
     /**
@@ -65,26 +73,31 @@ class ExceptionHandler
     public function handleValidationException(Throwable $exception)
     {
         $this->flash->addMessage('errors', $exception->getErrors());
+        $this->logger->error('Validation exception', $exception->getMessage());
 
-        return $this->responseFactory
-            ->createResponse()
-            ->withHeader('Location', $exception->getPath());
+        return $this->responseFactory->createResponse()->withHeader('Location', $exception->getPath());
     }
 
     /**
      * @param Throwable $exception The exception
      *
+     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     * @throws SyntaxError
      *
      * @return ResponseInterface
      */
     public function handleHttpNotFoundException(Throwable $exception)
     {
-        return $this->view->render(
-            $this->responseFactory->createResponse(),
-            'pages/errors/404.twig'
-        )->withStatus(404);
+        $this->logger->error('Http not found exception', $exception->getMessage());
+
+        return $this->view->render($this->responseFactory->createResponse(), 'pages/errors/404.twig')->withStatus(404);
+    }
+
+    public function HttpMethodNotAllowedException(Throwable $exception)
+    {
+        $this->logger->error('Http Method not allow exception', $exception->getMessage());
+
+        return $this->view->render($this->responseFactory->createResponse(), 'pages/errors/405.twig')->withStatus(405);
     }
 }

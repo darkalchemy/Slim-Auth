@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Exceptions\ExceptionHandler;
+use App\Factory\LoggerFactory;
 use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Flash\Messages;
@@ -23,6 +24,7 @@ return static function (App $app) {
             $container->get(Messages::class),
             $app->getResponseFactory(),
             $container->get(Twig::class),
+            $container->get(LoggerFactory::class),
         )
     );
 };
