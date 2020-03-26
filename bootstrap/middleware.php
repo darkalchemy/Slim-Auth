@@ -22,4 +22,5 @@ return function (App $app) {
     $app->addMiddleware($container->get(WhoopsMiddleware::class));
     $app->addMiddleware($container->get(CheckSettingsMiddleware::class));
     $app->addMiddleware($container->get(TrailingSlash::class));
+    $app->addRoutingMiddleware();
 };
