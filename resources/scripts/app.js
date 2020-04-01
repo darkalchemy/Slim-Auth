@@ -46,6 +46,9 @@ function removeFadeOut(el, speed) {
 function display_ct() {
     const x = new Date();
     let hour = x.getHours();
+    let ampm = hour >= 12 ? 'pm' : 'am';
+    hour = hour % 12;
+    hour = hour ? hour : 12;
     let minute = x.getMinutes();
     let second = x.getSeconds();
     if (minute < 10) {
@@ -54,6 +57,6 @@ function display_ct() {
     if (second < 10) {
         second = '0' + second;
     }
-    document.getElementById('ct').innerHTML = hour + ':' + minute + ':' + second;
+    document.getElementById('ct').innerHTML = hour + ':' + minute + ':' + second + ' ' + ampm;
     setTimeout(display_ct, 1000);
 }
