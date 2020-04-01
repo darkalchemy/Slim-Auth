@@ -66,6 +66,12 @@ return [
         return $container->get(App::class)->getResponseFactory();
     },
 
+    Messages::class => function () {
+        $storage = [];
+
+        return new Messages($storage);
+    },
+
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
         $twig = Twig::create($settings['twig']['path'], [

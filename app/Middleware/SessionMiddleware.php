@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Flash\Messages;
 
 /**
  * Class SessionMiddleware.
@@ -16,15 +17,18 @@ use Psr\Http\Server\RequestHandlerInterface;
 class SessionMiddleware implements MiddlewareInterface
 {
     protected SessionInterface $session;
+    protected Messages $flash;
 
     /**
      * SessionMiddleware constructor.
      *
      * @param SessionInterface $session
+     * @param Messages         $flash
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(SessionInterface $session, Messages $flash)
     {
         $this->session = $session;
+        $this->flash   = $flash;
     }
 
     /**
@@ -35,6 +39,10 @@ class SessionMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        if (session_status() !== PHP_SESSION_ACTIVE && !headers_sent()) {
+            session_start();
+        }
+        $this->flash->__construct($_SESSION);
         $response = $handler->handle($request);
         if (!$this->session->has('regen') || $this->session->get('regen') < time()) {
             $this->session->regenerateId();
