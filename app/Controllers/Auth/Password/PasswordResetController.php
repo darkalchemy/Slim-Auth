@@ -60,9 +60,9 @@ class PasswordResetController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws LoaderError
      *
      * @return ResponseInterface
      */
