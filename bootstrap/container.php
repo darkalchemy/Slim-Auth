@@ -24,6 +24,7 @@ use Slim\Csrf\Guard;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
+use UMA\RedisSessionHandler;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return [
@@ -43,12 +44,15 @@ return [
         return $app;
     },
 
-    SessionInterface::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->getArray('session');
-        $phpSession = new PhpSession();
-        $phpSession->setOptions($settings);
+    // replace default redis session handler
+    RedisSessionHandler::class => function () {
+        if (ini_get('session.save_handler') === 'redis') {
+            session_set_save_handler(new RedisSessionHandler(), true);
+        }
+    },
 
-        return $phpSession;
+    SessionInterface::class => function () {
+        return new PhpSession();
     },
 
     I18n::class => DI\factory(function () {
@@ -64,12 +68,6 @@ return [
 
     ResponseInterface::class => function (ContainerInterface $container) {
         return $container->get(App::class)->getResponseFactory();
-    },
-
-    Messages::class => function () {
-        $storage = [];
-
-        return new Messages($storage);
     },
 
     Twig::class => function (ContainerInterface $container) {
@@ -91,7 +89,9 @@ return [
     },
 
     Guard::class => function (ContainerInterface $container) {
-        return new Guard($container->get(ResponseInterface::class));
+        $storage = null;
+
+        return new Guard($container->get(ResponseInterface::class), 'csrf', $storage, null, 200, 32, true);
     },
 
     PHPMailer::class => function (ContainerInterface $container) {

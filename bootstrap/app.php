@@ -7,6 +7,7 @@ use DI\ContainerBuilder;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Slim\App;
+use UMA\RedisSessionHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -41,6 +42,15 @@ try {
     die($e->getMessage());
 }
 
+try {
+    $container->get(RedisSessionHandler::class);
+} catch (DependencyException $e) {
+    die($e->getMessage());
+} catch (NotFoundException $e) {
+    die($e->getMessage());
+}
+
+session_start($settings['session']);
 (require __DIR__ . '/middleware.php')($app);
 (require __DIR__ . '/../routes/web.php')($app);
 (require __DIR__ . '/exceptions.php')($app);
