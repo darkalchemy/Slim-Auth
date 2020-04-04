@@ -24,7 +24,7 @@ class UserActivateController extends Controller
     protected Messages              $flash;
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
-    protected PhpSession            $phpSession;
+    protected PhpSession            $session;
 
     /**
      * SignUpController constructor.
@@ -32,13 +32,13 @@ class UserActivateController extends Controller
      * @param Messages             $flash         The response
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
-     * @param PhpSession           $phpSession
+     * @param PhpSession           $session
      *
      * @throws Exception
      */
-    public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, PhpSession $phpSession)
+    public function __construct(Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, PhpSession $session)
     {
-        parent::__construct($phpSession);
+        parent::__construct($session);
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('activate_controller.log')->createInstance('activate_controller');

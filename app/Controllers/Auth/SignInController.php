@@ -31,7 +31,7 @@ class SignInController extends Controller
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
-    protected PhpSession            $phpSession;
+    protected PhpSession            $session;
 
     /**
      * SignInController constructor.
@@ -41,28 +41,28 @@ class SignInController extends Controller
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
-     * @param PhpSession           $phpSession
+     * @param PhpSession           $session
      *
      * @throws Exception
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $session)
     {
-        parent::__construct($phpSession);
+        parent::__construct($session);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signin_controller.log')->createInstance('signin_controller');
         $this->rules       = $rules;
-        $this->phpSession->set('current_url', 'auth.signin');
+        $this->session->set('current_url', 'auth.signin');
     }
 
     /**
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */

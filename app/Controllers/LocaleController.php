@@ -19,7 +19,7 @@ class LocaleController
     protected I18n                 $i18n;
     protected Messages             $flash;
     protected RouteParserInterface $routeParser;
-    protected PhpSession           $phpSession;
+    protected PhpSession           $session;
     protected array                $locales;
     protected string $current_url;
 
@@ -29,16 +29,16 @@ class LocaleController
      * @param I18n                 $i18n
      * @param Messages             $flash
      * @param RouteParserInterface $routeParser
-     * @param PhpSession           $phpSession
+     * @param PhpSession           $session
      */
-    public function __construct(I18n $i18n, Messages $flash, RouteParserInterface $routeParser, PhpSession $phpSession)
+    public function __construct(I18n $i18n, Messages $flash, RouteParserInterface $routeParser, PhpSession $session)
     {
         $this->i18n        = $i18n;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->phpSession  = $phpSession;
+        $this->session     = $session;
         $this->locales     = $this->i18n->getSupportedLocales();
-        $this->current_url = $this->phpSession->get('current_url') ?? 'home';
+        $this->current_url = $this->session->get('current_url') ?? 'home';
     }
 
     /**
@@ -52,8 +52,8 @@ class LocaleController
     public function __invoke(ResponseInterface $response, string $lang)
     {
         if (isset($lang) && in_array($lang, $this->locales)) {
-            $this->phpSession->set('lang', $lang);
-            $this->phpSession->set('locale', substr($lang, 0, 2));
+            $this->session->set('lang', $lang);
+            $this->session->set('locale', substr($lang, 0, 2));
             $this->i18n->setLocaleManually($lang);
             $this->flash->addMessage('success', _fe('Current locale changed to: {0}.', ucfirst($this->i18n->getNativeLanguageName($lang))));
         }

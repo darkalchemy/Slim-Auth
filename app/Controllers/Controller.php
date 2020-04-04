@@ -14,18 +14,18 @@ use Valitron\Validator;
  */
 class Controller
 {
-    protected PhpSession $phpSession;
+    protected PhpSession $session;
     protected string $locale;
 
     /**
      * Controller constructor.
      *
-     * @param PhpSession $phpSession
+     * @param PhpSession $session
      */
-    public function __construct(PhpSession $phpSession)
+    public function __construct(PhpSession $session)
     {
-        $this->phpSession = $phpSession;
-        $this->locale     = $this->phpSession->get('locale') ?? 'en';
+        $this->session    = $session;
+        $this->locale     = $this->session->get('locale') ?? 'en';
     }
 
     /**

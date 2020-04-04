@@ -32,7 +32,7 @@ class PasswordResetController extends Controller
     protected RouteParserInterface  $routeParser;
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
-    protected PhpSession            $phpSession;
+    protected PhpSession            $session;
 
     /**
      * PasswordResetController constructor.
@@ -42,13 +42,13 @@ class PasswordResetController extends Controller
      * @param RouteParserInterface $routeParser
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
-     * @param PhpSession           $phpSession
+     * @param PhpSession           $session
      *
      * @throws Exception
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $phpSession)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, PhpSession $session)
     {
-        parent::__construct($phpSession);
+        parent::__construct($session);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;

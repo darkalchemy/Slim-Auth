@@ -27,7 +27,7 @@ class AccountController extends Controller
     protected Messages             $flash;
     protected RouteParserInterface $routeParser;
     protected ValidationRules      $rules;
-    protected PhpSession           $phpSession;
+    protected PhpSession           $session;
 
     /**
      * AccountController constructor.
@@ -36,11 +36,11 @@ class AccountController extends Controller
      * @param Messages             $flash
      * @param RouteParserInterface $routeParser
      * @param ValidationRules      $rules
-     * @param PhpSession           $phpSession
+     * @param PhpSession           $session
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules, PhpSession $phpSession)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, ValidationRules $rules, PhpSession $session)
     {
-        parent::__construct($phpSession);
+        parent::__construct($session);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;

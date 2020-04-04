@@ -33,7 +33,7 @@ class SignUpController extends Controller
     protected LoggerInterface       $logger;
     protected ValidationRules       $rules;
     protected StoreMail             $storeMail;
-    protected PhpSession            $phpSession;
+    protected PhpSession            $session;
 
     /**
      * SignUpController constructor.
@@ -44,20 +44,20 @@ class SignUpController extends Controller
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
      * @param StoreMail            $storeMail
-     * @param PhpSession           $phpSession
+     * @param PhpSession           $session
      *
      * @throws Exception
      */
-    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail, PhpSession $phpSession)
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser, LoggerFactory $loggerFactory, ValidationRules $rules, StoreMail $storeMail, PhpSession $session)
     {
-        parent::__construct($phpSession);
+        parent::__construct($session);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signup_controller.log')->createInstance('signup_controller');
         $this->rules       = $rules;
         $this->storeMail   = $storeMail;
-        $this->phpSession->set('current_url', 'auth.signup');
+        $this->session->set('current_url', 'auth.signup');
     }
 
     /**
