@@ -66,14 +66,14 @@ class ExceptionHandler
     }
 
     /**
-     * @param Throwable $exception The exception
+     * @param ValidationException $exception
      *
      * @return ResponseInterface
      */
-    public function handleValidationException(Throwable $exception)
+    public function handleValidationException(ValidationException $exception)
     {
         $this->flash->addMessage('errors', $exception->getErrors());
-        $this->logger->error('Validation exception', $exception->getMessage());
+        $this->logger->error('Validation exception', $exception->getErrors());
 
         return $this->responseFactory->createResponse()->withHeader('Location', $exception->getPath());
     }
@@ -89,14 +89,14 @@ class ExceptionHandler
      */
     public function handleHttpNotFoundException(Throwable $exception)
     {
-        $this->logger->error('Http not found exception', $exception->getMessage());
+        $this->logger->error('Http not found exception', ['error' => $exception->getMessage()]);
 
         return $this->view->render($this->responseFactory->createResponse(), 'pages/errors/404.twig')->withStatus(404);
     }
 
     public function HttpMethodNotAllowedException(Throwable $exception)
     {
-        $this->logger->error('Http Method not allow exception', $exception->getMessage());
+        $this->logger->error('Http Method not allow exception', ['error' => $exception->getMessage()]);
 
         return $this->view->render($this->responseFactory->createResponse(), 'pages/errors/405.twig')->withStatus(405);
     }
