@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75d90896badd064355eb6026f8bc351a",
+    "content-hash": "ac81c9815911ee6e1155331e7c536257",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -1271,6 +1271,7 @@
                 "serialize",
                 "tokenizer"
             ],
+            "abandoned": "opis/closure",
             "time": "2018-03-21T22:21:57+00:00"
         },
         {
@@ -4123,6 +4124,41 @@
             "time": "2020-02-11T15:33:47+00:00"
         },
         {
+            "name": "uma/redis-session-handler",
+            "version": "v0.9.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/1ma/RedisSessionHandler.git",
+                "reference": "d05c6b5375e453e37f8a5dfad621acb08d6c2867"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/1ma/RedisSessionHandler/zipball/d05c6b5375e453e37f8a5dfad621acb08d6c2867",
+                "reference": "d05c6b5375e453e37f8a5dfad621acb08d6c2867",
+                "shasum": ""
+            },
+            "require": {
+                "ext-redis": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "UMA\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "An alternative Redis session handler",
+            "time": "2018-03-31T15:28:31+00:00"
+        },
+        {
             "name": "vlucas/valitron",
             "version": "v1.4.7",
             "source": {
@@ -4280,20 +4316,21 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.8.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
+                "reference": "5eb79f3dbdffed6544e1fc287572c0f462bd29bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
-                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5eb79f3dbdffed6544e1fc287572c0f462bd29bb",
+                "reference": "5eb79f3dbdffed6544e1fc287572c0f462bd29bb",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
+                "ext-tokenizer": "*",
                 "php": "^7.1"
             },
             "require-dev": {
@@ -4303,7 +4340,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.9.x-dev"
                 }
             },
             "autoload": {
@@ -4344,7 +4381,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2019-10-01T18:55:10+00:00"
+            "time": "2020-04-02T12:33:25+00:00"
         },
         {
             "name": "filp/whoops",
