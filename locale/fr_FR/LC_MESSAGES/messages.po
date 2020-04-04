@@ -62,10 +62,6 @@ msgid "Current password"
 msgstr "Mot de passe actuel"
 
 #, php-format
-msgid "Current time"
-msgstr "Heure actuelle"
-
-#, php-format
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
@@ -192,6 +188,3 @@ msgstr "{0} n'est pas accessible en écriture par le serveur Web."
 #, no-php-format
 msgid "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
 msgstr "{0} n'est pas accessible en écriture par le serveur Web. <br> Veuillez exécuter: <br> sudo chown -R www-data: www-data {0} <br> sudo chmod -R 0775 {0}"
-
-#~ msgid "The cache path is required"
-#~ msgstr "Le chemin du cache est obligatoire"
