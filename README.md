@@ -30,9 +30,10 @@ npm is required
 [Slim/Flash](https://github.com/slimphp/Slim-Flash) for flash messaging  
 [Slim/Twig/Flash](https://github.com/kanellov/slim-twig-flash)(updated) for displaying flash messages in twig  
 [Slim/Twig-View](https://github.com/slimphp/Twig-View) for templates  
+[Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
 [Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for translations  
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
-[Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
+[uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session  
 
 To install with composer:
 ```
