@@ -102,8 +102,6 @@ $settings['session'] = [
     'sid_length'             => (ini_get('session.save_handler') != 'files' ? '256' : '128'),
     'lazy_write'             => '0',
     'sid_bits_per_character' => '6',
-    'hash_function'          => 'sha512',
-    'entropy_length'         => '1024',
     'use_strict_mode'        => '1',
     'use_trans_sid'          => '0',
     'use_cookies'            => '1',
