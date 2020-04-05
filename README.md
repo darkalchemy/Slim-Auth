@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.11)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.12)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
@@ -33,7 +33,7 @@ npm is required
 [Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
 [Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for translations  
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
-[uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session  
+[uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session handling  
 
 To install with composer:
 ```
@@ -116,6 +116,14 @@ Then to create the binary forms of the translations, you need to run again for e
 composer translate en_EN
 composer translate fr_FR
 ```
+
+### Notes
+If you want to use redis as your session handler, you must set:
+```
+session.save_handler = redis
+session.save_path    = "tcp://127.0.0.1:6379?database=1"
+```
+As of now, uma/redis-session-handler can not use unix sockets, but that should be fixed soon.  
 
 ### TODO    
 phpunit for testing.
