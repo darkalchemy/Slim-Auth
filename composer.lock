@@ -2486,16 +2486,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "0.11.4",
+            "version": "0.11.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/phinx.git",
-                "reference": "10e8c3f6b09111f4c0ef128d5a43375e15286cc5"
+                "reference": "06c65d63ca22be27f278133f439ddcf0bd150635"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/phinx/zipball/10e8c3f6b09111f4c0ef128d5a43375e15286cc5",
-                "reference": "10e8c3f6b09111f4c0ef128d5a43375e15286cc5",
+                "url": "https://api.github.com/repos/cakephp/phinx/zipball/06c65d63ca22be27f278133f439ddcf0bd150635",
+                "reference": "06c65d63ca22be27f278133f439ddcf0bd150635",
                 "shasum": ""
             },
             "require": {
@@ -2503,13 +2503,18 @@
                 "cakephp/database": "^3.7",
                 "php": ">=5.6",
                 "symfony/config": "^3.4|^4.0|^5.0",
-                "symfony/console": "^3.4|^4.0|^5.0",
-                "symfony/yaml": "^3.4|^4.0|^5.0"
+                "symfony/console": "^3.4|^4.0|^5.0"
             },
             "require-dev": {
                 "cakephp/cakephp-codesniffer": "^3.0",
+                "ext-json": "*",
                 "phpunit/phpunit": ">=5.7,<8.0",
-                "sebastian/comparator": ">=1.2.3"
+                "sebastian/comparator": ">=1.2.3",
+                "symfony/yaml": "^3.4|^4.0|^5.0"
+            },
+            "suggest": {
+                "ext-json": "Install if using JSON configuration format",
+                "symfony/yaml": "Install if using YAML configuration format"
             },
             "bin": [
                 "bin/phinx"
@@ -2557,7 +2562,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2019-12-24T23:43:31+00:00"
+            "time": "2020-03-30T12:38:04+00:00"
         },
         {
             "name": "selective/config",
@@ -4001,65 +4006,6 @@
                 "standards"
             ],
             "time": "2019-11-18T17:27:11+00:00"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v5.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "ad5e9c83ade5bbb3a96a3f30588a0622708caefd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/ad5e9c83ade5bbb3a96a3f30588a0622708caefd",
-                "reference": "ad5e9c83ade5bbb3a96a3f30588a0622708caefd",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2.5",
-                "symfony/polyfill-ctype": "~1.8"
-            },
-            "conflict": {
-                "symfony/console": "<4.4"
-            },
-            "require-dev": {
-                "symfony/console": "^4.4|^5.0"
-            },
-            "suggest": {
-                "symfony/console": "For validating YAML files using the lint command"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Yaml Component",
-            "homepage": "https://symfony.com",
-            "time": "2020-03-30T11:42:42+00:00"
         },
         {
             "name": "twig/twig",
