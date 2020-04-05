@@ -60,3 +60,16 @@ function display_ct() {
     document.getElementById('ct').innerHTML = hour + ':' + minute + ':' + second + ' ' + ampm;
     setTimeout(display_ct, 1000);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = Array.prototype.slice.call(document.querySelectorAll('.navbar a'), 0);
+    for (let i = 0; i < navbar.length; i++) {
+        if (navbar[i].href === window.location.href) {
+            navbar[i].classList.add("is-info", "is-active");
+            navbar[i].classList.remove("is-light");
+        } else {
+            navbar[i].classList.remove("is-info", "is-active");
+            navbar[i].classList.add("is-light");
+        }
+    }
+});
