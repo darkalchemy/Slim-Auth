@@ -9,7 +9,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-
     {% block css %}
         {% webpack_entry_css 'default' %}
     {% endblock %}
@@ -20,5 +19,6 @@
 {% block js %}
     {% webpack_entry_js 'default' %}
 {% endblock %}
+{% include 'components/cookieconsent.twig' %}
 </body>
 </html>
