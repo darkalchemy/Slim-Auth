@@ -91,14 +91,14 @@ $settings['logger'] = [
 ];
 
 $settings['cookies'] = [
-    'name'      => ($scheme ? '__Secure-' : '') . $settings['site_name'],
+    'name'      => ($scheme ? '__Secure-' : '') . str_replace(' ', '_', $settings['site_name']),
     'http_only' => '1',
     'secure'    => $scheme ? '1' : '0',
     'samesite'  => 'Lax',
 ];
 
 $settings['session'] = [
-    'name'                   => $settings['site_name'],
+    'name'                   => str_replace(' ', '_', $settings['site_name']),
     'sid_length'             => (ini_get('session.save_handler') != 'files' ? '256' : '128'),
     'lazy_write'             => '0',
     'sid_bits_per_character' => '6',
@@ -126,7 +126,5 @@ if ($settings['site']['app_env'] === 'PRODUCTION') {
     $settings['router']['cache_file']                                      = $settings['root'] . '/var/cache/router.cache';
     $settings['twig']['cache']                                             = $settings['root'] . '/resources/views/cache';
 }
-
-putenv(sprintf('TMPDIR=%s', $settings['tmp']));
 
 return $settings;
