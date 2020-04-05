@@ -59,7 +59,7 @@ function compile_twig_templates(ContainerInterface $container)
     }
 
     echo "\nCompiling twig templates completed\n\n";
-    echo "to fix the permissions, you should run:\nsudo chown -R www-data:www-data {$cache}\nsudo chmod -R 0775 {$cache}\n";
+    echo "to fix the permissions, you should run:\nsudo chown -R www-data:www-data '{$cache}'\nsudo chmod -R 0775 '{$cache}'\n";
 
     return 0;
 }
