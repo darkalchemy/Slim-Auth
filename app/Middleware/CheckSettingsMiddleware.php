@@ -46,7 +46,6 @@ class CheckSettingsMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $response = $handler->handle($request);
         if (!$this->settings['mail']['smtp_enable']) {
             $this->flash->addMessage('error', _f('You must set up mail settings to send mail.'));
             $this->logger->error('You must set up mail settings to send mail.');
@@ -64,6 +63,6 @@ class CheckSettingsMiddleware implements MiddlewareInterface
             }
         }
 
-        return $response;
+        return $handler->handle($request);
     }
 }
