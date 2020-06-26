@@ -6,7 +6,7 @@ use App\Controllers\Account\AccountController;
 use App\Controllers\Account\AccountPasswordController;
 use App\Controllers\Auth\Password\PasswordRecoverController;
 use App\Controllers\Auth\Password\PasswordResetController;
-use App\Controllers\Auth\Password\UserActivateController;
+use App\Controllers\Auth\UserActivateController;
 use App\Controllers\Auth\SignInController;
 use App\Controllers\Auth\SignOutController;
 use App\Controllers\Auth\SignUpController;
