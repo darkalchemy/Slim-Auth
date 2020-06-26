@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.13)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.14)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
@@ -17,7 +17,7 @@ npm is required
 [php-di/php-di](http://php-di.org/) to manage dependency injection    
 [Cartalyst/Sentinel](https://cartalyst.com/manual/sentinel/3.) for user authentication and authorization  
 [delight-im/PHP-I18N](https://github.com/delight-im/PHP-I18N) for handling the users locale      
-[jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
+[hellogerard/jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
 [Eloquent/ORM](https://github.com/illuminate/database) for database storage  
 [EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails  
 [Middlewares/Trailing-slash](https://github.com/middlewares/trailing-slash) to remove any trailing slashes in the url  
@@ -39,27 +39,29 @@ To install with composer:
 ```
 composer create-project darkalchemy/slim-auth
 ```
-edit config/settings.php as needed.
-
-Make these folders writable by the web server
-```
-sudo chown -R www-data:www-data var/{cache,logs,tmp} resources/views/cache/
-sudo chmod -R 0775 var/{cache,logs,tmp} resources/views/cache/
-```
+edit config/settings.php as needed and create the database.
 
 For Development:
 ```
 npm install
-composer migrate
 npm run build-dev
+composer compile
+composer migrate
 ```
 
 For Production:
 ```
 composer install --no-dev
 npm install
-composer migrate
 npm run build
+composer compile 
+composer migrate
+```
+
+Make these folders writable by the web server
+```
+sudo chown -R www-data:www-data var/{cache,logs,tmp} resources/views/cache/
+sudo chmod -R 0775 var/{cache,logs,tmp} resources/views/cache/
 ```
 
 Set up cron job, this is necessary to be able to run scripts as www-data when needed:
@@ -70,7 +72,7 @@ sudo crontab -e
 * * * * * cd /path/to/bootstrap/ && /usr/bin/php jobby.php 1>> /dev/null 2>&1
 ```
 
-Emails are not sent directly, they are inserted into the database and jobby will take care of sending them.
+Emails do not get sent directly, they are inserted into the database and jobby will take care of sending them.
 
 Compile twig templates for translating:
 ```
@@ -118,12 +120,16 @@ composer translate fr_FR
 ```
 
 ### Notes
-If you want to use redis as your session handler, you must set:
+If you want to use redis as your session handler, you should add this to php.ini and uncomment as needed, TCP or Socket:
 ```
-session.save_handler = redis
-session.save_path    = "tcp://127.0.0.1:6379?database=1"
+; TCP
+; session.save_handler = redis
+; session.save_path    = "tcp://127.0.0.1:6379?database=1"
+
+; UNIX Socket
+; session.save_handler = redis
+; session.save_path = "unix:///dev/shm/redis.sock?database=1"
 ```
-As of now, uma/redis-session-handler can not use unix sockets, but that should be fixed soon.  
 
 ### TODO    
 phpunit for testing.
