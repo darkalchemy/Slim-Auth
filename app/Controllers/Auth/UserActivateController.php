@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers\Auth\Password;
+namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Factory\LoggerFactory;
