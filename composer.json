@@ -66,49 +66,36 @@
         "sort-packages": true
     },
     "scripts": {
-        "cleanup": [
-            "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --show-progress=dots -vvv"
-        ],
-        "dump": [
-            "composer dump-autoload -a"
-        ],
+        "cleanup": "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --show-progress=dots -vvv",
+        "dump": "composer dump-autoload -a",
         "post-install-cmd": [
             "composer dump-autoload -o",
             "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
-        "post-update-cmd": [
-            "composer dump-autoload -o"
-        ],
-        "post-create-project-cmd": [
-            "php -r \"copy('config/settings.example.php', 'config/settings.php');\""
-        ],
-        "migrate": [
-            "vendor/bin/phinx migrate -c config/phinx.php -e default --ansi"
-        ],
-        "rollback": [
-            "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0"
-        ],
+        "post-update-cmd": "composer dump-autoload -o",
+        "post-create-project-cmd": "php -r \"copy('config/settings.example.php', 'config/settings.php');\"",
+        "migrate": "vendor/bin/phinx migrate -c config/phinx.php -e default --ansi",
+        "rollback": "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0",
         "compile": [
             "php bin/utilities.php compile",
             "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
-        "translate": [
-            "php bin/utilities.php translate"
-        ],
-        "clear_cache": [
-            "php bin/utilities.php clear_cache"
-        ],
-        "set-perms": [
-            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
-        ]
+        "translate": "php bin/utilities.php translate",
+        "clear_cache": "php bin/utilities.php clear_cache",
+        "set-perms": "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
     },
     "extra": {
-        "writable-dirs": ["var/cache", "var/logs", "var/tmp", "resources/views/cache/"]
+        "writable-dirs": [
+            "var/cache",
+            "var/logs",
+            "var/tmp",
+            "resources/views/cache/"
+        ]
     },
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:darkalchemy/PermissionsHandler.git"
+            "url": "git@github.com:darkalchemy/PermissionsHandler.git"
         }
     ]
 }

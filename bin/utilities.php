@@ -15,12 +15,12 @@ $processes = [
 ];
 
 $languages = [];
-$locales = $container->get(I18n::class)->getSupportedLocales();
+$locales   = $container->get(I18n::class)->getSupportedLocales();
 foreach ($locales as $locale) {
     $languages[] = str_replace('-', '_', $locale);
 }
 $process = 'compile';
-$lang = 'en_US';
+$lang    = 'en_US';
 foreach ($argv as $arg) {
     if (in_array($arg, $processes)) {
         $process = $arg;
@@ -39,6 +39,7 @@ switch ($process) {
         break;
     case 'clear_cache':
         remove_cached_files($container);
+
         break;
     default:
         compile_twig_templates($container);
