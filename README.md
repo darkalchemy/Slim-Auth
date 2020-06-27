@@ -19,7 +19,7 @@ npm is required
 [delight-im/PHP-I18N](https://github.com/delight-im/PHP-I18N) for handling the users locale      
 [hellogerard/jobby](https://github.com/jobbyphp/jobby) to run all background jobs through cron  
 [Eloquent/ORM](https://github.com/illuminate/database) for database storage  
-[EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating emails  
+[EmailValidator](https://github.com/egulias/EmailValidator/tree/master) for validating email addresses    
 [Middlewares/Trailing-slash](https://github.com/middlewares/trailing-slash) to remove any trailing slashes in the url  
 [Monolog](https://github.com/Seldaek/monolog) for logging  
 [PHPMailer](https://github.com/PHPMailer/PHPMailer) for sending email  
@@ -28,10 +28,11 @@ npm is required
 [Selective/Config](https://github.com/selective-php/config) to manage config settings  
 [Slim/CSRF](https://github.com/slimphp/Slim-Csrf) to protect against csrf  
 [Slim/Flash](https://github.com/slimphp/Slim-Flash) for flash messaging  
-[Slim/Twig/Flash](https://github.com/kanellov/slim-twig-flash)(updated) for displaying flash messages in twig  
+[Slim/Twig/Flash](https://github.com/kanellov/slim-twig-flash) (updated and included manually) for displaying flash messages in twig  
 [Slim/Twig-View](https://github.com/slimphp/Twig-View) for templates  
 [Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors  
 [Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for translations  
+[umpirsky/composer-permissions-handler](https://github.com/umpirsky/PermissionsHandler) to set folder permissions for log and cache folders  
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
 [uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session handling  
 
