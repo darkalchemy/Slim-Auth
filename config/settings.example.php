@@ -29,7 +29,6 @@ $settings['db'] = [
     'driver'        => 'mysql',
     'host'          => '127.0.0.1',
     'port'          => 3306,
-    //'host'          => 'localhost;unix_socket=/var/run/mysqld/mysqld.sock',
     'database'      => 'slim-auth',
     'username'      => 'root',
     'password'      => '',
