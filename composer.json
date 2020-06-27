@@ -41,12 +41,13 @@
         "slim/twig-view": "^3.0",
         "symfony/http-foundation": "^5.0",
         "uma/redis-session-handler": "^0.9.6",
-        "vlucas/valitron": "^1.4"
+        "umpirsky/composer-permissions-handler": "^1.6",
+        "vlucas/valitron": "^1.4",
+        "zeuxisoo/slim-whoops": "^0.7.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
-        "symfony/var-dumper": "^5.0",
-        "zeuxisoo/slim-whoops": "^0.7.2"
+        "symfony/var-dumper": "^5.0"
     },
     "autoload": {
         "psr-4": {
@@ -72,7 +73,8 @@
             "composer dump-autoload -a"
         ],
         "post-install-cmd": [
-            "composer dump-autoload -o"
+            "composer dump-autoload -o",
+            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
         "post-update-cmd": [
             "composer dump-autoload -o"
@@ -87,10 +89,23 @@
             "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0"
         ],
         "compile": [
-            "php bin/translate.php compile"
+            "php bin/translate.php compile",
+            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
         "translate": [
             "php bin/translate.php translate"
+        ],
+        "set-perms": [
+            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ]
-    }
+    },
+    "extra": {
+        "writable-dirs": ["var/cache", "var/logs", "var/tmp", "resources/views/cache/"]
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:darkalchemy/PermissionsHandler.git"
+        }
+    ]
 }

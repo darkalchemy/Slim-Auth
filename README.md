@@ -58,12 +58,6 @@ composer compile
 composer migrate
 ```
 
-Make these folders writable by the web server
-```
-sudo chown -R www-data:www-data var/{cache,logs,tmp} resources/views/cache/
-sudo chmod -R 0775 var/{cache,logs,tmp} resources/views/cache/
-```
-
 Set up cron job, this is necessary to be able to run scripts as www-data when needed:
 ```
 sudo crontab -e
@@ -77,8 +71,6 @@ Emails do not get sent directly, they are inserted into the database and jobby w
 Compile twig templates for translating:
 ```
 composer compile
-sudo chown -R www-data:www-data resources/views/cache/
-sudo chmod -R 0775 resources/views/cache/
 ```
 
 Translate all php files to locale - en_US:
