@@ -25,6 +25,7 @@ class RedirectIfAuthenticated
     {
         if (!Sentinel::guest()) {
             $response = new Response();
+
             return $response->withHeader('Location', '/');
         }
 

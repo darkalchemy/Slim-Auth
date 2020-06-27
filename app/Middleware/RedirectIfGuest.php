@@ -44,6 +44,7 @@ class RedirectIfGuest
             $this->flash->addMessage('status', _f('Please sign in before continuing'));
 
             $response = new Response();
+
             return $response->withHeader(
                     'Location',
                     $this->routeParser->urlFor('auth.signin') .

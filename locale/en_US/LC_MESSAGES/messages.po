@@ -1,7 +1,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Slim-Auth\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 
 #, php-format
 msgid "Account"
@@ -160,6 +160,10 @@ msgstr "Something went wrong"
 #, php-format
 msgid "Staff"
 msgstr "Staff"
+
+#, no-php-format
+msgid "This page was generated in {0} ms and used {1} of ram."
+msgstr "This page was generated in {0} ms and used {1} of ram."
 
 #, php-format
 msgid "Update"

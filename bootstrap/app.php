@@ -9,6 +9,7 @@ use DI\NotFoundException;
 use Slim\App;
 use UMA\RedisSessionHandler;
 
+$starttime = microtime(true);
 require __DIR__ . '/../vendor/autoload.php';
 
 $settings_path = realpath(__DIR__ . '/../') . '/config/settings.php';

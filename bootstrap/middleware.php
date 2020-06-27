@@ -16,7 +16,6 @@ return function (App $app) {
     $container = $app->getContainer();
 
     (require __DIR__ . '/database.php')($container->get(Configuration::class)->getArray('db'));
-
     $app->addMiddleware(TwigMiddleware::createFromContainer($container->get(App::class)));
     $app->addMiddleware($container->get(WhoopsMiddleware::class));
     $app->addMiddleware($container->get(CheckSettingsMiddleware::class));

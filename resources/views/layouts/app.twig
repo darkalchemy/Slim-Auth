@@ -16,6 +16,7 @@
 <body>
 {% include 'components/menu.twig' %}
 {% block content %}{% endblock %}
+{% include 'components/footer.twig' %}
 {% block js %}
     {% webpack_entry_js 'default' %}
 {% endblock %}

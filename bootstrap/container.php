@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Controllers\LocaleController;
 use App\Factory\LoggerFactory;
 use App\Middleware\CheckSettingsMiddleware;
 use App\Views\CsrfExtension;
 use App\Views\TwigMessagesExtension;
+use App\Views\TwigUtilities;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Darkalchemy\Twig\TwigTranslationExtension;
 use Delight\I18n\Codes;
@@ -28,9 +28,7 @@ use UMA\RedisSessionHandler;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return [
-    Configuration::class => function () {
-        return new Configuration(require __DIR__ . '/../config/settings.php');
-    },
+    Configuration::class => fn () => new Configuration(require __DIR__ . '/../config/settings.php'),
 
     App::class => function (ContainerInterface $container) {
         $app = Bridge::create($container);
@@ -51,24 +49,16 @@ return [
         }
     },
 
-    SessionInterface::class => function () {
-        return new PhpSession();
-    },
+    SessionInterface::class => fn () => new PhpSession(),
 
-    I18n::class => DI\factory(function () {
-        return new I18n([
-            Codes::EN_US,
-            Codes::FR_FR,
-        ]);
-    }),
+    I18n::class => DI\factory(fn () => new I18n([
+        Codes::EN_US,
+        Codes::FR_FR,
+    ])),
 
-    RouteParserInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)->getRouteCollector()->getRouteParser();
-    },
+    RouteParserInterface::class => fn (ContainerInterface $container) => $container->get(App::class)->getRouteCollector()->getRouteParser(),
 
-    ResponseInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)->getResponseFactory();
-    },
+    ResponseInterface::class => fn (ContainerInterface $container) => $container->get(App::class)->getResponseFactory(),
 
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
@@ -78,6 +68,7 @@ return [
 
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], $settings['webpack']['js_path'], $settings['webpack']['css_path']));
         $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
+        $twig->addExtension(new TwigUtilities());
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
         $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class), $container->get(PhpSession::class)));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
@@ -119,17 +110,13 @@ return [
         ]);
     },
 
-    LoggerFactory::class => function (ContainerInterface $container) {
-        return new LoggerFactory($container->get(Configuration::class)->getArray('logger'));
-    },
+    LoggerFactory::class => fn (ContainerInterface $container) => new LoggerFactory($container->get(Configuration::class)->getArray('logger')),
 
-    CheckSettingsMiddleware::class => function (ContainerInterface $container) {
-        return new CheckSettingsMiddleware($container->get(Configuration::class)->all(), $container->get(LoggerFactory::class), $container->get(Messages::class));
-    },
-
-    LocaleController::class => function (ContainerInterface $container) {
-        return new LocaleController($container->get(I18n::class), $container->get(Messages::class), $container->get(RouteParserInterface::class), $container->get(PhpSession::class));
-    },
+    CheckSettingsMiddleware::class => fn (ContainerInterface $container) => new CheckSettingsMiddleware(
+        $container->get(Configuration::class)->all(),
+        $container->get(LoggerFactory::class),
+        $container->get(Messages::class)
+    ),
 
     'view' => DI\get(Twig::class),
 ];

@@ -24,18 +24,15 @@ function array_clean($array, $keys)
  */
 function get_scheme()
 {
-    $scheme = 'http';
     if (isset($_SERVER['REQUEST_SCHEME'])) {
-        $scheme = $_SERVER['REQUEST_SCHEME'];
-    } elseif (isset($_SERVER['HTTPS'])) {
-        $scheme = 'https';
-    } elseif (isset($_SERVER['REQUEST_URI'])) {
-        $url = parse_url($_SERVER['REQUEST_URI']);
-
-        $scheme = $url[0];
+        return $_SERVER['REQUEST_SCHEME'];
     }
-
-    return $scheme;
+    if (isset($_SERVER['HTTPS'])) {
+        return 'https';
+    }
+    if (isset($_SERVER['REQUEST_URI'])) {
+        return ['scheme' => $scheme] = parse_url($_SERVER['REQUEST_URI']) + ['scheme' => 'http'];
+    }
 }
 
 /**
@@ -157,4 +154,20 @@ function _m(string $text)
     global $i18n;
 
     return $i18n->markForTranslation($text);
+}
+
+/**
+ * @param int $bytes
+ * @param int $precision
+ *
+ * @return string
+ */
+function human_readable_size(int $bytes, int $precision)
+{
+    $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    for ($i = 0; $bytes > 1024; ++$i) {
+        $bytes /= 1024;
+    }
+
+    return round($bytes, $precision) . ' ' . $units[$i];
 }

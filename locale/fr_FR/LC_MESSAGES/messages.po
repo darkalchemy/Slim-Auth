@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 
 #, php-format
 msgid "Account"
@@ -160,6 +160,10 @@ msgstr "Quelque chose a mal tourné"
 #, php-format
 msgid "Staff"
 msgstr "Personnel"
+
+#, no-php-format
+msgid "This page was generated in {0} ms and used {1} of ram."
+msgstr "Cette page a été générée en {0} ms et utilisée {1} de RAM."
 
 #, php-format
 msgid "Update"
