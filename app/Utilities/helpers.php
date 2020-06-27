@@ -168,3 +168,47 @@ function human_readable_size(int $bytes, int $precision)
 
     return round($bytes, $precision) . ' ' . $units[$i];
 }
+
+function remove_cached_files(ContainerInterface $container)
+{
+    $settings    = $container->get(Configuration::class)->all();
+    $twig_config = $settings['twig'];
+    $cache       = $twig_config['cache'] ?? $settings['root'] . '/resources/views/cache/';
+    if (file_exists($cache)) {
+        removeDirectory($cache, false);
+    }
+    removeDirectory($settings['site']['di_compilation_path'], false);
+    removeDirectory(dirname($settings['router']['cache_file']), false);
+}
+
+function removeDirectory(string $path, bool $contentsOnly): bool
+{
+    $iterator = new DirectoryIterator($path);
+    foreach ($iterator as $fileInfo) {
+        if ($fileInfo->isDot() || !$fileInfo->isDir()) {
+            continue;
+        }
+        $dirName = $fileInfo->getPathname();
+        removeDirectory($dirName, $contentsOnly);
+    }
+
+    $files = new FilesystemIterator($path);
+    $types = ['php', 'cache'];
+    foreach ($files as $file) {
+        if (in_array($file->getExtension(), $types)) {
+            $fileName = $file->getPathname();
+
+            try {
+                unlink($fileName);
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+    }
+
+    if ($contentsOnly) {
+        return rmdir($path);
+    }
+
+    return true;
+}

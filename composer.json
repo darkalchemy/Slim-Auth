@@ -89,11 +89,14 @@
             "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0"
         ],
         "compile": [
-            "php bin/translate.php compile",
+            "php bin/utilities.php compile",
             "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
         "translate": [
-            "php bin/translate.php translate"
+            "php bin/utilities.php translate"
+        ],
+        "clear_cache": [
+            "php bin/utilities.php clear_cache"
         ],
         "set-perms": [
             "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
