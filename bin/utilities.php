@@ -11,6 +11,7 @@ $root_path = $container->get(Configuration::class)->findString('root');
 $processes = [
     'compile',
     'translate',
+    'translate-all',
     'clear_cache',
 ];
 
@@ -30,11 +31,14 @@ foreach ($argv as $arg) {
 }
 
 switch ($process) {
+    case 'translate-all':
+        foreach ($languages as $locale) {
+            translate($locale, $root_path);
+        }
+
+        break;
     case 'translate':
-        copy($root_path . '/bin/i18n.sh', $root_path . '/i18n.sh');
-        chmod($root_path . '/i18n.sh', 0775);
-        passthru(sprintf('./i18n.sh %s', $lang));
-        unlink($root_path . '/i18n.sh');
+        translate($lang, $root_path);
 
         break;
     case 'clear_cache':
@@ -45,4 +49,12 @@ switch ($process) {
         compile_twig_templates($container);
 
         break;
+}
+
+function translate(string $lang, string $path)
+{
+    copy($path . '/bin/i18n.sh', $path . '/i18n.sh');
+    chmod($path . '/i18n.sh', 0775);
+    passthru(sprintf('./i18n.sh %s', $lang));
+    unlink($path . '/i18n.sh');
 }

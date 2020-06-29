@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.15)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.16)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
@@ -40,23 +40,28 @@ To install with composer:
 ```
 composer create-project darkalchemy/slim-auth
 ```
-edit config/settings.php as needed and create the database.
+
+cd into project, edit config/settings.php as needed and create the database.
+```
+cd slim-auth
+nano config/settings.php
+```
 
 For Development:
 ```
-npm install
-npm run build-dev
-composer compile
-composer migrate
+npm install        # install dependencies
+npm run build-dev  # create initial js/css resources
+composer compile   # compile twig templates
+composer migrate   # import database
 ```
 
 For Production:
 ```
-composer install --no-dev
-npm install
-npm run build
-composer compile 
-composer migrate
+composer install --no-dev  # install non-dev dependencies
+npm install                # install dependencies
+npm run build              # create initial js/css resources
+composer compile           # compile twig templates
+composer migrate           # import database
 ```
 
 Set up cron job, this is necessary to be able to run scripts as www-data when needed:
@@ -98,7 +103,7 @@ sudo update-locale
 ## restart webserver (apache2|nginx)
 sudo service nginx restart
 
-## edit bootstrap/container.php and add the correct local to the 'I18n::class' section
+## edit bootstrap/container.php and add the correct locale to the 'I18n::class' section
 nano bootstrap/container.php
 ```
 
@@ -124,6 +129,20 @@ If you want to use redis as your session handler, you should add this to php.ini
 ; UNIX Socket
 ; session.save_handler = redis
 ; session.save_path = "unix:///dev/shm/redis.sock?database=1"
+```
+
+### Available command line commands
+```
+composer cleanup          # runs php_cs_fixer 
+composer clear_cache      # clears all file based caches
+composer compile          # compile all twig templates
+composer migrate          # migrate the database
+composer rollback         # rollback all database changes
+composer set-perms        # set writable perms for cache/log folders for both webserver and cli 
+composer translate [lang] # translate all strings for listed language
+composer translate-all    # translate all strings for all currently available languages
+npm build                 # create minified js/css resources
+npm build-dev             # create js/css resources
 ```
 
 ### TODO    

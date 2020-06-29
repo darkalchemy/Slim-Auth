@@ -181,8 +181,11 @@ function remove_cached_files(ContainerInterface $container)
     removeDirectory(dirname($settings['router']['cache_file']), false);
 }
 
-function removeDirectory(string $path, bool $contentsOnly): bool
+function removeDirectory(?string $path, bool $contentsOnly): bool
 {
+    if (empty($path)) {
+        return true;
+    }
     $iterator = new DirectoryIterator($path);
     foreach ($iterator as $fileInfo) {
         if ($fileInfo->isDot() || !$fileInfo->isDir()) {
