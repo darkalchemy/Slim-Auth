@@ -15,9 +15,8 @@ class Migration extends AbstractMigration
 {
     protected Builder $schema;
 
-    protected function init()
+    public function init()
     {
-        parent::init();
         $this->schema = Capsule::schema();
     }
 }

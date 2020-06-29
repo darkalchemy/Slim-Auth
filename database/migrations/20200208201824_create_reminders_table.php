@@ -14,7 +14,7 @@ class CreateRemindersTable extends Migration
     {
         $this->schema->create('reminders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->unsignedInteger('user_id');
             $table->string('code');
             $table->tinyInteger('completed')->default(0);
             $table->timestamp('completed_at')->nullable();

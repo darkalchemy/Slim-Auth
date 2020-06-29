@@ -14,7 +14,7 @@ class CreateThrottleTable extends Migration
     {
         $this->schema->create('throttle', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('type');
             $table->string('ip')->nullable();
             $table->timestamps();

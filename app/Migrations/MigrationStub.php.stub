@@ -23,10 +23,6 @@ class $className extends $baseClassName
             $table->timestamp('last_login')->nullable();
             $table->timestamps();
         });
-
-        $this->schema->table('users', function (Blueprint $table) {
-
-        });
     }
 
     /**
@@ -34,10 +30,12 @@ class $className extends $baseClassName
      */
     public function down()
     {
-        $this->schema->table('', function (Blueprint $table) {
+        // rollback
+        $this->schema->table('users', function (Blueprint $table) {
 
         });
 
-        $this->schema->drop('');
+        // or drop
+        $this->schema->drop('users');
     }
 }

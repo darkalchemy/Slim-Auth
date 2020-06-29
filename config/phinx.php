@@ -6,8 +6,7 @@ use Selective\Config\Configuration;
 
 require_once __DIR__ . '/../bootstrap/app.php';
 
-$db = $container->get(Configuration::class)
-    ->getArray('db');
+$db = $container->get(Configuration::class)->getArray('db');
 
 return [
     'paths' => [

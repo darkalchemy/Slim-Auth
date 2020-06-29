@@ -136,6 +136,7 @@ If you want to use redis as your session handler, you should add this to php.ini
 composer cleanup          # runs php_cs_fixer 
 composer clear_cache      # clears all file based caches
 composer compile          # compile all twig templates
+composer create-migration # create new migration class
 composer migrate          # migrate the database
 composer rollback         # rollback all database changes
 composer set-perms        # set writable perms for cache/log folders for both webserver and cli 

@@ -14,12 +14,12 @@ class CreateEmailTable extends Migration
     {
         $this->schema->create('email', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->tinyInteger('priority')->unsigned()->default(10)->index();
-            $table->tinyInteger('sent')->unsigned()->default(0)->index();
-            $table->integer('cancelled')->unsigned()->default(0);
-            $table->integer('send_count')->unsigned()->default(0);
-            $table->integer('error_count')->unsigned()->default(0);
+            $table->unsignedInteger('user_id');
+            $table->unsignedTinyInteger('priority')->default(10)->index();
+            $table->unsignedTinyInteger('sent')->default(0)->index();
+            $table->unsignedInteger('cancelled')->default(0);
+            $table->unsignedInteger('send_count')->default(0);
+            $table->unsignedInteger('error_count')->default(0);
             $table->text('subject');
             $table->longText('body');
             $table->dateTime('date_sent')->nullable()->index();
