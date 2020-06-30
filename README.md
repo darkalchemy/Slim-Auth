@@ -36,7 +36,7 @@ npm is required
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
 [uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session handling  
 
-To install with composer:
+To install using composer:
 ```
 composer create-project darkalchemy/slim-auth
 ```

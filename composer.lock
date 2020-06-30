@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "387e1f9aeb154c4e6eed3579ce8ce805",
+    "content-hash": "631762766d92a4e36ad2b35c940ca200",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -451,25 +451,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/darkalchemy/Twig-Translate.git",
-                "reference": "ce4350445fd5e0bd527f85059499ee10eb8282ed"
+                "reference": "bf40334385534a02118c638ca70af37291d62f4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/ce4350445fd5e0bd527f85059499ee10eb8282ed",
-                "reference": "ce4350445fd5e0bd527f85059499ee10eb8282ed",
+                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/bf40334385534a02118c638ca70af37291d62f4c",
+                "reference": "bf40334385534a02118c638ca70af37291d62f4c",
                 "shasum": ""
             },
             "require": {
-                "delight-im/i18n": "^1.0.2",
+                "delight-im/i18n": "^1.0",
                 "ext-gettext": "*",
                 "ext-intl": "*",
-                "odan/session": "^4.0.0",
+                "odan/session": "^4.0",
                 "php": "^7.4",
-                "twig/twig": "^3.0.03"
+                "twig/twig": "^3.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16.4",
-                "symfony/var-dumper": "^5.1.2"
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "symfony/var-dumper": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -492,7 +492,7 @@
                 "translations",
                 "twig"
             ],
-            "time": "2020-06-30T15:18:33+00:00"
+            "time": "2020-06-30T19:25:22+00:00"
         },
         {
             "name": "delight-im/i18n",
@@ -678,6 +678,54 @@
             "time": "2020-05-25T17:44:05+00:00"
         },
         {
+            "name": "dragonmantank/cron-expression",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dragonmantank/cron-expression.git",
+                "reference": "70c187e8d95c828fc93a2d09d63179c13381482e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/70c187e8d95c828fc93a2d09d63179c13381482e",
+                "reference": "70c187e8d95c828fc93a2d09d63179c13381482e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "replace": {
+                "mtdowling/cron-expression": "^1.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.11",
+                "phpunit/phpunit": "^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cron\\": "src/Cron/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Tankersley",
+                    "email": "chris@ctankersley.com",
+                    "homepage": "https://github.com/dragonmantank"
+                }
+            ],
+            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "keywords": [
+                "cron",
+                "schedule"
+            ],
+            "time": "2020-03-25T18:33:19+00:00"
+        },
+        {
             "name": "egulias/email-validator",
             "version": "2.1.18",
             "source": {
@@ -844,26 +892,27 @@
         },
         {
             "name": "hellogerard/jobby",
-            "version": "v3.4.7",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jobbyphp/jobby.git",
-                "reference": "d2756b64104eb71e6a7fbd4ac0d44f2b427d3f7f"
+                "url": "https://github.com/darkalchemy/jobby.git",
+                "reference": "b4ba3201696910c0a733bec2fb29842dc6290375"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jobbyphp/jobby/zipball/d2756b64104eb71e6a7fbd4ac0d44f2b427d3f7f",
-                "reference": "d2756b64104eb71e6a7fbd4ac0d44f2b427d3f7f",
+                "url": "https://api.github.com/repos/darkalchemy/jobby/zipball/b4ba3201696910c0a733bec2fb29842dc6290375",
+                "reference": "b4ba3201696910c0a733bec2fb29842dc6290375",
                 "shasum": ""
             },
             "require": {
-                "jeremeamia/superclosure": "^2.2",
-                "mtdowling/cron-expression": "^1.0",
+                "dragonmantank/cron-expression": "^3.0",
+                "opis/closure": "^3.5",
                 "php": ">=5.6",
                 "swiftmailer/swiftmailer": "^5.4|^6.0",
                 "symfony/process": "^2.7|^3.0|^4.0|^5.0"
             },
             "require-dev": {
+                "mp091689/dump-die": "^1.0",
                 "phpunit/phpunit": "^4.6",
                 "symfony/filesystem": "^2.7|^3.0|^4.0|^5.0"
             },
@@ -873,7 +922,11 @@
                     "Jobby\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Jobby\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -890,7 +943,10 @@
             ],
             "description": "Manage all your cron jobs without modifying crontab. Handles locking, logging, error emails, and more.",
             "homepage": "https://github.com/jobbyphp/jobby",
-            "time": "2019-11-27T22:09:58+00:00"
+            "support": {
+                "source": "https://github.com/darkalchemy/jobby/tree/3.5.0"
+            },
+            "time": "2020-06-30T18:48:23+00:00"
         },
         {
             "name": "illuminate/container",
@@ -1153,65 +1209,6 @@
             "time": "2020-06-25T13:51:17+00:00"
         },
         {
-            "name": "jeremeamia/superclosure",
-            "version": "2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeremeamia/super_closure.git",
-                "reference": "5707d5821b30b9a07acfb4d76949784aaa0e9ce9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeremeamia/super_closure/zipball/5707d5821b30b9a07acfb4d76949784aaa0e9ce9",
-                "reference": "5707d5821b30b9a07acfb4d76949784aaa0e9ce9",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "^1.2|^2.0|^3.0|^4.0",
-                "php": ">=5.4",
-                "symfony/polyfill-php56": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SuperClosure\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeremy Lindblom",
-                    "email": "jeremeamia@gmail.com",
-                    "homepage": "https://github.com/jeremeamia",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Serialize Closure objects, including their context and binding",
-            "homepage": "https://github.com/jeremeamia/super_closure",
-            "keywords": [
-                "closure",
-                "function",
-                "lambda",
-                "parser",
-                "serializable",
-                "serialize",
-                "tokenizer"
-            ],
-            "abandoned": "opis/closure",
-            "time": "2018-03-21T22:21:57+00:00"
-        },
-        {
             "name": "middlewares/trailing-slash",
             "version": "v2.0.0",
             "source": {
@@ -1399,51 +1396,6 @@
             "time": "2020-05-22T08:12:19+00:00"
         },
         {
-            "name": "mtdowling/cron-expression",
-            "version": "v1.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mtdowling/cron-expression.git",
-                "reference": "9be552eebcc1ceec9776378f7dcc085246cacca6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/9be552eebcc1ceec9776378f7dcc085246cacca6",
-                "reference": "9be552eebcc1ceec9776378f7dcc085246cacca6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0|~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Cron\\": "src/Cron/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
-            "keywords": [
-                "cron",
-                "schedule"
-            ],
-            "abandoned": "dragonmantank/cron-expression",
-            "time": "2019-12-28T04:23:06+00:00"
-        },
-        {
             "name": "nesbot/carbon",
             "version": "2.35.0",
             "source": {
@@ -1561,58 +1513,6 @@
                 "routing"
             ],
             "time": "2018-02-13T20:26:39+00:00"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/53c2753d756f5adb586dca79c2ec0e2654dd9463",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "0.0.5",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "time": "2020-06-03T07:24:19+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -3692,66 +3592,6 @@
             "time": "2020-06-06T08:46:27+00:00"
         },
         {
-            "name": "symfony/polyfill-php56",
-            "version": "v1.17.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "a25861bb3c79b0ec2da9ede51de2ea573818b943"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/a25861bb3c79b0ec2da9ede51de2ea573818b943",
-                "reference": "a25861bb3c79b0ec2da9ede51de2ea573818b943",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/polyfill-util": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.17-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php56\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2020-06-06T08:46:27+00:00"
-        },
-        {
             "name": "symfony/polyfill-php72",
             "version": "v1.17.0",
             "source": {
@@ -3930,62 +3770,6 @@
                 "compatibility",
                 "polyfill",
                 "portable",
-                "shim"
-            ],
-            "time": "2020-06-06T08:46:27+00:00"
-        },
-        {
-            "name": "symfony/polyfill-util",
-            "version": "v1.17.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "6dd644eda43cd2f3daa883d728d8ab4120a05af6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/6dd644eda43cd2f3daa883d728d8ab4120a05af6",
-                "reference": "6dd644eda43cd2f3daa883d728d8ab4120a05af6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.17-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Util\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony utilities for portability of PHP codes",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compat",
-                "compatibility",
-                "polyfill",
                 "shim"
             ],
             "time": "2020-06-06T08:46:27+00:00"
