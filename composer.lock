@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "314f52777b4ca55c87ca13145ee13363",
+    "content-hash": "387e1f9aeb154c4e6eed3579ce8ce805",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -447,29 +447,29 @@
         },
         {
             "name": "darkalchemy/twig-translate",
-            "version": "0.1.4",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darkalchemy/Twig-Translate.git",
-                "reference": "5c856f30a8bc4a1d2fde42819c95cd252c249101"
+                "reference": "ce4350445fd5e0bd527f85059499ee10eb8282ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/5c856f30a8bc4a1d2fde42819c95cd252c249101",
-                "reference": "5c856f30a8bc4a1d2fde42819c95cd252c249101",
+                "url": "https://api.github.com/repos/darkalchemy/Twig-Translate/zipball/ce4350445fd5e0bd527f85059499ee10eb8282ed",
+                "reference": "ce4350445fd5e0bd527f85059499ee10eb8282ed",
                 "shasum": ""
             },
             "require": {
-                "delight-im/i18n": "^1.0",
+                "delight-im/i18n": "^1.0.2",
                 "ext-gettext": "*",
                 "ext-intl": "*",
-                "odan/session": "^4.0",
+                "odan/session": "^4.0.0",
                 "php": "^7.4",
-                "twig/twig": "^3.0"
+                "twig/twig": "^3.0.03"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.14",
-                "symfony/var-dumper": "^5.0"
+                "friendsofphp/php-cs-fixer": "^2.16.4",
+                "symfony/var-dumper": "^5.1.2"
             },
             "type": "library",
             "autoload": {
@@ -492,7 +492,7 @@
                 "translations",
                 "twig"
             ],
-            "time": "2020-02-24T06:15:28+00:00"
+            "time": "2020-06-30T15:18:33+00:00"
         },
         {
             "name": "delight-im/i18n",

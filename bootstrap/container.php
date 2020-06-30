@@ -70,7 +70,7 @@ return [
         $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigUtilities());
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
-        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class), $container->get(PhpSession::class)));
+        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class), $container->get(SessionInterface::class)));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
         $twig->getEnvironment()->addGlobal('settings', $settings);
         $twig->getEnvironment()->addGlobal('errors', $container->get(Messages::class)->getFirstMessage('errors'));
