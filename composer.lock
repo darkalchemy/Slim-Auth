@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0b8a933d54642a353371ad160c0163f",
+    "content-hash": "a0161f5f5f64e2d23c9d1c86da738130",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -4842,17 +4842,17 @@
             "version": "v1.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/darkalchemy/PermissionsHandler.git",
-                "reference": "a31086ce62f2fd01e8788617e5dd23e64967fce7"
+                "url": "https://github.com/umpirsky/PermissionsHandler.git",
+                "reference": "f8d84f2c5c6393f78d8a57a7d266772b712faff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darkalchemy/PermissionsHandler/zipball/a31086ce62f2fd01e8788617e5dd23e64967fce7",
-                "reference": "a31086ce62f2fd01e8788617e5dd23e64967fce7",
+                "url": "https://api.github.com/repos/umpirsky/PermissionsHandler/zipball/f8d84f2c5c6393f78d8a57a7d266772b712faff2",
+                "reference": "f8d84f2c5c6393f78d8a57a7d266772b712faff2",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
+                "php": "^7.2",
                 "symfony/process": "^2.3|^3.0|^4.0|^5.0"
             },
             "require-dev": {
@@ -4865,6 +4865,7 @@
                     "Umpirsky\\PermissionsHandler": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4878,10 +4879,7 @@
             "keywords": [
                 "permissions handling"
             ],
-            "support": {
-                "source": "https://github.com/darkalchemy/PermissionsHandler/tree/v1.6"
-            },
-            "time": "2020-06-27T14:39:14+00:00"
+            "time": "2020-06-29T11:37:46+00:00"
         },
         {
             "name": "vlucas/valitron",

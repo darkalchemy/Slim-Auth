@@ -93,11 +93,5 @@
             "var/tmp",
             "resources/views/cache/"
         ]
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:darkalchemy/PermissionsHandler.git"
-        }
-    ]
+    }
 }
