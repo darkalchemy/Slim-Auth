@@ -14,10 +14,6 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 
 #, php-format
-msgid "Account"
-msgstr "Account"
-
-#, php-format
 msgid "Account details updated!"
 msgstr "Account details updated!"
 
@@ -26,52 +22,12 @@ msgid "An email has to been sent with instructions to reset your password."
 msgstr "An email has to been sent with instructions to reset your password."
 
 #, php-format
-msgid "Change"
-msgstr "Change"
-
-#, php-format
-msgid "Change password"
-msgstr "Change password"
-
-#, php-format
-msgid "Choose a password"
-msgstr "Choose a password"
-
-#, php-format
-msgid "Click the link below to confirm your email and activate your account."
-msgstr "Click the link below to confirm your email and activate your account."
-
-#, php-format
-msgid "Click the link below to reset your password and recover your account."
-msgstr "Click the link below to reset your password and recover your account."
-
-#, php-format
-msgid "Confirm Password"
-msgstr "Confirm Password"
-
-#, php-format
 msgid "Confirm your email"
 msgstr "Confirm your email"
 
 #, no-php-format
 msgid "Current locale changed to: {0}."
 msgstr "Current locale changed to: {0}."
-
-#, php-format
-msgid "Current password"
-msgstr "Current password"
-
-#, php-format
-msgid "Dashboard"
-msgstr "Dashboard"
-
-#, php-format
-msgid "Email"
-msgstr "Email"
-
-#, php-format
-msgid "Hi"
-msgstr "Hi"
 
 #, php-format
 msgid "Incorrect email or password"
@@ -86,30 +42,6 @@ msgid "Invalid reset code."
 msgstr "Invalid reset code."
 
 #, php-format
-msgid "Keep me signed in"
-msgstr "Keep me signed in"
-
-#, php-format
-msgid "Locale"
-msgstr "Locale"
-
-#, php-format
-msgid "Method Not Allowed"
-msgstr "Method Not Allowed"
-
-#, php-format
-msgid "New password"
-msgstr "New password"
-
-#, php-format
-msgid "Page Not Found"
-msgstr "Page Not Found"
-
-#, php-format
-msgid "Password"
-msgstr "Password"
-
-#, php-format
 msgid "Password updated!"
 msgstr "Password updated!"
 
@@ -118,36 +50,8 @@ msgid "Please sign in before continuing"
 msgstr "Please sign in before continuing"
 
 #, php-format
-msgid "Recover"
-msgstr "Recover"
-
-#, php-format
-msgid "Recover your password"
-msgstr "Recover your password"
-
-#, php-format
-msgid "Reset"
-msgstr "Reset"
-
-#, php-format
 msgid "Reset your password"
 msgstr "Reset your password"
-
-#, php-format
-msgid "Select Locale"
-msgstr "Select Locale"
-
-#, php-format
-msgid "Sign in"
-msgstr "Sign in"
-
-#, php-format
-msgid "Sign out"
-msgstr "Sign out"
-
-#, php-format
-msgid "Sign up"
-msgstr "Sign up"
 
 #, php-format
 msgid "Signup successful. Please check and confirm your email before continuing."
@@ -156,22 +60,6 @@ msgstr "Signup successful. Please check and confirm your email before continuing
 #, php-format
 msgid "Something went wrong"
 msgstr "Something went wrong"
-
-#, php-format
-msgid "Staff"
-msgstr "Staff"
-
-#, no-php-format
-msgid "This page was generated in {0} ms and used {1} of ram."
-msgstr "This page was generated in {0} ms and used {1} of ram."
-
-#, php-format
-msgid "Update"
-msgstr "Update"
-
-#, php-format
-msgid "Username"
-msgstr "Username"
 
 #, php-format
 msgid "You must set up mail settings to send mail."
@@ -192,3 +80,87 @@ msgstr "{0} is not writable by the webserver."
 #, no-php-format
 msgid "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
 msgstr "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
+
+#~ msgid "Account"
+#~ msgstr "Account"
+
+#~ msgid "Change"
+#~ msgstr "Change"
+
+#~ msgid "Change password"
+#~ msgstr "Change password"
+
+#~ msgid "Choose a password"
+#~ msgstr "Choose a password"
+
+#~ msgid "Click the link below to confirm your email and activate your account."
+#~ msgstr "Click the link below to confirm your email and activate your account."
+
+#~ msgid "Click the link below to reset your password and recover your account."
+#~ msgstr "Click the link below to reset your password and recover your account."
+
+#~ msgid "Confirm Password"
+#~ msgstr "Confirm Password"
+
+#~ msgid "Current password"
+#~ msgstr "Current password"
+
+#~ msgid "Dashboard"
+#~ msgstr "Dashboard"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Hi"
+#~ msgstr "Hi"
+
+#~ msgid "Keep me signed in"
+#~ msgstr "Keep me signed in"
+
+#~ msgid "Locale"
+#~ msgstr "Locale"
+
+#~ msgid "Method Not Allowed"
+#~ msgstr "Method Not Allowed"
+
+#~ msgid "New password"
+#~ msgstr "New password"
+
+#~ msgid "Page Not Found"
+#~ msgstr "Page Not Found"
+
+#~ msgid "Password"
+#~ msgstr "Password"
+
+#~ msgid "Recover"
+#~ msgstr "Recover"
+
+#~ msgid "Recover your password"
+#~ msgstr "Recover your password"
+
+#~ msgid "Reset"
+#~ msgstr "Reset"
+
+#~ msgid "Select Locale"
+#~ msgstr "Select Locale"
+
+#~ msgid "Sign in"
+#~ msgstr "Sign in"
+
+#~ msgid "Sign out"
+#~ msgstr "Sign out"
+
+#~ msgid "Sign up"
+#~ msgstr "Sign up"
+
+#~ msgid "Staff"
+#~ msgstr "Staff"
+
+#~ msgid "This page was generated in {0} ms and used {1} of ram."
+#~ msgstr "This page was generated in {0} ms and used {1} of ram."
+
+#~ msgid "Update"
+#~ msgstr "Update"
+
+#~ msgid "Username"
+#~ msgstr "Username"

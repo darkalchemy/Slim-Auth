@@ -37,27 +37,33 @@ npm is required
 [Vlucas/Valitron](https://github.com/vlucas/valitron) for validation  
 [uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session handling  
 
-To install using composer:
-```
+To install using composer
+```text
 composer create-project darkalchemy/slim-auth
 ```
 
 cd into project, edit config/settings.php as needed and create the database.
-```
+```text
 cd slim-auth
 nano config/settings.php
 ```
 
-For Development:
-```
-npm install        # install dependencies
-npm run build-dev  # create initial js/css resources
-composer compile   # compile twig templates
+After install
+```text
 composer migrate   # import database
 ```
 
-For Production:
+To update for development
+```text
+composer install           # install non-dev dependencies
+npm install                # install dependencies
+npm run build              # create initial js/css resources
+composer compile           # compile twig templates
+composer migrate           # import database
 ```
+
+To update for production
+```text
 composer install --no-dev  # install non-dev dependencies
 npm install                # install dependencies
 npm run build              # create initial js/css resources
@@ -65,28 +71,28 @@ composer compile           # compile twig templates
 composer migrate           # import database
 ```
 
-Set up cron job, this is necessary to be able to run scripts as www-data when needed:
-```
+Set up cron job, this is necessary to be able to run scripts as www-data when needed
+```text
 sudo crontab -e
 
 ## add this to root crontab
-* * * * * cd /path/to/bootstrap/ && /usr/bin/php jobby.php 1>> /dev/null 2>&1
+* * * * * cd /path/to/bootstrap folder/ && /usr/bin/php jobby.php 1>> /dev/null 2>&1
 ```
 
 Emails do not get sent directly, they are inserted into the database and jobby will take care of sending them.
 
-Compile twig templates for translating:
-```
+Compile twig templates for translating
+```text
 composer compile
 ```
 
-Translate all php files to locale - en_US:
-```
+Translate all php files to locale - en_US
+```text
 composer translate en_US
 ```
 
-Add additional locales:
-```
+Add additional locales
+```text
 ## check if locale is installed
 locale -a
 
@@ -108,21 +114,21 @@ sudo service nginx restart
 nano bootstrap/container.php
 ```
 
-Translate all php files to locale - fr_FR:
-```
+Translate all php files to locale - fr_FR
+```text
 composer translate fr_FR
 ```
 Then open locale/[en_US|fr_FR]/LC_MESSAGES/messages.po in poedit and edit translation.  
 
-Then to create the binary forms of the translations, you need to run again for each locale:
-```
+Then to create the binary forms of the translations, you need to run again for each locale
+```text
 composer translate en_EN
 composer translate fr_FR
 ```
 
 ### Notes
-If you want to use redis as your session handler, you should add this to php.ini and uncomment as needed, TCP or Socket:
-```
+If you want to use redis as your session handler, you should add this to php.ini and uncomment as needed, TCP or Socket
+```text
 ; TCP
 ; session.save_handler = redis
 ; session.save_path    = "tcp://127.0.0.1:6379?database=1"
@@ -133,7 +139,7 @@ If you want to use redis as your session handler, you should add this to php.ini
 ```
 
 ### Available command line commands
-```
+```text
 composer cleanup          # runs php_cs_fixer 
 composer clear_cache      # clears all file based caches
 composer compile          # compile all twig templates

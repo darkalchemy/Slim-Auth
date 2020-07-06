@@ -53,7 +53,7 @@ switch ($process) {
 
 function translate(string $lang, string $path)
 {
-    copy($path . '/bin/i18n.sh', $path . '/i18n.sh');
+    copy($path . '/vendor/delight-im/i18n/i18n.sh', $path . '/i18n.sh');
     chmod($path . '/i18n.sh', 0775);
     passthru(sprintf('./i18n.sh %s', $lang));
     unlink($path . '/i18n.sh');

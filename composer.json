@@ -46,6 +46,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
+        "overtrue/phplint": "^2.0",
         "symfony/var-dumper": "^5.0"
     },
     "autoload": {
@@ -68,7 +69,6 @@
         "cleanup": "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --show-progress=dots -vvv",
         "dump": "composer dump-autoload -a",
         "post-update-cmd": "composer dump-autoload -o",
-        "post-create-project-cmd": "php -r \"copy('config/settings.example.php', 'config/settings.php');\"",
         "create-migration": "vendor/bin/phinx create -c config/phinx.php --ansi -- ",
         "migrate": "vendor/bin/phinx migrate -c config/phinx.php -e default --ansi",
         "rollback": "vendor/bin/phinx rollback -c config/phinx.php -e default --ansi -t 0",
@@ -76,6 +76,13 @@
         "translate-all": "php bin/utilities.php translate-all",
         "clear_cache": "php bin/utilities.php clear_cache",
         "set-perms": "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions",
+        "phplint": "phplint ./ --exclude=vendor --no-cache",
+        "post-create-project-cmd": [
+            "php -r \"copy('config/settings.example.php', 'config/settings.php');\"",
+            "npm install",
+            "npm run build-dev",
+            "composer compile"
+        ],
         "post-install-cmd": [
             "composer dump-autoload -o",
             "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
