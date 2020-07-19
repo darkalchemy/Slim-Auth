@@ -12,7 +12,6 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4.0",
-        "ext-gettext": "*",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
