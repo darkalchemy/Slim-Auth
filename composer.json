@@ -20,7 +20,7 @@
         "delight-im/i18n": "^1.0",
         "egulias/email-validator": "^2.1",
         "fullpipe/twig-webpack-extension": "^3.1",
-        "hellogerard/jobby": "^3.4",
+        "hellogerard/jobby": "^3.5",
         "illuminate/database": "^7.18",
         "illuminate/events": "^7.18",
         "middlewares/trailing-slash": "^2.0",
@@ -98,11 +98,5 @@
             "var/tmp",
             "resources/views/cache/"
         ]
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:darkalchemy/jobby.git"
-        }
-    ]
+    }
 }

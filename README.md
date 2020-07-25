@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.18)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.19)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a60839ff8004b51afc186abf4d948ef)](https://app.codacy.com/manual/darkalchemy/Slim-Auth?utm_source=github.com&utm_medium=referral&utm_content=darkalchemy/Slim-Auth&utm_campaign=Badge_Grade_Dashboard)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
@@ -57,7 +57,7 @@ To update for development
 ```text
 composer install           # install non-dev dependencies
 npm install                # install dependencies
-npm run build              # create initial js/css resources
+npm run build-dev          # create initial js/css resources
 composer compile           # compile twig templates
 composer migrate           # import database
 ```
