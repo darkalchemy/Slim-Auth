@@ -1,7 +1,7 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.19)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.20)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a60839ff8004b51afc186abf4d948ef)](https://app.codacy.com/manual/darkalchemy/Slim-Auth?utm_source=github.com&utm_medium=referral&utm_content=darkalchemy/Slim-Auth&utm_campaign=Badge_Grade_Dashboard)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
@@ -11,7 +11,7 @@ This is a simple skeleton to quickly ramp up a slim 4 project.
 
 PHP 7.4 is required  
 Composer is required  
-npm is required  
+npm/npx is required  
 
 [Slim 4](https://github.com/slimphp/Slim) as the core framework  
 [nyholm/psr7](https://github.com/Nyholm/psr7) for the PSR-7 implementation  
