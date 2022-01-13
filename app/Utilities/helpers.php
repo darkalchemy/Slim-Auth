@@ -6,7 +6,6 @@ use Darkalchemy\Twig\TwigCompiler;
 use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
 use Slim\Views\Twig;
-use Slim\Views\TwigExtension;
 
 /**
  * @param $array
@@ -46,8 +45,7 @@ function compile_twig_templates(ContainerInterface $container)
     $twig_config = $settings['twig'];
     $cache       = $twig_config['cache'] ?? $settings['root'] . '/resources/views/cache/';
     $twig        = $container->get(Twig::class)->getEnvironment();
-    $twig->addExtension(new TwigExtension());
-    $compiler = new TwigCompiler($twig, $cache, true);
+    $compiler    = new TwigCompiler($twig, $cache, true);
 
     try {
         $compiler->compile();

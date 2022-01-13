@@ -1,0 +1,13 @@
+path: ./
+jobs: 10
+cache: no
+extensions:
+  - php
+exclude:
+  - vendor
+  - node_modules
+  - resources/views/cache
+  - public/resources
+  - var
+  - locale
+warning: true

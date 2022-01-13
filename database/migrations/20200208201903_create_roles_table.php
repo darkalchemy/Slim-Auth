@@ -20,7 +20,8 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
 
-        $this->execute("INSERT INTO roles (name, slug, created_at) VALUES
+        $this->execute(
+            "INSERT INTO roles (name, slug, created_at) VALUES
                     ('User', 'user', NOW()),
                     ('Power User', 'power_user', NOW()),
                     ('Super User', 'super_user', NOW()),

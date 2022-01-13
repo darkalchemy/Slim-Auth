@@ -11,7 +11,7 @@
     "homepage": "https://github.com/darkalchemy/slim-auth",
     "license": "MIT",
     "require": {
-        "php": ">=7.4.0",
+        "php": "^7.4",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
@@ -75,7 +75,7 @@
         "translate-all": "php bin/utilities.php translate-all",
         "clear_cache": "php bin/utilities.php clear_cache",
         "set-perms": "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions",
-        "phplint": "phplint ./ --exclude=vendor --no-cache",
+        "phplint": "phplint",
         "post-create-project-cmd": [
             "php -r \"copy('config/settings.example.php', 'config/settings.php');\"",
             "npm install",

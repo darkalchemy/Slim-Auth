@@ -46,11 +46,11 @@ class RedirectIfGuest
             $response = new Response();
 
             return $response->withHeader(
-                    'Location',
-                    $this->routeParser->urlFor('auth.signin') .
+                'Location',
+                $this->routeParser->urlFor('auth.signin') .
                     '?' .
                     http_build_query(['redirect' => $request->getUri()->getPath()])
-                );
+            );
         }
 
         return $handler->handle($request);
