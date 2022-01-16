@@ -1,16 +1,13 @@
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin').default;
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
-const PurgeCSSPlugin = require('purgecss-webpack-plugin');
 const zopfli = require("@gfx/zopfli");
 const zlib = require("zlib");
-
 const path = require('path');
-const glob = require('glob')
 
 let mode = 'development';
 if (process.env.NODE_ENV === 'production') {
@@ -18,6 +15,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 module.exports = {
     mode: mode,
+    devtool: 'source-map',
     entry: {
         'default': './resources/scripts/app.js'
     },
@@ -46,7 +44,7 @@ module.exports = {
     plugins: [
         new WebpackManifestPlugin({
             fileName: 'manifest.json',
-            publicPath: '/',
+            publicPath: '/resources/',
         }),
         new MiniCssExtractPlugin(
             {
@@ -82,14 +80,4 @@ module.exports = {
             'files': ['./resources/styles/*.css'],
         }),
     ],
-    devtool: 'source-map'
 };
-
-if (mode === 'production') {
-    module.exports.plugins.push(
-        new PurgeCSSPlugin({
-            paths: glob.sync('./resources/views/**/*.twig',  { nodir: true }),
-        })
-    );
-}
-
