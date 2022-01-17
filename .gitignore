@@ -5,3 +5,4 @@ node_modules/
 vendor/
 public/resources/
 resources/views/cache/
+composer.lock
