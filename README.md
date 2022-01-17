@@ -9,7 +9,7 @@ A Slim 4 Skeleton.
 
 This is a simple skeleton to quickly ramp up a slim 4 project.  
 
-PHP 7.4 is required  
+PHP 7.4, 8.0 or 8.1 is required  
 Composer is required  
 npm/npx is required  
 
