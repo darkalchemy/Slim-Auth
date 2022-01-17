@@ -12,8 +12,8 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -64,16 +64,15 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param Request $request
+     * @param Response $response
      *
+     * @return Response
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError
-     *
-     * @return ResponseInterface
      */
-    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function index(Request $request, Response $response): Response
     {
         $params = array_clean($request->getQueryParams(), [
             'email',
@@ -90,14 +89,14 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param Request $request
+     * @param Response      $response
      *
      * @throws ValidationException
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function reset(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function reset(Request $request, Response $response): Response
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->required('email'),

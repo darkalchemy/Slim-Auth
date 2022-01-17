@@ -12,8 +12,8 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -69,28 +69,28 @@ class SignUpController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response The response
+     * @param Response $response The response
      *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function index(ResponseInterface $response)
+    public function index(Response $response): Response
     {
         return $this->view->render($response, 'pages/auth/signup.twig');
     }
 
     /**
-     * @param ServerRequestInterface $request  The request
-     * @param ResponseInterface      $response The response
+     * @param Request $request  The request
+     * @param Response      $response The response
      *
      * @throws ValidationException
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function signup(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function signup(Request $request, Response $response): Response
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->email(),

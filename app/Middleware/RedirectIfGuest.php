@@ -6,8 +6,7 @@ namespace App\Middleware;
 
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Nyholm\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -33,12 +32,12 @@ class RedirectIfGuest
     }
 
     /**
-     * @param ServerRequestInterface  $request The request
+     * @param Request  $request The request
      * @param RequestHandlerInterface $handler The handler
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function __invoke(Request $request, RequestHandlerInterface $handler): Response
     {
         if (Sentinel::guest()) {
             $this->flash->addMessage('status', _f('Please sign in before continuing'));

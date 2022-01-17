@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use Delight\I18n\I18n;
 use Delight\I18n\Throwable\LocaleNotSupportedException;
+use Nyholm\Psr7\Response;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 
@@ -42,14 +42,14 @@ class LocaleController
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param Response $response
      * @param string            $lang
      *
      * @throws LocaleNotSupportedException
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function __invoke(ResponseInterface $response, string $lang): ResponseInterface
+    public function __invoke(Response $response, string $lang): Response
     {
         if (in_array($lang, $this->locales)) {
             $this->session->set('lang', $lang);

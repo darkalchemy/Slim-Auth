@@ -10,9 +10,9 @@ use App\Model\User;
 use App\Provider\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
@@ -59,32 +59,32 @@ class PasswordRecoverController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param Request $request
+     * @param Response      $response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function index(Request $request, Response $response): Response
     {
         return $this->view->render($response, 'pages/auth/password/recover.twig');
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param Request $request
+     * @param Response      $response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws ValidationException
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function recover(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function recover(Request $request, Response $response): Response
     {
         $data = $this->validate($request, $this->rules->email());
 

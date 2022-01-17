@@ -11,8 +11,8 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -64,16 +64,16 @@ class SignInController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request  The request
-     * @param ResponseInterface      $response The response
+     * @param Request $request  The request
+     * @param Response      $response The response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function index(Request $request, Response $response): Response
     {
         return $this->view->render($response, 'pages/auth/signin.twig', [
             'redirect' => $request->getQueryParams()['redirect'] ?? null,
@@ -81,14 +81,14 @@ class SignInController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request  The request
-     * @param ResponseInterface      $response The response
+     * @param Request $request  The request
+     * @param Response      $response The response
      *
      * @throws ValidationException
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function signin(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function signin(Request $request, Response $response): Response
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->email(),

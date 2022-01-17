@@ -9,8 +9,8 @@ use App\Exception\ValidationException;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
@@ -53,28 +53,28 @@ class AccountPasswordController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param Response $response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function index(ResponseInterface $response): ResponseInterface
+    public function index(Response $response): Response
     {
         return $this->view->render($response, 'pages/account/password.twig');
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param Request $request
+     * @param Response      $response
      *
      * @throws ValidationException
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function action(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function action(Request $request, Response $response): Response
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->password(),

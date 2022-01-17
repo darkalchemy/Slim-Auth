@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Exception\ValidationException;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\ServerRequest as Request;
 use Valitron\Validator;
 
 /**
@@ -29,14 +29,14 @@ class Controller
     }
 
     /**
-     * @param ServerRequestInterface $request The request
+     * @param Request $request The request
      * @param array                  $rules   The rules to process
      *
      * @throws ValidationException
      *
      * @return null|array|object
      */
-    public function validate(ServerRequestInterface $request, array $rules = [])
+    public function validate(Request $request, array $rules = [])
     {
         Validator::langDir(VENDOR_DIR . 'vlucas/valitron/lang/');
         Validator::lang($this->locale);

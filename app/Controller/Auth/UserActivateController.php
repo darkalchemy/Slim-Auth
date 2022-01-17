@@ -10,8 +10,8 @@ use App\Model\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Exception;
 use Odan\Session\PhpSession;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -50,12 +50,12 @@ class UserActivateController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param Request $request
+     * @param Response      $response
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function __invoke(Request $request, Response $response): Response
     {
         $params = array_clean($request->getQueryParams(), [
             'email',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Psr\Http\Message\ResponseInterface;
+use Nyholm\Psr7\Response;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -28,15 +28,15 @@ class HomeController
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param Response $response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function __invoke(ResponseInterface $response): ResponseInterface
+    public function __invoke(Response $response): Response
     {
         return $this->view->render($response, 'pages/home/index.twig');
     }

@@ -7,8 +7,8 @@ namespace App\Exception;
 use App\Factory\LoggerFactory;
 use Exception;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\Response;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
 use ReflectionException;
@@ -53,7 +53,7 @@ class ExceptionHandler
     }
 
     /**
-     * @param ServerRequestInterface $request
+     * @param Request $request
      * @param Throwable $exception
      *
      * @return mixed
@@ -61,7 +61,7 @@ class ExceptionHandler
      *
      * @throws ReflectionException
      */
-    public function __invoke(ServerRequestInterface $request, Throwable $exception)
+    public function __invoke(Request $request, Throwable $exception)
     {
         if (method_exists($this, $handle = 'handle' . (new ReflectionClass($exception))->getShortName())) {
             return $this->{$handle}($exception);
@@ -73,9 +73,9 @@ class ExceptionHandler
     /**
      * @param ValidationException $exception
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function handleValidationException(ValidationException $exception): ResponseInterface
+    public function handleValidationException(ValidationException $exception): Response
     {
         $this->flash->addMessage('errors', $exception->getErrors());
         $this->logger->error('Validation exception', $exception->getErrors());
@@ -86,13 +86,13 @@ class ExceptionHandler
     /**
      * @param Throwable $exception The exception
      *
-     * @return ResponseInterface
+     * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      *
      * @throws SyntaxError
      */
-    public function handleHttpNotFoundException(Throwable $exception): ResponseInterface
+    public function handleHttpNotFoundException(Throwable $exception): Response
     {
         $this->logger->error('Http not found exception', ['error' => $exception->getMessage()]);
 
@@ -105,7 +105,7 @@ class ExceptionHandler
      * @throws RuntimeError
      * @throws LoaderError
      */
-    public function HttpMethodNotAllowedException(Throwable $exception): ResponseInterface
+    public function HttpMethodNotAllowedException(Throwable $exception): Response
     {
         $this->logger->error('Http Method not allow exception', ['error' => $exception->getMessage()]);
 

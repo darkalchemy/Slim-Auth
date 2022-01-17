@@ -6,8 +6,7 @@ namespace App\Middleware;
 
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Nyholm\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Nyholm\Psr7\ServerRequest as Request;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -16,12 +15,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 class RedirectIfAuthenticated
 {
     /**
-     * @param ServerRequestInterface $request
+     * @param Request $request
      * @param RequestHandlerInterface $handler
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function __invoke(Request $request, RequestHandlerInterface $handler): Response
     {
         if (!Sentinel::guest()) {
             $response = new Response();

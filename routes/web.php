@@ -15,6 +15,7 @@ use App\Controller\HomeController;
 use App\Controller\LocaleController;
 use App\Middleware\RedirectIfAuthenticated;
 use App\Middleware\RedirectIfGuest;
+use Nyholm\Psr7\Response;
 use Slim\App;
 
 return function (App $app) {

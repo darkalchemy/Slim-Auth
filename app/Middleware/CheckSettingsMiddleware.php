@@ -6,7 +6,7 @@ namespace App\Middleware;
 
 use App\Factory\LoggerFactory;
 use Exception;
-use Psr\Http\Message\ResponseInterface;
+use Nyholm\Psr7\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -42,9 +42,9 @@ class CheckSettingsMiddleware implements MiddlewareInterface
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      *
-     * @return ResponseInterface
+     * @return Response
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): Response
     {
         if (!$this->settings['mail']['smtp_enable']) {
             $this->flash->addMessage('error', _f('You must set up mail settings to send mail.'));

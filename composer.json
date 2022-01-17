@@ -34,7 +34,6 @@
         "selective/config": "^1.0",
         "slim/csrf": "^1.0",
         "slim/flash": "^0.4.0",
-        "slim/http": "^1.0",
         "slim/slim": "^4.5",
         "slim/twig-view": "^3.1",
         "symfony/http-foundation": "^5.1",

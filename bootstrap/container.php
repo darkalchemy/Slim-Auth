@@ -17,7 +17,7 @@ use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseInterface;
+use Nyholm\Psr7\Response as ResponseInterface;
 use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Csrf\Guard;
