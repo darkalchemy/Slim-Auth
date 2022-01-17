@@ -19,6 +19,12 @@ use Nyholm\Psr7\Response;
 use Slim\App;
 
 return function (App $app) {
+    $app->get('/version', function (Response $response) {
+        $response->getBody()->write((string) phpinfo());
+
+        return $response;
+    });
+
     $app->get('/', HomeController::class)->setName('home');
     $app->get('/locale/{lang}', LocaleController::class)->setName('translate');
 

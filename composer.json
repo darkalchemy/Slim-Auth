@@ -11,7 +11,7 @@
     "homepage": "https://github.com/darkalchemy/slim-auth",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
@@ -36,16 +36,16 @@
         "slim/flash": "^0.4.0",
         "slim/slim": "^4.5",
         "slim/twig-view": "^3.1",
-        "symfony/http-foundation": "^5.1",
+        "symfony/http-foundation": "^5.1 || ^6.0",
         "uma/redis-session-handler": "^0.9.7",
-        "umpirsky/composer-permissions-handler": "^1.6",
+        "umpirsky/composer-permissions-handler": "dev-master",
         "vlucas/valitron": "^1.4",
         "zeuxisoo/slim-whoops": "^0.7.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
-        "overtrue/phplint": "^3.0",
-        "symfony/var-dumper": "^5.0"
+        "overtrue/phplint": "^3.0 || ^4.0",
+        "symfony/var-dumper": "^5.0 || ^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -97,5 +97,11 @@
             "var/tmp",
             "resources/views/cache/"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/darkalchemy/PermissionsHandler.git"
+        }
+    ]
 }
