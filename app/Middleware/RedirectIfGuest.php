@@ -38,7 +38,7 @@ class RedirectIfGuest
      *
      * @return ResponseInterface
      */
-    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function __invoke(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (Sentinel::guest()) {
             $this->flash->addMessage('status', _f('Please sign in before continuing'));

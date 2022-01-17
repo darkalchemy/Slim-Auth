@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 use Selective\Config\Configuration;
 
-require_once __DIR__ . '/../bootstrap/app.php';
-
-$db = $container->get(Configuration::class)->getArray('db');
+$container = (require_once __DIR__ . '/../bootstrap/app.php')->getContainer();
+$db        = $container->get(Configuration::class)->getArray('db');
 
 return [
     'paths' => [

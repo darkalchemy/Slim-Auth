@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
+use App\Model\User;
 
 /*
  * Part of the Sentinel package.

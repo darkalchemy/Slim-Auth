@@ -1,7 +1,7 @@
 {% extends 'layouts/app.twig' %}
 
 {% block content %}
-    <div class="section">
+    <div class="hero-body">
         <div class="container">
             <div class="column is-4 is-offset-4">
                 <h3 class="title has-text-centered">
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="control level">
-                        <a href="{{ url_for('auth.password.recover') }}" class="button is-info">Recover</a>
+                        <a href="{{ url_for('auth.password.recover') }}" class="button is-info"> {{  _f('Recover') }} </a>
                         <button type="submit" class="button is-info">
                             {{ _f('Sign in') }}
                         </button>

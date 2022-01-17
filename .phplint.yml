@@ -1,6 +1,5 @@
 path: ./
 jobs: 10
-cache: no
 extensions:
   - php
 exclude:

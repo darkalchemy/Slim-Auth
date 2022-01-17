@@ -44,7 +44,7 @@ module.exports = {
     plugins: [
         new WebpackManifestPlugin({
             fileName: 'manifest.json',
-            publicPath: '',
+            publicPath: '/resources/',
         }),
         new MiniCssExtractPlugin(
             {

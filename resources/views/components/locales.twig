@@ -4,9 +4,9 @@
         <div class="select is-fullwidth">
             <select id="select_locale" onchange="location.href=this.value;">
                 <option selected>{{ _f('Locale') }}</option>
-                {% for locale in supported_locales() %}
-                    {% if get_user_locale() != locale %}
-                        <option value="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ native_language_name(locale)|capitalize }}</option>
+                {% for locale in supportedLocales() %}
+                    {% if getUserLocale() != locale %}
+                        <option value="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ nativeLanguageName(locale)|capitalize }}</option>
                     {% endif %}
                 {% endfor %}
             </select>

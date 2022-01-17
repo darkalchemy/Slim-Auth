@@ -65,11 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = Array.prototype.slice.call(document.querySelectorAll('.navbar a'), 0);
     for (let i = 0; i < navbar.length; i++) {
         if (navbar[i].href === window.location.href) {
-            navbar[i].classList.add("is-info", "is-active");
-            navbar[i].classList.remove("is-light");
+            navbar[i].classList.add("is-info", "is-active", "is-light");
+            navbar[i].classList.remove("is-info");
         } else {
-            navbar[i].classList.remove("is-info", "is-active");
-            navbar[i].classList.add("is-light");
+            navbar[i].classList.remove("is-info", "is-active", "is-light");
+            navbar[i].classList.add("is-info");
         }
     }
 });

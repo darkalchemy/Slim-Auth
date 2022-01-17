@@ -1,14 +1,13 @@
 {% extends 'layouts/app.twig' %}
 
 {% block content %}
-    <section class="hero is-info is-fullheight-with-navbar">
-        {% include 'components/notification.twig' %}
-        <div class="hero-body">
-            <div class="container">
-                <p class="title">
-                    {{ settings.site_name }}
-                </p>
-            </div>
+    {% include 'components/notification.twig' %}
+    <div class="hero-body has-background-info">
+        <div class="container">
+            <p class="title has-text-white">
+                {{ settings.site_name }}
+            </p>
         </div>
-    </section>
+    </div>
+
 {% endblock %}

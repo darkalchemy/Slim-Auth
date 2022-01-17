@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use App\Controllers\Account\AccountController;
-use App\Controllers\Account\AccountPasswordController;
-use App\Controllers\Auth\Password\PasswordRecoverController;
-use App\Controllers\Auth\Password\PasswordResetController;
-use App\Controllers\Auth\SignInController;
-use App\Controllers\Auth\SignOutController;
-use App\Controllers\Auth\SignUpController;
-use App\Controllers\Auth\UserActivateController;
-use App\Controllers\Dashboard\DashboardController;
-use App\Controllers\HomeController;
-use App\Controllers\LocaleController;
+use App\Controller\Account\AccountController;
+use App\Controller\Account\AccountPasswordController;
+use App\Controller\Auth\Password\PasswordRecoverController;
+use App\Controller\Auth\Password\PasswordResetController;
+use App\Controller\Auth\SignInController;
+use App\Controller\Auth\SignOutController;
+use App\Controller\Auth\SignUpController;
+use App\Controller\Auth\UserActivateController;
+use App\Controller\Dashboard\DashboardController;
+use App\Controller\HomeController;
+use App\Controller\LocaleController;
 use App\Middleware\RedirectIfAuthenticated;
 use App\Middleware\RedirectIfGuest;
 use Slim\App;

@@ -1,70 +1,72 @@
-<nav class="navbar" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item has-text-weight-bold" href="{{ url_for('home') }}">
-            {{ settings.site_name }}
-        </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-    <div id="navbar" class="navbar-menu">
-        <div class="navbar-end">
-            {% if user %}
-                <div class="navbar-item has-dropdown is-hoverable min-150">
-                    <a class="navbar-link min-150 has-text-right">
-                        {{ _f('Select Locale') }}
-                    </a>
-                    <div class="navbar-dropdown">
-                        {% for locale in supported_locales() %}
-                            {% if get_user_locale() != locale %}
-                                <a class="navbar-item"
-                                   href="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ native_language_name(locale)|capitalize }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="navbar-item has-dropdown is-hoverable min-150">
-                    <a class="navbar-link min-150 has-text-right">
-                        {{ user.username }}
-                    </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item" href="{{ url_for('account.account') }}">
-                            {{ _f('Account') }}
-                        </a>
-                        <a class="navbar-item" href="{{ url_for('account.password') }}">
-                            {{ _f('Change password') }}
-                        </a>
-                        <a class="navbar-item" href="{{ url_for('dashboard') }}">
-                            {{ _f('Dashboard') }}
-                        </a>
-                        <a href="#" class="navbar-item"
-                           onclick="document.getElementById('signout').submit(); return false;">
-                            {{ _f('Sign out') }}
-                        </a>
-                    </div>
-                </div>
-            {% else %}
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button" href="{{ url_for('auth.signup') }}">
-                            <strong>{{ _f('Sign up') }}</strong>
-                        </a>
-                        <a class="button" href="{{ url_for('auth.signin') }}">
-                            {{ _f('Sign in') }}
-                        </a>
-                    </div>
-                </div>
-            {% endif %}
-            <div class="navbar-item" id='ct'></div>
+<section class="hero-head">
+    <nav class="navbar" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="{{ url_for('home') }}">
+                {{ settings.site_name }}
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-    </div>
-</nav>
+        <div id="navbar" class="navbar-menu">
+            <div class="navbar-end">
+                {% if user %}
+                    <div class="navbar-item has-dropdown is-hoverable min-150">
+                        <a class="navbar-link min-150 has-text-right">
+                            {{ _f('Select Locale') }}
+                        </a>
+                        <div class="navbar-dropdown">
+                            {% for locale in supportedLocales() %}
+                                {% if getUserLocale() != locale %}
+                                    <a class="navbar-item"
+                                       href="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ nativeLanguageName(locale)|capitalize }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
 
-{% if user %}
-    <form action="{{ url_for('auth.signout') }}" method="post" id="signout">
-        {{ csrf() | raw }}
-    </form>
-{% endif %}
+                    <div class="navbar-item has-dropdown is-hoverable min-150">
+                        <a class="navbar-link min-150 has-text-right">
+                            {{ user.username }}
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ url_for('account.account') }}">
+                                {{ _f('Account') }}
+                            </a>
+                            <a class="navbar-item" href="{{ url_for('account.password') }}">
+                                {{ _f('Change password') }}
+                            </a>
+                            <a class="navbar-item" href="{{ url_for('dashboard') }}">
+                                {{ _f('Dashboard') }}
+                            </a>
+                            <a href="#" class="navbar-item"
+                               onclick="document.getElementById('signout').submit(); return false;">
+                                {{ _f('Sign out') }}
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button" href="{{ url_for('auth.signup') }}">
+                                {{ _f('Sign up') }}
+                            </a>
+                            <a class="button" href="{{ url_for('auth.signin') }}">
+                                {{ _f('Sign in') }}
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="navbar-item" id='ct'></div>
+            </div>
+        </div>
+    </nav>
+
+    {% if user %}
+        <form action="{{ url_for('auth.signout') }}" method="post" id="signout">
+            {{ csrf() | raw }}
+        </form>
+    {% endif %}
+</section>

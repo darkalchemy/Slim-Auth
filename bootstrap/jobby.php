@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Factory\LoggerFactory;
-use App\Models\Email;
-use App\Providers\SendMail;
+use App\Model\Email;
+use App\Provider\SendMail;
 use Carbon\Carbon;
 use Jobby\Jobby;
 use Selective\Config\Configuration;
@@ -26,7 +26,7 @@ if ($sendmail_enabled) {
     $jobby->add('Send Email', [
         'runAs'   => 'www-data',
         'command' => function () {
-            $container = (require_once __DIR__ . '/app.php')->getContainer();
+            $container = (require_once BOOTSTRAP_DIR . 'app.php')->getContainer();
             $email = $container->get(Email::class);
             $emails = $email->with('user')->where('sent', 0)->orderBy('priority')->orderBy('created_at')->take(10)->get();
             $sendmail = $container->get(Sendmail::class);
@@ -52,7 +52,7 @@ if ($sendmail_enabled) {
             return true;
         },
         'schedule' => '* * * * *',
-        'output'   => __DIR__ . '/../var/logs/sendmail.log',
+        'output'   => LOGS_DIR . 'sendmail.log',
         'enabled'  => true,
     ]);
 } else {

@@ -19,15 +19,15 @@ use Slim\Flash\Messages;
 class CheckSettingsMiddleware implements MiddlewareInterface
 {
     protected array $settings;
-    protected LoggerInterface       $logger;
+    protected LoggerInterface $logger;
     protected Messages $flash;
 
     /**
      * CheckMailMiddleware constructor.
      *
-     * @param array         $settings
+     * @param array $settings
      * @param LoggerFactory $loggerFactory
-     * @param Messages      $flash
+     * @param Messages $flash
      *
      * @throws Exception
      */
@@ -39,7 +39,7 @@ class CheckSettingsMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @param ServerRequestInterface  $request
+     * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      *
      * @return ResponseInterface
@@ -52,14 +52,19 @@ class CheckSettingsMiddleware implements MiddlewareInterface
         }
 
         $paths = [
-            $this->settings['site']['di_compilation_path'],
-            $this->settings['router']['cache_file'],
+            $this->settings['di_compilation_path'],
+            $this->settings['router_cache_file'],
             $this->settings['twig']['cache'],
         ];
         foreach ($paths as $path) {
             if (!empty($path) && !is_writeable($path)) {
                 $this->flash->addMessage('error', _fe('{0} is not writable by the webserver.', $path));
-                $this->logger->error(sprintf('%s is not writable by the webserver. Please run: sudo chown -R www-data:www-data %s;sudo chmod -R 0775 %s', $path, $path, $path));
+                $this->logger->error(sprintf(
+                    '%s is not writable by the webserver. Please run: sudo chown -R www-data:www-data %s;sudo chmod -R 0775 %s',
+                    $path,
+                    $path,
+                    $path
+                ));
             }
         }
 

@@ -1,10 +1,9 @@
 body {
-  line-height: 150%;
-  margin: auto;
+  margin: 0;
   padding: 0;
-  height: 100%;
-  width: auto;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;

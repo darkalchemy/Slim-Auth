@@ -3,11 +3,9 @@
 declare(strict_types=1);
 
 use Delight\I18n\I18n;
-use Selective\Config\Configuration;
 
 $container = (require_once __DIR__ . '/../bootstrap/app.php')->getContainer();
 
-$root_path = $container->get(Configuration::class)->findString('root');
 $processes = [
     'compile',
     'translate',
@@ -33,12 +31,12 @@ foreach ($argv as $arg) {
 switch ($process) {
     case 'translate-all':
         foreach ($languages as $locale) {
-            translate($locale, $root_path);
+            translate($locale);
         }
 
         break;
     case 'translate':
-        translate($lang, $root_path);
+        translate($lang);
 
         break;
     case 'clear_cache':
@@ -51,10 +49,10 @@ switch ($process) {
         break;
 }
 
-function translate(string $lang, string $path)
+function translate(string $lang)
 {
-    copy($path . '/vendor/delight-im/i18n/i18n.sh', $path . '/i18n.sh');
-    chmod($path . '/i18n.sh', 0775);
+    copy(VENDOR_DIR . 'delight-im/i18n/i18n.sh', ROOT_DIR . 'i18n.sh');
+    chmod(ROOT_DIR . 'i18n.sh', 0775);
     passthru(sprintf('./i18n.sh %s', $lang));
-    unlink($path . '/i18n.sh');
+    unlink(ROOT_DIR . 'i18n.sh');
 }

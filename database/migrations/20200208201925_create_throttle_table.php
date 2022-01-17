@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Migrations\Migration;
+use App\Migration\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**

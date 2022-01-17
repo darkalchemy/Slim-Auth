@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use App\Factory\LoggerFactory;
 use App\Middleware\CheckSettingsMiddleware;
-use App\Views\CsrfExtension;
-use App\Views\TwigMessagesExtension;
-use App\Views\TwigUtilities;
+use App\View\CsrfExtension;
+use App\View\TwigMessagesExtension;
+use App\View\TwigUtilities;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Darkalchemy\Twig\TwigTranslationExtension;
 use Delight\I18n\Codes;
@@ -28,7 +28,7 @@ use UMA\RedisSessionHandler;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return [
-    Configuration::class => fn () => new Configuration(require __DIR__ . '/../config/settings.php'),
+    Configuration::class => fn () => new Configuration(require CONFIG_DIR . 'settings.php'),
 
     App::class => function (ContainerInterface $container) {
         $app = Bridge::create($container);
@@ -38,6 +38,11 @@ return [
         if ($routeCacheFile) {
             $app->getRouteCollector()->setCacheFile($routeCacheFile);
         }
+
+        (require BOOTSTRAP_DIR . 'middleware.php')($app);
+        (require ROUTES_DIR . 'web.php')($app);
+        (require BOOTSTRAP_DIR . 'exceptions.php')($app);
+        require BOOTSTRAP_DIR . 'validation.php';
 
         return $app;
     },
@@ -66,7 +71,7 @@ return [
             'cache' => $settings['twig']['cache'] ?? false,
         ]);
 
-        $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], $settings['webpack']['js_path'], $settings['webpack']['css_path']));
+        $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], PUBLIC_DIR));
         $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigUtilities());
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
@@ -103,10 +108,8 @@ return [
     },
 
     WhoopsMiddleware::class => function (ContainerInterface $container) {
-        $appEnv = $container->get(Configuration::class)->findString('site.app_env');
-
         return new WhoopsMiddleware([
-            'enable' => $appEnv === 'DEVELOPMENT',
+            'enable' => ENV === 'DEVELOPMENT',
         ]);
     },
 

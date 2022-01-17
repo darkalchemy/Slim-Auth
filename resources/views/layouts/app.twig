@@ -14,12 +14,17 @@
     {% endblock %}
 </head>
 <body>
-{% include 'components/menu.twig' %}
-{% block content %}{% endblock %}
-{% include 'components/footer.twig' %}
-{% block js %}
-    {% webpack_entry_js 'default' %}
-{% endblock %}
-{% include 'components/cookieconsent.twig' %}
+<section class="hero is-fullheight">
+    {% include 'components/menu.twig' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'components/footer.twig' %}
+    {% block js %}
+        {% webpack_entry_js 'default' %}
+    {% endblock %}
+
+    {% include 'components/cookieconsent.twig' %}
+</section>
 </body>
 </html>
