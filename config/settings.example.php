@@ -73,7 +73,7 @@ $settings = [
         'level' => Logger::DEBUG,
     ],
     'mail' => [
-        'smtp_enable'     => true,
+        'smtp_enable'     => false,
         'smtp_host'       => 'smtp.gmail.com',
         'smtp_auth'       => true,
         'smtp_username'   => 'email address',
