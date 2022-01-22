@@ -45,6 +45,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
         "overtrue/phplint": "^3.0 || ^4.0",
+        "phpstan/phpstan": "^1.4",
         "symfony/var-dumper": "^5.0 || ^6.0"
     },
     "autoload": {
@@ -75,6 +76,7 @@
         "clear_cache": "php bin/utilities.php clear_cache",
         "set-perms": "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions",
         "phplint": "phplint --no-cache",
+        "phpstan": "phpstan analyse",
         "post-create-project-cmd": [
             "php -r \"copy('config/settings.example.php', 'config/settings.php');\"",
             "npm install",

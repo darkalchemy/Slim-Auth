@@ -1,0 +1,11 @@
+parameters:
+    level: 8
+    checkMissingIterableValueType: false
+    paths:
+        - app
+        - tests
+        - bin
+        - bootstrap
+        - config
+        - routes
+        - var
