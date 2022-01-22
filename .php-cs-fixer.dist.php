@@ -15,6 +15,7 @@ return $config
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR12'                                 => true,
+        '@PhpCsFixer'                            => true,
         'array_syntax'                           => ['syntax' => 'short'],
         'binary_operator_spaces'                 => ['operators' => ['=' => 'align_single_space', '=>' => 'align_single_space']],
         'cast_spaces'                            => true,
