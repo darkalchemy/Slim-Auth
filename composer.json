@@ -12,11 +12,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
+        "ext-gettext": "*",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "cartalyst/sentinel": "^5.0",
-        "darkalchemy/twig-translate": "^0.2",
+        "darkalchemy/twig-translate": "^0.3.0",
         "delight-im/i18n": "^1.0",
         "egulias/email-validator": "^3.1",
         "fullpipe/twig-webpack-extension": "^4.0",
