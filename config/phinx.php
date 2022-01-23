@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Selective\Config\Configuration;
 
-$container = (require_once __DIR__ . '/../bootstrap/app.php')->getContainer();
+$container = (require __DIR__ . '/../bootstrap/app.php')->getContainer();
 $db        = $container->get(Configuration::class)->getArray('db');
 
 return [

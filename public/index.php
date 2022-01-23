@@ -2,4 +2,4 @@
 
 declare(strict_types=1);
 
-(require_once __DIR__ . '/../bootstrap/app.php')->run();
+(require __DIR__ . '/../bootstrap/app.php')->run();

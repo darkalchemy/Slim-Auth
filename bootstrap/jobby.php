@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Jobby\Jobby;
 use Selective\Config\Configuration;
 
-$app              = require_once __DIR__ . '/app.php';
+$app              = require __DIR__ . '/app.php';
 $container        = $app->getContainer();
 $jobby            = $container->get(Jobby::class);
 $loggerFactory    = $container->get(LoggerFactory::class);
@@ -26,7 +26,7 @@ if ($sendmail_enabled) {
     $jobby->add('Send Email', [
         'runAs'   => 'www-data',
         'command' => function () {
-            $container = (require_once __DIR__ . '/app.php')->getContainer();
+            $container = (require __DIR__ . '/app.php')->getContainer();
             $email = $container->get(Email::class);
             $emails = $email->with('user')->where('sent', 0)->orderBy('priority')->orderBy('created_at')->take(10)->get();
             $sendmail = $container->get(SendMail::class);

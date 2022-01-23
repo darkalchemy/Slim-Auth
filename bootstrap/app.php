@@ -10,8 +10,8 @@ use Slim\App;
 use UMA\RedisSessionHandler;
 
 $startTime = microtime(true);
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/constants.php';
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../config/constants.php';
 
 try {
     $container = (new ContainerFactory())->createContainer();
