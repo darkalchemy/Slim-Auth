@@ -7,52 +7,57 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Selective\Config\Configuration;
+use Slim\App;
 use Valitron\Validator;
 
-Validator::addRule('emailIsUnique', function ($field, $value, $params, $fields) {
-    if (!empty($value)) {
-        $user = User::where('email', $value);
-        if (Sentinel::check()) {
-            $user = $user->where('email', '!=', Sentinel::check()->email);
+return function (App $app) {
+    $container = $app->getContainer();
+
+    Validator::addRule('emailIsUnique', function ($field, $value, array $params, array $fields) {
+        if (!empty($value)) {
+            $user = User::where($field, $value);
+            if (Sentinel::check()) {
+                $user = $user->where($field, '!=', Sentinel::check()->email);
+            }
+            $user = $user->first();
         }
-        $user = $user->first();
-    }
-    if (!empty($user)) {
-        return false;
-    }
-
-    return true;
-}, 'is already in use');
-
-Validator::addRule('usernameIsUnique', function ($field, $value, $params, $fields) {
-    if (!empty($value)) {
-        $user = User::where('username', $value);
-        if (Sentinel::check()) {
-            $user = $user->where('username', '!=', Sentinel::check()->username);
+        if (!empty($user)) {
+            return false;
         }
-        $user = $user->first();
-    }
-    if (!empty($user)) {
-        return false;
-    }
 
-    return true;
-}, 'is already in use');
+        return true;
+    }, 'is already in use');
 
-Validator::addRule('currentPassword', function ($field, $value, $params, $fields) {
-    return Sentinel::getUserRepository()
-        ->validateCredentials(Sentinel::check(), ['password' => $value]);
-}, 'is wrong');
+    Validator::addRule('usernameIsUnique', function ($field, $value, array $params, array $fields) {
+        if (!empty($value)) {
+            $user = User::where($field, $value);
+            if (Sentinel::check()) {
+                $user = $user->where($field, '!=', Sentinel::check()->username);
+            }
+            $user = $user->first();
+        }
+        if (!empty($user)) {
+            return false;
+        }
 
-Validator::addRule('badWords', function ($field, $value, $params, $fields) use ($container) {
-    $bad_words = $container->get(Configuration::class)
-        ->getArray('bad_words');
+        return true;
+    }, 'is already in use');
 
-    return !in_array(strtolower($value), $bad_words);
-}, 'is not allowed');
+    Validator::addRule('currentPassword', function ($field, $value, array $params, array $fields) {
+        return Sentinel::getUserRepository()
+            ->validateCredentials(Sentinel::check(), [$field => $value]);
+    }, 'is wrong');
 
-Validator::addRule('isValidEmail', function ($field, $value, $params, $fields) use ($container) {
-    $validator = $container->get(EmailValidator::class);
+    Validator::addRule('badWords', function ($field, $value, array $params, array $fields) use ($container) {
+        $bad_words = $container->get(Configuration::class)
+            ->getArray('bad_words');
 
-    return $validator->isValid($value, $container->get(RFCValidation::class));
-}, 'does not appear to be valid');
+        return !in_array(strtolower($value), $bad_words);
+    }, 'is not allowed');
+
+    Validator::addRule('isValidEmail', function ($field, $value, array $params, array $fields) use ($container) {
+        $validator = $container->get(EmailValidator::class);
+
+        return $validator->isValid($value, $container->get(RFCValidation::class));
+    }, 'does not appear to be valid');
+};
