@@ -9,7 +9,7 @@ use Slim\App;
 use Slim\Flash\Messages;
 use Slim\Views\Twig;
 
-return static function (App $app) {
+return function (App $app) {
     $container = $app->getContainer();
     $error     = $container->get(Configuration::class)->getArray('error_handler_middleware');
 
