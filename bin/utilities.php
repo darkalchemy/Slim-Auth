@@ -49,10 +49,11 @@ switch ($process) {
         break;
 }
 
-function translate(string $lang)
+function translate(string $lang): void
 {
     copy(VENDOR_DIR . 'delight-im/i18n/i18n.sh', ROOT_DIR . 'i18n.sh');
     chmod(ROOT_DIR . 'i18n.sh', 0775);
+    passthru("sed -i 's/\\-\\-keyword \\-\\-keyword/\\-\\-keyword \\-\\-keyword=\"translateFormatted:1\" \\-\\-keyword=\"translateFormattedExtended:1\" \\-\\-keyword=\"translatePlural:1,2,3t\" \\-\\-keyword=\"translatePluralFormatted:1,2\" \\-\\-keyword=\"translatePluralFormattedExtended:1,2\" \\-\\-keyword=\"translateWithContext:1,2c,2t\" \\-\\-keyword=\"markForTranslation:1,1t\" \\-\\-flag=\"translateFormatted:1:php\\-format\" \\-\\-flag=\"translateFormattedExtended:1:no\\-php\\-format\" \\-\\-flag=\"translatePluralFormatted:1:php\\-format\" \\-\\-flag=\"translatePluralFormattedExtended:1:no\\-php\\-format\" \\-\\-keyword/g' i18n.sh");
     passthru(sprintf('./i18n.sh %s', $lang));
     unlink(ROOT_DIR . 'i18n.sh');
 }
