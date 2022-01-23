@@ -11,7 +11,7 @@ use Exception;
  */
 class ValidationException extends Exception
 {
-    protected array  $errors;
+    protected array $errors;
     protected string $path;
 
     /**
@@ -30,7 +30,7 @@ class ValidationException extends Exception
     /**
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -38,7 +38,7 @@ class ValidationException extends Exception
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }

@@ -24,7 +24,7 @@ class SendMail
     /**
      * SendMail constructor.
      *
-     * @param PHPMailer $mailer
+     * @param PHPMailer     $mailer
      * @param LoggerFactory $loggerFactory
      *
      * @throws Exception
@@ -35,9 +35,6 @@ class SendMail
         $this->logger = $loggerFactory->addFileHandler('sendmail_class.log')->createInstance('sendmail');
     }
 
-    /**
-     * @return void
-     */
     public function send(): void
     {
         try {
@@ -53,7 +50,7 @@ class SendMail
     }
 
     /**
-     * @param string $email The email address
+     * @param string $email    The email address
      * @param string $username The username
      */
     public function addRecipient(string $email, string $username): void

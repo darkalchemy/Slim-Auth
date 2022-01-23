@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Slim\Interfaces\RouteParserInterface;
 
 /**
@@ -26,11 +26,11 @@ class SignOutController
     }
 
     /**
-     * @param Response $response
+     * @param ResponseInterface $response
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function __invoke(Response $response): Response
+    public function __invoke(ResponseInterface $response): ResponseInterface
     {
         Sentinel::logout();
 

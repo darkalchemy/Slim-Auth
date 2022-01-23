@@ -11,14 +11,15 @@ use Exception;
 class ContainerFactory
 {
     /**
-     * @return Container
      * @throws Exception
+     *
+     * @return Container
      */
     public function createContainer(): Container
     {
         $file = CONFIG_DIR . 'settings.php';
         if (!file_exists($file)) {
-            die(sprintf(
+            exit(sprintf(
                 '%s does not exist.<br>please run:<br>cp %s %s<br>and edit as needed.',
                 $file,
                 CONFIG_DIR . 'settings.example.php',
@@ -26,7 +27,7 @@ class ContainerFactory
             ));
         }
 
-        $builder  = new ContainerBuilder();
+        $builder = new ContainerBuilder();
         $builder->addDefinitions(BOOTSTRAP_DIR . 'container.php');
         $settings = require $file;
 

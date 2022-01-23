@@ -7,11 +7,10 @@ namespace App\Exception;
 use App\Factory\LoggerFactory;
 use Exception;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Nyholm\Psr7\Response;
-use Nyholm\Psr7\ServerRequest as Request;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
-use ReflectionException;
 use Slim\Flash\Messages;
 use Slim\Views\Twig;
 use Throwable;
@@ -32,18 +31,18 @@ class ExceptionHandler
     /**
      * ExceptionHandler constructor.
      *
-     * @param Messages $flash The flash
+     * @param Messages                 $flash           The flash
      * @param ResponseFactoryInterface $responseFactory The responseFactory
-     * @param Twig $view The view
-     * @param LoggerFactory $loggerFactory The loggerFactory
+     * @param Twig                     $view            The view
+     * @param LoggerFactory            $loggerFactory   The loggerFactory
      *
      * @throws Exception
      */
     public function __construct(
-        Messages                 $flash,
+        Messages $flash,
         ResponseFactoryInterface $responseFactory,
-        Twig                     $view,
-        LoggerFactory            $loggerFactory
+        Twig $view,
+        LoggerFactory $loggerFactory
     ) {
         $this->flash           = $flash;
         $this->responseFactory = $responseFactory;
@@ -53,15 +52,14 @@ class ExceptionHandler
     }
 
     /**
-     * @param Request $request
-     * @param Throwable $exception
+     * @param ServerRequestInterface $request
+     * @param Throwable              $exception
      *
-     * @return mixed
      * @throws Throwable
      *
-     * @throws ReflectionException
+     * @return mixed
      */
-    public function __invoke(Request $request, Throwable $exception)
+    public function __invoke(ServerRequestInterface $request, Throwable $exception)
     {
         if (method_exists($this, $handle = 'handle' . (new ReflectionClass($exception))->getShortName())) {
             return $this->{$handle}($exception);
@@ -73,9 +71,9 @@ class ExceptionHandler
     /**
      * @param ValidationException $exception
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function handleValidationException(ValidationException $exception): Response
+    public function handleValidationException(ValidationException $exception): ResponseInterface
     {
         $this->flash->addMessage('errors', $exception->getErrors());
         $this->logger->error('Validation exception', $exception->getErrors());
@@ -86,13 +84,13 @@ class ExceptionHandler
     /**
      * @param Throwable $exception The exception
      *
-     * @return Response
-     * @throws LoaderError
      * @throws RuntimeError
-     *
      * @throws SyntaxError
+     * @throws LoaderError
+     *
+     * @return ResponseInterface
      */
-    public function handleHttpNotFoundException(Throwable $exception): Response
+    public function handleHttpNotFoundException(Throwable $exception): ResponseInterface
     {
         $this->logger->error('Http not found exception', ['error' => $exception->getMessage()]);
 
@@ -105,7 +103,7 @@ class ExceptionHandler
      * @throws RuntimeError
      * @throws LoaderError
      */
-    public function HttpMethodNotAllowedException(Throwable $exception): Response
+    public function HttpMethodNotAllowedException(Throwable $exception): ResponseInterface
     {
         $this->logger->error('Http Method not allow exception', ['error' => $exception->getMessage()]);
 

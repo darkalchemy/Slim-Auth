@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -28,12 +28,12 @@ class FlashOldFormDataMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @param ServerRequestInterface  $request The request
-     * @param RequestHandlerInterface $handler The handler
+     * @param ServerRequestInterface  $request
+     * @param RequestHandlerInterface $handler
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): Response
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (!empty($params = $request->getParsedBody())) {
             $this->flash->addMessage('old', $params);

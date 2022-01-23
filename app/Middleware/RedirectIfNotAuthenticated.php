@@ -13,9 +13,9 @@ use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 
 /**
- * Class RedirectIfAuthenticated.
+ * Class RedirectIfNotAuthenticated.
  */
-class RedirectIfAuthenticated
+class RedirectIfNotAuthenticated
 {
     protected Messages $flash;
     protected RouteParserInterface $routeParser;
@@ -44,12 +44,17 @@ class RedirectIfAuthenticated
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
-        if (!Sentinel::guest()) {
-            $this->flash->addMessage('error', _f('You are already authenticated.'));
+        if (Sentinel::guest()) {
+            $this->flash->addMessage('status', _f('Please sign in before continuing'));
 
             $response = $this->responseFactory->createResponse();
 
-            return $response->withHeader('Location', '/');
+            return $response->withHeader(
+                'Location',
+                $this->routeParser->urlFor('auth.signin') .
+                '?' .
+                http_build_query(['redirect' => $request->getUri()->getPath()])
+            );
         }
 
         return $handler->handle($request);

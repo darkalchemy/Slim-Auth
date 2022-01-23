@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Dashboard;
 
-use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -28,15 +28,15 @@ class DashboardController
     }
 
     /**
-     * @param Response $response
+     * @param ResponseInterface $response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function __invoke(Response $response): Response
+    public function __invoke(ResponseInterface $response): ResponseInterface
     {
         return $this->view->render($response, 'pages/dashboard/index.twig');
     }

@@ -63,16 +63,17 @@ class LoggerFactory
     }
 
     /**
-     * @param string $filename
+     * @param string   $filename
      * @param null|int $level
      *
-     * @return $this
      * @throws Exception
+     *
+     * @return $this
      */
     public function addFileHandler(string $filename, int $level = null): self
     {
         if (!is_writeable($this->path)) {
-            die(_fe(
+            exit(_fe(
                 '{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}',
                 $this->path
             ));
@@ -91,7 +92,7 @@ class LoggerFactory
     /**
      * Add a console logger.
      *
-     * @param int|null $level The level (optional)
+     * @param null|int $level The level (optional)
      *
      * @return self The instance
      */

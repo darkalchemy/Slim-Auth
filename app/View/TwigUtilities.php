@@ -22,6 +22,7 @@ class TwigUtilities extends AbstractExtension
 
     /**
      * @param bool $real
+     *
      * @return string
      */
     public function max_mem_usage(bool $real): string

@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use Delight\I18n\I18n;
 use Delight\I18n\Throwable\LocaleNotSupportedException;
-use Nyholm\Psr7\Response;
-use Odan\Session\PhpSession;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 
@@ -16,11 +16,11 @@ use Slim\Interfaces\RouteParserInterface;
  */
 class LocaleController
 {
-    protected I18n                 $i18n;
-    protected Messages             $flash;
+    protected I18n $i18n;
+    protected Messages $flash;
     protected RouteParserInterface $routeParser;
-    protected PhpSession           $session;
-    protected array                $locales;
+    protected SessionInterface $session;
+    protected array $locales;
     protected string $current_url;
 
     /**
@@ -29,9 +29,9 @@ class LocaleController
      * @param I18n                 $i18n
      * @param Messages             $flash
      * @param RouteParserInterface $routeParser
-     * @param PhpSession           $session
+     * @param SessionInterface     $session
      */
-    public function __construct(I18n $i18n, Messages $flash, RouteParserInterface $routeParser, PhpSession $session)
+    public function __construct(I18n $i18n, Messages $flash, RouteParserInterface $routeParser, SessionInterface $session)
     {
         $this->i18n        = $i18n;
         $this->flash       = $flash;
@@ -42,18 +42,17 @@ class LocaleController
     }
 
     /**
-     * @param Response $response
+     * @param ResponseInterface $response
      * @param string            $lang
      *
      * @throws LocaleNotSupportedException
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function __invoke(Response $response, string $lang): Response
+    public function __invoke(ResponseInterface $response, string $lang): ResponseInterface
     {
         if (in_array($lang, $this->locales)) {
-            $this->session->set('lang', $lang);
-            $this->session->set('locale', substr($lang, 0, 2));
+            $this->session->set('locale', $lang);
             $this->i18n->setLocaleManually($lang);
             $this->flash->addMessage(
                 'success',

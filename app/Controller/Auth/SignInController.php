@@ -9,10 +9,11 @@ use App\Exception\ValidationException;
 use App\Factory\LoggerFactory;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Delight\I18n\I18n;
 use Exception;
-use Odan\Session\PhpSession;
-use Nyholm\Psr7\Response;
-use Nyholm\Psr7\ServerRequest as Request;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -26,12 +27,13 @@ use Twig\Error\SyntaxError;
  */
 class SignInController extends Controller
 {
-    protected Twig                  $view;
-    protected Messages              $flash;
-    protected RouteParserInterface  $routeParser;
-    protected LoggerInterface       $logger;
-    protected ValidationRules       $rules;
-    protected PhpSession            $session;
+    protected Twig $view;
+    protected Messages $flash;
+    protected RouteParserInterface $routeParser;
+    protected LoggerInterface $logger;
+    protected ValidationRules $rules;
+    protected SessionInterface $session;
+    protected I18n $i18n;
 
     /**
      * SignInController constructor.
@@ -41,7 +43,8 @@ class SignInController extends Controller
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
-     * @param PhpSession           $session
+     * @param SessionInterface     $session
+     * @param I18n                 $i18n
      *
      * @throws Exception
      */
@@ -51,29 +54,30 @@ class SignInController extends Controller
         RouteParserInterface $routeParser,
         LoggerFactory $loggerFactory,
         ValidationRules $rules,
-        PhpSession $session
+        SessionInterface $session,
+        I18n $i18n
     ) {
-        parent::__construct($session);
+        parent::__construct($session, $i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signin_controller.log')
             ->createInstance('signin_controller');
-        $this->rules       = $rules;
+        $this->rules = $rules;
         $this->session->set('current_url', 'auth.signin');
     }
 
     /**
-     * @param Request $request  The request
-     * @param Response      $response The response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
+     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     * @throws SyntaxError
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function index(Request $request, Response $response): Response
+    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         return $this->view->render($response, 'pages/auth/signin.twig', [
             'redirect' => $request->getQueryParams()['redirect'] ?? null,
@@ -81,14 +85,14 @@ class SignInController extends Controller
     }
 
     /**
-     * @param Request $request  The request
-     * @param Response      $response The response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws ValidationException
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function signin(Request $request, Response $response): Response
+    public function signin(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->email(),
@@ -100,7 +104,7 @@ class SignInController extends Controller
                 'email',
                 'password',
             ]), isset($data['persist']))) {
-                throw new Exception(_f('Incorrect email or password'));
+                throw new Exception(_f('Incorrect email or password.'));
             }
         } catch (Exception $e) {
             $this->flash->addMessage('status', $e->getMessage());
@@ -109,6 +113,6 @@ class SignInController extends Controller
             return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));
         }
 
-        return $response->withHeader('Location', $data['redirect'] ? $data['redirect'] : $this->routeParser->urlFor('home'));
+        return $response->withHeader('Location', $data['redirect'] ?: $this->routeParser->urlFor('home'));
     }
 }

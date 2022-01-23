@@ -8,10 +8,11 @@ use App\Controller\Controller;
 use App\Factory\LoggerFactory;
 use App\Model\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Delight\I18n\I18n;
 use Exception;
-use Odan\Session\PhpSession;
-use Nyholm\Psr7\Response;
-use Nyholm\Psr7\ServerRequest as Request;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -21,10 +22,11 @@ use Slim\Interfaces\RouteParserInterface;
  */
 class UserActivateController extends Controller
 {
-    protected Messages              $flash;
-    protected RouteParserInterface  $routeParser;
-    protected LoggerInterface       $logger;
-    protected PhpSession            $session;
+    protected Messages $flash;
+    protected RouteParserInterface $routeParser;
+    protected LoggerInterface $logger;
+    protected SessionInterface $session;
+    protected I18n $i18n;
 
     /**
      * SignUpController constructor.
@@ -32,7 +34,8 @@ class UserActivateController extends Controller
      * @param Messages             $flash         The response
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
-     * @param PhpSession           $session
+     * @param SessionInterface     $session
+     * @param I18n                 $i18n
      *
      * @throws Exception
      */
@@ -40,9 +43,10 @@ class UserActivateController extends Controller
         Messages $flash,
         RouteParserInterface $routeParser,
         LoggerFactory $loggerFactory,
-        PhpSession $session
+        SessionInterface $session,
+        I18n $i18n
     ) {
-        parent::__construct($session);
+        parent::__construct($session, $i18n);
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('activate_controller.log')
@@ -50,19 +54,19 @@ class UserActivateController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Response      $response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function __invoke(Request $request, Response $response): Response
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $params = array_clean($request->getQueryParams(), [
             'email',
             'code',
         ]);
 
-        if (!$this->activationCodeExists($user = User::whereEmail($email = $params['email'] ?? null)
+        if (!$this->activationCodeExists($user = User::whereEmail($params['email'] ?? null)
             ->first(), $code = $params['code'] ?? null)) {
             $this->logger->error('Invalid activation code.');
             $this->flash->addMessage('error', _f('Invalid activation code.'));

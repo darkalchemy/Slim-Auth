@@ -13,11 +13,14 @@ use Delight\I18n\Codes;
 use Delight\I18n\I18n;
 use DI\Bridge\Slim\Bridge;
 use Fullpipe\TwigWebpackExtension\WebpackExtension;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Odan\Session\Middleware\SessionMiddleware;
 use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Container\ContainerInterface;
-use Nyholm\Psr7\Response as ResponseInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Csrf\Guard;
@@ -38,11 +41,10 @@ return [
         if ($routeCacheFile) {
             $app->getRouteCollector()->setCacheFile($routeCacheFile);
         }
-
         (require BOOTSTRAP_DIR . 'middleware.php')($app);
         (require ROUTES_DIR . 'web.php')($app);
         (require BOOTSTRAP_DIR . 'exceptions.php')($app);
-        require BOOTSTRAP_DIR . 'validation.php';
+        (require BOOTSTRAP_DIR . 'validation.php')($app);
 
         return $app;
     },
@@ -54,28 +56,49 @@ return [
         }
     },
 
-    SessionInterface::class => fn () => new PhpSession(),
+    SessionInterface::class => function (ContainerInterface $container) {
+        $settings = $container->get(Configuration::class)->getArray('session');
+        $session = new PhpSession();
+        $session->setOptions((array) $settings);
 
-    I18n::class => DI\factory(fn () => new I18n([
-        Codes::EN_US,
-        Codes::FR_FR,
-    ])),
+        return $session;
+    },
+
+    SessionMiddleware::class => function (ContainerInterface $container) {
+        return new SessionMiddleware($container->get(SessionInterface::class));
+    },
+
+    I18n::class => function () {
+        $i18n = new I18n([
+            Codes::EN_US,
+            Codes::FR_FR,
+        ]);
+        $i18n->setSessionField('locale');
+        $i18n->setDirectory(LOCALE_DIR);
+        $i18n->setModule('messages');
+        $i18n->setLocaleAutomatically();
+
+        return $i18n;
+    },
 
     RouteParserInterface::class => fn (ContainerInterface $container) => $container->get(App::class)->getRouteCollector()->getRouteParser(),
 
     ResponseInterface::class => fn (ContainerInterface $container) => $container->get(App::class)->getResponseFactory(),
+
+    ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(Psr17Factory::class);
+    },
 
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
         $twig = Twig::create($settings['twig']['path'], [
             'cache' => $settings['twig']['cache'] ?? false,
         ]);
-
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], PUBLIC_DIR));
-        $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigUtilities());
+        $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
-        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class), $container->get(SessionInterface::class)));
+        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class)));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
         $twig->getEnvironment()->addGlobal('settings', $settings);
         $twig->getEnvironment()->addGlobal('errors', $container->get(Messages::class)->getFirstMessage('errors'));
@@ -107,7 +130,7 @@ return [
         return $mail;
     },
 
-    WhoopsMiddleware::class => function (ContainerInterface $container) {
+    WhoopsMiddleware::class => function () {
         return new WhoopsMiddleware([
             'enable' => ENV === 'DEVELOPMENT',
         ]);

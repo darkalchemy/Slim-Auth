@@ -10,10 +10,11 @@ use App\Factory\LoggerFactory;
 use App\Provider\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Delight\I18n\I18n;
 use Exception;
-use Odan\Session\PhpSession;
-use Nyholm\Psr7\Response;
-use Nyholm\Psr7\ServerRequest as Request;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -27,13 +28,14 @@ use Twig\Error\SyntaxError;
  */
 class SignUpController extends Controller
 {
-    protected Twig                  $view;
-    protected Messages              $flash;
-    protected RouteParserInterface  $routeParser;
-    protected LoggerInterface       $logger;
-    protected ValidationRules       $rules;
-    protected StoreMail             $storeMail;
-    protected PhpSession            $session;
+    protected Twig $view;
+    protected Messages $flash;
+    protected RouteParserInterface $routeParser;
+    protected LoggerInterface $logger;
+    protected ValidationRules $rules;
+    protected StoreMail $storeMail;
+    protected SessionInterface $session;
+    protected I18n $i18n;
 
     /**
      * SignUpController constructor.
@@ -44,7 +46,8 @@ class SignUpController extends Controller
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
      * @param StoreMail            $storeMail
-     * @param PhpSession           $session
+     * @param SessionInterface     $session
+     * @param I18n                 $i18n
      *
      * @throws Exception
      */
@@ -55,42 +58,43 @@ class SignUpController extends Controller
         LoggerFactory $loggerFactory,
         ValidationRules $rules,
         StoreMail $storeMail,
-        PhpSession $session
+        SessionInterface $session,
+        I18n $i18n
     ) {
-        parent::__construct($session);
+        parent::__construct($session, $i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signup_controller.log')
             ->createInstance('signup_controller');
-        $this->rules       = $rules;
-        $this->storeMail   = $storeMail;
+        $this->rules     = $rules;
+        $this->storeMail = $storeMail;
         $this->session->set('current_url', 'auth.signup');
     }
 
     /**
-     * @param Response $response The response
+     * @param ResponseInterface $response The response
      *
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function index(Response $response): Response
+    public function index(ResponseInterface $response): ResponseInterface
     {
         return $this->view->render($response, 'pages/auth/signup.twig');
     }
 
     /**
-     * @param Request $request  The request
-     * @param Response      $response The response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws ValidationException
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function signup(Request $request, Response $response): Response
+    public function signup(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->email(),
@@ -110,7 +114,7 @@ class SignUpController extends Controller
             ]));
             $activation = Sentinel::getActivationRepository()->create($user);
             $this->storeMail->setUserID($user->id);
-            $this->storeMail->setSubject(_f('Confirm your email'));
+            $this->storeMail->setSubject(_f('Confirm your email.'));
             $this->storeMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
                 'user' => $user,
                 'code' => $activation->code,

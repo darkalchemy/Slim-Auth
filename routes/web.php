@@ -14,7 +14,7 @@ use App\Controller\Dashboard\DashboardController;
 use App\Controller\HomeController;
 use App\Controller\LocaleController;
 use App\Middleware\RedirectIfAuthenticated;
-use App\Middleware\RedirectIfGuest;
+use App\Middleware\RedirectIfNotAuthenticated;
 use Psr\Http\Message\ResponseInterface;
 use Slim\App;
 
@@ -59,5 +59,5 @@ return function (App $app) {
         $route->get('/account/password', [AccountPasswordController::class, 'index'])->setName('account.password');
         $route->post('/account/password', [AccountPasswordController::class, 'action']);
         $route->get('/dashboard', DashboardController::class)->setName('dashboard');
-    })->add(RedirectIfGuest::class);
+    })->add(RedirectIfNotAuthenticated::class);
 };

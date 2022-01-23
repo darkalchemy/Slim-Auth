@@ -10,10 +10,11 @@ use App\Factory\LoggerFactory;
 use App\Model\User;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Delight\I18n\I18n;
 use Exception;
-use Odan\Session\PhpSession;
-use Nyholm\Psr7\Response;
-use Nyholm\Psr7\ServerRequest as Request;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
@@ -27,12 +28,13 @@ use Twig\Error\SyntaxError;
  */
 class PasswordResetController extends Controller
 {
-    protected Twig                  $view;
-    protected Messages              $flash;
-    protected RouteParserInterface  $routeParser;
-    protected LoggerInterface       $logger;
-    protected ValidationRules       $rules;
-    protected PhpSession            $session;
+    protected Twig $view;
+    protected Messages $flash;
+    protected RouteParserInterface $routeParser;
+    protected LoggerInterface $logger;
+    protected ValidationRules $rules;
+    protected SessionInterface $session;
+    protected I18n $i18n;
 
     /**
      * PasswordResetController constructor.
@@ -42,7 +44,8 @@ class PasswordResetController extends Controller
      * @param RouteParserInterface $routeParser
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
-     * @param PhpSession           $session
+     * @param SessionInterface     $session
+     * @param I18n                 $i18n
      *
      * @throws Exception
      */
@@ -52,27 +55,29 @@ class PasswordResetController extends Controller
         RouteParserInterface $routeParser,
         LoggerFactory $loggerFactory,
         ValidationRules $rules,
-        PhpSession $session
+        SessionInterface $session,
+        I18n $i18n
     ) {
-        parent::__construct($session);
+        parent::__construct($session, $i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log')
             ->createInstance('password_reset_controller');
-        $this->rules       = $rules;
+        $this->rules = $rules;
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
      *
-     * @return Response
+     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     * @throws SyntaxError
+     *
+     * @return ResponseInterface
      */
-    public function index(Request $request, Response $response): Response
+    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $params = array_clean($request->getQueryParams(), [
             'email',
@@ -89,14 +94,14 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Response      $response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
      *
      * @throws ValidationException
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function reset(Request $request, Response $response): Response
+    public function reset(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->required('email'),

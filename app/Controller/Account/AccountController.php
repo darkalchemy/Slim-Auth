@@ -8,9 +8,10 @@ use App\Controller\Controller;
 use App\Exception\ValidationException;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Odan\Session\PhpSession;
-use Nyholm\Psr7\Response;
-use Nyholm\Psr7\ServerRequest as Request;
+use Delight\I18n\I18n;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
@@ -23,11 +24,12 @@ use Twig\Error\SyntaxError;
  */
 class AccountController extends Controller
 {
-    protected Twig                 $view;
-    protected Messages             $flash;
+    protected Twig $view;
+    protected Messages $flash;
     protected RouteParserInterface $routeParser;
-    protected ValidationRules      $rules;
-    protected PhpSession           $session;
+    protected ValidationRules $rules;
+    protected SessionInterface $session;
+    protected I18n $i18n;
 
     /**
      * AccountController constructor.
@@ -36,16 +38,18 @@ class AccountController extends Controller
      * @param Messages             $flash
      * @param RouteParserInterface $routeParser
      * @param ValidationRules      $rules
-     * @param PhpSession           $session
+     * @param SessionInterface     $session
+     * @param I18n                 $i18n
      */
     public function __construct(
         Twig $view,
         Messages $flash,
         RouteParserInterface $routeParser,
         ValidationRules $rules,
-        PhpSession $session
+        SessionInterface $session,
+        I18n $i18n
     ) {
-        parent::__construct($session);
+        parent::__construct($session, $i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
@@ -53,28 +57,28 @@ class AccountController extends Controller
     }
 
     /**
-     * @param Response $response
+     * @param ResponseInterface $response
      *
+     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     * @throws SyntaxError
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function index(Response $response): Response
+    public function index(ResponseInterface $response): ResponseInterface
     {
         return $this->view->render($response, 'pages/account/index.twig');
     }
 
     /**
-     * @param Request $request
-     * @param Response      $response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
      *
      * @throws ValidationException
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function action(Request $request, Response $response): Response
+    public function action(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->email(),

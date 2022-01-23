@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use Odan\Session\SessionInterface;
-use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -31,12 +31,12 @@ class SessionMiddleware implements MiddlewareInterface
      * @param ServerRequestInterface  $request
      * @param RequestHandlerInterface $handler
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): Response
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (session_status() !== PHP_SESSION_ACTIVE && !headers_sent()) {
-            session_start();
+        if (!$this->session->isStarted() && !headers_sent()) {
+            $this->session->start();
         }
         if (!$this->session->has('regen') || $this->session->get('regen') < time()) {
             $this->session->regenerateId();

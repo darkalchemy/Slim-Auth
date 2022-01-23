@@ -24,7 +24,7 @@ class StoreMail
      * SendMail constructor.
      *
      * @param LoggerFactory $loggerFactory
-     * @param Email $email
+     * @param Email         $email
      *
      * @throws Exception
      */
@@ -34,9 +34,6 @@ class StoreMail
         $this->email  = $email;
     }
 
-    /**
-     * @return void
-     */
     public function store(): void
     {
         try {

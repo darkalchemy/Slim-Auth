@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Darkalchemy\Twig\TwigCompiler;
+use Darkalchemy\Twig\TwigTranslationExtension;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -10,12 +11,12 @@ use Selective\Config\Configuration;
 use Slim\Views\Twig;
 
 /**
- * @param $array
- * @param $keys
+ * @param array $array
+ * @param array $keys
  *
  * @return array
  */
-function array_clean($array, $keys): array
+function array_clean(array $array, array $keys): array
 {
     return array_intersect_key($array, array_flip($keys));
 }
@@ -32,15 +33,22 @@ function get_scheme()
         return 'https';
     }
     if (isset($_SERVER['REQUEST_URI'])) {
-        return ['scheme' => $scheme] = parse_url($_SERVER['REQUEST_URI']) + ['scheme' => 'http'];
+        $parsed = parse_url($_SERVER['REQUEST_URI']);
+        if (!empty($scheme = $parsed['scheme'])) {
+            return $scheme;
+        }
     }
+
+    return 'http';
 }
 
 /**
  * @param ContainerInterface $container
- * @return int
- * @throws ContainerExceptionInterface
+ *
  * @throws NotFoundExceptionInterface
+ * @throws ContainerExceptionInterface
+ *
+ * @return int
  */
 function compile_twig_templates(ContainerInterface $container): int
 {
@@ -48,12 +56,13 @@ function compile_twig_templates(ContainerInterface $container): int
     $twig_config = $settings['twig'];
     $cache       = $twig_config['cache'] ?? VIEWS_DIR . 'cache/';
     $twig        = $container->get(Twig::class)->getEnvironment();
-    $compiler    = new TwigCompiler($twig, $cache, true);
+    $ext         = $container->get(TwigTranslationExtension::class);
+    $compiler    = new TwigCompiler($twig, $ext, $cache, true);
 
     try {
         $compiler->compile();
     } catch (Exception $e) {
-        die($e->getMessage());
+        exit($e->getMessage());
     }
 
     return 0;
@@ -61,7 +70,7 @@ function compile_twig_templates(ContainerInterface $container): int
 
 /**
  * @param string $text
- * @param mixed ...$replacements
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -74,7 +83,7 @@ function _f(string $text, ...$replacements): string
 
 /**
  * @param string $text
- * @param mixed ...$replacements
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -88,7 +97,7 @@ function _fe(string $text, ...$replacements): string
 /**
  * @param string $text
  * @param string $alternative
- * @param int $count
+ * @param int    $count
  *
  * @return string
  */
@@ -102,8 +111,8 @@ function _p(string $text, string $alternative, int $count): string
 /**
  * @param string $text
  * @param string $alternative
- * @param int $count
- * @param mixed ...$replacements
+ * @param int    $count
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -117,8 +126,8 @@ function _pf(string $text, string $alternative, int $count, ...$replacements): s
 /**
  * @param string $text
  * @param string $alternative
- * @param int $count
- * @param mixed ...$replacements
+ * @param int    $count
+ * @param mixed  ...$replacements
  *
  * @return string
  */
@@ -172,7 +181,7 @@ function human_readable_size(int $bytes, int $precision): string
 
 /**
  * @param ContainerInterface $container
- * @return void
+ *
  * @throws ContainerExceptionInterface
  * @throws NotFoundExceptionInterface
  */
@@ -189,8 +198,9 @@ function remove_cached_files(ContainerInterface $container): void
 }
 
 /**
- * @param string|null $path
- * @param bool $contentsOnly
+ * @param null|string $path
+ * @param bool        $contentsOnly
+ *
  * @return bool
  */
 function removeDirectory(?string $path, bool $contentsOnly): bool
@@ -204,7 +214,7 @@ function removeDirectory(?string $path, bool $contentsOnly): bool
             continue;
         }
         $dirName = $fileInfo->getPathname();
-        removeDirectory($dirName, $contentsOnly);
+        removeDirectory($dirName, true);
     }
 
     $files = new FilesystemIterator($path);
@@ -216,7 +226,7 @@ function removeDirectory(?string $path, bool $contentsOnly): bool
             try {
                 unlink($fileName);
             } catch (Exception $e) {
-                die($e->getMessage());
+                exit($e->getMessage());
             }
         }
     }

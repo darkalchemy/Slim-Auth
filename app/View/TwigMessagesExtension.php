@@ -51,11 +51,11 @@ class TwigMessagesExtension extends AbstractExtension
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return bool
      */
-    public function hasMessage($key): bool
+    public function hasMessage(string $key): bool
     {
         return $this->flash->hasMessage($key);
     }
