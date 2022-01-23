@@ -15,11 +15,17 @@ use App\Controller\HomeController;
 use App\Controller\LocaleController;
 use App\Middleware\RedirectIfAuthenticated;
 use App\Middleware\RedirectIfGuest;
-use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Slim\App;
 
 return function (App $app) {
-    $app->get('/version', function (Response $response) {
+    $app->get('/session', function (ResponseInterface $response) {
+        $response->getBody()->write(json_encode($_SESSION));
+
+        return $response->withHeader('Content-Type', 'application/json');
+    });
+
+    $app->get('/version', function (ResponseInterface $response) {
         $response->getBody()->write((string) phpinfo());
 
         return $response;
