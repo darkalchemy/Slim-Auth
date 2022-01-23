@@ -63,13 +63,13 @@ function display_ct() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = Array.prototype.slice.call(document.querySelectorAll('.navbar a'), 0);
-    for (let i = 0; i < navbar.length; i++) {
-        if (navbar[i].href === window.location.href) {
-            navbar[i].classList.add("is-info", "is-active", "is-light");
-            navbar[i].classList.remove("is-info");
+    for (const item of navbar) {
+        if (item.href === window.location.href) {
+            item.classList.add("is-info", "is-active", "is-light");
+            item.classList.remove("is-info");
         } else {
-            navbar[i].classList.remove("is-info", "is-active", "is-light");
-            navbar[i].classList.add("is-info");
+            item.classList.remove("is-info", "is-active", "is-light");
+            item.classList.add("is-info");
         }
     }
 });
