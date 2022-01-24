@@ -1,8 +1,8 @@
 # Slim-Auth
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.3.20)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a60839ff8004b51afc186abf4d948ef)](https://app.codacy.com/manual/darkalchemy/Slim-Auth?utm_source=github.com&utm_medium=referral&utm_content=darkalchemy/Slim-Auth&utm_campaign=Badge_Grade_Dashboard)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.4.0)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e09082beab44f75afe2eefdbc55ec50)](https://www.codacy.com/gh/darkalchemy/Slim-Auth/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=darkalchemy/Slim-Auth&amp;utm_campaign=Badge_Grade)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/darkalchemy/Slim-Auth.svg)](https://packagist.org/packages/darlachemy/slim-auth)
