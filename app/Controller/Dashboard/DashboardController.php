@@ -30,9 +30,9 @@ class DashboardController
     /**
      * @param ResponseInterface $response
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws LoaderError
      *
      * @return ResponseInterface
      */

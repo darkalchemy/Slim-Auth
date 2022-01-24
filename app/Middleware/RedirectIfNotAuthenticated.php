@@ -27,8 +27,11 @@ class RedirectIfNotAuthenticated
      * @param Messages             $flash       The flash
      * @param RouteParserInterface $routeParser The routeParser
      */
-    public function __construct(Messages $flash, RouteParserInterface $routeParser, ResponseFactoryInterface $responseFactory)
-    {
+    public function __construct(
+        Messages $flash,
+        RouteParserInterface $routeParser,
+        ResponseFactoryInterface $responseFactory
+    ) {
         $this->flash           = $flash;
         $this->routeParser     = $routeParser;
         $this->responseFactory = $responseFactory;

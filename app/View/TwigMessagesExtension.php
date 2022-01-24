@@ -65,7 +65,7 @@ class TwigMessagesExtension extends AbstractExtension
      *
      * @return array|mixed
      */
-    public function getMessages(?string $key = null)
+    public function getMessages(?string $key = null): mixed
     {
         if ($key !== null) {
             return $this->flash->getMessage($key);

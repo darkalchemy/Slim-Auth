@@ -9,7 +9,7 @@ use DI\NotFoundException;
 use Slim\App;
 use UMA\RedisSessionHandler;
 
-$startTime = microtime(true);
+$startTime = hrtime(true);
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../config/constants.php';
 

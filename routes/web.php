@@ -20,7 +20,7 @@ use Slim\App;
 
 return function (App $app) {
     $app->get('/session', function (ResponseInterface $response) {
-        $response->getBody()->write(json_encode($_SESSION));
+        $response->getBody()->write((string) json_encode($_SESSION));
 
         return $response->withHeader('Content-Type', 'application/json');
     });

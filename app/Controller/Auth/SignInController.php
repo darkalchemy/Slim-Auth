@@ -11,6 +11,7 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
 use Exception;
+use Monolog\Logger;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -61,7 +62,7 @@ class SignInController extends Controller
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('signin_controller.log')
+        $this->logger      = $loggerFactory->addFileHandler('signin_controller.log', Logger::DEBUG)
             ->createInstance('signin_controller');
         $this->rules = $rules;
         $this->session->set('current_url', 'auth.signin');
@@ -71,9 +72,9 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */
@@ -94,7 +95,7 @@ class SignInController extends Controller
      */
     public function signin(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $data = $this->validate($request, array_merge_recursive(
+        $data = (array) $this->validate($request, array_merge_recursive(
             $this->rules->email(),
             $this->rules->required('password')
         ));

@@ -59,9 +59,9 @@ class AccountController extends Controller
     /**
      * @param ResponseInterface $response
      *
-     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */

@@ -22,7 +22,8 @@ class Controller
     /**
      * Controller constructor.
      *
-     * @param I18n $i18n
+     * @param SessionInterface $session
+     * @param I18n             $i18n
      */
     public function __construct(SessionInterface $session, I18n $i18n)
     {
@@ -39,11 +40,11 @@ class Controller
      *
      * @return null|array|object
      */
-    public function validate(ServerRequestInterface $request, array $rules = [])
+    public function validate(ServerRequestInterface $request, array $rules = []): object|array|null
     {
         Validator::langDir(VENDOR_DIR . 'vlucas/valitron/lang/');
         Validator::lang(substr($this->locale, 0, 2));
-        $params    = $request->getParsedBody();
+        $params    = (array) $request->getParsedBody();
         $validator = new Validator($params);
         $validator->mapFieldsRules($rules);
         if (!$validator->validate()) {

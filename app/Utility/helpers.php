@@ -22,31 +22,10 @@ function array_clean(array $array, array $keys): array
 }
 
 /**
- * @return mixed|string
- */
-function get_scheme()
-{
-    if (isset($_SERVER['REQUEST_SCHEME'])) {
-        return $_SERVER['REQUEST_SCHEME'];
-    }
-    if (isset($_SERVER['HTTPS'])) {
-        return 'https';
-    }
-    if (isset($_SERVER['REQUEST_URI'])) {
-        $parsed = parse_url($_SERVER['REQUEST_URI']);
-        if (!empty($scheme = $parsed['scheme'])) {
-            return $scheme;
-        }
-    }
-
-    return 'http';
-}
-
-/**
  * @param ContainerInterface $container
  *
- * @throws NotFoundExceptionInterface
  * @throws ContainerExceptionInterface
+ * @throws NotFoundExceptionInterface
  *
  * @return int
  */

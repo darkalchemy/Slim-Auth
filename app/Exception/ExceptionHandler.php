@@ -6,6 +6,7 @@ namespace App\Exception;
 
 use App\Factory\LoggerFactory;
 use Exception;
+use Monolog\Logger;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -47,7 +48,7 @@ class ExceptionHandler
         $this->flash           = $flash;
         $this->responseFactory = $responseFactory;
         $this->view            = $view;
-        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log')
+        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log', Logger::DEBUG)
             ->createInstance('exception_handler');
     }
 
@@ -59,7 +60,7 @@ class ExceptionHandler
      *
      * @return mixed
      */
-    public function __invoke(ServerRequestInterface $request, Throwable $exception)
+    public function __invoke(ServerRequestInterface $request, Throwable $exception): mixed
     {
         if (method_exists($this, $handle = 'handle' . (new ReflectionClass($exception))->getShortName())) {
             return $this->{$handle}($exception);

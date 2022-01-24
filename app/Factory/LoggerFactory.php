@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use Exception;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
@@ -22,11 +21,6 @@ class LoggerFactory
     private string $path;
 
     /**
-     * @var int
-     */
-    private int $level;
-
-    /**
      * @var array Handler
      */
     private array $handler = [];
@@ -38,8 +32,7 @@ class LoggerFactory
      */
     public function __construct(array $settings)
     {
-        $this->path  = (string) $settings['path'];
-        $this->level = (int) $settings['level'];
+        $this->path = (string) $settings['path'];
     }
 
     /**
@@ -63,14 +56,12 @@ class LoggerFactory
     }
 
     /**
-     * @param string   $filename
-     * @param null|int $level
-     *
-     * @throws Exception
+     * @param string $filename
+     * @param int    $level
      *
      * @return $this
      */
-    public function addFileHandler(string $filename, int $level = null): self
+    public function addFileHandler(string $filename, int $level): self
     {
         if (!is_writeable($this->path)) {
             exit(_fe(
@@ -79,7 +70,7 @@ class LoggerFactory
             ));
         }
         $filename            = sprintf('%s/%s', $this->path, $filename);
-        $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level ?? $this->level, true, 0755);
+        $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level, true, 0755);
 
         // The last "true" here tells monolog to remove empty []'s
         $rotatingFileHandler->setFormatter(new LineFormatter(null, null, false, true));
@@ -92,13 +83,11 @@ class LoggerFactory
     /**
      * Add a console logger.
      *
-     * @param null|int $level The level (optional)
-     *
      * @return self The instance
      */
-    public function addConsoleHandler(int $level = null): self
+    public function addConsoleHandler(int $level): self
     {
-        $streamHandler = new StreamHandler('php://stdout', $level ?? $this->level);
+        $streamHandler = new StreamHandler('php://stdout', $level);
         $streamHandler->setFormatter(new LineFormatter(null, null, false, true));
 
         $this->handler[] = $streamHandler;

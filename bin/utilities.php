@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Delight\I18n\I18n;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 $container = (require __DIR__ . '/../bootstrap/app.php')->getContainer();
 
@@ -40,11 +42,19 @@ switch ($process) {
 
         break;
     case 'clear_cache':
-        remove_cached_files($container);
+        try {
+            remove_cached_files($container);
+        } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+            exit($e->getMessage());
+        }
 
         break;
     default:
-        compile_twig_templates($container);
+        try {
+            compile_twig_templates($container);
+        } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+            exit($e->getMessage());
+        }
 
         break;
 }

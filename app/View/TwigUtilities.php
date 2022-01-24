@@ -27,16 +27,16 @@ class TwigUtilities extends AbstractExtension
      */
     public function max_mem_usage(bool $real): string
     {
-        return human_readable_size(memory_get_peak_usage($real), 2);
+        return human_readable_size(memory_get_peak_usage($real), 3);
     }
 
     /**
-     * @return float|int
+     * @return float
      */
-    public function runtime()
+    public function runtime(): float
     {
         global $startTime;
 
-        return round(microtime(true) - $startTime, 5) * 1000;
+        return round((hrtime(true) - $startTime) / 1e+6, 3);
     }
 }

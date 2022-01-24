@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Monolog\Logger;
-
 date_default_timezone_set('UTC');
 ini_set('default_charset', 'utf-8');
 ini_set('max_execution_time', '300');
@@ -68,9 +66,8 @@ $settings = [
         'manifest' => PUBLIC_RESOURCES_DIR . 'manifest.json',
     ],
     'logger' => [
-        'name'  => 'simple',
-        'path'  => LOGS_DIR,
-        'level' => Logger::DEBUG,
+        'name' => 'simple',
+        'path' => LOGS_DIR,
     ],
     'mail' => [
         'smtp_enable'     => false,

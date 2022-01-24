@@ -6,6 +6,7 @@ use App\Factory\LoggerFactory;
 use App\Middleware\CheckSettingsMiddleware;
 use App\View\CsrfExtension;
 use App\View\TwigMessagesExtension;
+use App\View\TwigPhpExtension;
 use App\View\TwigUtilities;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Darkalchemy\Twig\TwigTranslationExtension;
@@ -96,6 +97,7 @@ return [
         ]);
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], PUBLIC_DIR));
         $twig->addExtension(new TwigUtilities());
+        $twig->addExtension(new TwigPhpExtension());
         $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
         $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
         $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class)));

@@ -12,6 +12,7 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
 use Exception;
+use Monolog\Logger;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -65,7 +66,7 @@ class SignUpController extends Controller
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('signup_controller.log')
+        $this->logger      = $loggerFactory->addFileHandler('signup_controller.log', Logger::DEBUG)
             ->createInstance('signup_controller');
         $this->rules     = $rules;
         $this->storeMail = $storeMail;
@@ -75,9 +76,9 @@ class SignUpController extends Controller
     /**
      * @param ResponseInterface $response The response
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws LoaderError
      *
      * @return ResponseInterface
      */
@@ -96,7 +97,7 @@ class SignUpController extends Controller
      */
     public function signup(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $data = $this->validate($request, array_merge_recursive(
+        $data = (array) $this->validate($request, array_merge_recursive(
             $this->rules->email(),
             $this->rules->email_unique(),
             $this->rules->username(),

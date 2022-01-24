@@ -8,7 +8,10 @@ use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class User.
+ * @property string email
+ * @property string username
+ * @property string password
+ * @property string permissions
  */
 class User extends EloquentUser
 {

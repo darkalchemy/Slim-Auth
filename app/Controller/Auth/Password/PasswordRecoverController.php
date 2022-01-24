@@ -65,9 +65,9 @@ class PasswordRecoverController extends Controller
     /**
      * @param ResponseInterface $response
      *
-     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */
@@ -80,10 +80,10 @@ class PasswordRecoverController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @throws SyntaxError
      * @throws ValidationException
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */

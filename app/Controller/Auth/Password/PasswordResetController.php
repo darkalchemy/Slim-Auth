@@ -12,6 +12,7 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
 use Exception;
+use Monolog\Logger;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -62,7 +63,7 @@ class PasswordResetController extends Controller
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log')
+        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log', Logger::DEBUG)
             ->createInstance('password_reset_controller');
         $this->rules = $rules;
     }
@@ -71,9 +72,9 @@ class PasswordResetController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */
@@ -103,7 +104,7 @@ class PasswordResetController extends Controller
      */
     public function reset(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $data = $this->validate($request, array_merge_recursive(
+        $data = (array) $this->validate($request, array_merge_recursive(
             $this->rules->required('email'),
             $this->rules->required('code'),
             $this->rules->password(),

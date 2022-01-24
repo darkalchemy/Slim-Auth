@@ -67,7 +67,7 @@ class ValidationRules
                 'required',
                 [
                     'lengthMin',
-                    8,
+                    12,
                 ],
                 [
                     'equals',
@@ -129,7 +129,7 @@ class ValidationRules
                 'usernameIsUnique',
                 [
                     'lengthMin',
-                    4,
+                    5,
                 ],
                 [
                     'regex',
