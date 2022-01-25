@@ -7,7 +7,6 @@ namespace App\Provider;
 use App\Factory\LoggerFactory;
 use App\Model\Email;
 use Exception;
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -31,7 +30,7 @@ class StoreMail
      */
     public function __construct(LoggerFactory $loggerFactory, Email $email)
     {
-        $this->logger = $loggerFactory->addFileHandler('storemail_class.log', Logger::DEBUG)
+        $this->logger = $loggerFactory->addFileHandler('storemail_class.log', LOG_DEBUG)
             ->createInstance('storemail');
         $this->email = $email;
     }

@@ -56,6 +56,8 @@ class LoggerFactory
     }
 
     /**
+     * Add a console logger.
+     *
      * @param string $filename
      * @param int    $level
      *

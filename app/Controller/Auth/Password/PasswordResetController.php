@@ -12,7 +12,6 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
 use Exception;
-use Monolog\Logger;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -63,7 +62,7 @@ class PasswordResetController extends Controller
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log', Logger::DEBUG)
+        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log', LOG_DEBUG)
             ->createInstance('password_reset_controller');
         $this->rules = $rules;
     }

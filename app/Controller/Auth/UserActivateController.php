@@ -10,7 +10,6 @@ use App\Model\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
 use Exception;
-use Monolog\Logger;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -50,7 +49,7 @@ class UserActivateController extends Controller
         parent::__construct($session, $i18n);
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('activate_controller.log', Logger::DEBUG)
+        $this->logger      = $loggerFactory->addFileHandler('activate_controller.log', LOG_DEBUG)
             ->createInstance('activate_controller');
     }
 

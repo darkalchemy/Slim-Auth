@@ -6,7 +6,6 @@ namespace App\Exception;
 
 use App\Factory\LoggerFactory;
 use Exception;
-use Monolog\Logger;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -48,7 +47,7 @@ class ExceptionHandler
         $this->flash           = $flash;
         $this->responseFactory = $responseFactory;
         $this->view            = $view;
-        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log', Logger::DEBUG)
+        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log', LOG_DEBUG)
             ->createInstance('exception_handler');
     }
 

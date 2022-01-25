@@ -6,7 +6,6 @@ namespace App\Middleware;
 
 use App\Factory\LoggerFactory;
 use Exception;
-use Monolog\Logger;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -35,7 +34,7 @@ class CheckSettingsMiddleware implements MiddlewareInterface
     public function __construct(array $settings, LoggerFactory $loggerFactory, Messages $flash)
     {
         $this->settings = $settings;
-        $this->logger   = $loggerFactory->addFileHandler('settings.log', Logger::DEBUG)->createInstance('settings');
+        $this->logger   = $loggerFactory->addFileHandler('settings.log', LOG_DEBUG)->createInstance('settings');
         $this->flash    = $flash;
     }
 
