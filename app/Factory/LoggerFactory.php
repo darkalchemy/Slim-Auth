@@ -63,7 +63,7 @@ class LoggerFactory
      *
      * @return $this
      */
-    public function addFileHandler(string $filename, int $level): self
+    public function addFileHandler(string $filename, int $level = LOG_DEBUG): self
     {
         if (!is_writeable($this->path)) {
             exit(_fe(

@@ -62,7 +62,7 @@ class PasswordResetController extends Controller
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log', LOG_DEBUG)
+        $this->logger      = $loggerFactory->addFileHandler('password_reset_controller.log')
             ->createInstance('password_reset_controller');
         $this->rules = $rules;
     }

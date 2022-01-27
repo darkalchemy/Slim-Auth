@@ -49,7 +49,7 @@ class UserActivateController extends Controller
         parent::__construct($session, $i18n);
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('activate_controller.log', LOG_DEBUG)
+        $this->logger      = $loggerFactory->addFileHandler('activate_controller.log')
             ->createInstance('activate_controller');
     }
 

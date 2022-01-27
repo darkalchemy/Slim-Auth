@@ -34,7 +34,7 @@ class CheckSettingsMiddleware implements MiddlewareInterface
     public function __construct(array $settings, LoggerFactory $loggerFactory, Messages $flash)
     {
         $this->settings = $settings;
-        $this->logger   = $loggerFactory->addFileHandler('settings.log', LOG_DEBUG)->createInstance('settings');
+        $this->logger   = $loggerFactory->addFileHandler('settings.log')->createInstance('settings');
         $this->flash    = $flash;
     }
 

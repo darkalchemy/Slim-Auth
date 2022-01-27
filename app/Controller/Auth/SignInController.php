@@ -61,7 +61,7 @@ class SignInController extends Controller
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
-        $this->logger      = $loggerFactory->addFileHandler('signin_controller.log', LOG_DEBUG)
+        $this->logger      = $loggerFactory->addFileHandler('signin_controller.log')
             ->createInstance('signin_controller');
         $this->rules = $rules;
         $this->session->set('current_url', 'auth.signin');

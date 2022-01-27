@@ -47,7 +47,7 @@ class ExceptionHandler
         $this->flash           = $flash;
         $this->responseFactory = $responseFactory;
         $this->view            = $view;
-        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log', LOG_DEBUG)
+        $this->logger          = $loggerFactory->addFileHandler('exception_handler.log')
             ->createInstance('exception_handler');
     }
 

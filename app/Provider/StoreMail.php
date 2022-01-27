@@ -30,7 +30,7 @@ class StoreMail
      */
     public function __construct(LoggerFactory $loggerFactory, Email $email)
     {
-        $this->logger = $loggerFactory->addFileHandler('storemail_class.log', LOG_DEBUG)
+        $this->logger = $loggerFactory->addFileHandler('storemail_class.log')
             ->createInstance('storemail');
         $this->email = $email;
     }
