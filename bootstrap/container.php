@@ -52,15 +52,17 @@ return [
 
     // replace default redis session handler
     RedisSessionHandler::class => function () {
-        if (ini_get('session.save_handler') === 'redis') {
-            session_set_save_handler(new RedisSessionHandler(), true);
-        }
+        session_set_save_handler(new RedisSessionHandler(), true);
     },
 
     SessionInterface::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->getArray('session');
         $session = new PhpSession();
         $session->setOptions((array) $settings);
+        if (SESSION_HANDLER === 'redis') {
+            ini_set('redis.session.locking_enabled', '1');
+            $container->get(RedisSessionHandler::class);
+        }
 
         return $session;
     },
