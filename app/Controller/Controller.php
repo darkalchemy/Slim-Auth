@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Exception\ValidationException;
 use Delight\I18n\I18n;
-use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Valitron\Validator;
 
@@ -15,20 +14,17 @@ use Valitron\Validator;
  */
 class Controller
 {
-    protected SessionInterface $session;
     protected I18n $i18n;
     protected string $locale;
 
     /**
      * Controller constructor.
      *
-     * @param SessionInterface $session
-     * @param I18n             $i18n
+     * @param I18n $i18n
      */
-    public function __construct(SessionInterface $session, I18n $i18n)
+    public function __construct(I18n $i18n)
     {
         $this->i18n    = $i18n;
-        $this->session = $session;
         $this->locale  = $this->i18n->getLocale() ?? $this->i18n->getSupportedLocales()[0];
     }
 
@@ -38,9 +34,9 @@ class Controller
      *
      * @throws ValidationException
      *
-     * @return null|array|object
+     * @return array
      */
-    public function validate(ServerRequestInterface $request, array $rules = []): object|array|null
+    public function validate(ServerRequestInterface $request, array $rules = []): array
     {
         Validator::langDir(VENDOR_DIR . 'vlucas/valitron/lang/');
         Validator::lang(substr($this->locale, 0, 2));
@@ -48,7 +44,7 @@ class Controller
         $validator = new Validator($params);
         $validator->mapFieldsRules($rules);
         if (!$validator->validate()) {
-            throw new ValidationException($validator->errors(), $request->getServerParams()['HTTP_REFERER']);
+            throw new ValidationException((array) $validator->errors(), $request->getServerParams()['HTTP_REFERER']);
         }
 
         return $params;

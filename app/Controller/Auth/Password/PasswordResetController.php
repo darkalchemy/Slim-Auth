@@ -12,7 +12,6 @@ use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
 use Exception;
-use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -33,7 +32,6 @@ class PasswordResetController extends Controller
     protected RouteParserInterface $routeParser;
     protected LoggerInterface $logger;
     protected ValidationRules $rules;
-    protected SessionInterface $session;
     protected I18n $i18n;
 
     /**
@@ -44,7 +42,6 @@ class PasswordResetController extends Controller
      * @param RouteParserInterface $routeParser
      * @param LoggerFactory        $loggerFactory
      * @param ValidationRules      $rules
-     * @param SessionInterface     $session
      * @param I18n                 $i18n
      *
      * @throws Exception
@@ -55,10 +52,9 @@ class PasswordResetController extends Controller
         RouteParserInterface $routeParser,
         LoggerFactory $loggerFactory,
         ValidationRules $rules,
-        SessionInterface $session,
         I18n $i18n
     ) {
-        parent::__construct($session, $i18n);
+        parent::__construct($i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
@@ -71,9 +67,9 @@ class PasswordResetController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws LoaderError
      *
      * @return ResponseInterface
      */

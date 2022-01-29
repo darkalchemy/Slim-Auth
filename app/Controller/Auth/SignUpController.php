@@ -61,7 +61,7 @@ class SignUpController extends Controller
         SessionInterface $session,
         I18n $i18n
     ) {
-        parent::__construct($session, $i18n);
+        parent::__construct($i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
@@ -69,15 +69,16 @@ class SignUpController extends Controller
             ->createInstance('signup_controller');
         $this->rules     = $rules;
         $this->storeMail = $storeMail;
+        $this->session   = $session;
         $this->session->set('current_url', 'auth.signup');
     }
 
     /**
      * @param ResponseInterface $response The response
      *
-     * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
+     * @throws RuntimeError
      *
      * @return ResponseInterface
      */

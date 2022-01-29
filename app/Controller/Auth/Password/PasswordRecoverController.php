@@ -11,7 +11,6 @@ use App\Provider\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
-use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
@@ -31,7 +30,6 @@ class PasswordRecoverController extends Controller
     protected RouteParserInterface $routeParser;
     protected ValidationRules $rules;
     protected StoreMail $storeMail;
-    protected SessionInterface $session;
     protected I18n $i18n;
 
     /**
@@ -42,7 +40,6 @@ class PasswordRecoverController extends Controller
      * @param RouteParserInterface $routeParser
      * @param StoreMail            $storeMail
      * @param ValidationRules      $rules
-     * @param SessionInterface     $session
      * @param I18n                 $i18n
      */
     public function __construct(
@@ -51,10 +48,9 @@ class PasswordRecoverController extends Controller
         RouteParserInterface $routeParser,
         StoreMail $storeMail,
         ValidationRules $rules,
-        SessionInterface $session,
         I18n $i18n
     ) {
-        parent::__construct($session, $i18n);
+        parent::__construct($i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
@@ -65,9 +61,9 @@ class PasswordRecoverController extends Controller
     /**
      * @param ResponseInterface $response
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws LoaderError
      *
      * @return ResponseInterface
      */
@@ -80,10 +76,10 @@ class PasswordRecoverController extends Controller
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      *
-     * @throws ValidationException
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws ValidationException
      *
      * @return ResponseInterface
      */

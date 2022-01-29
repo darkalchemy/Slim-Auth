@@ -9,7 +9,6 @@ use App\Exception\ValidationException;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
-use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
@@ -28,7 +27,6 @@ class AccountPasswordController extends Controller
     protected Messages $flash;
     protected RouteParserInterface $routeParser;
     protected ValidationRules $rules;
-    protected SessionInterface $session;
     protected I18n $i18n;
 
     /**
@@ -38,7 +36,6 @@ class AccountPasswordController extends Controller
      * @param Messages             $flash
      * @param RouteParserInterface $routeParser
      * @param ValidationRules      $rules
-     * @param SessionInterface     $session
      * @param I18n                 $i18n
      */
     public function __construct(
@@ -46,10 +43,9 @@ class AccountPasswordController extends Controller
         Messages $flash,
         RouteParserInterface $routeParser,
         ValidationRules $rules,
-        SessionInterface $session,
         I18n $i18n
     ) {
-        parent::__construct($session, $i18n);
+        parent::__construct($i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
@@ -59,9 +55,9 @@ class AccountPasswordController extends Controller
     /**
      * @param ResponseInterface $response
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws LoaderError
      *
      * @return ResponseInterface
      */

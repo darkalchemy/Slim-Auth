@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Controller\Controller;
+use App\Exception\AuthException;
 use App\Exception\ValidationException;
 use App\Factory\LoggerFactory;
 use App\Validation\ValidationRules;
@@ -57,13 +58,14 @@ class SignInController extends Controller
         SessionInterface $session,
         I18n $i18n
     ) {
-        parent::__construct($session, $i18n);
+        parent::__construct($i18n);
         $this->view        = $view;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
         $this->logger      = $loggerFactory->addFileHandler('signin_controller.log')
             ->createInstance('signin_controller');
-        $this->rules = $rules;
+        $this->rules   = $rules;
+        $this->session = $session;
         $this->session->set('current_url', 'auth.signin');
     }
 
@@ -71,9 +73,9 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
+     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     * @throws SyntaxError
      *
      * @return ResponseInterface
      */
@@ -104,7 +106,7 @@ class SignInController extends Controller
                 'email',
                 'password',
             ]), isset($data['persist']))) {
-                throw new Exception(_f('Incorrect email or password.'));
+                throw new AuthException(_f('Incorrect email or password.'));
             }
         } catch (Exception $e) {
             $this->flash->addMessage('status', $e->getMessage());
