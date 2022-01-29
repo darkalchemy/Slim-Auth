@@ -59,11 +59,11 @@ class LoggerFactory
      * Add a console logger.
      *
      * @param string $filename
-     * @param int    $level
+     * @param string $level
      *
      * @return $this
      */
-    public function addFileHandler(string $filename, int $level = LOG_DEBUG): self
+    public function addFileHandler(string $filename, string $level = 'DEBUG'): self
     {
         if (!is_writeable($this->path)) {
             exit(_fe(
@@ -87,7 +87,7 @@ class LoggerFactory
      *
      * @return self The instance
      */
-    public function addConsoleHandler(int $level): self
+    public function addConsoleHandler(string $level = 'DEBUG'): self
     {
         $streamHandler = new StreamHandler('php://stdout', $level);
         $streamHandler->setFormatter(new LineFormatter(null, null, false, true));
