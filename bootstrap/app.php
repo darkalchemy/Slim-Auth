@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Factory\ContainerFactory;
 use Delight\I18n\I18n;
 use Slim\App;
-use UMA\RedisSessionHandler;
 
 $startTime = hrtime(true);
 require __DIR__ . '/../vendor/autoload.php';
