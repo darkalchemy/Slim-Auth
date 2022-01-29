@@ -58,7 +58,7 @@ class LocaleController
                 'success',
                 _fe(
                     'Current locale changed to: {0}.',
-                    ucfirst($this->i18n->getNativeLanguageName($lang))
+                    ucfirst((string) $this->i18n->getNativeLanguageName($lang))
                 )
             );
         }
