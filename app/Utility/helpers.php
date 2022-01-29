@@ -196,7 +196,7 @@ function removeDirectory(?string $path, bool $contentsOnly): bool
         removeDirectory($dirName, true);
     }
 
-    $files = new FilesystemIterator($path);
+    $files = new DirectoryIterator($path);
     $types = ['php', 'cache'];
     foreach ($files as $file) {
         if (in_array($file->getExtension(), $types)) {
