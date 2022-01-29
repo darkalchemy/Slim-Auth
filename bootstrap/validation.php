@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Model\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use DI\NotFoundException;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Selective\Config\Configuration;
@@ -11,7 +12,9 @@ use Slim\App;
 use Valitron\Validator;
 
 return function (App $app) {
-    $container = $app->getContainer();
+    if (!($container = $app->getContainer())) {
+        throw new NotFoundException('Could not get the container.');
+    }
 
     Validator::addRule('emailIsUnique', function ($field, $value, array $params, array $fields) {
         if (!empty($value)) {
@@ -44,8 +47,7 @@ return function (App $app) {
     }, 'is already in use');
 
     Validator::addRule('currentPassword', function ($field, $value, array $params, array $fields) {
-        return Sentinel::getUserRepository()
-            ->validateCredentials(Sentinel::check(), [$field => $value]);
+        return Sentinel::getUserRepository()->validateCredentials(Sentinel::check(), [$field => $value]);
     }, 'is wrong');
 
     Validator::addRule('badWords', function ($field, $value, array $params, array $fields) use ($container) {
