@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property string subject
- * @property int user_id
- * @property string body
+ * @property string $subject
+ * @property int    $user_id
+ * @property string $body
  */
 class Email extends Model
 {
