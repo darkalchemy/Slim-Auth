@@ -161,10 +161,6 @@ msgstr "Quelque chose a mal tourné"
 msgid "Staff"
 msgstr "Personnel"
 
-#, php-format
-msgid "The cache path is required"
-msgstr "Le chemin du cache est requis"
-
 #, no-php-format
 msgid "This page was generated in {0} ms and used {1} of ram."
 msgstr "Cette page a été générée en {0} ms et utilisée {1} de RAM."
@@ -193,13 +189,14 @@ msgstr "Votre email a été confirmé et votre compte a été activé. Vous pouv
 msgid "Your password has been reset and you can now sign in."
 msgstr "Votre mot de passe a été réinitialisé et vous pouvez maintenant vous connecter."
 
-#, no-php-format
-msgid "{0} is not writable by the webserver."
-msgstr "{0} n'est pas accessible en écriture par le serveur Web."
-
-#, no-php-format
-msgid "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
-msgstr "{0} n'est pas accessible en écriture par le serveur Web. <br> Veuillez exécuter: <br> sudo chown -R www-data: www-data {0} <br> sudo chmod -R 0775 {0}"
-
 #~ msgid "Select Locale: {0}"
 #~ msgstr "Sélectionnez les paramètres régionaux: {0}"
+
+#~ msgid "The cache path is required"
+#~ msgstr "Le chemin du cache est requis"
+
+#~ msgid "{0} is not writable by the webserver."
+#~ msgstr "{0} n'est pas accessible en écriture par le serveur Web."
+
+#~ msgid "{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}"
+#~ msgstr "{0} n'est pas accessible en écriture par le serveur Web. <br> Veuillez exécuter: <br> sudo chown -R www-data: www-data {0} <br> sudo chmod -R 0775 {0}"
