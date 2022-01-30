@@ -24,8 +24,8 @@ class Controller
      */
     public function __construct(I18n $i18n)
     {
-        $this->i18n    = $i18n;
-        $this->locale  = $this->i18n->getLocale() ?? $this->i18n->getSupportedLocales()[0];
+        $this->i18n   = $i18n;
+        $this->locale = $this->i18n->getLocale() ?? $this->i18n->getSupportedLocales()[0];
     }
 
     /**

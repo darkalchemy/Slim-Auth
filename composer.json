@@ -12,6 +12,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-apcu": "*",
         "ext-gettext": "*",
         "ext-intl": "*",
         "ext-json": "*",

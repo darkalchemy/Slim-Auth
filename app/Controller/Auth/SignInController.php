@@ -73,9 +73,9 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
+     * @throws SyntaxError
      *
      * @return ResponseInterface
      */

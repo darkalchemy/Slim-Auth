@@ -7,7 +7,9 @@ use Delight\I18n\I18n;
 use Slim\App;
 
 $startTime = hrtime(true);
+
 require __DIR__ . '/../vendor/autoload.php';
+
 require __DIR__ . '/../config/constants.php';
 
 $container = (new ContainerFactory())->createContainer();

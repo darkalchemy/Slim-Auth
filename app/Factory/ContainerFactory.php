@@ -17,23 +17,13 @@ class ContainerFactory
      */
     public function createContainer(): Container
     {
-        $file = CONFIG_DIR . 'settings.php';
-        if (!file_exists($file)) {
-            exit(sprintf(
-                '%s does not exist.<br>please run:<br>cp %s %s<br>and edit as needed.',
-                $file,
-                CONFIG_DIR . 'settings.example.php',
-                $file
-            ));
-        }
-
         $builder = new ContainerBuilder();
         $builder->addDefinitions(BOOTSTRAP_DIR . 'container.php');
-        $settings = require $file;
+        $settings = require CONFIG_DIR . 'settings.php';
 
-        if ($settings['di_compilation_path']) {
+        if ($settings['environment'] === 'PRODUCTION') {
             $builder->enableCompilation((string) $settings['di_compilation_path']);
-            $builder->writeProxiesToFile(true, PROXIES_DIR);
+            $builder->enableDefinitionCache($settings['site_name'] . '.');
         }
 
         return $builder->build();

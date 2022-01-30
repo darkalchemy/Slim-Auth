@@ -29,6 +29,7 @@ use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
 use UMA\RedisSessionHandler;
+use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return [
@@ -36,12 +37,12 @@ return [
 
     App::class => function (ContainerInterface $container) {
         $app = Bridge::create($container);
-
-        $config = $container->get(Configuration::class);
-        $routeCacheFile = $config->findString('router.cache_file');
-        if ($routeCacheFile) {
+        $settings = $container->get(Configuration::class)->all();
+        if ($settings['environment'] === 'PRODUCTION') {
+            $routeCacheFile = $settings['router_cache_file'];
             $app->getRouteCollector()->setCacheFile($routeCacheFile);
         }
+
         (require BOOTSTRAP_DIR . 'middleware.php')($app);
         (require ROUTES_DIR . 'web.php')($app);
         (require BOOTSTRAP_DIR . 'exceptions.php')($app);
@@ -52,15 +53,16 @@ return [
 
     // replace default redis session handler
     RedisSessionHandler::class => function () {
-        session_set_save_handler(new RedisSessionHandler(), true);
+        if (ini_get('session.save_handler') === 'redis') {
+            session_set_save_handler(new RedisSessionHandler(), true);
+        }
     },
 
     SessionInterface::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->getArray('session');
+        $settings = $container->get(Configuration::class)->all();
         $session = new PhpSession();
-        $session->setOptions((array) $settings);
-        if (SESSION_HANDLER === 'redis') {
-            ini_set('redis.session.locking_enabled', '1');
+        $session->setOptions((array) $settings['session']);
+        if ($settings['environment'] === 'redis') {
             $container->get(RedisSessionHandler::class);
         }
 
@@ -95,7 +97,7 @@ return [
     Twig::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->all();
         $twig = Twig::create($settings['twig']['path'], [
-            'cache' => $settings['twig']['cache'] ?? false,
+            'cache' => $settings['environment'] === 'PRODUCTION' ? $settings['twig']['cache'] : false,
         ]);
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], PUBLIC_DIR));
         $twig->addExtension(new TwigUtilities());
@@ -134,18 +136,24 @@ return [
         return $mail;
     },
 
-    WhoopsMiddleware::class => function () {
+    WhoopsMiddleware::class => function (ContainerInterface $container) {
+        $env = $container->get(Configuration::class)->getString('environment');
+
         return new WhoopsMiddleware([
-            'enable' => ENV === 'DEVELOPMENT',
+            'enable' => $env === 'DEVELOPMENT',
         ]);
     },
 
-    LoggerFactory::class => fn (ContainerInterface $container) => new LoggerFactory($container->get(Configuration::class)->getArray('logger')),
+    LoggerFactory::class => fn (ContainerInterface $container) => new LoggerFactory(
+        $container->get(Configuration::class)->getArray('logger'),
+        $container->get(ChmodPermissionsSetter::class)
+    ),
 
     CheckSettingsMiddleware::class => fn (ContainerInterface $container) => new CheckSettingsMiddleware(
         $container->get(Configuration::class)->all(),
         $container->get(LoggerFactory::class),
-        $container->get(Messages::class)
+        $container->get(Messages::class),
+        $container->get(ChmodPermissionsSetter::class)
     ),
 
     'view' => DI\get(Twig::class),

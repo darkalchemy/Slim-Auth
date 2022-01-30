@@ -17,7 +17,3 @@ const PUBLIC_DIR           = ROOT_DIR . 'public' . DIRECTORY_SEPARATOR;
 const VENDOR_DIR           = ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR;
 const PUBLIC_RESOURCES_DIR = PUBLIC_DIR . 'resources' . DIRECTORY_SEPARATOR;
 const LOCALE_DIR           = ROOT_DIR . 'locale' . DIRECTORY_SEPARATOR;
-
-const ENV             = 'DEVELOPMENT'; // DEVELOPMENT or PRODUCTION
-const SITE_NAME       = 'Slim-Auth';
-const SESSION_HANDLER = 'files'; // files, redis, memcached

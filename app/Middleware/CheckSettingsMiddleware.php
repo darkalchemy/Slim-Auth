@@ -5,22 +5,38 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Factory\LoggerFactory;
-use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
+use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 
 /**
  * Class CheckMailMiddleware.
  */
 class CheckSettingsMiddleware implements MiddlewareInterface
 {
-    protected array $settings;
-    protected LoggerInterface $logger;
-    protected Messages $flash;
+    /**
+     * @var array
+     */
+    private array $settings;
+
+    /**
+     * @var LoggerInterface
+     */
+    private LoggerInterface $logger;
+
+    /**
+     * @var Messages
+     */
+    private Messages $flash;
+
+    /**
+     * @var ChmodPermissionsSetter
+     */
+    private ChmodPermissionsSetter $permissionsSetter;
 
     /**
      * CheckMailMiddleware constructor.
@@ -28,14 +44,17 @@ class CheckSettingsMiddleware implements MiddlewareInterface
      * @param array         $settings
      * @param LoggerFactory $loggerFactory
      * @param Messages      $flash
-     *
-     * @throws Exception
      */
-    public function __construct(array $settings, LoggerFactory $loggerFactory, Messages $flash)
-    {
-        $this->settings = $settings;
-        $this->logger   = $loggerFactory->addFileHandler('settings.log')->createInstance('settings');
-        $this->flash    = $flash;
+    public function __construct(
+        array $settings,
+        LoggerFactory $loggerFactory,
+        Messages $flash,
+        ChmodPermissionsSetter $permissionsSetter
+    ) {
+        $this->settings          = $settings;
+        $this->logger            = $loggerFactory->addFileHandler('settings.log')->createInstance('settings');
+        $this->flash             = $flash;
+        $this->permissionsSetter = $permissionsSetter;
     }
 
     /**
@@ -57,14 +76,8 @@ class CheckSettingsMiddleware implements MiddlewareInterface
             $this->settings['twig']['cache'],
         ];
         foreach ($paths as $path) {
-            if (!empty($path) && !is_writeable($path)) {
-                $this->flash->addMessage('error', _fe('{0} is not writable by the webserver.', $path));
-                $this->logger->error(sprintf(
-                    '%s is not writable by the webserver. Please run: sudo chown -R www-data:www-data %s;sudo chmod -R 0775 %s',
-                    $path,
-                    $path,
-                    $path
-                ));
+            if (!empty($path) && file_exists($path) && !is_writeable($path)) {
+                $this->permissionsSetter->setPermissions($path);
             }
         }
 

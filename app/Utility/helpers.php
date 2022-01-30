@@ -24,8 +24,9 @@ function array_clean(array $array, array $keys): array
 /**
  * @param ContainerInterface $container
  *
- * @throws ContainerExceptionInterface
  * @throws NotFoundExceptionInterface
+ * @throws ContainerExceptionInterface
+ * @throws Exception
  *
  * @return int
  */
@@ -38,11 +39,7 @@ function compile_twig_templates(ContainerInterface $container): int
     $ext         = $container->get(TwigTranslationExtension::class);
     $compiler    = new TwigCompiler($twig, $ext, $cache, true);
 
-    try {
-        $compiler->compile();
-    } catch (Exception $e) {
-        exit($e->getMessage());
-    }
+    $compiler->compile();
 
     return 0;
 }
@@ -178,11 +175,11 @@ function remove_cached_files(ContainerInterface $container): void
 
 /**
  * @param null|string $path
- * @param bool        $contentsOnly
+ * @param bool        $removePath
  *
  * @return bool
  */
-function removeDirectory(?string $path, bool $contentsOnly): bool
+function removeDirectory(?string $path, bool $removePath): bool
 {
     if (empty($path)) {
         return true;
@@ -200,17 +197,11 @@ function removeDirectory(?string $path, bool $contentsOnly): bool
     $types = ['php', 'cache'];
     foreach ($files as $file) {
         if (in_array($file->getExtension(), $types)) {
-            $fileName = $file->getPathname();
-
-            try {
-                unlink($fileName);
-            } catch (Exception $e) {
-                exit($e->getMessage());
-            }
+            unlink($file->getPathname());
         }
     }
 
-    if ($contentsOnly) {
+    if ($removePath) {
         return rmdir($path);
     }
 

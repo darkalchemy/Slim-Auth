@@ -9,6 +9,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
+use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 
 /**
  * Factory.
@@ -26,13 +27,19 @@ class LoggerFactory
     private array $handler = [];
 
     /**
+     * @var ChmodPermissionsSetter
+     */
+    private ChmodPermissionsSetter $permissionsSetter;
+
+    /**
      * The constructor.
      *
      * @param array $settings The settings
      */
-    public function __construct(array $settings)
+    public function __construct(array $settings, ChmodPermissionsSetter $permissionsSetter)
     {
-        $this->path = (string) $settings['path'];
+        $this->path              = (string) $settings['path'];
+        $this->permissionsSetter = $permissionsSetter;
     }
 
     /**
@@ -66,10 +73,7 @@ class LoggerFactory
     public function addFileHandler(string $filename, string $level = 'DEBUG'): self
     {
         if (!is_writeable($this->path)) {
-            exit(_fe(
-                '{0} is not writable by the webserver.<br>Please run:<br>sudo chown -R www-data:www-data {0}<br>sudo chmod -R 0775 {0}',
-                $this->path
-            ));
+            $this->permissionsSetter->setPermissions($this->path);
         }
         $filename            = sprintf('%s/%s', $this->path, $filename);
         $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level, true, 0755);

@@ -3,17 +3,15 @@
 declare(strict_types=1);
 
 date_default_timezone_set('UTC');
-ini_set('default_charset', 'utf-8');
-ini_set('max_execution_time', '300');
+$siteName = 'Slim-Auth';
 
 $settings = [
-    'site_name'           => SITE_NAME,
-    'di_compilation_path' => ENV === 'PRODUCTION' ? CACHE_DIR : null,
-    'router_cache_file'   => ENV === 'PRODUCTION' ? CACHE_DIR . 'router.cache' : '',
+    'site_name'           => $siteName,
+    'di_compilation_path' => CACHE_DIR,
+    'router_cache_file'   => CACHE_DIR . 'router.cache',
+    'environment'         => 'DEVELOPMENT', // DEVELOPMENT or PRODUCTION
     'session'             => [
-        'name'                   => str_replace(' ', '_', SITE_NAME),
-        'save_handler'           => SESSION_HANDLER,
-        'save_path'              => SESSION_HANDLER === 'redis' ? 'unix:///dev/shm/redis.sock?prefix=' . SITE_NAME . ':&database=1' : '',
+        'name'                   => str_replace(' ', '_', $siteName),
         'sid_length'             => '128',
         'cache_expire'           => '300',
         'lazy_write'             => '0',
@@ -60,7 +58,7 @@ $settings = [
     ],
     'twig' => [
         'path'  => VIEWS_DIR,
-        'cache' => ENV === 'PRODUCTION' ? VIEWS_DIR . 'cache' . DIRECTORY_SEPARATOR : null,
+        'cache' => VIEWS_DIR . 'cache' . DIRECTORY_SEPARATOR,
     ],
     'webpack' => [
         'manifest' => PUBLIC_RESOURCES_DIR . 'manifest.json',
@@ -78,7 +76,7 @@ $settings = [
         'smtp_secure'     => 'tls',
         'smtp_port'       => 587,
         'smtp_from_email' => '',
-        'smtp_from_user'  => SITE_NAME . ' Staff',
+        'smtp_from_user'  => $siteName . ' Staff',
     ],
     'bad_words' => [
         'owner',
