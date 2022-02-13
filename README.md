@@ -191,4 +191,4 @@ phpunit for testing.
 Much of what I have done here I learned from watching videos on youtube, [Laracasts](https://laracasts.com/), [Codecourse](https://codecourse.com) and from what I have read in many of the online tutorials and Slim Skeletons on github.\
 [Slim4-Skeleton](https://github.com/odan/slim4-skeleton), [Slim-Skeleton](https://github.com/slimphp/Slim-Skeleton) and [Slim4-Starter](https://github.com/akrabat/slim4-starter) to list just a few.
 
-I still have a long way to go, but I'm enjoying the trip.
+I still have a long way to go, but I'm enjoying the trip. This should not be used for any production websites as there are still many things to correct.
