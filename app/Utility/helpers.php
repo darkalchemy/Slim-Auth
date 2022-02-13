@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Slim\Views\Twig;
 use Darkalchemy\Twig\TwigCompiler;
-use Selective\Config\Configuration;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Psr\Container\ContainerExceptionInterface;
+use Selective\Config\Configuration;
+use Slim\Views\Twig;
 
 /**
  * @param array $array

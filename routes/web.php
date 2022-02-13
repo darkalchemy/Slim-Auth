@@ -17,6 +17,7 @@ use App\Middleware\RedirectIfAuthenticated;
 use App\Middleware\RedirectIfNotAuthenticated;
 use Psr\Http\Message\ResponseInterface;
 use Slim\App;
+use Slim\Csrf\Guard;
 
 return function (App $app) {
     $app->get('/clear', function (ResponseInterface $response) {
@@ -60,9 +61,9 @@ return function (App $app) {
             $route->post('/recover', [PasswordRecoverController::class, 'recover']);
             $route->get('/reset', [PasswordResetController::class, 'index'])->setName('auth.password.reset');
             $route->post('/reset', [PasswordResetController::class, 'reset']);
-        })->add(RedirectIfAuthenticated::class);
+        })->add(RedirectIfAuthenticated::class)->add(Guard::class);
 
-        $route->post('/signout', SignOutController::class)->setName('auth.signout');
+        $route->post('/signout', SignOutController::class)->setName('auth.signout')->add(Guard::class);
     });
 
     $app->group('', function ($route) {
@@ -71,5 +72,5 @@ return function (App $app) {
         $route->get('/account/password', [AccountPasswordController::class, 'index'])->setName('account.password');
         $route->post('/account/password', [AccountPasswordController::class, 'action']);
         $route->get('/dashboard', DashboardController::class)->setName('dashboard');
-    })->add(RedirectIfNotAuthenticated::class);
+    })->add(RedirectIfNotAuthenticated::class)->add(Guard::class);
 };
