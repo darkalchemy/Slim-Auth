@@ -19,7 +19,7 @@ class ValidationRules
                 'required',
                 [
                     'lengthMin',
-                    8,
+                    12,
                 ],
                 [
                     'equals',
