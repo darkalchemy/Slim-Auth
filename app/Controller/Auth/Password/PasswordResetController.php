@@ -81,7 +81,7 @@ class PasswordResetController extends Controller
         ]);
         if (!$this->reminderCodeExists(User::whereEmail($email = $params['email'] ?? null)
             ->first(), $code = $params['code'] ?? null)) {
-            $this->flash->addMessage('status', _f('Invalid reset code.'));
+            $this->flash->addMessage('status', __f('Invalid reset code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
         }
@@ -113,13 +113,13 @@ class PasswordResetController extends Controller
         ]);
         if (!$this->reminderCodeExists($user = User::whereEmail($params['email'])->first(), $code = $params['code'])) {
             $this->logger->error('Invalid reset code', $data);
-            $this->flash->addMessage('status', _f('Invalid reset code.'));
+            $this->flash->addMessage('status', __f('Invalid reset code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
         }
 
         Sentinel::getReminderRepository()->complete($user, $code, $params['password']);
-        $this->flash->addMessage('status', _f('Your password has been reset and you can now sign in.'));
+        $this->flash->addMessage('status', __f('Your password has been reset and you can now sign in.'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));
     }

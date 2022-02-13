@@ -15,7 +15,7 @@
                 {% if user %}
                     <div class="navbar-item has-dropdown is-hoverable min-150">
                         <a class="navbar-link min-150 has-text-right">
-                            {{ _f('Select Locale') }}
+                            {{ __f('Select Locale') }}
                         </a>
                         <div class="navbar-dropdown">
                             {% for locale in supportedLocales() %}
@@ -33,17 +33,17 @@
                         </a>
                         <div class="navbar-dropdown">
                             <a class="navbar-item" href="{{ url_for('account.account') }}">
-                                {{ _f('Account') }}
+                                {{ __f('Account') }}
                             </a>
                             <a class="navbar-item" href="{{ url_for('account.password') }}">
-                                {{ _f('Change password') }}
+                                {{ __f('Change password') }}
                             </a>
                             <a class="navbar-item" href="{{ url_for('dashboard') }}">
-                                {{ _f('Dashboard') }}
+                                {{ __f('Dashboard') }}
                             </a>
                             <a href="#" class="navbar-item"
                                onclick="document.getElementById('signout').submit(); return false;">
-                                {{ _f('Sign out') }}
+                                {{ __f('Sign out') }}
                             </a>
                         </div>
                     </div>
@@ -51,10 +51,10 @@
                     <div class="navbar-item">
                         <div class="buttons">
                             <a class="button" href="{{ url_for('auth.signup') }}">
-                                {{ _f('Sign up') }}
+                                {{ __f('Sign up') }}
                             </a>
                             <a class="button" href="{{ url_for('auth.signin') }}">
-                                {{ _f('Sign in') }}
+                                {{ __f('Sign in') }}
                             </a>
                         </div>
                     </div>

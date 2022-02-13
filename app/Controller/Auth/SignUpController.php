@@ -115,14 +115,14 @@ class SignUpController extends Controller
             ]));
             $activation = Sentinel::getActivationRepository()->create($user);
             $this->storeMail->setUserID($user->id);
-            $this->storeMail->setSubject(_f('Confirm your email.'));
+            $this->storeMail->setSubject(__f('Confirm your email.'));
             $this->storeMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
                 'user' => $user,
                 'code' => $activation->code,
             ]));
             $this->storeMail->store();
         } catch (Exception $e) {
-            $this->flash->addMessage('status', _f('Something went wrong'));
+            $this->flash->addMessage('status', __f('Something went wrong'));
             $this->logger->error($e->getMessage(), array_clean($data, [
                 'email',
                 'username',
@@ -138,7 +138,7 @@ class SignUpController extends Controller
             'email',
             'username',
         ]));
-        $this->flash->addMessage('success', _f('Signup successful. Please check and confirm your email before continuing.'));
+        $this->flash->addMessage('success', __f('Signup successful. Please check and confirm your email before continuing.'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('home'));
     }

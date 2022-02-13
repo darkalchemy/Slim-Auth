@@ -1,16 +1,16 @@
 {% set link = full_url_for('auth.activate', {}, {'email': user.email, 'code': code}) %}
 
 <p>
-    {{ _f('Hi') }} {{ user.username }},
+    {{ __f('Hi') }} {{ user.username }},
 </p>
 
 <p>
-    {{ _f('Click the link below to confirm your email and activate your account.') }}
+    {{ __f('Click the link below to confirm your email and activate your account.') }}
 </p>
 <p>
     <a href="{{ link }}">{{ link }}</a>
 </p>
 
 <p>
-    {{ settings.site_name }} {{ _f('Staff') }}
+    {{ settings.site_name }} {{ __f('Staff') }}
 </p>

@@ -48,7 +48,7 @@ class RedirectIfAuthenticated
         RequestHandlerInterface $handler
     ): ResponseInterface {
         if (!Sentinel::guest()) {
-            $this->flash->addMessage('error', _f('You are already authenticated.'));
+            $this->flash->addMessage('error', __f('You are already authenticated.'));
 
             $response = $this->responseFactory->createResponse();
 

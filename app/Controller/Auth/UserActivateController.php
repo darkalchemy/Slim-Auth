@@ -65,7 +65,7 @@ class UserActivateController extends Controller
         if (!$this->activationCodeExists($user = User::whereEmail($params['email'] ?? null)
             ->first(), $code = $params['code'] ?? null)) {
             $this->logger->error('Invalid activation code.');
-            $this->flash->addMessage('error', _f('Invalid activation code.'));
+            $this->flash->addMessage('error', __f('Invalid activation code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('auth.signup'));
         }
@@ -75,7 +75,7 @@ class UserActivateController extends Controller
         $role->users()->attach($user);
         $this->flash->addMessage(
             'success',
-            _f('Your email has been confirmed and your account has been activated. You can now sign in.')
+            __f('Your email has been confirmed and your account has been activated. You can now sign in.')
         );
 
         return $response->withHeader('Location', $this->routeParser->urlFor('auth.signin'));

@@ -1,9 +1,9 @@
 <div class="field">
-    <label for="select_locale" class="label">{{ _f('Select Locale') }}</label>
+    <label for="select_locale" class="label">{{ __f('Select Locale') }}</label>
     <div class="control">
         <div class="select is-fullwidth">
             <select id="select_locale" onchange="location.href=this.value;">
-                <option selected>{{ _f('Locale') }}</option>
+                <option selected>{{ __f('Locale') }}</option>
                 {% for locale in supportedLocales() %}
                     {% if getUserLocale() != locale %}
                         <option value="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ nativeLanguageName(locale)|capitalize }}</option>

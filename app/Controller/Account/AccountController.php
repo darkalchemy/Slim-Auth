@@ -83,7 +83,7 @@ class AccountController extends Controller
         Sentinel::check()->update(array_clean($data, [
             'email', 'username',
         ]));
-        $this->flash->addMessage('status', _f('Account details updated!'));
+        $this->flash->addMessage('status', __f('Account details updated!'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('account.account'));
     }

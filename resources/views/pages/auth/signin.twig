@@ -5,7 +5,7 @@
         <div class="container">
             <div class="column is-4 is-offset-4">
                 <h3 class="title has-text-centered">
-                    {{ _f('Sign in') }}
+                    {{ __f('Sign in') }}
                 </h3>
 
                 {% include 'components/status.twig' %}
@@ -13,7 +13,7 @@
                 <form action="{{ url_for('auth.signin') }}" method="post">
                     {{ csrf() | raw }}
                     <div class="field">
-                        <label for="email" class="label">{{ _f('Email') }}</label>
+                        <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">
                             <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
                                    id="email" value="{{ old.email }}">
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="field">
-                        <label for="password" class="label">{{ _f('Password') }}</label>
+                        <label for="password" class="label">{{ __f('Password') }}</label>
                         <div class="control">
                             <input class="input{{ errors.password ? ' is-danger' : '' }}" type="password"
                                    name="password" id="password">
@@ -46,15 +46,15 @@
                         <div class="control">
                             <label class="checkbox">
                                 <input type="checkbox" name="persist" checked>
-                                {{ _f('Keep me signed in') }}
+                                {{ __f('Keep me signed in') }}
                             </label>
                         </div>
                     </div>
 
                     <div class="control level">
-                        <a href="{{ url_for('auth.password.recover') }}" class="button is-info"> {{  _f('Recover') }} </a>
+                        <a href="{{ url_for('auth.password.recover') }}" class="button is-info"> {{  __f('Recover') }} </a>
                         <button type="submit" class="button is-info">
-                            {{ _f('Sign in') }}
+                            {{ __f('Sign in') }}
                         </button>
                     </div>
 

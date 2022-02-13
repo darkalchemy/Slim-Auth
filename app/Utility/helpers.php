@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
+use Slim\Views\Twig;
 use Darkalchemy\Twig\TwigCompiler;
-use Darkalchemy\Twig\TwigTranslationExtension;
-use Psr\Container\ContainerExceptionInterface;
+use Selective\Config\Configuration;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Selective\Config\Configuration;
-use Slim\Views\Twig;
+use Psr\Container\ContainerExceptionInterface;
 
 /**
  * @param array $array
@@ -36,8 +35,7 @@ function compile_twig_templates(ContainerInterface $container): int
     $twig_config = $settings['twig'];
     $cache       = $twig_config['cache'] ?? VIEWS_DIR . 'cache/';
     $twig        = $container->get(Twig::class)->getEnvironment();
-    $ext         = $container->get(TwigTranslationExtension::class);
-    $compiler    = new TwigCompiler($twig, $ext, $cache, true);
+    $compiler    = new TwigCompiler($twig, $cache);
 
     $compiler->compile();
 
@@ -50,7 +48,7 @@ function compile_twig_templates(ContainerInterface $container): int
  *
  * @return string
  */
-function _f(string $text, ...$replacements): string
+function __f(string $text, ...$replacements): string
 {
     global $i18n;
 
@@ -63,7 +61,7 @@ function _f(string $text, ...$replacements): string
  *
  * @return string
  */
-function _fe(string $text, ...$replacements): string
+function __fe(string $text, ...$replacements): string
 {
     global $i18n;
 
@@ -77,7 +75,7 @@ function _fe(string $text, ...$replacements): string
  *
  * @return string
  */
-function _p(string $text, string $alternative, int $count): string
+function __p(string $text, string $alternative, int $count): string
 {
     global $i18n;
 
@@ -92,7 +90,7 @@ function _p(string $text, string $alternative, int $count): string
  *
  * @return string
  */
-function _pf(string $text, string $alternative, int $count, ...$replacements): string
+function __pf(string $text, string $alternative, int $count, ...$replacements): string
 {
     global $i18n;
 
@@ -107,7 +105,7 @@ function _pf(string $text, string $alternative, int $count, ...$replacements): s
  *
  * @return string
  */
-function _pfe(string $text, string $alternative, int $count, ...$replacements): string
+function __pfe(string $text, string $alternative, int $count, ...$replacements): string
 {
     global $i18n;
 
@@ -120,7 +118,7 @@ function _pfe(string $text, string $alternative, int $count, ...$replacements): 
  *
  * @return string
  */
-function _c(string $text, string $context): string
+function __c(string $text, string $context): string
 {
     global $i18n;
 
@@ -132,7 +130,7 @@ function _c(string $text, string $context): string
  *
  * @return string
  */
-function _m(string $text): string
+function __m(string $text): string
 {
     global $i18n;
 

@@ -56,7 +56,7 @@ class LocaleController
             $this->i18n->setLocaleManually($lang);
             $this->flash->addMessage(
                 'success',
-                _fe(
+                __fe(
                     'Current locale changed to: {0}.',
                     ucfirst((string) $this->i18n->getNativeLanguageName($lang))
                 )

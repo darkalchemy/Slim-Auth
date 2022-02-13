@@ -82,7 +82,7 @@ class AccountPasswordController extends Controller
             $this->rules->confirm_password()
         ));
         Sentinel::getUserRepository()->update(Sentinel::check(), array_clean($data, ['password']));
-        $this->flash->addMessage('status', _f('Password updated!'));
+        $this->flash->addMessage('status', __f('Password updated!'));
 
         return $response->withHeader('Location', $this->routeParser->urlFor('account.password'));
     }

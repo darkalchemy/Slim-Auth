@@ -48,7 +48,7 @@ class RedirectIfNotAuthenticated
         RequestHandlerInterface $handler
     ): ResponseInterface {
         if (Sentinel::guest()) {
-            $this->flash->addMessage('status', _f('Please sign in before continuing'));
+            $this->flash->addMessage('status', __f('Please sign in before continuing'));
 
             $response = $this->responseFactory->createResponse();
 
