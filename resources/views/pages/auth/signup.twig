@@ -11,7 +11,6 @@
                 {% include 'components/status.twig' %}
 
                 <form action="{{ url_for('auth.signup') }}" method="post">
-                    {{ csrf() | raw }}
                     <div class="field">
                         <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">
