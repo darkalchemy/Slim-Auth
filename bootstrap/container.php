@@ -122,14 +122,20 @@ return [
     PHPMailer::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->getArray('mail');
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug = 0;
+        $mail->SMTPDebug = 3;
         $mail->isSMTP();
         $mail->Host = $settings['smtp_host'];
         $mail->SMTPAuth = $settings['smtp_auth'];
-        $mail->Username = $settings['smtp_username'];
-        $mail->Password = $settings['smtp_password'];
-        $mail->SMTPSecure = $settings['smtp_secure'];
         $mail->Port = $settings['smtp_port'];
+        if ($settings['smtp_username']) {
+            $mail->Username = $settings['smtp_username'];
+        }
+        if ($settings['smtp_password']) {
+            $mail->Password = $settings['smtp_password'];
+        }
+        if ($settings['smtp_secure']) {
+            $mail->SMTPSecure = $settings['smtp_secure'];
+        }
         $mail->setFrom($settings['smtp_from_email'], $settings['smtp_from_user']);
         $mail->isHTML();
 
