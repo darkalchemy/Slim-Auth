@@ -22,7 +22,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Csrf\Guard;
 use Slim\Flash\Messages;
@@ -33,11 +32,13 @@ use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return [
-    Configuration::class => fn () => new Configuration(require CONFIG_DIR . 'settings.php'),
+    'settings' => function () {
+        return require CONFIG_DIR . 'settings.php';
+    },
 
     App::class => function (ContainerInterface $container) {
         $app = Bridge::create($container);
-        $settings = $container->get(Configuration::class)->all();
+        $settings = $container->get('settings');
         if ($settings['environment'] === 'PRODUCTION') {
             $routeCacheFile = $settings['router_cache_file'];
             $app->getRouteCollector()->setCacheFile($routeCacheFile);
@@ -59,7 +60,7 @@ return [
     },
 
     SessionInterface::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->all();
+        $settings = $container->get('settings');
         $session = new PhpSession();
         $session->setOptions((array) $settings['session']);
         if ($settings['environment'] === 'redis') {
@@ -95,7 +96,7 @@ return [
     },
 
     Twig::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->all();
+        $settings = $container->get('settings');
         $twig = Twig::create($settings['twig']['path'], [
             'cache' => $settings['environment'] === 'PRODUCTION' ? $settings['twig']['cache'] : false,
         ]);
@@ -120,7 +121,7 @@ return [
     },
 
     PHPMailer::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->getArray('mail');
+        $settings = $container->get('settings')['mail'];
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 3;
         $mail->isSMTP();
@@ -143,7 +144,7 @@ return [
     },
 
     WhoopsMiddleware::class => function (ContainerInterface $container) {
-        $env = $container->get(Configuration::class)->getString('environment');
+        $env = $container->get('settings')['environment'];
 
         return new WhoopsMiddleware([
             'enable' => $env === 'DEVELOPMENT',
@@ -151,12 +152,12 @@ return [
     },
 
     LoggerFactory::class => fn (ContainerInterface $container) => new LoggerFactory(
-        $container->get(Configuration::class)->getArray('logger'),
+        $container->get('settings')['logger'],
         $container->get(ChmodPermissionsSetter::class)
     ),
 
     CheckSettingsMiddleware::class => fn (ContainerInterface $container) => new CheckSettingsMiddleware(
-        $container->get(Configuration::class)->all(),
+        $container->get('settings'),
         $container->get(LoggerFactory::class),
         $container->get(Messages::class),
         $container->get(ChmodPermissionsSetter::class)

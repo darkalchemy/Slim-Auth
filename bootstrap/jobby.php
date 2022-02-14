@@ -7,7 +7,6 @@ use App\Model\Email;
 use App\Provider\SendMail;
 use Carbon\Carbon;
 use Jobby\Jobby;
-use Selective\Config\Configuration;
 
 $app              = require __DIR__ . '/app.php';
 $container        = $app->getContainer();
@@ -17,7 +16,7 @@ $logger           = $loggerFactory->addFileHandler('jobby.log')->createInstance(
 $sendmail_enabled = false;
 
 try {
-    $sendmail_enabled = (bool) $container->get(Configuration::class)->findString('mail.smtp_enable');
+    $sendmail_enabled = (bool) $container->get('settings')['mail']['smtp_enable'];
 } catch (Exception $e) {
     $logger->error($e->getMessage());
 }

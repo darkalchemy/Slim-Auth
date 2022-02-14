@@ -27,7 +27,6 @@ npm/npx is required
 [PHPMailer](https://github.com/PHPMailer/PHPMailer) for sending email\
 [Phinx](https://phinx.org/) for database migrations\
 [Odan/Session](https://github.com/odan/session) for managing the session\
-[Selective/Config](https://github.com/selective-php/config) to manage config settings\
 [Slim/CSRF](https://github.com/slimphp/Slim-Csrf) to protect against csrf\
 [Slim/Flash](https://github.com/slimphp/Slim-Flash) for flash messaging\
 [Slim/Twig/Flash](https://github.com/kanellov/slim-twig-flash) (updated and included manually) for displaying flash messages in twig\

@@ -7,7 +7,6 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use DI\NotFoundException;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
-use Selective\Config\Configuration;
 use Slim\App;
 use Valitron\Validator;
 
@@ -53,8 +52,7 @@ return function (App $app) {
     }, 'is wrong');
 
     Validator::addRule('badWords', function ($field, $value, array $params, array $fields) use ($container) {
-        $bad_words = $container->get(Configuration::class)
-            ->getArray('bad_words');
+        $bad_words = $container->get('settings')['bad_words'];
 
         return !in_array(strtolower($value), $bad_words);
     }, 'is not allowed');

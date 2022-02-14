@@ -6,7 +6,6 @@ use Darkalchemy\Twig\TwigCompiler;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Selective\Config\Configuration;
 use Slim\Views\Twig;
 
 /**
@@ -31,7 +30,7 @@ function array_clean(array $array, array $keys): array
  */
 function compile_twig_templates(ContainerInterface $container): int
 {
-    $settings    = $container->get(Configuration::class)->all();
+    $settings    = $container->get('settings');
     $twig_config = $settings['twig'];
     $cache       = $twig_config['cache'] ?? VIEWS_DIR . 'cache/';
     $twig        = $container->get(Twig::class)->getEnvironment();
@@ -161,7 +160,7 @@ function human_readable_size(int $bytes, int $precision): string
  */
 function remove_cached_files(ContainerInterface $container): void
 {
-    $settings    = $container->get(Configuration::class)->all();
+    $settings    = $container->get('settings');
     $twig_config = $settings['twig'];
     $cache       = $twig_config['cache'] ?? VIEWS_DIR . 'cache/';
     if (file_exists($cache)) {

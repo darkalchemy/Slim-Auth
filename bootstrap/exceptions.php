@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Exception\ExceptionHandler;
 use App\Factory\LoggerFactory;
 use DI\NotFoundException;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Flash\Messages;
 use Slim\Views\Twig;
@@ -14,7 +13,7 @@ return function (App $app) {
     if (!($container = $app->getContainer())) {
         throw new NotFoundException('Could not get the container.');
     }
-    $error = $container->get(Configuration::class)->getArray('error_handler_middleware');
+    $error = $container->get('settings')['error_handler_middleware'];
 
     $errorMiddleware = $app->addErrorMiddleware(
         $error['display_error_details'],

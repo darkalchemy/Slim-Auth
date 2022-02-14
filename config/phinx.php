@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-use Selective\Config\Configuration;
-
 $container = (require __DIR__ . '/../bootstrap/app.php')->getContainer();
-$db        = $container->get(Configuration::class)->getArray('db');
+$db        = $container->get('settings')['db'];
 
 return [
     'paths' => [
