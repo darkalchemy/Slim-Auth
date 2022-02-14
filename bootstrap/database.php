@@ -12,6 +12,4 @@ return function ($settings) {
     $capsule->addConnection($settings);
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
-
-    $capsule->bootEloquent();
 };
