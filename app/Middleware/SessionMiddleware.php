@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Csrf\Guard;
 
 /**
  * Class SessionMiddleware.
@@ -16,15 +17,17 @@ use Psr\Http\Server\RequestHandlerInterface;
 class SessionMiddleware implements MiddlewareInterface
 {
     protected SessionInterface $session;
+    protected Guard $guard;
 
     /**
      * SessionMiddleware constructor.
      *
      * @param SessionInterface $session
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(SessionInterface $session, Guard $guard)
     {
         $this->session = $session;
+        $this->guard   = $guard;
     }
 
     /**
@@ -42,6 +45,8 @@ class SessionMiddleware implements MiddlewareInterface
             $this->session->regenerateId();
             $this->session->set('regen', time() + 300);
         }
+
+        $this->guard->setStorage($this);
 
         return $handler->handle($request);
     }

@@ -44,8 +44,9 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/', HomeController::class)->setName('home');
+    $app->get('/', HomeController::class)->setName('home')->add(Guard::class);
     $app->get('/locale/{lang}', LocaleController::class)->setName('translate');
+    $app->post('/signout', SignOutController::class)->setName('auth.signout')->add(Guard::class);
 
     $app->group('/auth', function ($route) {
         $route->group('', function ($route) {
@@ -54,17 +55,15 @@ return function (App $app) {
             $route->get('/signup', [SignUpController::class, 'index'])->setName('auth.signup');
             $route->post('/signup', [SignUpController::class, 'signup']);
             $route->get('/activate', UserActivateController::class)->setName('auth.activate');
-        })->add(RedirectIfAuthenticated::class);
+        });
 
         $route->group('/password', function ($route) {
             $route->get('/recover', [PasswordRecoverController::class, 'index'])->setName('auth.password.recover');
             $route->post('/recover', [PasswordRecoverController::class, 'recover']);
             $route->get('/reset', [PasswordResetController::class, 'index'])->setName('auth.password.reset');
             $route->post('/reset', [PasswordResetController::class, 'reset']);
-        })->add(RedirectIfAuthenticated::class)->add(Guard::class);
-
-        $route->post('/signout', SignOutController::class)->setName('auth.signout')->add(Guard::class);
-    });
+        });
+    })->add(RedirectIfAuthenticated::class);
 
     $app->group('', function ($route) {
         $route->get('/account/account', [AccountController::class, 'index'])->setName('account.account');

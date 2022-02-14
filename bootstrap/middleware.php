@@ -9,7 +9,6 @@ use DI\NotFoundException;
 use Middlewares\TrailingSlash;
 use Selective\Config\Configuration;
 use Slim\App;
-use Slim\Csrf\Guard;
 use Slim\Views\TwigMiddleware;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 

@@ -114,7 +114,7 @@ return [
     },
 
     Guard::class => function (ContainerInterface $container) {
-        $storage = null;
+        $storage = [];
 
         return new Guard($container->get(ResponseInterface::class), 'csrf', $storage, null, 200, 32, true);
     },
