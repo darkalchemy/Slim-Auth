@@ -1,5 +1,7 @@
 .idea
 .php_cs.cache
+.dccache
+.vscode
 config/settings.php
 node_modules/
 vendor/
