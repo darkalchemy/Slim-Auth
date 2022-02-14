@@ -14,6 +14,8 @@ class TwigPhpExtension extends AbstractExtension
         'floor',
         'ceil',
         'hash',
+        'get_included_files',
+        'count',
     ];
 
     /**

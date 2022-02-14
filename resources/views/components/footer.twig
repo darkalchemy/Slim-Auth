@@ -1,7 +1,7 @@
 <div class="hero-foot is-info">
     <div class="content has-text-centered">
         <p class="mb-2 mt-2">
-            {{ __fe('This page was generated in {0} ms and used {1} of ram.', runtime(), max_mem_usage(false)) }}
+            {{ __fe('This page was generated in {0} ms, included {1} files and used {2} of ram.', runtime(), count(get_included_files()), max_mem_usage(false)) }}
         </p>
     </div>
 </div>

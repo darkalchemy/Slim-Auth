@@ -27,7 +27,7 @@ class TwigUtilities extends AbstractExtension
      */
     public function max_mem_usage(bool $real): string
     {
-        return human_readable_size(memory_get_peak_usage($real), 3);
+        return human_readable_size(memory_get_peak_usage($real));
     }
 
     /**
@@ -37,6 +37,6 @@ class TwigUtilities extends AbstractExtension
     {
         global $startTime;
 
-        return round((hrtime(true) - $startTime) / 1e+6, 3);
+        return round((hrtime(true) - $startTime) / 1e+6, 2);
     }
 }
