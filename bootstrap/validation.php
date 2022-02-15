@@ -46,9 +46,9 @@ return function (App $app) {
     }, 'is already in use');
 
     Validator::addRule('currentPassword', function ($field, $value, array $params, array $fields) {
-        $field = 'current_password' ? 'password' : $field;
-
-        return Sentinel::getUserRepository()->validateCredentials(Sentinel::check(), [$field => $value]);
+        return Sentinel::getUserRepository()->validateCredentials(Sentinel::check(), [
+            $field === 'current_password' ? 'password' : $field => $value,
+        ]);
     }, 'is wrong');
 
     Validator::addRule('badWords', function ($field, $value, array $params, array $fields) use ($container) {
