@@ -11,3 +11,6 @@ parameters:
         - config
         - routes
         - var
+    ignoreErrors:
+        - '#Call to an undefined static method Cartalyst\\Sentinel\\Native\\Facades\\Sentinel::(\w+)\(\)#'
+        - '#Call to an undefined static method App\\Model\\User::(\w+)\(\)#'

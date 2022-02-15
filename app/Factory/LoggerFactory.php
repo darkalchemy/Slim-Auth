@@ -66,16 +66,18 @@ class LoggerFactory
      * Add a console logger.
      *
      * @param string $filename
-     * @param string $level
+     * @param int    $level
      *
      * @return $this
      */
-    public function addFileHandler(string $filename, string $level = 'DEBUG'): self
+    public function addFileHandler(string $filename, int $level = Logger::DEBUG): self
     {
         if (!is_writeable($this->path)) {
             $this->permissionsSetter->setPermissions($this->path);
         }
         $filename            = sprintf('%s/%s', $this->path, $filename);
+
+        /** @phpstan-ignore-next-line */
         $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level, true, 0755);
 
         // The last "true" here tells monolog to remove empty []'s
@@ -89,10 +91,13 @@ class LoggerFactory
     /**
      * Add a console logger.
      *
+     * @param int $level
+     *
      * @return self The instance
      */
-    public function addConsoleHandler(string $level = 'DEBUG'): self
+    public function addConsoleHandler(int $level = Logger::DEBUG): self
     {
+        /** @phpstan-ignore-next-line */
         $streamHandler = new StreamHandler('php://stdout', $level);
         $streamHandler->setFormatter(new LineFormatter(null, null, false, true));
 
