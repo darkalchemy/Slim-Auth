@@ -38,7 +38,6 @@
         "slim/slim": "^4.9.0",
         "slim/twig-view": "^3.3.0",
         "symfony/http-foundation": "^v6.0.2",
-        "uma/redis-session-handler": "^v0.9.9",
         "umpirsky/composer-permissions-handler": "^v1.7",
         "vlucas/valitron": "v1.4.10",
         "zeuxisoo/slim-whoops": "^0.7.3"

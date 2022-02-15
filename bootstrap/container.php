@@ -27,7 +27,6 @@ use Slim\Csrf\Guard;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
-use UMA\RedisSessionHandler;
 use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
@@ -52,20 +51,10 @@ return [
         return $app;
     },
 
-    // replace default redis session handler
-    RedisSessionHandler::class => function () {
-        if (ini_get('session.save_handler') === 'redis') {
-            session_set_save_handler(new RedisSessionHandler(), true);
-        }
-    },
-
     SessionInterface::class => function (ContainerInterface $container) {
         $settings = $container->get('settings');
         $session = new PhpSession();
         $session->setOptions((array) $settings['session']);
-        if ($settings['environment'] === 'redis') {
-            $container->get(RedisSessionHandler::class);
-        }
 
         return $session;
     },

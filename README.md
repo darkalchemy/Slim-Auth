@@ -34,8 +34,7 @@ npm/npx is required
 [Slim/Whoops](https://github.com/zeuxisoo/php-slim-whoops) for displaying errors\
 [Twig-Translate](https://github.com/darkalchemy/Twig-Translate) for translations\
 [umpirsky/composer-permissions-handler](https://github.com/umpirsky/PermissionsHandler) to set folder permissions for log and cache folders\
-[Vlucas/Valitron](https://github.com/vlucas/valitron) for validation\
-[uma/redis-session-handler](https://github.com/1ma/RedisSessionHandler) for session handler if using redis for session handling
+[Vlucas/Valitron](https://github.com/vlucas/valitron) for validation
 
 To install using composer
 
