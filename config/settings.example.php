@@ -59,6 +59,7 @@ $settings = [
     'twig' => [
         'path'  => VIEWS_DIR,
         'cache' => VIEWS_DIR . 'cache' . DIRECTORY_SEPARATOR,
+        'charset' => 'UTF-8',
     ],
     'webpack' => [
         'manifest' => PUBLIC_RESOURCES_DIR . 'manifest.json',

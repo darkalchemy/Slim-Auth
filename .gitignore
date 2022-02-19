@@ -7,3 +7,4 @@ node_modules/
 vendor/
 public/resources/
 composer.lock
+resources/views/cache/
