@@ -1,0 +1,65 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+	// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+	"name": "Existing Docker Compose (Extend)",
+
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		"../../../devilbox/docker-compose.yml" // Point to Devilbox's docker-compose.yml
+	],
+
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "php", // Name of the service we want to remote to
+
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	"workspaceFolder": "/shared/httpd/Slim-Auth", // For example: /shared/httpd/my-website
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is attached - for example installing git.
+	"postAttachCommand": "npm i npm-check-updates",
+
+	// Add the IDs of any extensions you want installed in the array below.
+	"extensions": [
+        "abusaidm.html-snippets",
+        "bmewburn.vscode-intelephense-client",
+        "bradlc.vscode-tailwindcss",
+        "cweijan.vscode-mysql-client2",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "fabiospampinato.vscode-statusbar-debugger",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "GitHub.vscode-pull-request-github",
+        "ikappas.composer",
+        "ionutvmi.path-autocomplete",
+        "jaguadoromero.vscode-php-create-class",
+        "junstyle.php-cs-fixer",
+        "lior-chamla.google-fonts",
+        "MehediDracula.php-namespace-resolver",
+        "mgmcdermott.vscode-language-babel",
+        "mkxml.vscode-filesize",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode.cpptools",
+        "naumovs.theme-oceanicnext",
+        "neilbrayfield.php-docblocker",
+        "RedVanWorkshop.explorer-exclude-vscode-extension",
+        "snyk-security.snyk-vulnerability-scanner",
+        "streetsidesoftware.code-spell-checker",
+        "swordev.phpstan",
+        "vincaslt.highlight-matching-tag",
+        "vscode-icons-team.vscode-icons",
+        "wayou.vscode-todo-highlight",
+        "xdebug.php-debug",
+        "yzhang.markdown-all-in-one",
+    ],
+    "remoteUser": "devilbox",
+}
