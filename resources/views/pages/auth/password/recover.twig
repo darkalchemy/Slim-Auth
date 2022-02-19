@@ -15,13 +15,13 @@
                     <div class="field">
                         <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
-                                   id="email" value="{{ old.email }}">
+                            <input class="input{{ errors('email') ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ form_data('email') }}">
                         </div>
 
-                        {% if errors.email %}
+                        {% if errors('email') %}
                             <p class="help is-danger">
-                                {{ errors.email | first }}
+                                {{ errors('email') | first }}
                             </p>
                         {% endif %}
                     </div>

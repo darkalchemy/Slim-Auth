@@ -89,16 +89,16 @@ return [
         $twig = Twig::create($settings['twig']['path'], [
             'cache' => $settings['environment'] === 'PRODUCTION' ? $settings['twig']['cache'] : false,
         ]);
+        $twig->getEnvironment()->setCharset($settings['twig']['charset']);
+        $twig->getEnvironment()->enableStrictVariables();
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], PUBLIC_DIR));
-        $twig->addExtension(new TwigUtilities());
-        $twig->addExtension(new TwigPhpExtension());
-        $twig->addExtension(new CsrfExtension($container->get(Guard::class)));
-        $twig->addExtension(new TwigMessagesExtension($container->get(Messages::class)));
-        $twig->addExtension(new TwigTranslationExtension($container->get(I18n::class)));
+        $twig->addExtension($container->get(TwigUtilities::class));
+        $twig->addExtension($container->get(TwigPhpExtension::class));
+        $twig->addExtension($container->get(CsrfExtension::class));
+        $twig->addExtension($container->get(TwigMessagesExtension::class));
+        $twig->addExtension($container->get(TwigTranslationExtension::class));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
         $twig->getEnvironment()->addGlobal('settings', $settings);
-        $twig->getEnvironment()->addGlobal('errors', $container->get(Messages::class)->getFirstMessage('errors'));
-        $twig->getEnvironment()->addGlobal('old', $container->get(Messages::class)->getFirstMessage('old'));
 
         return $twig;
     },

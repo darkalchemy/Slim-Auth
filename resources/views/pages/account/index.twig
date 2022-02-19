@@ -15,13 +15,13 @@
                     <div class="field">
                         <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
-                                   id="email" value="{{ old.email ?: user.email }}">
+                            <input class="input{{ errors('email') ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ form_data('email') ?: user.email }}">
                         </div>
 
-                        {% if errors.email %}
+                        {% if errors('email') %}
                             <p class="help is-danger">
-                                {{ errors.email | first }}
+                                {{ errors('email') | first }}
                             </p>
                         {% endif %}
                     </div>
@@ -29,14 +29,14 @@
                     <div class="field">
                         <label for="username" class="label">{{ __f('Username') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.username ? ' is-danger' : '' }}" type="text"
+                            <input class="input{{ errors('username') ? ' is-danger' : '' }}" type="text"
                                    name="username" id="username"
-                                   value="{{ old.username ?: user.username }}">
+                                   value="{{ form_data('username') ?: user.username }}">
                         </div>
 
-                        {% if errors.username %}
+                        {% if errors('username') %}
                             <p class="help is-danger">
-                                {{ errors.username | first }}
+                                {{ errors('username') | first }}
                             </p>
                         {% endif %}
                     </div>

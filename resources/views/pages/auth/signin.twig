@@ -14,13 +14,13 @@
                     <div class="field">
                         <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
-                                   id="email" value="{{ old.email }}">
+                            <input class="input{{ errors('email') ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ form_data('email') }}">
                         </div>
 
-                        {% if errors.email %}
+                        {% if errors('email') %}
                             <p class="help is-danger">
-                                {{ errors.email | first }}
+                                {{ errors('email') | first }}
                             </p>
                         {% endif %}
                     </div>
@@ -28,13 +28,13 @@
                     <div class="field">
                         <label for="password" class="label">{{ __f('Password') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.password ? ' is-danger' : '' }}" type="password"
+                            <input class="input{{ errors('password') ? ' is-danger' : '' }}" type="password"
                                    name="password" id="password">
                         </div>
 
-                        {% if errors.password %}
+                        {% if errors('password') %}
                             <p class="help is-danger">
-                                {{ errors.password | first }}
+                                {{ errors('password') | first }}
                             </p>
                         {% endif %}
                     </div>

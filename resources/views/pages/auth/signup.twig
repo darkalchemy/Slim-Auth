@@ -9,18 +9,17 @@
                 </h3>
 
                 {% include 'components/status.twig' %}
-
                 <form action="{{ url_for('auth.signup') }}" method="post">
                     <div class="field">
                         <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.email ? ' is-danger' : '' }}" type="text" name="email"
-                                   id="email" value="{{ old.email }}" autocomplete="username">
+                            <input class="input{{ errors('email') ? ' is-danger' : '' }}" type="text" name="email"
+                                   id="email" value="{{ form_data('email') }}" autocomplete="username">
                         </div>
 
-                        {% if errors.email %}
+                        {% if errors('email') %}
                             <p class="help is-danger">
-                                {{ errors.email | first }}
+                                {{ errors('email') | first }}
                             </p>
                         {% endif %}
                     </div>
@@ -28,13 +27,13 @@
                     <div class="field">
                         <label for="username" class="label">{{ __f('Username') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.username ? ' is-danger' : '' }}" type="text"
-                                   name="username" id="username" value="{{ old.username }}">
+                            <input class="input{{ errors('username') ? ' is-danger' : '' }}" type="text"
+                                   name="username" id="username" value="{{ form_data('username') }}">
                         </div>
 
-                        {% if errors.username %}
+                        {% if errors('username') %}
                             <p class="help is-danger">
-                                {{ errors.username | first }}
+                                {{ errors('username') | first }}
                             </p>
                         {% endif %}
                     </div>
@@ -42,13 +41,13 @@
                     <div class="field">
                         <label for="password" class="label">{{ __f('Password') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.password ? ' is-danger' : '' }}" type="password"
+                            <input class="input{{ errors('password') ? ' is-danger' : '' }}" type="password"
                                    name="password" id="password" autocomplete="new-password">
                         </div>
 
-                        {% if errors.password %}
+                        {% if errors('password') %}
                             <p class="help is-danger">
-                                {{ errors.password | first }}
+                                {{ errors('password') | first }}
                             </p>
                         {% endif %}
                     </div>
@@ -56,13 +55,13 @@
                     <div class="field">
                         <label for="confirm_password" class="label">{{ __f('Confirm Password') }}</label>
                         <div class="control">
-                            <input class="input{{ errors.confirm_password ? ' is-danger' : '' }}" type="password"
+                            <input class="input{{ errors('confirm_password') ? ' is-danger' : '' }}" type="password"
                                    name="confirm_password" id="confirm_password" autocomplete="new-password">
                         </div>
 
-                        {% if errors.password %}
+                        {% if errors('confirm_password') %}
                             <p class="help is-danger">
-                                {{ errors.confirm_password | first }}
+                                {{ errors('confirm_password') | first }}
                             </p>
                         {% endif %}
                     </div>

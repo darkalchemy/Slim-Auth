@@ -47,6 +47,14 @@ class TwigMessagesExtension extends AbstractExtension
                 $this,
                 'hasMessage',
             ]),
+            new TwigFunction('form_data', [
+                $this,
+                'formData',
+            ]),
+            new TwigFunction('errors', [
+                $this,
+                'errors',
+            ]),
         ];
     }
 
@@ -67,10 +75,55 @@ class TwigMessagesExtension extends AbstractExtension
      */
     public function getMessages(?string $key = null): mixed
     {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            file_put_contents(LOGS_DIR . 'flash.log', 'flash not active' . PHP_EOL, FILE_APPEND);
+
+            return [];
+        }
         if ($key !== null) {
             return $this->flash->getMessage($key);
         }
 
         return $this->flash->getMessages();
+    }
+
+    /**
+     * Get the form data.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    public function formData(string $key): string
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            file_put_contents(LOGS_DIR . 'flash.log', 'flash not active' . PHP_EOL, FILE_APPEND);
+
+            return '';
+        }
+
+        $old = $this->flash->getFirstMessage('old');
+
+        return $old[$key] ?? '';
+    }
+
+    /**
+     * Get the errors.
+     *
+     * @param string $key
+     *
+     * @return array
+     */
+    public function errors(string $key): array
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            file_put_contents(LOGS_DIR . 'flash.log', 'flash not active' . PHP_EOL, FILE_APPEND);
+
+            return [];
+        }
+
+        $errors = $this->flash->getFirstMessage('errors');
+
+        return $errors[$key] ?? [];
     }
 }
