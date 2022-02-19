@@ -13,20 +13,19 @@
         <div id="navbar" class="navbar-menu">
             <div class="navbar-end">
                 {% if user %}
-                    <div class="navbar-item has-dropdown is-hoverable min-150">
-                        <a class="navbar-link min-150 has-text-right">
-                            {{ __f('Select Locale') }}
-                        </a>
-                        <div class="navbar-dropdown">
-                            {% for locale in supportedLocales() %}
-                                {% if getUserLocale() != locale %}
-                                    <a class="navbar-item"
-                                       href="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ nativeLanguageName(locale)|capitalize }}</a>
-                                {% endif %}
-                            {% endfor %}
+                        <div class="navbar-item has-dropdown is-hoverable min-150">
+                            <a class="navbar-link min-150 has-text-right">
+                                {{ __f('Select Locale') }}
+                            </a>
+                            <div class="navbar-dropdown">
+                                {% for locale in supportedLocales() %}
+                                    {% if getUserLocale() != locale %}
+                                        <a class="navbar-item"
+                                        href="{{ url_for('translate', { 'lang': locale }) }}">{{ nativeLanguageName(locale)|capitalize }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-
                     <div class="navbar-item has-dropdown is-hoverable min-150">
                         <a class="navbar-link min-150 has-text-right">
                             {{ user.username }}

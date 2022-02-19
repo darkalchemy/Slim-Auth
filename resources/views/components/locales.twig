@@ -6,7 +6,7 @@
                 <option selected>{{ __f('Locale') }}</option>
                 {% for locale in supportedLocales() %}
                     {% if getUserLocale() != locale %}
-                        <option value="{{ url_for('translate', { 'lang': lang }) }}{{ locale }}">{{ nativeLanguageName(locale)|capitalize }}</option>
+                        <option value="{{ url_for('translate', { 'lang': locale }) }}">{{ nativeLanguageName(locale)|capitalize }}</option>
                     {% endif %}
                 {% endfor %}
             </select>
