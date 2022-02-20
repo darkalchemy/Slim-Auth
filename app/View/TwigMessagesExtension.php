@@ -75,11 +75,6 @@ class TwigMessagesExtension extends AbstractExtension
      */
     public function getMessages(?string $key = null): mixed
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            file_put_contents(LOGS_DIR . 'flash.log', 'flash not active' . PHP_EOL, FILE_APPEND);
-
-            return [];
-        }
         if ($key !== null) {
             return $this->flash->getMessage($key);
         }
@@ -96,12 +91,6 @@ class TwigMessagesExtension extends AbstractExtension
      */
     public function formData(string $key): string
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            file_put_contents(LOGS_DIR . 'flash.log', 'flash not active' . PHP_EOL, FILE_APPEND);
-
-            return '';
-        }
-
         $old = $this->flash->getFirstMessage('old');
 
         return $old[$key] ?? '';
@@ -116,12 +105,6 @@ class TwigMessagesExtension extends AbstractExtension
      */
     public function errors(string $key): array
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            file_put_contents(LOGS_DIR . 'flash.log', 'flash not active' . PHP_EOL, FILE_APPEND);
-
-            return [];
-        }
-
         $errors = $this->flash->getFirstMessage('errors');
 
         return $errors[$key] ?? [];
