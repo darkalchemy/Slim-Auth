@@ -57,8 +57,8 @@ $settings = [
         ],
     ],
     'twig' => [
-        'path'  => VIEWS_DIR,
-        'cache' => VIEWS_DIR . 'cache' . DIRECTORY_SEPARATOR,
+        'path'    => VIEWS_DIR,
+        'cache'   => VIEWS_DIR . 'cache' . DIRECTORY_SEPARATOR,
         'charset' => 'UTF-8',
     ],
     'webpack' => [

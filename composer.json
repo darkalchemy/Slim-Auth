@@ -16,6 +16,7 @@
         "ext-gettext": "*",
         "ext-intl": "*",
         "ext-json": "*",
+        "ext-mysqli": "*",
         "ext-pdo": "*",
         "cartalyst/sentinel": "^v5.1.0",
         "darkalchemy/twig-translate": "^0.3.0",
