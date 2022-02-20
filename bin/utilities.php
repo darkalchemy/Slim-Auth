@@ -52,6 +52,12 @@ switch ($process) {
         break;
 }
 
+/**
+ * Translate function
+ *
+ * @param string $lang
+ * @return void
+ */
 function translate(string $lang): void
 {
     $file = ROOT_DIR . 'i18n.sh';
