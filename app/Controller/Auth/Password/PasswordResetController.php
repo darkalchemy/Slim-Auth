@@ -112,7 +112,12 @@ class PasswordResetController extends Controller
             'password',
         ]);
         if (!$this->reminderCodeExists($user = User::whereEmail($params['email'])->first(), $code = $params['code'])) {
-            $this->logger->error('Invalid reset code', $data);
+            $clean = array_clean($data, [
+                'email',
+                'code',
+            ]);
+            // file deepcode ignore PrivacyLeak: password is removed by array_clean
+            $this->logger->error('Invalid reset code', $clean);
             $this->flash->addMessage('status', __f('Invalid reset code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
