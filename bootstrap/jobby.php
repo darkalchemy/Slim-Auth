@@ -29,6 +29,8 @@ if ($sendmail_enabled) {
             $email = $container->get(Email::class);
             $emails = $email->with('user')->where('sent', 0)->orderBy('priority')->orderBy('created_at')->take(10)->get();
             $sendmail = $container->get(SendMail::class);
+            $loggerFactory    = $container->get(LoggerFactory::class);
+            $logger           = $loggerFactory->addFileHandler('sendmail_error.log')->createInstance('sendMail');
             foreach ($emails as $item) {
                 $sendmail->addRecipient($item->user->email, $item->user->username);
                 $sendmail->setSubject($item->subject);
@@ -44,7 +46,7 @@ if ($sendmail_enabled) {
                     $update->save();
                 } catch (Exception $e) {
                     $email->find($item->id)->increment('error_count');
-                    echo 'SendMail Failed: ' . $e->getMessage();
+                    $logger->error('SendMail Failed: ' . $e->getMessage());
                 }
             }
 
