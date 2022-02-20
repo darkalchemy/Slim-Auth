@@ -53,10 +53,9 @@ switch ($process) {
 }
 
 /**
- * Translate function
+ * Translate function.
  *
  * @param string $lang
- * @return void
  */
 function translate(string $lang): void
 {
