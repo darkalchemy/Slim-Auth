@@ -27,6 +27,7 @@ use Slim\Csrf\Guard;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
 use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
@@ -152,5 +153,10 @@ return [
         $container->get(ChmodPermissionsSetter::class)
     ),
 
-    'view' => DI\get(Twig::class),
+    TwigMiddleware::class => function (ContainerInterface $container) {
+        return TwigMiddleware::createFromContainer(
+            $container->get(App::class),
+            Twig::class,
+        );
+    },
 ];
