@@ -123,6 +123,7 @@ class SignUpController extends Controller
             $this->storeMail->store();
         } catch (Exception $e) {
             $this->flash->addMessage('status', __f('Something went wrong'));
+            // file deepcode ignore PrivacyLeak: password is removed by array_clean
             $this->logger->error($e->getMessage(), array_clean($data, [
                 'email',
                 'username',
