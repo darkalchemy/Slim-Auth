@@ -24,7 +24,7 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is attached - for example installing git.
-	"postAttachCommand": "npm i npm-check-updates",
+	"postAttachCommand": "npm i -g npm-check-updates",
 
 	// Add the IDs of any extensions you want installed in the array below.
 	"extensions": [
