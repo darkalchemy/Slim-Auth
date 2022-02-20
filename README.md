@@ -81,7 +81,7 @@ Set up cron job, this is necessary to be able to run scripts as www-data when ne
 sudo crontab -e
 
 ## add this to root crontab
-* * * * * cd /path/to/bootstrap folder/ && /usr/bin/php jobby.php 1>> /dev/null 2>&1
+* * * * * cd /path/to/bin folder/ && /usr/bin/php jobby.php 1>> /dev/null 2>&1
 ```
 
 Emails do not get sent directly, they are inserted into the database and jobby will take care of sending them.
