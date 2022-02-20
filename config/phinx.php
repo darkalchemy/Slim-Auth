@@ -10,9 +10,9 @@ return [
         'migrations' => 'database/migrations',
         'seeds'      => 'database/seeds',
     ],
-    'migration_base_class' => 'App\Migrations\Migration',
+    'migration_base_class' => 'App\Migration\Migration',
     'templates'            => [
-        'file' => 'app/Migrations/MigrationStub.php.stub',
+        'file' => 'app/Migration/MigrationStub.php.stub',
     ],
     'environments' => [
         'default_migration_table' => 'migrations',
