@@ -65,7 +65,7 @@
 
     {% if user %}
         <form action="{{ url_for('auth.signout') }}" method="post" id="signout">
-            {{ csrf() | raw }}
+            {{ csrf() }}
         </form>
     {% endif %}
 </section>

@@ -11,7 +11,7 @@
                 {% include 'components/status.twig' %}
 
                 <form action="{{ url_for('account.account') }}" method="post">
-                    {{ csrf() | raw }}
+                    {{ csrf() }}
                     <div class="field">
                         <label for="email" class="label">{{ __f('Email') }}</label>
                         <div class="control">

@@ -11,7 +11,7 @@
                 {% include 'components/status.twig' %}
 
                 <form action="{{ url_for('auth.password.reset') }}" method="post">
-                    {{ csrf() | raw }}
+                    {{ csrf() }}
 
                     <div class="field">
                         <label for="password" class="label">{{ __f('Password') }}</label>

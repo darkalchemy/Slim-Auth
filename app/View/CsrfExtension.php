@@ -30,7 +30,7 @@ class CsrfExtension extends AbstractExtension
     {
         return [
             // @phpstan-ignore-next-line
-            new TwigFunction('csrf', [$this->container->get(CsrfRuntime::class), 'csrf']),
+            new TwigFunction('csrf', [$this->container->get(CsrfRuntime::class), 'csrf'], ['is_safe' => ['html']]),
         ];
     }
 }
