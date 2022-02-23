@@ -116,10 +116,7 @@ class SignUpController extends Controller
             $activation = Sentinel::getActivationRepository()->create($user);
             $this->storeMail->setUserID($user->id);
             $this->storeMail->setSubject(__f('Confirm your email.'));
-            $this->storeMail->setBody($this->view->fetch('email/auth/password/activate.twig', [
-                'user' => $user,
-                'code' => $activation->code,
-            ]));
+            $this->storeMail->setUri((string) $request->getUri(), '/auth/activate?');
             $this->storeMail->store();
         } catch (Exception $e) {
             $this->flash->addMessage('status', __f('Something went wrong'));

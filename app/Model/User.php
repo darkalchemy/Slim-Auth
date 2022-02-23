@@ -34,4 +34,12 @@ class User extends EloquentUser
     {
         return $this->hasMany(Email::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function activations(): HasMany
+    {
+        return $this->hasMany(Activations::class);
+    }
 }

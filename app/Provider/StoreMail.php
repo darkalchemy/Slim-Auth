@@ -8,6 +8,7 @@ use App\Factory\LoggerFactory;
 use App\Model\Email;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Spatie\Url\Url;
 
 /**
  * Class StoreMail.
@@ -17,8 +18,8 @@ class StoreMail
     protected LoggerInterface $logger;
     protected Email $email;
     protected int $user_id;
-    protected string $template;
     protected string $subject;
+    protected string $uri;
 
     /**
      * SendMail constructor.
@@ -61,10 +62,12 @@ class StoreMail
     }
 
     /**
-     * @param string $body
+     * @param string $uri
+     * @param string $path
      */
-    public function setBody(string $body): void
+    public function setUri(string $uri, string $path): void
     {
-        $this->email->body = $body;
+        $url              = Url::fromString($uri);
+        $this->email->uri = $url->getScheme() . '://' . $url->getHost() . $path;
     }
 }

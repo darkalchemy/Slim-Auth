@@ -7,23 +7,12 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property string $subject
- * @property int    $user_id
- * @property string $uri
- */
-class Email extends Model
+class Activations extends Model
 {
-    protected $fillable = [
-        'subject',
-        'user_id',
-        'uri',
-    ];
-
     /**
      * @var string
      */
-    protected $table = 'email';
+    protected $table = 'activations';
 
     /**
      * @return BelongsTo
@@ -36,8 +25,8 @@ class Email extends Model
     /**
      * @return BelongsTo
      */
-    public function activations(): BelongsTo
+    public function email(): BelongsTo
     {
-        return $this->belongsTo(Activations::class, 'user_id', 'user_id');
+        return $this->belongsTo(Email::class, 'user_id', 'user_id');
     }
 }

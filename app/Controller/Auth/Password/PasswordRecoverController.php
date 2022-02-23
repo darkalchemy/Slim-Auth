@@ -92,10 +92,7 @@ class PasswordRecoverController extends Controller
             $reminder = Sentinel::getReminderRepository()->create($user);
             $this->storeMail->setUserID($user->id);
             $this->storeMail->setSubject(__f('Reset your password.'));
-            $this->storeMail->setBody($this->view->fetch('email/auth/password/recover.twig', [
-                'user' => $user,
-                'code' => $reminder->code,
-            ]));
+            $this->storeMail->setUri((string) $request->getUri(), '/auth/password/reset?');
             $this->storeMail->store();
         }
         $this->flash->addMessage('status', __f('An email has to been sent with instructions to reset your password.'));

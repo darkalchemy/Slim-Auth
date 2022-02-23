@@ -3,13 +3,9 @@
 declare(strict_types=1);
 
 use App\Factory\LoggerFactory;
-use App\Model\Email;
-use App\Provider\SendMail;
-use Carbon\Carbon;
 use Jobby\Jobby;
 
-$app              = require __DIR__ . '/app.php';
-$container        = $app->getContainer();
+$container        = (require __DIR__ . '/../bootstrap/app.php')->getContainer();
 $jobby            = $container->get(Jobby::class);
 $loggerFactory    = $container->get(LoggerFactory::class);
 $logger           = $loggerFactory->addFileHandler('jobby.log')->createInstance('jobby');
@@ -23,37 +19,10 @@ try {
 
 if ($sendmail_enabled) {
     $jobby->add('Send Email', [
-        'runAs'   => 'www-data',
-        'command' => function () {
-            $container = (require __DIR__ . '/app.php')->getContainer();
-            $email = $container->get(Email::class);
-            $emails = $email->with('user')->where('sent', 0)->orderBy('priority')->orderBy('created_at')->take(10)->get();
-            $sendmail = $container->get(SendMail::class);
-            $loggerFactory    = $container->get(LoggerFactory::class);
-            $logger           = $loggerFactory->addFileHandler('sendmail_error.log')->createInstance('sendMail');
-            foreach ($emails as $item) {
-                $sendmail->addRecipient($item->user->email, $item->user->username);
-                $sendmail->setSubject($item->subject);
-                $sendmail->setMessage($item->body);
-
-                try {
-                    // TODO clean this up
-                    $sendmail->send();
-                    $update = $email->find($item->id);
-                    $update->sent = 1;
-                    $update->send_count = $item->send_count + 1;
-                    $update->date_sent = Carbon::now();
-                    $update->save();
-                } catch (Exception $e) {
-                    $email->find($item->id)->increment('error_count');
-                    $logger->error('SendMail Failed: ' . $e->getMessage());
-                }
-            }
-
-            return true;
-        },
+        'runAs'    => 'www-data',
+        'command'  => sendEmail($container),
         'schedule' => '* * * * *',
-        'output'   => LOGS_DIR . 'sendmail.log',
+        'output'   => LOGS_DIR . 'sendmail_jobby.log',
         'enabled'  => true,
     ]);
 } else {

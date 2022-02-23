@@ -2,11 +2,16 @@
 
 declare(strict_types=1);
 
+use App\Factory\LoggerFactory;
+use App\Model\Email;
+use App\Provider\SendMail;
+use Carbon\Carbon;
 use Darkalchemy\Twig\TwigCompiler;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Slim\Views\Twig;
+use Spatie\Url\Url;
 
 /**
  * @param array $array
@@ -200,6 +205,63 @@ function removeDirectory(?string $path, bool $removePath): bool
 
     if ($removePath) {
         return rmdir($path);
+    }
+
+    return true;
+}
+
+/**
+ * sendEmail function.
+ *
+ * @param ContainerInterface $container
+ *
+ * @return bool
+ */
+function sendEmail(ContainerInterface $container): bool
+{
+    $email     = $container->get(Email::class);
+    $emails    = $email
+        ->with('user')
+        ->with('activations')
+        ->where('sent', 0)
+        ->orderBy('priority')
+        ->orderBy('created_at')
+        ->take(10)
+        ->get();
+    $sendmail      = $container->get(SendMail::class);
+    $loggerFactory = $container->get(LoggerFactory::class);
+    $logger        = $loggerFactory->addFileHandler('sendmail_error.log')->createInstance('sendMail');
+    $twig          = $container->get(Twig::class);
+
+    foreach ($emails as $item) {
+        $data  = [
+            'email' => $item->user->email,
+            'code'  => $item->activations->code,
+        ];
+        $params = http_build_query($data);
+        $link   = $item->uri . $params;
+        $sendmail->addRecipient($item->user->email, $item->user->username);
+        $sendmail->setSubject($item->subject);
+        // {% set link = cli_full_url_for('auth.activate', {}, {'email': user.email, 'code': code}) %}
+        $sendmail->setMessage($twig->fetch('email/auth/password/activate.twig', [
+            'user' => [
+                'username' => $item->user->username,
+            ],
+            'link' => $link,
+        ]));
+
+        try {
+            $sendmail->send();
+            $email->where('id', $item->id)
+                ->increment('send_count', 1, [
+                    'sent'       => 1,
+                    'date_sent'  => Carbon::now(),
+                ]);
+            $logger->success('SendMail Successful: ' . $item->user->email . ' ' . $item->subject);
+        } catch (Exception $e) {
+            $email->find($item->id)->increment('error_count');
+            $logger->error('SendMail Failed: ' . $e->getMessage());
+        }
     }
 
     return true;
