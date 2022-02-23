@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\View;
 
-use Slim\Flash\Messages;
+use Psr\Container\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -13,24 +13,11 @@ use Twig\TwigFunction;
  */
 class TwigMessagesExtension extends AbstractExtension
 {
-    protected Messages $flash;
+    protected ContainerInterface $container;
 
-    /**
-     * TwigMessagesExtension constructor.
-     *
-     * @param Messages $flash
-     */
-    public function __construct(Messages $flash)
+    public function __construct(ContainerInterface $container)
     {
-        $this->flash = $flash;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return 'slim-twig-flash';
+        $this->container = $container;
     }
 
     /**
@@ -39,74 +26,14 @@ class TwigMessagesExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('flash', [
-                $this,
-                'getMessages',
-            ]),
-            new TwigFunction('has_message', [
-                $this,
-                'hasMessage',
-            ]),
-            new TwigFunction('form_data', [
-                $this,
-                'formData',
-            ]),
-            new TwigFunction('errors', [
-                $this,
-                'errors',
-            ]),
+            // @phpstan-ignore-next-line
+            new TwigFunction('flash', [$this->container->get(TwigMessagesRuntime::class), 'getMessages']),
+            // @phpstan-ignore-next-line
+            new TwigFunction('has_message', [$this->container->get(TwigMessagesRuntime::class), 'hasMessage']),
+            // @phpstan-ignore-next-line
+            new TwigFunction('form_data', [$this->container->get(TwigMessagesRuntime::class), 'formData']),
+            // @phpstan-ignore-next-line
+            new TwigFunction('errors', [$this->container->get(TwigMessagesRuntime::class), 'errors']),
         ];
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function hasMessage(string $key): bool
-    {
-        return $this->flash->hasMessage($key);
-    }
-
-    /**
-     * @param null|string $key
-     *
-     * @return array|mixed
-     */
-    public function getMessages(?string $key = null): mixed
-    {
-        if ($key !== null) {
-            return $this->flash->getMessage($key);
-        }
-
-        return $this->flash->getMessages();
-    }
-
-    /**
-     * Get the form data.
-     *
-     * @param string $key
-     *
-     * @return string
-     */
-    public function formData(string $key): string
-    {
-        $old = $this->flash->getFirstMessage('old');
-
-        return $old[$key] ?? '';
-    }
-
-    /**
-     * Get the errors.
-     *
-     * @param string $key
-     *
-     * @return array
-     */
-    public function errors(string $key): array
-    {
-        $errors = $this->flash->getFirstMessage('errors');
-
-        return $errors[$key] ?? [];
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\View;
 
-use Slim\Csrf\Guard;
+use Psr\Container\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -13,16 +13,14 @@ use Twig\TwigFunction;
  */
 class CsrfExtension extends AbstractExtension
 {
-    protected Guard $csrf;
-
     /**
-     * CsrfExtension constructor.
-     *
-     * @param Guard $csrf
+     * @var ContainerInterface
      */
-    public function __construct(Guard $csrf)
+    protected ContainerInterface $container;
+
+    public function __construct(ContainerInterface $container)
     {
-        $this->csrf = $csrf;
+        $this->container = $container;
     }
 
     /**
@@ -31,17 +29,8 @@ class CsrfExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('csrf', [$this, 'csrf']),
+            // @phpstan-ignore-next-line
+            new TwigFunction('csrf', [$this->container->get(CsrfRuntime::class), 'csrf']),
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function csrf(): string
-    {
-        return '
-            <input type="hidden" name="' . $this->csrf->getTokenNameKey() . '" value="' . $this->csrf->getTokenName() . '">
-            <input type="hidden" name="' . $this->csrf->getTokenValueKey() . '" value="' . $this->csrf->getTokenValue() . '">';
     }
 }
