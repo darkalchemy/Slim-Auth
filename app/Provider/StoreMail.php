@@ -15,17 +15,34 @@ use Spatie\Url\Url;
  */
 class StoreMail
 {
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
+
+    /**
+     * @var Email
+     */
     protected Email $email;
+
+    /**
+     * @var int
+     */
     protected int $user_id;
+
+    /**
+     * @var string
+     */
     protected string $subject;
+
+    /**
+     * @var string
+     */
     protected string $uri;
 
     /**
-     * SendMail constructor.
-     *
-     * @param LoggerFactory $loggerFactory
-     * @param Email         $email
+     * @param LoggerFactory $loggerFactory The loggerFactory
+     * @param Email         $email         The email
      *
      * @throws Exception
      */
@@ -46,7 +63,7 @@ class StoreMail
     }
 
     /**
-     * @param int $user_id
+     * @param int $user_id The user_id
      */
     public function setUserID(int $user_id): void
     {
@@ -54,7 +71,7 @@ class StoreMail
     }
 
     /**
-     * @param string $subject
+     * @param string $subject The subject
      */
     public function setSubject(string $subject): void
     {
@@ -62,8 +79,8 @@ class StoreMail
     }
 
     /**
-     * @param string $uri
-     * @param string $path
+     * @param string $uri  The uri
+     * @param string $path The path
      */
     public function setUri(string $uri, string $path): void
     {

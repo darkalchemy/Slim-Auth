@@ -7,6 +7,9 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Activations class.
+ */
 class Activations extends Model
 {
     /**

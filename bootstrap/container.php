@@ -7,7 +7,6 @@ use App\Middleware\CheckSettingsMiddleware;
 use App\View\CsrfExtension;
 use App\View\TwigMessagesExtension;
 use App\View\TwigPhpExtension;
-use App\View\TwigUtilities;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Darkalchemy\Twig\TwigTranslationExtension;
 use Delight\I18n\Codes;
@@ -30,6 +29,8 @@ use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
+
+global $startTime;
 
 return [
     'settings' => function () {
@@ -77,15 +78,19 @@ return [
         return $i18n;
     },
 
-    RouteParserInterface::class => fn (ContainerInterface $container) => $container->get(App::class)->getRouteCollector()->getRouteParser(),
+    RouteParserInterface::class => function (ContainerInterface $container) {
+        return $container->get(App::class)->getRouteCollector()->getRouteParser();
+    },
 
-    ResponseInterface::class => fn (ContainerInterface $container) => $container->get(App::class)->getResponseFactory(),
+    ResponseInterface::class => function (ContainerInterface $container) {
+        return $container->get(App::class)->getResponseFactory();
+    },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {
         return $container->get(Psr17Factory::class);
     },
 
-    Twig::class => function (ContainerInterface $container) {
+    Twig::class => function (ContainerInterface $container) use ($startTime) {
         $settings = $container->get('settings');
         $twig = Twig::create($settings['twig']['path'], [
             'cache' => $settings['environment'] === 'PRODUCTION' ? $settings['twig']['cache'] : false,
@@ -93,13 +98,13 @@ return [
         $twig->getEnvironment()->setCharset($settings['twig']['charset']);
         $twig->getEnvironment()->enableStrictVariables();
         $twig->addExtension(new WebpackExtension($settings['webpack']['manifest'], PUBLIC_DIR));
-        $twig->addExtension($container->get(TwigUtilities::class));
         $twig->addExtension($container->get(TwigPhpExtension::class));
         $twig->addExtension($container->get(CsrfExtension::class));
         $twig->addExtension($container->get(TwigMessagesExtension::class));
         $twig->addExtension($container->get(TwigTranslationExtension::class));
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
         $twig->getEnvironment()->addGlobal('settings', $settings);
+        $twig->getEnvironment()->addGlobal('startTime', $startTime);
 
         return $twig;
     },

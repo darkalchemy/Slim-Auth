@@ -18,6 +18,9 @@ class CsrfExtension extends AbstractExtension
      */
     protected ContainerInterface $container;
 
+    /**
+     * @param ContainerInterface $container The container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;

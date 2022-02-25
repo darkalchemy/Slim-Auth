@@ -39,11 +39,9 @@ class CheckSettingsMiddleware implements MiddlewareInterface
     private ChmodPermissionsSetter $permissionsSetter;
 
     /**
-     * CheckMailMiddleware constructor.
-     *
-     * @param array         $settings
-     * @param LoggerFactory $loggerFactory
-     * @param Messages      $flash
+     * @param array         $settings      The settings
+     * @param LoggerFactory $loggerFactory The loggerFactory
+     * @param Messages      $flash         The flash
      */
     public function __construct(
         array $settings,
@@ -58,8 +56,8 @@ class CheckSettingsMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
+     * @param ServerRequestInterface  $request The request
+     * @param RequestHandlerInterface $handler The handler
      *
      * @return ResponseInterface
      */
@@ -76,7 +74,7 @@ class CheckSettingsMiddleware implements MiddlewareInterface
             $this->settings['twig']['cache'],
         ];
         foreach ($paths as $path) {
-            if (!empty($path) && file_exists($path) && !is_writeable($path)) {
+            if (!empty($path) && file_exists($path) && !is_writable($path)) {
                 $this->permissionsSetter->setPermissions($path);
             }
         }

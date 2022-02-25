@@ -13,12 +13,13 @@ use Slim\Interfaces\RouteParserInterface;
  */
 class SignOutController
 {
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
 
     /**
-     * SignOutController constructor.
-     *
-     * @param RouteParserInterface $routeParser
+     * @param RouteParserInterface $routeParser The routeParser
      */
     public function __construct(RouteParserInterface $routeParser)
     {
@@ -26,7 +27,7 @@ class SignOutController
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param ResponseInterface $response The response
      *
      * @return ResponseInterface
      */

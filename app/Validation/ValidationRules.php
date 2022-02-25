@@ -32,7 +32,7 @@ class ValidationRules
     /**
      * @return array
      */
-    public function password_different(): array
+    public function passwordDifferent(): array
     {
         return [
             'password' => [
@@ -47,7 +47,7 @@ class ValidationRules
     /**
      * @return array
      */
-    public function current_password(): array
+    public function currentPassword(): array
     {
         return [
             'current_password' => [
@@ -60,7 +60,7 @@ class ValidationRules
     /**
      * @return array
      */
-    public function confirm_password(): array
+    public function confirmPassword(): array
     {
         return [
             'confirm_password' => [
@@ -80,7 +80,7 @@ class ValidationRules
     /**
      * @return array
      */
-    public function confirm_password_different(): array
+    public function confirmPasswordDifferent(): array
     {
         return [
             'confirm_password' => [
@@ -109,7 +109,7 @@ class ValidationRules
     /**
      * @return array
      */
-    public function email_unique(): array
+    public function emailIsUnique(): array
     {
         return [
             'email' => [
@@ -141,7 +141,7 @@ class ValidationRules
     }
 
     /**
-     * @param string $key
+     * @param string $key The key
      *
      * @return array
      */

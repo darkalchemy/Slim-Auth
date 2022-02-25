@@ -32,8 +32,6 @@ class LoggerFactory
     private ChmodPermissionsSetter $permissionsSetter;
 
     /**
-     * The constructor.
-     *
      * @param array $settings The settings
      */
     public function __construct(array $settings, ChmodPermissionsSetter $permissionsSetter)
@@ -43,8 +41,6 @@ class LoggerFactory
     }
 
     /**
-     * Build the logger.
-     *
      * @param string $name The name
      *
      * @return LoggerInterface The logger
@@ -63,16 +59,14 @@ class LoggerFactory
     }
 
     /**
-     * Add a console logger.
-     *
-     * @param string $filename
-     * @param int    $level
+     * @param string $filename The filename
+     * @param int    $level    The level
      *
      * @return $this
      */
     public function addFileHandler(string $filename, int $level = Logger::DEBUG): self
     {
-        if (!is_writeable($this->path)) {
+        if (!is_writable($this->path)) {
             $this->permissionsSetter->setPermissions($this->path);
         }
         $filename            = sprintf('%s/%s', $this->path, $filename);
@@ -89,9 +83,7 @@ class LoggerFactory
     }
 
     /**
-     * Add a console logger.
-     *
-     * @param int $level
+     * @param int $level The level
      *
      * @return self The instance
      */

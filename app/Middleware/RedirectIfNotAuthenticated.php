@@ -17,13 +17,22 @@ use Slim\Interfaces\RouteParserInterface;
  */
 class RedirectIfNotAuthenticated
 {
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var ResponseFactoryInterface
+     */
     protected ResponseFactoryInterface $responseFactory;
 
     /**
-     * RedirectIfNotAuthenticated constructor.
-     *
      * @param Messages             $flash       The flash
      * @param RouteParserInterface $routeParser The routeParser
      */
@@ -38,8 +47,8 @@ class RedirectIfNotAuthenticated
     }
 
     /**
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
+     * @param ServerRequestInterface  $request The request
+     * @param RequestHandlerInterface $handler The handler
      *
      * @return ResponseInterface
      */
@@ -55,8 +64,8 @@ class RedirectIfNotAuthenticated
             return $response->withHeader(
                 'Location',
                 $this->routeParser->urlFor('auth.signin') .
-                '?' .
-                http_build_query(['redirect' => $request->getUri()->getPath()])
+                    '?' .
+                    http_build_query(['redirect' => $request->getUri()->getPath()])
             );
         }
 

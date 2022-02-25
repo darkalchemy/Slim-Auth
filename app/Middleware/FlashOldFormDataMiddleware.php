@@ -15,11 +15,12 @@ use Slim\Flash\Messages;
  */
 class FlashOldFormDataMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
 
     /**
-     * FlashOldFormData constructor.
-     *
      * @param Messages $flash The flash
      */
     public function __construct(Messages $flash)
@@ -28,8 +29,8 @@ class FlashOldFormDataMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
+     * @param ServerRequestInterface  $request The request
+     * @param RequestHandlerInterface $handler The handler
      *
      * @return ResponseInterface
      */

@@ -23,14 +23,27 @@ use Twig\Error\SyntaxError;
  */
 class ExceptionHandler
 {
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var ResponseFactoryInterface
+     */
     protected ResponseFactoryInterface $responseFactory;
+
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
 
     /**
-     * ExceptionHandler constructor.
-     *
      * @param Messages                 $flash           The flash
      * @param ResponseFactoryInterface $responseFactory The responseFactory
      * @param Twig                     $view            The view
@@ -52,8 +65,8 @@ class ExceptionHandler
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param Throwable              $exception
+     * @param ServerRequestInterface $request   The request
+     * @param Throwable              $exception The exception
      *
      * @throws Throwable
      *
@@ -69,7 +82,7 @@ class ExceptionHandler
     }
 
     /**
-     * @param ValidationException $exception
+     * @param ValidationException $exception The exception
      *
      * @return ResponseInterface
      */
@@ -103,7 +116,7 @@ class ExceptionHandler
      * @throws RuntimeError
      * @throws LoaderError
      */
-    public function HttpMethodNotAllowedException(Throwable $exception): ResponseInterface
+    public function httpMethodNotAllowedException(Throwable $exception): ResponseInterface
     {
         $this->logger->error('Http Method not allow exception', ['error' => $exception->getMessage()]);
 

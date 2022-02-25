@@ -28,24 +28,49 @@ use Twig\Error\SyntaxError;
  */
 class SignInController extends Controller
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
+
+    /**
+     * @var ValidationRules
+     */
     protected ValidationRules $rules;
+
+    /**
+     * @var SessionInterface
+     */
     protected SessionInterface $session;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * SignInController constructor.
-     *
      * @param Twig                 $view          The view
      * @param Messages             $flash         The flash
      * @param RouteParserInterface $routeParser   The routeParser
-     * @param LoggerFactory        $loggerFactory
-     * @param ValidationRules      $rules
-     * @param SessionInterface     $session
-     * @param I18n                 $i18n
+     * @param LoggerFactory        $loggerFactory The loggerFactory
+     * @param ValidationRules      $rules         The rules
+     * @param SessionInterface     $session       The session
+     * @param I18n                 $i18n          The i18m
      *
      * @throws Exception
      */
@@ -102,10 +127,12 @@ class SignInController extends Controller
         ));
 
         try {
-            if (!Sentinel::authenticate(array_clean($data, [
-                'email',
-                'password',
-            ]), isset($data['persist']))) {
+            if (
+                !Sentinel::authenticate(array_clean($data, [
+                    'email',
+                    'password',
+                ]), isset($data['persist']))
+            ) {
                 throw new AuthException('Incorrect email or password.');
             }
         } catch (Exception $e) {

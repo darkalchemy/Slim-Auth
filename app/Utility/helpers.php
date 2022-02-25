@@ -11,11 +11,10 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Slim\Views\Twig;
-use Spatie\Url\Url;
 
 /**
- * @param array $array
- * @param array $keys
+ * @param array $array The array
+ * @param array $keys  The keys
  *
  * @return array
  */
@@ -25,7 +24,7 @@ function array_clean(array $array, array $keys): array
 }
 
 /**
- * @param ContainerInterface $container
+ * @param ContainerInterface $container The container
  *
  * @throws NotFoundExceptionInterface
  * @throws ContainerExceptionInterface
@@ -47,8 +46,8 @@ function compile_twig_templates(ContainerInterface $container): int
 }
 
 /**
- * @param string $text
- * @param mixed  ...$replacements
+ * @param string $text            The text
+ * @param mixed  ...$replacements The replacements
  *
  * @return string
  */
@@ -60,8 +59,8 @@ function __f(string $text, ...$replacements): string
 }
 
 /**
- * @param string $text
- * @param mixed  ...$replacements
+ * @param string $text            The text
+ * @param mixed  ...$replacements The replacements
  *
  * @return string
  */
@@ -73,9 +72,9 @@ function __fe(string $text, ...$replacements): string
 }
 
 /**
- * @param string $text
- * @param string $alternative
- * @param int    $count
+ * @param string $text        The text
+ * @param string $alternative The alternative
+ * @param int    $count       The count
  *
  * @return string
  */
@@ -87,10 +86,10 @@ function __p(string $text, string $alternative, int $count): string
 }
 
 /**
- * @param string $text
- * @param string $alternative
- * @param int    $count
- * @param mixed  ...$replacements
+ * @param string $text            The text
+ * @param string $alternative     The alternative
+ * @param int    $count           The count
+ * @param mixed  ...$replacements The replacements
  *
  * @return string
  */
@@ -102,10 +101,10 @@ function __pf(string $text, string $alternative, int $count, ...$replacements): 
 }
 
 /**
- * @param string $text
- * @param string $alternative
- * @param int    $count
- * @param mixed  ...$replacements
+ * @param string $text            The text
+ * @param string $alternative     The alternative
+ * @param int    $count           The count
+ * @param mixed  ...$replacements The replacements
  *
  * @return string
  */
@@ -117,8 +116,8 @@ function __pfe(string $text, string $alternative, int $count, ...$replacements):
 }
 
 /**
- * @param string $text
- * @param string $context
+ * @param string $text    The text
+ * @param string $context The context
  *
  * @return string
  */
@@ -130,7 +129,7 @@ function __c(string $text, string $context): string
 }
 
 /**
- * @param string $text
+ * @param string $text The text
  *
  * @return string
  */
@@ -142,8 +141,8 @@ function __m(string $text): string
 }
 
 /**
- * @param int $bytes
- * @param int $precision
+ * @param int $bytes     The bytes
+ * @param int $precision The precision
  *
  * @return string
  */
@@ -158,7 +157,7 @@ function human_readable_size(int $bytes, int $precision = 2): string
 }
 
 /**
- * @param ContainerInterface $container
+ * @param ContainerInterface $container The container
  *
  * @throws ContainerExceptionInterface
  * @throws NotFoundExceptionInterface
@@ -176,8 +175,8 @@ function remove_cached_files(ContainerInterface $container): void
 }
 
 /**
- * @param null|string $path
- * @param bool        $removePath
+ * @param null|string $path       The path
+ * @param bool        $removePath The removePath
  *
  * @return bool
  */
@@ -211,9 +210,7 @@ function removeDirectory(?string $path, bool $removePath): bool
 }
 
 /**
- * sendEmail function.
- *
- * @param ContainerInterface $container
+ * @param ContainerInterface $container The container
  *
  * @return bool
  */
@@ -265,4 +262,18 @@ function sendEmail(ContainerInterface $container): bool
     }
 
     return true;
+}
+
+/**
+ * @param string $lang The lang
+ */
+function translate(string $lang): void
+{
+    $file = ROOT_DIR . 'i18n.sh';
+    copy(VENDOR_DIR . 'delight-im/i18n/i18n.sh', $file);
+    chmod($file, 0775);
+    passthru("sed -i -E 's/\\-\\-(keyword|flag)=\"_(f|p|c|m)/\\-\\-\\1=\"__\\2/g' {$file}");
+    passthru("sed -i 's/\\-\\-keyword \\-\\-keyword/\\-\\-keyword \\-\\-keyword=\"translateFormatted:1\" \\-\\-keyword=\"translateFormattedExtended:1\" \\-\\-keyword=\"translatePlural:1,2,3t\" \\-\\-keyword=\"translatePluralFormatted:1,2\" \\-\\-keyword=\"translatePluralFormattedExtended:1,2\" \\-\\-keyword=\"translateWithContext:1,2c,2t\" \\-\\-keyword=\"markForTranslation:1,1t\" \\-\\-flag=\"translateFormatted:1:php\\-format\" \\-\\-flag=\"translateFormattedExtended:1:no\\-php\\-format\" \\-\\-flag=\"translatePluralFormatted:1:php\\-format\" \\-\\-flag=\"translatePluralFormattedExtended:1:no\\-php\\-format\" \\-\\-keyword/g' {$file}"); //phpcs:ignore
+    passthru(sprintf('%s %s', $file, $lang));
+    unlink($file);
 }

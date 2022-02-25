@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
-    ->exclude(['vendor', 'node_modules', 'resources/views/cache', 'public/resources', 'var', 'locale'])
+    ->exclude(['vendor', 'node_modules', 'resources/views/cache', 'public/resources', 'var', 'locale', 'git'])
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
@@ -26,5 +26,9 @@ return $config
         'declare_strict_types'                   => true,
         'yoda_style'                             => ['equal' => false, 'identical' => false, 'less_and_greater' => false],
         'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
+        'function_to_constant'                   => true,
+        'native_constant_invocation'             => true,
+        'no_alias_functions'                     => true,
+        'ternary_to_elvis_operator'              => true
     ])
     ->setFinder($finder);

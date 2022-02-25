@@ -27,22 +27,43 @@ use Twig\Error\SyntaxError;
  */
 class PasswordResetController extends Controller
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
+
+    /**
+     * @var ValidationRules
+     */
     protected ValidationRules $rules;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * PasswordResetController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param LoggerFactory        $loggerFactory
-     * @param ValidationRules      $rules
-     * @param I18n                 $i18n
+     * @param Twig                 $view          The view
+     * @param Messages             $flash         The flash
+     * @param RouteParserInterface $routeParser   The routeParser
+     * @param LoggerFactory        $loggerFactory The loggerFactory
+     * @param ValidationRules      $rules         The rules
+     * @param I18n                 $i18n          The i18n
      *
      * @throws Exception
      */
@@ -64,8 +85,8 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws RuntimeError
      * @throws SyntaxError
@@ -79,8 +100,10 @@ class PasswordResetController extends Controller
             'email',
             'code',
         ]);
-        if (!$this->reminderCodeExists(User::whereEmail($email = $params['email'] ?? null)
-            ->first(), $code = $params['code'] ?? null)) {
+        if (
+            !$this->reminderCodeExists(User::whereEmail($email = $params['email'] ?? null)
+                ->first(), $code = $params['code'] ?? null)
+        ) {
             $this->flash->addMessage('status', __f('Invalid reset code.'));
 
             return $response->withHeader('Location', $this->routeParser->urlFor('home'));
@@ -90,8 +113,8 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws ValidationException
      *
@@ -103,7 +126,7 @@ class PasswordResetController extends Controller
             $this->rules->required('email'),
             $this->rules->required('code'),
             $this->rules->password(),
-            $this->rules->confirm_password()
+            $this->rules->confirmPassword()
         ));
 
         $params = array_clean($data, [
@@ -130,8 +153,8 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param null|User   $user
-     * @param null|string $code
+     * @param null|User   $user The user to validate
+     * @param null|string $code The code to validate
      *
      * @return bool
      */

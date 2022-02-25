@@ -25,22 +25,43 @@ use Twig\Error\SyntaxError;
  */
 class PasswordRecoverController extends Controller
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var ValidationRules
+     */
     protected ValidationRules $rules;
+
+    /**
+     * @var StoreMail
+     */
     protected StoreMail $storeMail;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * PasswordRecoverController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param StoreMail            $storeMail
-     * @param ValidationRules      $rules
-     * @param I18n                 $i18n
+     * @param Twig                 $view        The view
+     * @param Messages             $flash       The flash
+     * @param RouteParserInterface $routeParser The routeParser
+     * @param StoreMail            $storeMail   The storeMail
+     * @param ValidationRules      $rules       The rules
+     * @param I18n                 $i18n        The i18n
      */
     public function __construct(
         Twig $view,
@@ -59,7 +80,7 @@ class PasswordRecoverController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param ResponseInterface $response The response
      *
      * @throws RuntimeError
      * @throws SyntaxError
@@ -73,8 +94,8 @@ class PasswordRecoverController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws LoaderError
      * @throws RuntimeError

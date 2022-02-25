@@ -14,13 +14,18 @@ use Valitron\Validator;
  */
 class Controller
 {
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
+
+    /**
+     * @var string
+     */
     protected string $locale;
 
     /**
-     * Controller constructor.
-     *
-     * @param I18n $i18n
+     * @param I18n $i18n The i18n
      */
     public function __construct(I18n $i18n)
     {

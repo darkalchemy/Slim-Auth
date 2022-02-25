@@ -16,9 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class User extends EloquentUser
 {
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * {@inheritDoc}
      */
     protected $fillable = [
         'email',

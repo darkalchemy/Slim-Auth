@@ -27,13 +27,13 @@ return function (App $app) {
     });
 
     $app->get('/apcu', function (ResponseInterface $response) {
-        $response->getBody()->write((string) json_encode(apcu_cache_info(), JSON_PRETTY_PRINT));
+        $response->getBody()->write((string) json_encode(apcu_cache_info(), \JSON_PRETTY_PRINT));
 
         return $response->withHeader('Content-Type', 'application/json');
     });
 
     $app->get('/session', function (ResponseInterface $response) {
-        $response->getBody()->write((string) json_encode($_SESSION, JSON_PRETTY_PRINT));
+        $response->getBody()->write((string) json_encode($_SESSION, \JSON_PRETTY_PRINT));
 
         return $response->withHeader('Content-Type', 'application/json');
     });

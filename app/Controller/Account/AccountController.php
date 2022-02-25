@@ -23,20 +23,37 @@ use Twig\Error\SyntaxError;
  */
 class AccountController extends Controller
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var ValidationRules
+     */
     protected ValidationRules $rules;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * AccountController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param ValidationRules      $rules
-     * @param I18n                 $i18n
+     * @param Twig                 $view        The view
+     * @param Messages             $flash       The flash
+     * @param RouteParserInterface $routeParser The routeParser
+     * @param ValidationRules      $rules       The rules
+     * @param I18n                 $i18n        The i18n
      */
     public function __construct(
         Twig $view,
@@ -53,7 +70,7 @@ class AccountController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param ResponseInterface $response The response
      *
      * @throws SyntaxError
      * @throws LoaderError
@@ -67,8 +84,8 @@ class AccountController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws ValidationException
      *

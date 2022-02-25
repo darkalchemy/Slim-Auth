@@ -11,12 +11,17 @@ use Exception;
  */
 class ValidationException extends Exception
 {
+    /**
+     * @var array
+     */
     protected array $errors;
+
+    /**
+     * @var string
+     */
     protected string $path;
 
     /**
-     * ValidationException constructor.
-     *
      * @param array  $errors The errors
      * @param string $path   The path
      */

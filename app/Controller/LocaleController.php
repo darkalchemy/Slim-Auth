@@ -16,23 +16,48 @@ use Slim\Interfaces\RouteParserInterface;
  */
 class LocaleController
 {
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var SessionInterface
+     */
     protected SessionInterface $session;
+
+    /**
+     * @var array
+     */
     protected array $locales;
+
+    /**
+     * @var string
+     */
     protected string $current_url;
 
     /**
-     * LocaleController constructor.
-     *
-     * @param I18n                 $i18n
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param SessionInterface     $session
+     * @param I18n                 $i18n        The i18n
+     * @param Messages             $flash       The flash
+     * @param RouteParserInterface $routeParser The routeParser
+     * @param SessionInterface     $session     The sessionInterface
      */
-    public function __construct(I18n $i18n, Messages $flash, RouteParserInterface $routeParser, SessionInterface $session)
-    {
+    public function __construct(
+        I18n $i18n,
+        Messages $flash,
+        RouteParserInterface $routeParser,
+        SessionInterface $session
+    ) {
         $this->i18n        = $i18n;
         $this->flash       = $flash;
         $this->routeParser = $routeParser;
@@ -42,8 +67,8 @@ class LocaleController
     }
 
     /**
-     * @param ResponseInterface $response
-     * @param string            $lang
+     * @param ResponseInterface $response The response
+     * @param string            $lang     The lang
      *
      * @throws LocaleNotSupportedException
      *

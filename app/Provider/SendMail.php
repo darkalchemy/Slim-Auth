@@ -15,17 +15,34 @@ use Psr\Log\LoggerInterface;
  */
 class SendMail
 {
+    /**
+     * @var PHPMailer
+     */
     protected PHPMailer $mailer;
+
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
+
+    /**
+     * @var int
+     */
     protected int $user_id;
+
+    /**
+     * @var string
+     */
     protected string $template;
+
+    /**
+     * @var string
+     */
     protected string $subject;
 
     /**
-     * SendMail constructor.
-     *
-     * @param PHPMailer     $mailer
-     * @param LoggerFactory $loggerFactory
+     * @param PHPMailer     $mailer        The mailer
+     * @param LoggerFactory $loggerFactory The loggerFactory
      *
      * @throws Exception
      */
@@ -74,7 +91,7 @@ class SendMail
     }
 
     /**
-     * @param string $subject
+     * @param string $subject The subject
      */
     public function setSubject(string $subject): void
     {

@@ -7,19 +7,23 @@ namespace App\View;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+/**
+ * TwigPhpExtension class.
+ */
 class TwigPhpExtension extends AbstractExtension
 {
+    /**
+     * @var array
+     */
     private array $functions = [
-        'uniqid',
-        'floor',
-        'ceil',
-        'hash',
         'get_included_files',
-        'count',
+        'human_readable_size',
+        'memory_get_peak_usage',
+        'hrtime',
     ];
 
     /**
-     * @param array $functions
+     * @param array $functions The functions
      */
     public function __construct(array $functions = [])
     {
@@ -43,7 +47,7 @@ class TwigPhpExtension extends AbstractExtension
     }
 
     /**
-     * @param array $functions
+     * @param array $functions The functions
      */
     public function allowFunctions(array $functions): void
     {

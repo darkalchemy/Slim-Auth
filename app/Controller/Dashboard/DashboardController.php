@@ -15,12 +15,13 @@ use Twig\Error\SyntaxError;
  */
 class DashboardController
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
 
     /**
-     * DashboardController constructor.
-     *
-     * @param Twig $view
+     * @param Twig $view The view
      */
     public function __construct(Twig $view)
     {
@@ -28,7 +29,7 @@ class DashboardController
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param ResponseInterface $response The response
      *
      * @throws RuntimeError
      * @throws SyntaxError

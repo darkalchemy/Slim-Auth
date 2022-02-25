@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Email extends Model
 {
+    /**
+     * {@inheritDoc}
+     */
     protected $fillable = [
         'subject',
         'user_id',

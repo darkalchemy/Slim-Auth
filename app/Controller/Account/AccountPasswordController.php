@@ -23,20 +23,37 @@ use Twig\Error\SyntaxError;
  */
 class AccountPasswordController extends Controller
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var ValidationRules
+     */
     protected ValidationRules $rules;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * AccountController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param ValidationRules      $rules
-     * @param I18n                 $i18n
+     * @param Twig                 $view        The view
+     * @param Messages             $flash       The flash
+     * @param RouteParserInterface $routeParser The routeParser
+     * @param ValidationRules      $rules       The rules
+     * @param I18n                 $i18n        The i18n
      */
     public function __construct(
         Twig $view,
@@ -53,7 +70,7 @@ class AccountPasswordController extends Controller
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param ResponseInterface $response The response
      *
      * @throws RuntimeError
      * @throws SyntaxError
@@ -67,8 +84,8 @@ class AccountPasswordController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @throws ValidationException
      *
@@ -78,8 +95,8 @@ class AccountPasswordController extends Controller
     {
         $data = $this->validate($request, array_merge_recursive(
             $this->rules->password(),
-            $this->rules->current_password(),
-            $this->rules->confirm_password()
+            $this->rules->currentPassword(),
+            $this->rules->confirmPassword()
         ));
         Sentinel::getUserRepository()->update(Sentinel::check(), array_clean($data, ['password']));
         $this->flash->addMessage('status', __f('Password updated!'));

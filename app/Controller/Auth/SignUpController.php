@@ -28,26 +28,55 @@ use Twig\Error\SyntaxError;
  */
 class SignUpController extends Controller
 {
+    /**
+     * @var Twig
+     */
     protected Twig $view;
+
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
+
+    /**
+     * @var ValidationRules
+     */
     protected ValidationRules $rules;
+
+    /**
+     * @var StoreMail
+     */
     protected StoreMail $storeMail;
+
+    /**
+     * @var SessionInterface
+     */
     protected SessionInterface $session;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * SignUpController constructor.
-     *
-     * @param Twig                 $view
-     * @param Messages             $flash
-     * @param RouteParserInterface $routeParser
-     * @param LoggerFactory        $loggerFactory
-     * @param ValidationRules      $rules
-     * @param StoreMail            $storeMail
-     * @param SessionInterface     $session
-     * @param I18n                 $i18n
+     * @param Twig                 $view          The view
+     * @param Messages             $flash         The flash
+     * @param RouteParserInterface $routeParser   The routeParser
+     * @param LoggerFactory        $loggerFactory The loggerFactory
+     * @param ValidationRules      $rules         The rules
+     * @param StoreMail            $storeMail     The storeMail
+     * @param SessionInterface     $session       The session
+     * @param I18n                 $i18n          The i18n
      *
      * @throws Exception
      */
@@ -99,12 +128,12 @@ class SignUpController extends Controller
     {
         $data = (array) $this->validate($request, array_merge_recursive(
             $this->rules->email(),
-            $this->rules->email_unique(),
+            $this->rules->emailIsUnique(),
             $this->rules->username(),
             $this->rules->password(),
-            $this->rules->password_different(),
-            $this->rules->confirm_password(),
-            $this->rules->confirm_password_different()
+            $this->rules->passwordDifferent(),
+            $this->rules->confirmPassword(),
+            $this->rules->confirmPasswordDifferent()
         ));
 
         try {
@@ -136,7 +165,10 @@ class SignUpController extends Controller
             'email',
             'username',
         ]));
-        $this->flash->addMessage('success', __f('Signup successful. Please check and confirm your email before continuing.'));
+        $this->flash->addMessage(
+            'success',
+            __f('Signup successful. Please check and confirm your email before continuing.')
+        );
 
         return $response->withHeader('Location', $this->routeParser->urlFor('home'));
     }

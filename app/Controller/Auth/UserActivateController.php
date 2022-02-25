@@ -21,18 +21,31 @@ use Slim\Interfaces\RouteParserInterface;
  */
 class UserActivateController extends Controller
 {
+    /**
+     * @var Messages
+     */
     protected Messages $flash;
+
+    /**
+     * @var RouteParserInterface
+     */
     protected RouteParserInterface $routeParser;
+
+    /**
+     * @var LoggerInterface
+     */
     protected LoggerInterface $logger;
+
+    /**
+     * @var I18n
+     */
     protected I18n $i18n;
 
     /**
-     * SignUpController constructor.
-     *
      * @param Messages             $flash         The response
      * @param RouteParserInterface $routeParser   The routeParser
      * @param LoggerFactory        $loggerFactory The logger
-     * @param I18n                 $i18n
+     * @param I18n                 $i18n          The i18n
      *
      * @throws Exception
      */
@@ -50,8 +63,8 @@ class UserActivateController extends Controller
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
+     * @param ServerRequestInterface $request  The request
+     * @param ResponseInterface      $response The response
      *
      * @return ResponseInterface
      */
@@ -62,8 +75,10 @@ class UserActivateController extends Controller
             'code',
         ]);
 
-        if (!$this->activationCodeExists($user = User::whereEmail($params['email'] ?? null)
-            ->first(), $code = $params['code'] ?? null)) {
+        if (
+            !$this->activationCodeExists($user = User::whereEmail($params['email'] ?? null)
+                ->first(), $code = $params['code'] ?? null)
+        ) {
             $this->logger->error('Invalid activation code.');
             $this->flash->addMessage('error', __f('Invalid activation code.'));
 
@@ -82,8 +97,8 @@ class UserActivateController extends Controller
     }
 
     /**
-     * @param null|User   $user
-     * @param null|string $code
+     * @param null|User   $user The user to validate
+     * @param null|string $code The code to validate
      *
      * @return bool
      */

@@ -16,13 +16,18 @@ use Slim\Csrf\Guard;
  */
 class SessionMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var SessionInterface
+     */
     protected SessionInterface $session;
+
+    /**
+     * @var Guard
+     */
     protected Guard $guard;
 
     /**
-     * SessionMiddleware constructor.
-     *
-     * @param SessionInterface $session
+     * @param SessionInterface $session The session
      */
     public function __construct(SessionInterface $session, Guard $guard)
     {
@@ -31,8 +36,8 @@ class SessionMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
+     * @param ServerRequestInterface  $request The request
+     * @param RequestHandlerInterface $handler The handler
      *
      * @return ResponseInterface
      */

@@ -8,6 +8,9 @@ use DI\Container;
 use DI\ContainerBuilder;
 use Exception;
 
+/**
+ * ContainerFactory class.
+ */
 class ContainerFactory
 {
     /**
