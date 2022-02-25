@@ -239,7 +239,6 @@ function sendEmail(ContainerInterface $container): bool
         $link   = $item->uri . $params;
         $sendmail->addRecipient($item->user->email, $item->user->username);
         $sendmail->setSubject($item->subject);
-        // {% set link = cli_full_url_for('auth.activate', {}, {'email': user.email, 'code': code}) %}
         $sendmail->setMessage($twig->fetch('email/auth/password/activate.twig', [
             'user' => [
                 'username' => $item->user->username,
