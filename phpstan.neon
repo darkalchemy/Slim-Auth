@@ -1,6 +1,5 @@
 parameters:
     level: 8
-    checkMissingIterableValueType: false
     bootstrapFiles:
         - config/constants.php
     paths:
@@ -14,3 +13,4 @@ parameters:
     ignoreErrors:
         - '#Call to an undefined static method Cartalyst\\Sentinel\\Native\\Facades\\Sentinel::(\w+)\(\)#'
         - '#Call to an undefined static method App\\Model\\User::(\w+)\(\)#'
+        - identifier: missingType.iterableValue

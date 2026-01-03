@@ -70,9 +70,9 @@ class LocaleController
      * @param ResponseInterface $response The response
      * @param string            $lang     The lang
      *
-     * @throws LocaleNotSupportedException
-     *
      * @return ResponseInterface
+     *
+     * @throws LocaleNotSupportedException
      */
     public function __invoke(ResponseInterface $response, string $lang): ResponseInterface
     {

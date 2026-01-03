@@ -11,7 +11,6 @@ use App\Provider\StoreMail;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
-use Exception;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -78,7 +77,7 @@ class SignUpController extends Controller
      * @param SessionInterface     $session       The session
      * @param I18n                 $i18n          The i18n
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(
         Twig $view,
@@ -105,11 +104,11 @@ class SignUpController extends Controller
     /**
      * @param ResponseInterface $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     *
-     * @return ResponseInterface
      */
     public function index(ResponseInterface $response): ResponseInterface
     {
@@ -120,9 +119,9 @@ class SignUpController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws ValidationException
-     *
      * @return ResponseInterface
+     *
+     * @throws ValidationException
      */
     public function signup(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
@@ -147,7 +146,7 @@ class SignUpController extends Controller
             $this->storeMail->setSubject(__f('Confirm your email.'));
             $this->storeMail->setUri((string) $request->getUri(), '/auth/activate?');
             $this->storeMail->store();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->flash->addMessage('status', __f('Something went wrong'));
             // file deepcode ignore PrivacyLeak: password is removed by array_clean
             $this->logger->error($e->getMessage(), array_clean($data, [

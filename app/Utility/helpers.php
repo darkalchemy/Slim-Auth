@@ -26,11 +26,11 @@ function array_clean(array $array, array $keys): array
 /**
  * @param ContainerInterface $container The container
  *
+ * @return int
+ *
  * @throws NotFoundExceptionInterface
  * @throws ContainerExceptionInterface
  * @throws Exception
- *
- * @return int
  */
 function compile_twig_templates(ContainerInterface $container): int
 {
@@ -272,7 +272,7 @@ function translate(string $lang): void
     copy(VENDOR_DIR . 'delight-im/i18n/i18n.sh', $file);
     chmod($file, 0775);
     passthru("sed -i -E 's/\\-\\-(keyword|flag)=\"_(f|p|c|m)/\\-\\-\\1=\"__\\2/g' {$file}");
-    passthru("sed -i 's/\\-\\-keyword \\-\\-keyword/\\-\\-keyword \\-\\-keyword=\"translateFormatted:1\" \\-\\-keyword=\"translateFormattedExtended:1\" \\-\\-keyword=\"translatePlural:1,2,3t\" \\-\\-keyword=\"translatePluralFormatted:1,2\" \\-\\-keyword=\"translatePluralFormattedExtended:1,2\" \\-\\-keyword=\"translateWithContext:1,2c,2t\" \\-\\-keyword=\"markForTranslation:1,1t\" \\-\\-flag=\"translateFormatted:1:php\\-format\" \\-\\-flag=\"translateFormattedExtended:1:no\\-php\\-format\" \\-\\-flag=\"translatePluralFormatted:1:php\\-format\" \\-\\-flag=\"translatePluralFormattedExtended:1:no\\-php\\-format\" \\-\\-keyword/g' {$file}"); //phpcs:ignore
+    passthru("sed -i 's/\\-\\-keyword \\-\\-keyword/\\-\\-keyword \\-\\-keyword=\"translateFormatted:1\" \\-\\-keyword=\"translateFormattedExtended:1\" \\-\\-keyword=\"translatePlural:1,2,3t\" \\-\\-keyword=\"translatePluralFormatted:1,2\" \\-\\-keyword=\"translatePluralFormattedExtended:1,2\" \\-\\-keyword=\"translateWithContext:1,2c,2t\" \\-\\-keyword=\"markForTranslation:1,1t\" \\-\\-flag=\"translateFormatted:1:php\\-format\" \\-\\-flag=\"translateFormattedExtended:1:no\\-php\\-format\" \\-\\-flag=\"translatePluralFormatted:1:php\\-format\" \\-\\-flag=\"translatePluralFormattedExtended:1:no\\-php\\-format\" \\-\\-keyword/g' {$file}"); // phpcs:ignore
     passthru(sprintf('%s %s', $file, $lang));
     unlink($file);
 }

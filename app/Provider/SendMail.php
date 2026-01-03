@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Provider;
 
 use App\Factory\LoggerFactory;
-use Exception;
 use PHPMailer\PHPMailer\Exception as ExceptionAlias;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
@@ -44,7 +43,7 @@ class SendMail
      * @param PHPMailer     $mailer        The mailer
      * @param LoggerFactory $loggerFactory The loggerFactory
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(PHPMailer $mailer, LoggerFactory $loggerFactory)
     {
@@ -53,6 +52,9 @@ class SendMail
             ->createInstance('sendmail');
     }
 
+    /**
+     * @throws \Exception
+     */
     public function send(): void
     {
         try {

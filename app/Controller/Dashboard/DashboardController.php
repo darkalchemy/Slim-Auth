@@ -31,11 +31,11 @@ class DashboardController
     /**
      * @param ResponseInterface $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
-     *
-     * @return ResponseInterface
      */
     public function __invoke(ResponseInterface $response): ResponseInterface
     {

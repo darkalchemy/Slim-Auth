@@ -63,9 +63,9 @@ class RedirectIfNotAuthenticated
 
             return $response->withHeader(
                 'Location',
-                $this->routeParser->urlFor('auth.signin') .
-                    '?' .
-                    http_build_query(['redirect' => $request->getUri()->getPath()])
+                $this->routeParser->urlFor('auth.signin')
+                    . '?'
+                    . http_build_query(['redirect' => $request->getUri()->getPath()])
             );
         }
 

@@ -82,11 +82,11 @@ class PasswordRecoverController extends Controller
     /**
      * @param ResponseInterface $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
-     *
-     * @return ResponseInterface
      */
     public function index(ResponseInterface $response): ResponseInterface
     {
@@ -97,12 +97,12 @@ class PasswordRecoverController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws ValidationException
-     *
-     * @return ResponseInterface
      */
     public function recover(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {

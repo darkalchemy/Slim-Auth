@@ -9,7 +9,6 @@ use App\Factory\LoggerFactory;
 use App\Model\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
-use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -47,7 +46,7 @@ class UserActivateController extends Controller
      * @param LoggerFactory        $loggerFactory The logger
      * @param I18n                 $i18n          The i18n
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(
         Messages $flash,
@@ -77,7 +76,7 @@ class UserActivateController extends Controller
 
         if (
             !$this->activationCodeExists($user = User::whereEmail($params['email'] ?? null)
-                ->first(), $code = $params['code'] ?? null)
+                ->first(), $code               = $params['code'] ?? null)
         ) {
             $this->logger->error('Invalid activation code.');
             $this->flash->addMessage('error', __f('Invalid activation code.'));

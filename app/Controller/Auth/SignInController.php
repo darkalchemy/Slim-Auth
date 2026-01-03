@@ -11,7 +11,6 @@ use App\Factory\LoggerFactory;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
-use Exception;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -72,7 +71,7 @@ class SignInController extends Controller
      * @param SessionInterface     $session       The session
      * @param I18n                 $i18n          The i18m
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(
         Twig $view,
@@ -98,11 +97,11 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     *
-     * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
@@ -115,9 +114,9 @@ class SignInController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws ValidationException
-     *
      * @return ResponseInterface
+     *
+     * @throws ValidationException
      */
     public function signin(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
@@ -135,7 +134,7 @@ class SignInController extends Controller
             ) {
                 throw new AuthException('Incorrect email or password.');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->flash->addMessage('status', $e->getMessage());
             $this->logger->error($e->getMessage(), array_clean($data, ['email', 'persist', 'csrf_name', 'csrf_value']));
 

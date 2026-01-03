@@ -16,6 +16,7 @@
         "ext-gettext": "*",
         "ext-intl": "*",
         "ext-json": "*",
+        "ext-mbstring": "*",
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "ext-xml": "*",
@@ -96,8 +97,7 @@
             "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
         ],
         "compile": [
-            "php bin/utilities.php compile",
-            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
+            "php bin/utilities.php compile"
         ]
     },
     "extra": {

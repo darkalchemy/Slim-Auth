@@ -38,7 +38,7 @@ return [
     },
 
     App::class => function (ContainerInterface $container) {
-        $app = Bridge::create($container);
+        $app      = Bridge::create($container);
         $settings = $container->get('settings');
         if ($settings['environment'] === 'PRODUCTION') {
             $routeCacheFile = $settings['router_cache_file'];
@@ -55,7 +55,7 @@ return [
 
     SessionInterface::class => function (ContainerInterface $container) {
         $settings = $container->get('settings');
-        $session = new PhpSession();
+        $session  = new PhpSession();
         $session->setOptions((array) $settings['session']);
 
         return $session;
@@ -92,7 +92,7 @@ return [
 
     Twig::class => function (ContainerInterface $container) use ($startTime) {
         $settings = $container->get('settings');
-        $twig = Twig::create($settings['twig']['path'], [
+        $twig     = Twig::create($settings['twig']['path'], [
             'cache' => $settings['environment'] === 'PRODUCTION' ? $settings['twig']['cache'] : false,
         ]);
         $twig->getEnvironment()->setCharset($settings['twig']['charset']);
@@ -116,13 +116,13 @@ return [
     },
 
     PHPMailer::class => function (ContainerInterface $container) {
-        $settings = $container->get('settings')['mail'];
-        $mail = new PHPMailer(true);
+        $settings        = $container->get('settings')['mail'];
+        $mail            = new PHPMailer(true);
         $mail->SMTPDebug = 3;
         $mail->isSMTP();
-        $mail->Host = $settings['smtp_host'];
+        $mail->Host     = $settings['smtp_host'];
         $mail->SMTPAuth = $settings['smtp_auth'];
-        $mail->Port = $settings['smtp_port'];
+        $mail->Port     = $settings['smtp_port'];
         if ($settings['smtp_username']) {
             $mail->Username = $settings['smtp_username'];
         }

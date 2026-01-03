@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
-use Exception;
-
 /**
  * Class ValidationException.
  */
-class ValidationException extends Exception
+class ValidationException extends \Exception
 {
     /**
      * @var array

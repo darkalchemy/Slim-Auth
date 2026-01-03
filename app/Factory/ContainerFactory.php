@@ -6,7 +6,6 @@ namespace App\Factory;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use Exception;
 
 /**
  * ContainerFactory class.
@@ -14,9 +13,9 @@ use Exception;
 class ContainerFactory
 {
     /**
-     * @throws Exception
-     *
      * @return Container
+     *
+     * @throws \Exception
      */
     public function createContainer(): Container
     {

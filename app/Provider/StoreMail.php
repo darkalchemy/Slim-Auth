@@ -6,7 +6,6 @@ namespace App\Provider;
 
 use App\Factory\LoggerFactory;
 use App\Model\Email;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Spatie\Url\Url;
 
@@ -44,7 +43,7 @@ class StoreMail
      * @param LoggerFactory $loggerFactory The loggerFactory
      * @param Email         $email         The email
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(LoggerFactory $loggerFactory, Email $email)
     {
@@ -53,11 +52,14 @@ class StoreMail
         $this->email = $email;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function store(): void
     {
         try {
             $this->email->save();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
         }
     }

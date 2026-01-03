@@ -11,7 +11,6 @@ use App\Model\User;
 use App\Validation\ValidationRules;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Delight\I18n\I18n;
-use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -65,7 +64,7 @@ class PasswordResetController extends Controller
      * @param ValidationRules      $rules         The rules
      * @param I18n                 $i18n          The i18n
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(
         Twig $view,
@@ -88,11 +87,11 @@ class PasswordResetController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError
-     *
-     * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
@@ -116,9 +115,9 @@ class PasswordResetController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws ValidationException
-     *
      * @return ResponseInterface
+     *
+     * @throws ValidationException
      */
     public function reset(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {

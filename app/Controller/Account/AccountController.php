@@ -72,11 +72,11 @@ class AccountController extends Controller
     /**
      * @param ResponseInterface $response The response
      *
+     * @return ResponseInterface
+     *
      * @throws SyntaxError
      * @throws LoaderError
      * @throws RuntimeError
-     *
-     * @return ResponseInterface
      */
     public function index(ResponseInterface $response): ResponseInterface
     {
@@ -87,9 +87,9 @@ class AccountController extends Controller
      * @param ServerRequestInterface $request  The request
      * @param ResponseInterface      $response The response
      *
-     * @throws ValidationException
-     *
      * @return ResponseInterface
+     *
+     * @throws ValidationException
      */
     public function action(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {

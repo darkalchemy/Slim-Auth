@@ -31,4 +31,5 @@ return $config
         'no_alias_functions'                     => true,
         'ternary_to_elvis_operator'              => true
     ])
+    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setFinder($finder);
