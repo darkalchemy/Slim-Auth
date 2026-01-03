@@ -2,7 +2,7 @@
 
 A Slim 4 Skeleton.
 
-![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.4.0)
+![GitHub commits since tagged version](https://img.shields.io/github/commits-since/darkalchemy/Slim-Auth/0.4.2)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e09082beab44f75afe2eefdbc55ec50)](https://www.codacy.com/gh/darkalchemy/Slim-Auth/dashboard?utm_source=github.com&utm_medium=referral&utm_content=darkalchemy/Slim-Auth&utm_campaign=Badge_Grade)
 [![GitHub Issues](https://img.shields.io/github/issues/darkalchemy/Slim-Auth)](https://github.com/darkalchemy/Slim-Auth/issues)
 [![GitHub license](https://img.shields.io/github/license/darkalchemy/Slim-Auth.svg)](https://github.com/darkalchemy/Slim-Auth/blob/master/LICENSE)
