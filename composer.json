@@ -11,7 +11,7 @@
     "homepage": "https://github.com/darkalchemy/slim-auth",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.4",
         "ext-apcu": "*",
         "ext-gettext": "*",
         "ext-intl": "*",
@@ -21,6 +21,7 @@
         "ext-pdo": "*",
         "ext-xml": "*",
         "cartalyst/sentinel": "^v5.1.0",
+        "darkalchemy/composer-permission": "^2.1",
         "darkalchemy/twig-translate": "^0.3.0",
         "delight-im/i18n": "^v1.1.0",
         "egulias/email-validator": "^3.1.2",
@@ -41,8 +42,8 @@
         "slim/slim": "^4.9.0",
         "slim/twig-view": "^3.3.0",
         "spatie/url": "^2.0",
+        "symfony/filesystem": "^7.4",
         "symfony/http-foundation": "^v6.0.2",
-        "umpirsky/composer-permissions-handler": "^v1.7",
         "vlucas/valitron": "v1.4.10",
         "zeuxisoo/slim-whoops": "^0.7.3"
     },
@@ -71,7 +72,6 @@
     },
     "scripts": {
         "cleanup": [
-            "phpcbf",
             "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --show-progress=dots -vvv"
         ],
         "dump": "composer dump-autoload -a",
@@ -82,7 +82,8 @@
         "translate": "php bin/utilities.php translate",
         "translate-all": "php bin/utilities.php translate-all",
         "clear_cache": "php bin/utilities.php clear_cache",
-        "set-perms": "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions",
+        "set-perms": "Idnan\\ComposerPermission\\Handler::setPermissions",
+        "phpcbf": "phpcbf",            
         "phplint": "phplint --no-cache",
         "phpstan": "phpstan analyse",
         "phpcs": "phpcs -s",
@@ -94,18 +95,19 @@
         ],
         "post-install-cmd": [
             "composer dump-autoload -o",
-            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions"
+            "Idnan\\ComposerPermission\\Handler::setPermissions"
         ],
         "compile": [
-            "php bin/utilities.php compile"
+            "php bin/utilities.php compile",
+            "Idnan\\ComposerPermission\\Handler::setPermissions"
         ]
     },
     "extra": {
-        "writable-dirs": [
-            "var/cache",
-            "var/logs",
-            "var/tmp",
-            "resources/views/cache/"
+        "dir_permissions": [
+            "var/cache:0775",
+            "var/logs:0775",
+            "var/tmp:0775",
+            "resources/views/cache:0775"
         ]
     }
 }

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Factory\LoggerFactory;
+use App\Utility\SetPermissions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
-use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 
 /**
  * Class CheckMailMiddleware.
@@ -34,25 +34,26 @@ class CheckSettingsMiddleware implements MiddlewareInterface
     private Messages $flash;
 
     /**
-     * @var ChmodPermissionsSetter
+     * @var SetPermissions
      */
-    private ChmodPermissionsSetter $permissionsSetter;
+    private SetPermissions $setPermissions;
 
     /**
-     * @param array         $settings      The settings
-     * @param LoggerFactory $loggerFactory The loggerFactory
-     * @param Messages      $flash         The flash
+     * @param array          $settings       The settings
+     * @param LoggerFactory  $loggerFactory  The loggerFactory
+     * @param Messages       $flash          The flash
+     * @param SetPermissions $setPermissions
      */
     public function __construct(
         array $settings,
         LoggerFactory $loggerFactory,
         Messages $flash,
-        ChmodPermissionsSetter $permissionsSetter
+        SetPermissions $setPermissions
     ) {
-        $this->settings          = $settings;
-        $this->logger            = $loggerFactory->addFileHandler('settings.log')->createInstance('settings');
-        $this->flash             = $flash;
-        $this->permissionsSetter = $permissionsSetter;
+        $this->settings       = $settings;
+        $this->logger         = $loggerFactory->addFileHandler('settings.log')->createInstance('settings');
+        $this->flash          = $flash;
+        $this->setPermissions = $setPermissions;
     }
 
     /**
@@ -75,7 +76,7 @@ class CheckSettingsMiddleware implements MiddlewareInterface
         ];
         foreach ($paths as $path) {
             if (!empty($path) && file_exists($path) && !is_writable($path)) {
-                $this->permissionsSetter->setPermissions($path);
+                $this->setPermissions->setPermission($path, 0775);
             }
         }
 

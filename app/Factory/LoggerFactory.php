@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use App\Utility\SetPermissions;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
-use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 
 /**
  * Factory.
@@ -27,17 +27,18 @@ class LoggerFactory
     private array $handler = [];
 
     /**
-     * @var ChmodPermissionsSetter
+     * @var SetPermissions
      */
-    private ChmodPermissionsSetter $permissionsSetter;
+    private SetPermissions $setPermissions;
 
     /**
-     * @param array $settings The settings
+     * @param array          $settings       The settings
+     * @param SetPermissions $setPermissions
      */
-    public function __construct(array $settings, ChmodPermissionsSetter $permissionsSetter)
+    public function __construct(array $settings, SetPermissions $setPermissions)
     {
-        $this->path              = (string) $settings['path'];
-        $this->permissionsSetter = $permissionsSetter;
+        $this->path           = (string) $settings['path'];
+        $this->setPermissions = $setPermissions;
     }
 
     /**
@@ -67,9 +68,10 @@ class LoggerFactory
     public function addFileHandler(string $filename, int $level = Logger::DEBUG): self
     {
         if (!is_writable($this->path)) {
-            $this->permissionsSetter->setPermissions($this->path);
+            $this->setPermissions->setPermission($this->path, 0777);
         }
-        $filename            = sprintf('%s/%s', $this->path, $filename);
+
+        $filename = sprintf('%s/%s', $this->path, $filename);
 
         /** @phpstan-ignore-next-line */
         $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level, true, 0755);

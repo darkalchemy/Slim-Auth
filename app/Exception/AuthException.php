@@ -7,6 +7,4 @@ namespace App\Exception;
 /**
  * AuthException class.
  */
-class AuthException extends \RuntimeException
-{
-}
+class AuthException extends \RuntimeException {}

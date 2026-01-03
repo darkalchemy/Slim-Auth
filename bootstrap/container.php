@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Factory\LoggerFactory;
 use App\Middleware\CheckSettingsMiddleware;
+use App\Utility\SetPermissions;
 use App\View\CsrfExtension;
 use App\View\TwigMessagesExtension;
 use App\View\TwigPhpExtension;
@@ -27,7 +28,6 @@ use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
-use Umpirsky\PermissionsHandler\ChmodPermissionsSetter;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 global $startTime;
@@ -148,14 +148,14 @@ return [
 
     LoggerFactory::class => fn (ContainerInterface $container) => new LoggerFactory(
         $container->get('settings')['logger'],
-        $container->get(ChmodPermissionsSetter::class)
+        $container->get(SetPermissions::class)
     ),
 
     CheckSettingsMiddleware::class => fn (ContainerInterface $container) => new CheckSettingsMiddleware(
         $container->get('settings'),
         $container->get(LoggerFactory::class),
         $container->get(Messages::class),
-        $container->get(ChmodPermissionsSetter::class)
+        $container->get(SetPermissions::class)
     ),
 
     TwigMiddleware::class => function (ContainerInterface $container) {
